@@ -2,8 +2,8 @@ package com.fpt.ruby.nlp;
 
 import java.util.List;
 
-import com.fpt.ruby.model.Cinema;
-import com.fpt.ruby.model.MovieFly;
+import com.fpt.ruby.business.model.Cinema;
+import com.fpt.ruby.business.model.MovieFly;
 
 public interface MovieAnswerMapper{
 	String getTitleMovieAnswer(List<MovieFly> ans);

@@ -10,7 +10,7 @@ import net.billylieurance.azuresearch.AzureSearchWebResult;
 import org.springframework.stereotype.Service;
 
 import com.fpt.ruby.business.helper.DisplayAnswerHelper;
-import com.fpt.ruby.model.BingSearchAnswer;
+import com.fpt.ruby.business.model.BingSearchAnswer;
 @Service
 public class BingSearchHelper {
 private String appId;

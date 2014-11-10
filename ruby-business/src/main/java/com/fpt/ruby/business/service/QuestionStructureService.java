@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.Jedis;
 
-import com.fpt.ruby.config.SpringMongoConfig;
+import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.model.QuestionStructure;
+import com.fpt.ruby.business.model.QuestionStructure;
 
 @Service
 public class QuestionStructureService {

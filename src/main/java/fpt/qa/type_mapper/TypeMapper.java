@@ -15,8 +15,8 @@ import java.util.TreeMap;
 
 import com.fpt.ruby.business.constants.ProgramType;
 import com.fpt.ruby.business.helper.RedisHelper;
+import com.fpt.ruby.business.model.TVProgram;
 import com.fpt.ruby.business.service.TVProgramService;
-import com.fpt.ruby.model.TVProgram;
 
 import fpt.qa.mdnlib.struct.pair.Pair;
 

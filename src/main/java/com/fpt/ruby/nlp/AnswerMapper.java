@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fpt.ruby.business.constants.IntentConstants;
+import com.fpt.ruby.business.model.Cinema;
+import com.fpt.ruby.business.model.MovieFly;
+import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.service.MovieFlyService;
 import com.fpt.ruby.helper.FeaturedMovieHelper;
-import com.fpt.ruby.model.Cinema;
-import com.fpt.ruby.model.MovieFly;
-import com.fpt.ruby.model.MovieTicket;
 
 
 public class AnswerMapper {

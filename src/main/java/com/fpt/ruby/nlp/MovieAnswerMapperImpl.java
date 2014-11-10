@@ -10,8 +10,8 @@ import java.util.Map;
 import jmdn.util.string.StrUtil;
 
 import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.model.Cinema;
-import com.fpt.ruby.model.MovieFly;
+import com.fpt.ruby.business.model.Cinema;
+import com.fpt.ruby.business.model.MovieFly;
 
 public class MovieAnswerMapperImpl implements MovieAnswerMapper {
 	static Map<String, String> genreMap = new HashMap<String, String>();

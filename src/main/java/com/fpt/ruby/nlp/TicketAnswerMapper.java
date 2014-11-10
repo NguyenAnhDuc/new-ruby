@@ -2,7 +2,7 @@ package com.fpt.ruby.nlp;
 
 import java.util.List;
 
-import com.fpt.ruby.model.MovieTicket;
+import com.fpt.ruby.business.model.MovieTicket;
 
 public interface TicketAnswerMapper {
 	String getTypeTicketAnswer(List<MovieTicket> ans);

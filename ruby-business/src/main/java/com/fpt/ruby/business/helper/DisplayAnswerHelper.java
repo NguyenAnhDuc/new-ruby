@@ -2,7 +2,7 @@ package com.fpt.ruby.business.helper;
 
 import java.util.List;
 
-import com.fpt.ruby.model.BingSearchAnswer;
+import com.fpt.ruby.business.model.BingSearchAnswer;
 
 public class DisplayAnswerHelper {
 	public static String display(List<BingSearchAnswer> bingAnswers){

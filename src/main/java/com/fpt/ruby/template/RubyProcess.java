@@ -2,7 +2,7 @@ package com.fpt.ruby.template;
 
 import java.util.List;
 
-import com.fpt.ruby.model.TimeExtract;
+import com.fpt.ruby.business.model.TimeExtract;
 
 import edu.stanford.nlp.util.Pair;
 

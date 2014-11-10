@@ -11,6 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.helper.RedisHelper;
+import com.fpt.ruby.business.model.Cinema;
+import com.fpt.ruby.business.model.MovieFly;
+import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.model.QueryParamater;
+import com.fpt.ruby.business.model.QuestionStructure;
+import com.fpt.ruby.business.model.TimeExtract;
 import com.fpt.ruby.business.service.CinemaService;
 import com.fpt.ruby.business.service.LogService;
 import com.fpt.ruby.business.service.MovieFlyService;
@@ -18,13 +24,7 @@ import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.business.service.QuestionStructureService;
 import com.fpt.ruby.conjunction.ConjunctionHelper;
-import com.fpt.ruby.model.Cinema;
-import com.fpt.ruby.model.MovieFly;
-import com.fpt.ruby.model.MovieTicket;
-import com.fpt.ruby.model.QueryParamater;
-import com.fpt.ruby.model.QuestionStructure;
 import com.fpt.ruby.model.RubyAnswer;
-import com.fpt.ruby.model.TimeExtract;
 import com.fpt.ruby.nlp.AnswerMapper;
 import com.fpt.ruby.nlp.NlpHelper;
 
@@ -144,8 +144,7 @@ public class ProcessHelper {
 
 			} else if (questionType.equals(AnswerMapper.Dynamic_Question)) {
 				System.out.println("Dynamic ....");
-				MovieTicket matchMovieTicket = conjunctionHelper
-						.getMovieTicket(question);
+				MovieTicket matchMovieTicket = conjunctionHelper.getMovieTicket(question);
 				TimeExtract timeExtract = NlpHelper.getTimeCondition(question
 						.replaceAll("(\\d+)(h)", "$1 giờ"));
 				if(question.contains("đang")|| question.contains("dang")||question.contains("hiện tại")) {
@@ -171,8 +170,7 @@ public class ProcessHelper {
 				System.out.println("DONE Process");
 			} else {
 				System.out.println("Feature ..");
-				MovieTicket matchMovieTicket = conjunctionHelper
-						.getMovieTicket(question);
+				MovieTicket matchMovieTicket = conjunctionHelper.getMovieTicket(question);
 				Date today = new Date();
 				System.out.println("afterdate: " + today);
 				TimeExtract timeExtract = NlpHelper.getTimeCondition(question);

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.fpt.ruby.business.helper.DisplayAnswerHelper;
-import com.fpt.ruby.model.BingSearchAnswer;
+import com.fpt.ruby.business.model.BingSearchAnswer;
 
 import net.billylieurance.azuresearch.AzureSearchResultSet;
 import net.billylieurance.azuresearch.AzureSearchWebQuery;

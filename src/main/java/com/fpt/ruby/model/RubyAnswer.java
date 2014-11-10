@@ -2,6 +2,10 @@ package com.fpt.ruby.model;
 
 import java.util.Date;
 
+import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.model.QueryParamater;
+import com.fpt.ruby.business.model.QuestionStructure;
+
 public class RubyAnswer {
 	private String domain;
 	private QueryParamater queryParamater;

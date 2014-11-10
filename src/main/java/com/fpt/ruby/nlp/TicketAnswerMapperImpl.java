@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import com.fpt.ruby.model.MovieTicket;
+import com.fpt.ruby.business.model.MovieTicket;
 
 import fpt.qa.mdnlib.util.string.StrUtil;
 

@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /*import net.sf.uadetector.ReadableUserAgent;
  import net.sf.uadetector.UserAgentStringParser;
  import net.sf.uadetector.service.UADetectorServiceFactory;*/
@@ -31,6 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fpt.ruby.business.helper.DisplayAnswerHelper;
 import com.fpt.ruby.business.helper.RedisHelper;
+import com.fpt.ruby.business.model.Log;
+import com.fpt.ruby.business.model.QueryParamater;
 import com.fpt.ruby.business.service.BingSearchService;
 import com.fpt.ruby.business.service.CinemaService;
 import com.fpt.ruby.business.service.LogService;
@@ -39,8 +42,6 @@ import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.conjunction.ConjunctionHelper;
 import com.fpt.ruby.helper.ProcessHelper;
-import com.fpt.ruby.model.Log;
-import com.fpt.ruby.model.QueryParamater;
 import com.fpt.ruby.model.ReportQuestion;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.nlp.NlpHelper;

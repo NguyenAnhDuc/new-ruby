@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.fpt.ruby.config.SpringMongoConfig;
-import com.fpt.ruby.model.Cinema;
+import com.fpt.ruby.business.config.SpringMongoConfig;
+import com.fpt.ruby.business.model.Cinema;
 
 @Service
 public class CinemaService {

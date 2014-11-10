@@ -6,7 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.fpt.ruby.model.QuestionStructure;
+import com.fpt.ruby.business.model.QuestionStructure;
 
 public class RedisHelper {
 	private static final String HEAD_KEY = "head";

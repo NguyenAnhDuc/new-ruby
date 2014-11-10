@@ -1,4 +1,4 @@
-package com.fpt.ruby.model;
+package com.fpt.ruby.business.model;
 
 public class BingSearchAnswer {
 	private String url;

@@ -12,10 +12,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.helper.TypeMapperHelper;
-import com.fpt.ruby.config.SpringMongoConfig;
-import com.fpt.ruby.model.NameMapper;
-import com.fpt.ruby.model.TVProgram;
+import com.fpt.ruby.business.model.NameMapper;
+import com.fpt.ruby.business.model.TVProgram;
 
 @Service
 public class NameMapperService {

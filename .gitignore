@@ -62,7 +62,6 @@ local.properties
 .loadpath
 /src/main/resources/rebel.xml
 # address of db
-SpringMongoConfig.java
 # External tool builders
 .externalToolBuilders/
  

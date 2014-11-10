@@ -1,4 +1,4 @@
-package fpt.qa.additionalinformation.name_mapper;
+/*package fpt.qa.additionalinformation.name_mapper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -88,7 +88,7 @@ public class DataMigration {
 			setOfNames.add(name.trim().toLowerCase());
 			
 			
-			/**/
+			
 			
 			NameMapper n = new NameMapper();
 			n.setName(name);
@@ -127,16 +127,16 @@ public class DataMigration {
 		}	 
 		
 		//add name mapper
-		/*NameMapper nameMapper = new NameMapper();
+		NameMapper nameMapper = new NameMapper();
 		nameMapper.setDomain("tv");
 		nameMapper.setName("vtv1");
-		ns.save(nameMapper);*/
+		ns.save(nameMapper);
 		//test
-		/*NameMapper nameMapper = ns.findByName("vtv1");
+		NameMapper nameMapper = ns.findByName("vtv1");
 		nameMapper.setDomain("movie");
-		ns.save(nameMapper);*/
+		ns.save(nameMapper);
 		
 		System.out.println("DONE!");
 	}
 
-}
+}*/

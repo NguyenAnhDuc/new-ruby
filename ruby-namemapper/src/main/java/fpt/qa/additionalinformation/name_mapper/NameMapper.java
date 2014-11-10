@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import vn.hus.nlp.utils.UTF8FileUtility;
+
 import com.fpt.ruby.business.service.NameMapperService;
 
-import vn.hus.nlp.utils.UTF8FileUtility;
 import fpt.qa.mdnlib.struct.pair.Pair;
 
 /**
@@ -27,8 +28,8 @@ public class NameMapper{
 
 	public NameMapper( NameMapperService nameMapperService, String domain ) {
 		nameMap = new HashMap< NamedEntity, Set< String >>();
-		List< com.fpt.ruby.model.NameMapper > nameMappers = nameMapperService.findByDomain( domain );
-		for( com.fpt.ruby.model.NameMapper nameMapper : nameMappers ){
+		List< com.fpt.ruby.business.model.NameMapper > nameMappers = nameMapperService.findByDomain( domain );
+		for( com.fpt.ruby.business.model.NameMapper nameMapper : nameMappers ){
 			NamedEntity namedEntity = new NamedEntity( nameMapper.getType(), nameMapper.getName() );
 			nameMap.put( namedEntity, nameMapper.getVariants() );
 		}

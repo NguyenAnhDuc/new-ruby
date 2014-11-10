@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.helper.RedisHelper;
+import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.model.NameMapper;
 import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.model.MovieTicket;
-import com.fpt.ruby.model.NameMapper;
 
 import fpt.qa.additionalinformation.modifier.ConjunctionWithType;
 import fpt.qa.mdnlib.struct.pair.Pair;

@@ -9,7 +9,7 @@
   <dependencies>
   	<dependency>
 	  		<groupId>fpt.qa</groupId>
-		    <artifactId>business</artifactId>
+		    <artifactId>ruby-business</artifactId>
 		    <version>1.0.1</version>
 	  	</dependency>
   </dependencies>

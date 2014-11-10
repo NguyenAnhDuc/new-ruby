@@ -1,0 +1,136 @@
+bật quạt
+turn on fan
+fan on
+bật quạt số
+
+tắt quạt
+turn off fan
+fan off
+
+tăng gió
+giảm gió
+tăng lên số
+giảm xuống số
+
+bật tivi
+bật ti vi
+bật tv
+turn on tivi
+turn on ti vi
+turn on tv
+
+tắt tivi
+tắt ti vi
+tắt tv
+turn off tivi
+turn off ti vi
+turn off tv
+
+tăng tiếng
+tăng volume
+tăng âm lượng
+tăng âm thanh
+tăng âm
+cho tiếng to
+cho âm thanh to
+cho âm lượng to
+turn up volume
+
+giảm tiếng
+giảm volume
+giảm âm lượng
+giảm âm thanh
+giảm âm
+cho tiếng nhỏ
+cho âm thanh nhỏ
+cho âm lượng nhỏ
+turn down volume
+
+bật kênh
+bật đài
+bật kênh
+bật đài
+bật vtv1
+bật vtv2
+bật vtv3
+bật vtv4
+bật vtv5
+bật vtv6
+bật hbo
+bật star movies
+bật espn
+bật star sports
+
+chuyển kênh
+chuyển đài
+chuyển vtv1
+chuyển vtv2
+chuyển vtv3
+chuyển vtv4
+chuyển vtv5
+chuyển vtv6
+chuyển hbo
+chuyển star movies
+chuyển espn
+chuyển star sports
+
+về kênh
+về đài
+về vtv1
+về vtv2
+về vtv3
+về vtv4
+về vtv5
+về vtv6
+về hbo
+về star movies
+về espn
+về star sports
+
+sang kênh
+sang đài
+sang vtv1
+sang vtv2
+sang vtv3
+sang vtv4
+sáng vtv5
+sang vtv6
+sang hbo
+sang star movies
+sang espn
+sang star sports
+
+kênh thể thao
+kênh bóng đá
+kênh phim
+kênh hoạt hình
+kênh giải trí
+kênh ca nhạc
+kênh thời sự
+kênh thời trang
+
+bật điều hòa
+bật máy lạnh
+turn on air conditioner
+
+tắt điều hòa
+turn off air conditioner
+tắt máy lạnh
+
+tăng nhiệt độ
+tăng vài độ
+cho ấm lên
+cho ấm hơn
+để ấm hơn
+để ấm lên
+
+giảm nhiệt độ
+giảm vài độ
+cho mát hơn
+để mát hơn
+để lạnh hơn
+
+bật quạt gió
+mở quạt gió
+bật chế độ gió
+mở chế độ gió

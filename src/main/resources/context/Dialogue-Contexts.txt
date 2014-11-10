@@ -1,0 +1,336 @@
+H: Đói ơi là đói!
+M: 
+H: Đi ăn trưa ở đâu được nhỉ?
+M:
+H: Quán đó ngon không?
+M: 
+H: Có xa lắm không?
+M:
+
+H: Tối nay có phim gì hay không?
+M:
+H: Chiếu tầm mấy giờ?
+M:
+H: Có rạp nào chiếu lúc 8 giờ 30 không?
+M: 
+
+H: Tối nay MU đá không?
+M: 
+H: Tường thuật trên kênh nào?
+M: 
+H: Lúc mấy giờ?
+M: 
+
+H: Ai là chủ tịch FPT?
+M: 
+H: Ông ấy nắm bao nhiêu cổ phiếu?
+M: 
+
+H: Chiến lược kinh doanh của FPT là gì?
+M: 
+
+H: Muốn ăn phở cuốn thì đâu ngon nhỉ?
+M: 
+H: Đi đến đó xa không?
+M: 
+H: Có cần phải đặt bàn trước không?
+M: 
+H: Cảm ơn nhé.
+
+H: VTV3 có gì hay không?
+M: 
+
+H: Tối nay trận MU - Arsenal đá mấy giờ?
+M: 
+H: Có tường thuật trên VTV không?
+M: 
+
+H: Bật điều hòa giúp cái!
+M: 
+H: Để khoảng 25 độ!
+M: 
+
+H: Quán Ngon lối nào nhỉ?
+M: 
+H: Có món bánh bèo Nam Bộ không?
+M: 
+
+H: Đường Bưởi giờ thế nào, có tắc không?
+M: 
+
+H: Giá vàng hôm nay bao nhiêu?
+M: 
+H: Có nên bán vàng hôm nay không?
+M:
+
+H: Thời tiết ngày mai thế nào?
+M: 
+H: Cảm ơn nhé!
+M: 
+
+H: Hát một bài đi!
+M: 
+H: Bài gì cũng được.
+M: 
+H: Thôi dừng đi, nghe sến quá!
+M: 
+H: Làm bài rock đi.
+M: 
+H: Cảm ơn!
+
+H: Hôm nay có tin gì mới không?
+M: 
+H: Đọc giúp hai tin đầu tiên đi!
+M: 
+H: Thanks!
+M: 
+
+H: Có biết Nguyễn Trãi là ai không?
+M: 
+H: Ngài sinh năm nào?
+M: 
+H: Ngài sống ở đâu vào cuối đời?
+M: 
+
+H: Đi Đại Lải mất bao lâu?
+M: 
+H: Đi ô tô.
+M: 
+H: Đường có nhiều cảnh sát không?
+M: 
+
+H: Muốn đi biển chơi một chuyến.
+M: 
+H: Có nhiều người đi không?
+M: 
+H: Giá cả theo tour thế nào?
+M: 
+H: Đắt nhỉ!?
+M: 
+
+H: Trận tối qua kết quả thế nào?
+M: 
+H: Trận Real Madrid với Barcelona ấy.
+M:
+
+H: Có phim Hàn nào đang chiếu ở rạp không?
+M: 
+H: Có diễn viên nào nổi tiếng không?
+M: 
+H: Muốn xem vào tối cuối tuần.
+M: 
+
+H: Ngã tư Sở giờ có bị tắc không?
+M: 
+
+H: Có phim bom tấn nào mới ra không?
+M: 
+H: Ai đóng vai chính?
+M: 
+
+H: Nghe nói có món xôi chim trên phố ngon lắm.
+M: 
+H: Đi đến đó thế nào?
+M: 
+
+H: Lẩu bò nhúng dấm ở đâu ngon?
+M: 
+H: Có cần gọi đặt trước không?
+M: 
+
+H: Lịch đá C1 năm nay thế nào?
+M: 
+H: Có tường thuật trực tiếp trên VTV không?
+M: 
+
+H: Bật tivi giúp cái!
+M: 
+H: Bật sang VTV1 đi!
+M: 
+
+H: Mua kính mắt ở đâu tốt?
+M: 
+
+H: Giá đô hôm nay thế nào?
+M: 
+H: Mua đô ở đâu rẻ nhỉ?
+M: 
+H: Đi thế nào?
+M: 
+
+H: Có vé giá rẻ đi Đà Nẵng không?
+M: 
+
+H: Có tour nào đi Phú Quốc giá rẻ không?
+M: 
+H: Có thể liên hệ với ai?
+M: 
+
+H: Bật camera giúp!
+M: 
+
+H: Mở hộp thư!
+M: 
+H: Có email nào mới không?
+M: 
+
+H: Sửa laptop đâu được nhỉ?
+M: 
+H: Họ có làm thứ 7, chủ nhật không?
+M: 
+H: Đi đến đó thế nào?
+M: 
+
+H: Bật quạt giúp cái!
+M: 
+
+H: Thời tiết ngày mai thế nào?
+M: 
+
+H: Doanh thu FPT năm nay bao nhiêu?
+M: 
+H: Đơn vị nào có doanh thu cao nhất?
+M: 
+
+H: Tìm phim hành động mới nhất!
+M: 
+H: Xem phim đó!
+M:
+
+H: Có quán cà phê nào hay ở Mỹ Đình?
+M: 
+H: Quán đó yên tĩnh không?
+M: 
+
+H: Ăn thịt nướng ở đâu ngon?
+M: 
+H: Quán đó nằm ở đâu?
+M: 
+
+H: Quả tim máu còn chiếu ở rạp không?
+M: 
+H: Có rạp nào chiếu tầm 8 giờ tối không?
+M: 
+
+H: Quán phở nào ngon nhất Hà Nội?
+M: 
+H: Xa không?
+M: 
+H: Đi thế nào?
+M: 
+
+H: Tắt đèn cái!
+M: 
+
+H: Tắt 3G!
+M: 
+
+H: Bật wifi!
+M:
+
+H: Ăn lẩu cá kèo ở đâu ngon bổ rẻ?
+M: 
+H: Họ mở đến mấy giờ tối?
+M: 
+
+H: Bật 3G lên!
+M: 
+
+H: Ai là giám đốc công nghệ FPT?
+M: 
+H: Anh ấy bao nhiêu tuổi?
+M: 
+
+H: HBO hôm nay có những phim gì?
+M: 
+H: Có phim tâm lý tình cảm nào không?
+M: 
+
+H: Đợt này rạp Quốc gia có chiếu Hercules không?
+M: 
+H: Có 3D không?
+M: 
+
+H: Mình muốn đi Cô Tô đợt này.
+M: 
+H: Thời tiết ở đó tuần tới thế nào?
+M: 
+H: Cảm ơn nhé.
+M: 
+
+H: Rạp Lotte chiếu Đoạt hồn không?
+M: 
+H: Thứ 7 chiếu những giờ nào?
+M: 
+H: Có chiếu 3D không?
+M: 
+
+H: Muốn mua máy lọc nước RO.
+M: 
+H: Giới thiệu chút về loại máy này đi!
+M: 
+H: Thanks!
+M: 
+
+H: Có phòng khám nào gần đây không?
+M: 
+H: Có khám tai mũi họng không?
+M: 
+
+H: Muốn xem phim Transformers.
+M: 
+H: Có rạp nào chiếu sau 9 giờ tối chủ nhật không?
+M: 
+H: Cảm ơn nha.
+M: 
+
+H: Muốn đi làm răng.
+M: 
+H: Chỗ đó họ làm an toàn không?
+M: 
+
+H: Có hiệu thuốc nào gần đây không?
+M: 
+
+H: Muốn mua một con Android ngon bổ rẻ.
+M: 
+H: Tầm dưới 16 triệu, nên mua con nào?
+M: 
+H: Màn hình lớn không?
+M: 
+
+H: Cắt thuốc bắc ở đâu tốt?
+M: 
+H: Đi xa không?
+M: 
+
+H: Có quán Huế nào gần đây không?
+M: 
+H: Có chỗ đỗ xe không?
+M: 
+
+H: Tăng nhiệt độ điều hòa lên chút!
+M: 
+
+H: Phim Lucy dang chiếu ở rạp nào?
+M: 
+H: Có suất chiếu nào lúc 8 giờ tối thứ 6 không?
+M: 
+
+H: Có quán Thái nào ngon gần đây không?
+M: 
+H: Đi thế nào?
+M: 
+
+H: Quán ngon nằm lối nào?
+M: 
+
+H: Quán Sen hồ Tây có cần đặt trước không?
+M: 
+
+H: Muốn tìm quán tiếp khách buổi trưa gần Mỹ Đình.
+M: 
+H: Quán này có những món gì?
+M: 
+H: Có cần book trước không?
+M: 

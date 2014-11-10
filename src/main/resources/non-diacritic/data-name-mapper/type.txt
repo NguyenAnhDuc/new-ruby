@@ -1,0 +1,6 @@
+TYPE	FILM;phim,phim ảnh, chiếu phim,
+TYPE	MUSIC;ca nhạc, âm nhạc, hát, dân ca
+TYPE	SPORT;thể thao,bóng đá, giải đấu, giải thi đấu
+TYPE	GAME_SHOW;game show, trò chơi truyền hình
+TYPE	CARTOON;chương trình thiếu nhi, hoạt hình, phim hoạt hình, chương trình trẻ nhỏ
+TYPE	NEWS;thời sự, tin tức, chương trình tin tức, chương trình thời sự, bản tin

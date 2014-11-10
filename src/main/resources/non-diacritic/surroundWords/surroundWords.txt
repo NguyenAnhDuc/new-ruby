@@ -1,0 +1,3 @@
+mov_title, chieu, hay, dien vien, rap, ve
+cin_name, rap, chieu, phim, ve
+dien_vien, phim, dong, chinh, phu

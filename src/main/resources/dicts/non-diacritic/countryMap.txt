@@ -1,0 +1,19 @@
+my	USA
+trung quoc	China
+lao	Laos
+thai	Thailand
+thai lan	Thailand
+han quoc	South Korea
+han	South Korea
+trieu tien	North Korea
+nhat	Japan
+nhat ban	Japan
+viet	Vietnam
+viet nam	Vietnam
+phap	France
+duc	Germany
+an do	India
+tay ban nha	Spain
+lien xo	Russia
+hong kong	Hong Kong
+hong kong	Hong Kong

@@ -1,0 +1,127 @@
+UDF:vtvcab
+UDF:xem nhiều nhất
+UDF:yêu thích nhất
+UDF:quan tâm nhất
+UDF:ăn khách nhất
+UDF:đá+đội nào
+UDF:gặp+đội nào
+UDF:trực tiếp+không
+UDF:phát lại
+UDF:chiếu lại
+UDF:xem lại
+UDF:hết+đến
+UDF:sau khi hết
+UDF:thế nào
+UDF:lịch thi đấu
+UDF:hay nhất
+UDF:lịch+ngoại hạng anh
+UDF:về cái gì
+UDF:về vấn đề gì
+UDF:xoay quanh cái gì
+UDF:có nên+không
+UDF:còn bao lâu+đến
+UDF:bao nhiêu phút+đến
+UDF:tập bao nhiêu
+UDF:có+tốt+không
+UDF:có+hay+không
+UDF:có+nhiều+không
+UDF:gây sốt+là+gì
+UDF:với+đội nào
+UDF:gặp+đội nào
+UDF:bản quyền+phải+không
+UDF:khung giờ vàng+là mấy giờ
+UDF:trực tiếp+không
+UDF:lịch thi đấu
+UDF:hay nhất+phải không
+UDF:lắp
+UDF:dò sóng
+UDF:dành cho
+UDF:phủ sóng
+UDF:kênh+kênh nào
+UDF:kênh+kênh gì
+UDF:kênh+kênh bao nhiêu
+UDF:kênh+của+là
+UDF:bản quyền
+UDF:còn+không
+UDF:có còn
+POL:phải không
+POL:có+chiếu+không
+POL:có+phải+không
+POL:chiếu+trên+không
+POL:có+phát sóng+không
+POL:chiếu+không
+POL:có+phim+không
+POL:có+đá+không
+POL:có+trận+không
+POL:có+chương trình+không
+POL:đúng+không
+POL:có+không
+POL:không
+DUR:thời lượng
+DUR:bao lâu
+DAT:đến+mấy giờ
+DAT:kết thúc+mấy giờ
+DAT:đến+mấy giờ
+DAT:khi nào+kết thúc
+DAT:khi nào+hết
+DAT:khi nào+có
+DAT:khi nào+chiếu
+DAT:khi nào+phát
+DAT:khi nào+lên sóng
+DAT:bao giờ+hết
+DAT:bao giờ+kết thúc
+DAT:bao giờ+chiếu
+DAT:bao giờ+có
+DAT:bao giờ+phát
+DAT:bao giờ+lên sóng
+DAT:lúc nào+hết
+DAT:lúc nào+kết thúc
+DAT:lúc nào+phát
+DAT:lúc nào+có
+DAT:lúc nào+chiếu
+DAT:lúc nào+lên sóng
+DAT:lúc+mấy giờ
+DAT:lúc+nào
+DAT:khung giờ nào
+DAT:khi nào
+DAT:lúc nào
+DAT:bao giờ
+DAT:hôm nào
+DAT:ngày nào
+DAT:giờ nào
+CAL:lịch chiếu
+CAL:lịch phát sóng
+CAL:lịch lên sóng
+CAL:kênh+chiếu+gì
+CAL:kênh+có+gì
+CAL:có+gì+kênh
+CAL:có+gì
+CAL:chương trình
+CAL:sắp+có+gì
+CAL:sắp+có+nào
+CAL:sắp+chiếu+gì
+CAL:sắp+chiếu+nào
+CAL:sắp+phát+gì
+CAL:sắp+phát+nào
+CAL:có+trận+nào
+CAL:chiếu+ngày nào
+CAL:phát+ngày nào
+CAL:có+ngày nào
+CAL:chiếu+hôm nào
+CAL:phát+hôm nào
+CAL:có+hôm nào
+TTL:chương trình gì
+TTL:chương trình nào
+TTL:trận nào không
+TTL:có gì hay
+TTL:đang có+gì
+TTL:đang chiếu+gì
+TTL:bây giờ
+TTL:hiện giờ
+TTL:phim gì
+TTL:chương trình gì
+TTL:trận nào
+TTL:đang
+CHN:kênh nào
+CHN:kênh mấy
+CHN:ở đâu

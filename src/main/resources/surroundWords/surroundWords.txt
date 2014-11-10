@@ -1,0 +1,3 @@
+mov_title, chiếu, chieu, hay, diễn viên, dien vien, rạp, rap, vé, ve
+cin_name, rạp, rap, chiếu, chieu, phim, vé, ve
+diễn_viên, phim, đóng, dong, chính, chinh, phụ, phu

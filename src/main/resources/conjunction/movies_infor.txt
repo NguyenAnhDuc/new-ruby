@@ -1,0 +1,190 @@
+tên_rạp	Trung tâm chiếu phim Quốc gia
+tên_phim	Quái vật Frankenstein
+loại_phim	Khoa học viễn tưởng
+tên_phim	Step up all
+loại_phim	Tâm lý - Tình cảm
+diễn_viên	Alyson Stoner
+diễn_viên	Briana Eviga
+diễn_viên	Izabella Miko
+diễn_viên	Ryan Guxzman
+đạo_diễn	Trish Sie
+tên_phim	Lucy
+loại_phim	Phiêu lưu
+diễn_viên	Scarlett Johansson
+diễn_viên	Morgan Freeman
+diễn_viên	Amr Waked
+diễn_viên	Choi Min Sik
+đạo_diễn	Luc Besson
+tên_phim	Biệt đội đánh thuê
+thể_loại	Hành động
+diễn_viên	Arnold Schwarzenegger
+diễn_viên	Sylvester
+diễn_viên	Jason Statham
+diễn_viên	Jet Li
+diễn_viên	Antonio
+đạo_diễn	Patrick Hughes
+tên_phim	Vệ binh dải ngân hà	Vệ binh ngân hà
+loại_phim	Hành động - Khoa học viễn tưởng
+diễn_viên	Chris Pratt
+diễn_viên	Vin Diesel
+diễn_viên	Bradley Cooper
+diễn_viên	Zoe Saldana
+đạo_diễn	James Gunn
+tên_phim	Ninja Rùa
+diễn_viên	Hành động
+diễn_viên	Megan Fox
+diễn_viên	Alan Ritchson
+diễn_viên	Jeremy Howard
+diễn_viên	Pete Ploszek
+đạo_diễn	Jonathan Liebesman
+tên_phim	Hercules
+loại_phim	Hành động
+diễn_viên	Dwayne Johnson
+diễn_viên	John Hurt
+diễn_viên	Rufus Sewell
+diễn_viên	Ian McShane
+diễn_viên	Irina Shayk
+đạo_diễn	Brett Ratner
+tên_phim	Cuồng phong thịnh nộ
+loại_phim	Khoa học viễn tưởng
+diễn_viên	Richard Armitage
+diễn_viên	Sarah Wayne Callies
+diễn_viên	Jeremy Sumpter
+đạo_diễn	Steven Quale
+tên_phim	Trang điểm xác chết
+loại_phim	Kinh dị
+diễn_viên	Cung Tân Lượng
+diễn_viên	Mã Quân
+diễn_viên	Vương Hy Duy
+đạo_diễn	Mã Quân
+tên_phim	Mất xác
+loại_phim	Kinh dị
+diễn_viên	Hoàng Phúc
+diễn_viên	Tina Tình
+diễn_viên	Song Ngư
+diễn_viên	Phi Thanh Vân
+diễn_viên	Only C
+đạo_diễn	Đỗ Thành An
+tên_phim	Kỳ nghỉ của nhóc Nicolas
+loại_phim	Hài
+diễn_viên	Mathéo Boisselier
+diễn_viên	Valérie Lemercier
+diễn_viên	Kad Merad
+đạo_diễn	Laurent Tirard
+tên_phim	Đoạt hồn
+loại_phim	Kinh dị
+diễn_viên	Thương Tín
+diễn_viên	Trần Bảo Sơn
+diễn_viên	Nhung Kate
+diễn_viên	bé Thanh Mỹ
+đạo_diễn	Hàm Trần
+tên_phim	Thầm lặng
+loại_phim	Kinh dị
+diễn_viên	Jared Harris
+diễn_viên	Olivia Cooke
+diễn_viên	Sam Clapflin
+đạo_diễn	John Pogue
+tên_phim	Hào quang trở lại
+tên_phim	The comeback
+thể_loại	Tâm lý - Tình cảm
+diễn_viên	Trang Nhung
+diễn_viên	Chi Bảo
+diễn_viên	Thân Thúy Hà
+diễn_viên	Kinh Quốc
+diễn_viên	NSUT Chiều Xuân
+đạo_diễn	Victor Vũ
+tên_phim	Tứ đại danh bổ 4
+tên_phim	The four 4
+loại_phim	Hành động, cổ trang
+diễn_viên	Lưu Diệc Phi
+diễn_viên	Tô Hữu Bằng
+diễn_viên	Đặng Siêu
+đạo_diễn	Trần Gia Thượng
+tên_phim	Hội quái hộp
+tên_phim	The boxtrolls
+diễn_viên	Elle Fanning
+diễn_viên	Simon Pegg
+diễn_viên	Nick Frost
+diễn_viên	Ben Kingsley
+đạo_diễn	Graham Annable
+đạo_diễn	Anthony Stacchi
+tên_rạp	Lotte Cantavil
+tên_rạp	Lotte Hà Đông
+tên_rạp	Lotte Cộng Hòa
+tên_rạp	Lotte Nam Sài Gòn
+tên_rạp	Lotte Diamond
+tên_rạp	Lotte Landmark
+tên_rạp	Lotte Hà Đông
+tên_rạp	Lotte Nha Trang
+tên_rạp	Lotte Đà Nẵng
+tên_rạp	Lotte Biên Hòa
+tên_rạp	Lotte Bình Dương
+tên_rạp	Lotte Phan Thiết
+tên_rạp	Lotte Cantavil
+tên_rạp	Lotte Phú Thọ
+tên_phim	Bí ẩn tạo hồ bơi
+tên_phim	The swimmers
+loại_phim	Kinh dị
+diễn_viên	Tanapop Leerattanakajohn
+diễn_viên	Chutavuth Pattarakampol
+diễn_viên	Suppassara Thanachart
+đạo_diễn	Sophon Sakdaphisit
+tên_phim	Mật danh
+tên_phim	The Prince
+diễn_viên	Bruce Willis
+diễn_viên	John Cusack
+diễn_viên	Jessica Lowndes
+diễn_viên	Bi Rain
+đạo_diễn	Brian A Miller
+tên_phim	Đại thủy chiến
+tên_phim	Roaring Currents
+loại_phim	Hành động
+diễn_viên	Choi Min-sik
+diễn_viên	Ryoo Seung-ryong
+diễn_viên	Jo Jin-woong
+diễn_viên	Lee Jeong-hyeon
+đạo_diễn	Kim Han-min
+tên_phim	Vận đen
+tên_phim	Good people
+loại_phim	Hành động
+diễn_viên	Kate Hudson
+diễn_viên	James Franco
+diễn_viên	Tom Wilkinson
+diễn_viên	Omar Sy
+đạo_diễn	Henrik Ruben Genz
+tên_phim	Ngôi làng tử khí
+tên_phim	Close door village
+loại_phim	Kinh dị
+diễn_viên	Trần Vũ Phàm
+diễn_viên	Hứa Đông Đông
+diễn_viên	Vương Lượng
+đạo_diễn	Xing Bo
+tên_phim	Giải mã mê cung
+tên_phim	The maze runner
+loại_phim	Hành động
+diễn_viên	Dylan O'Brien
+diễn_viên	Kaya Scodelario
+diễn_viên	Will Poulter
+đạo_diễn	Wes Ball
+tên_phim	Vùng đất quỷ
+tên_phim	VIY
+loại_phim	Viễn tưởng
+diễn_viên	Jason Flemyng
+diễn_viên	Anna Churina
+diễn_viên	Aleksey Chadov
+diễn_viên	Agniya Ditkovskite
+đạo_diễn	Oleg Stepchenko
+tên_phim	Into the Storm
+tên_phim	Cuồng phong thịnh nộ
+loại_phim	Hành động
+diễn_viên	Sarah Wayne Callies
+diễn_viên	Richard Armitage
+diễn_viên	Jeremy Sumpter
+đạo_diễn	Steven Quale
+tên_rạp	Dân Chủ
+tên_phim	Nước mắt sát thủ
+tên_phim	No tears for the dead
+diễn_viên	Jang Dong Gun
+diễn_viên	Kim Min Hee
+diễn_viên	Brian Tee
+đạo_diễn	Lee Jeong Beom

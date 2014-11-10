@@ -1,0 +1,126 @@
+UDF:xem nhieu nhat
+UDF:yeu thich nhat
+UDF:quan tam nhat
+UDF:an khach nhat
+UDF:da+doi nao
+UDF:gap+doi nao
+UDF:truc tiep+khong
+UDF:phat lai
+UDF:chieu lai
+UDF:xem lai
+UDF:het+den
+UDF:sau khi het
+UDF:the nao
+UDF:lich thi dau
+UDF:hay nhat
+UDF:lich+ngoai hang anh
+UDF:ve cai gi
+UDF:ve van de gi
+UDF:xoay quanh cai gi
+UDF:co nen+khong
+UDF:con bao lau+den
+UDF:bao nhieu phut+den
+UDF:tap bao nhieu
+UDF:co+tot+khong
+UDF:co+hay+khong
+UDF:co+nhieu+khong
+UDF:gay sot+la+gi
+UDF:voi+doi nao
+UDF:gap+doi nao
+UDF:ban quyen+phai+khong
+UDF:khung gio vang+la may gio
+UDF:truc tiep+khong
+UDF:lich thi dau
+UDF:hay nhat+phai khong
+UDF:lap
+UDF:do song
+UDF:danh cho
+UDF:phu song
+UDF:kenh+kenh nao
+UDF:kenh+kenh gi
+UDF:kenh+kenh bao nhieu
+UDF:kenh+cua+la
+UDF:ban quyen
+UDF:con+khong
+UDF:co con
+POL:phai khong
+POL:co+chieu+khong
+POL:co+phai+khong
+POL:chieu+tren+khong
+POL:co+phat song+khong
+POL:chieu+khong
+POL:co+phim+khong
+POL:co+da+khong
+POL:co+tran+khong
+POL:co+chuong trinh+khong
+POL:dung+khong
+POL:co+khong
+POL:khong
+DUR:thoi luong
+DUR:bao lau
+DAT:den+may gio
+DAT:ket thuc+may gio
+DAT:den+may gio
+DAT:khi nao+ket thuc
+DAT:khi nao+het
+DAT:khi nao+co
+DAT:khi nao+chieu
+DAT:khi nao+phat
+DAT:khi nao+len song
+DAT:bao gio+het
+DAT:bao gio+ket thuc
+DAT:bao gio+chieu
+DAT:bao gio+co
+DAT:bao gio+phat
+DAT:bao gio+len song
+DAT:luc nao+het
+DAT:luc nao+ket thuc
+DAT:luc nao+phat
+DAT:luc nao+co
+DAT:luc nao+chieu
+DAT:luc nao+len song
+DAT:luc+may gio
+DAT:luc+nao
+DAT:khung gio nao
+DAT:khi nao
+DAT:luc nao
+DAT:bao gio
+DAT:hom nao
+DAT:ngay nao
+DAT:gio nao
+CAL:lich chieu
+CAL:lich phat song
+CAL:lich len song
+CAL:kenh+chieu+gi
+CAL:kenh+co+gi
+CAL:co+gi+kenh
+CAL:co+gi
+CAL:chuong trinh
+CAL:sap+co+gi
+CAL:sap+co+nao
+CAL:sap+chieu+gi
+CAL:sap+chieu+nao
+CAL:sap+phat+gi
+CAL:sap+phat+nao
+CAL:co+tran+nao
+CAL:chieu+ngay nao
+CAL:phat+ngay nao
+CAL:co+ngay nao
+CAL:chieu+hom nao
+CAL:phat+hom nao
+CAL:co+hom nao
+TTL:chuong trinh gi
+TTL:chuong trinh nao
+TTL:tran nao khong
+TTL:co gi hay
+TTL:dang co+gi
+TTL:dang chieu+gi
+TTL:bay gio
+TTL:hien gio
+TTL:phim gi
+TTL:chuong trinh gi
+TTL:tran nao
+TTL:dang
+CHN:kenh nao
+CHN:kenh may
+CHN:o dau

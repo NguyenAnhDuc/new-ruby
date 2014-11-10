@@ -1,0 +1,52 @@
+thiết lập chuông
+đặt chuông lúc
+chuông báo thức
+báo thức lúc
+
+thiết lập cuộc họp
+đặt cuộc họp
+sắp cuộc họp
+cuộc họp lúc
+cuộc họp vào
+cuộc họp giờ
+cuộc họp sáng
+cuộc họp chiều
+cuộc họp tối
+cuộc họp ngày
+cuộc họp tuần
+
+thiết lập cuộc hẹn
+đặt cuộc hẹn
+cuộc hẹn lúc
+cuộc hẹn vào
+cuộc hẹn giờ
+cuộc hẹn sáng
+cuộc hẹn chiều
+cuộc hẹn tối
+cuộc hẹn ngày
+cuộc hẹn tuần
+hẹn gặp lúc
+hẹn gặp vào
+hẹn gặp giờ
+hẹn gặp sáng
+hẹn gặp chiều
+hẹn gặp tối
+hẹn gặp ngày
+hẹn gặp tuần
+
+nhắc làm lúc
+nhắc đi lúc
+
+bắt đầu ghi note
+kết thúc ghi note
+
+gọi đến số
+gọi cho số 
+
+nhắn tin đến
+nhắn tin cho
+kết thúc tin nhắn
+hết tin nhắn
+hủy tin nhắn
+gửi tin nhắn
+trả lời tin nhắn

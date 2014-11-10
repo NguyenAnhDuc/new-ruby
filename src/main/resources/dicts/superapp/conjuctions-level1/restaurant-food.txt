@@ -1,0 +1,35 @@
+nhà hàng nào
+nhà hàng gần
+nhà hàng trên
+nhà hàng ở
+
+quán ăn nào
+quán ăn gần
+quán ăn trên
+quán ăn ở
+
+quán pizza
+quán phở
+quán lẩu
+quán thịt chó
+quán thịt cầy
+quán thịt nướng
+
+quán hàn quốc
+quán nhật
+quán ý
+
+quán rượu
+quán bia
+quán beer
+quán nhậu
+
+ăn pizza ở
+ăn phở ở
+ăn lẩu ở
+ăn thịt chó ở
+ăn thịt cầy ở
+
+uống beer
+nhậu ở quán
+nhậu trên

@@ -1,0 +1,113 @@
+NAME:o dau ngon
+NAME:o dau on
+NAME:o dau duoc
+NAME:o dau ok
+NAME:duoc+quan tam
+NAME:duoc danh gia+cao nhat
+NAME:duoc danh gia+tot nhat
+NAME:duoc xem+nhieu nhat
+NAME:duoc binh luan+tot nhat
+NAME:phim+hay nhat
+NAME:tot nhat
+NAME:cao nhat
+NAME:phim+quan tam nhat
+NAME:duoc+trong doi nhat
+NAME:co+phim gi
+NAME:chieu+phim gi
+NAME:phuc vu+gi
+NAME:co+mon+gi
+NAME:phuc vu+mon+gi
+NAME:duoc+chieu+rap
+NAME:chieu+phim+nao
+NAME:rap nao
+NAME:rap gi
+NAME:phim nao
+NAME:phim gi
+NAME:co phim nao
+ADDR:dia chi
+ADDR:so+bao nhieu
+ADDR:cho nao
+ADDR:khu nao
+DESC:chi+duong+den
+DESC:danh gia+the nao
+DESC:co+duoc khong
+DESC:co+on khong
+DESC:co+tot khong
+DESC:co+ok khong
+DESC:co+duoc ua chuong khong
+DESC:co+dong khach khong
+DESC:co+duoc ua thich khong
+DESC:co+nhieu nguoi thich khong
+DESC:co+nhieu khach hang khong
+DESC:ke ve+cai gi
+DESC:noi ve+cai gi
+DESC:noi dung+la gi
+DESC:phim+hay khong
+DESC:an+ngon khong
+DESC:an+duoc khong
+DESC:an+the nao
+DESC:danh gia+the nao
+DESC:danh gia+duoc khong
+DESC:danh gia+tot khong
+DESC:noi dung+tom tat
+DESC:tom tat+noi dung
+DESC:rating+cao khong
+DUR:bao lau
+DUR:dai+bao nhieu
+DUR:bao nhieu phut
+DUR:thoi luong+bao nhieu
+DIST:bao xa
+DIST:co xa khong
+PRICE:bao nhieu tien
+PRICE:gia ve+bao nhieu
+PRICE:gia+bao nhieu
+PRICE:bao nhieu+ve
+PRICE:co dat khong
+PRICE:co re khong
+PRICE:gia tien the nao
+PRICE:gia tien bao nhieu
+DTIME:den+may gio
+DTIME:den+khi nao
+DTIME:den+bao gio
+DTIME:den+luc nao
+DTIME:den+khi nao
+DTIME:may gio
+DTIME:luc nao
+DTIME:san xuat nam nao
+DTIME:ngay nao
+DTIME:khi nao
+DTIME:thu may
+DTIME:bao gio
+DTIME:hom nao
+CAL:khung gio nao
+CAL:lich chieu
+CAL:khoang+thoi gian+nao
+POL:co danh cho
+POL:ve+con+khong
+POL:con+ve+khong
+POL:con+cho+khong
+POL:co gan+khong
+NUM:rating+bao nhieu
+NUM:rating+cao khong
+NUM:rating+the nao
+NUM:phim+duoc danh gia the nao
+NUM:giam gia+bao nhieu
+NUM:khuyen mai+bao nhieu
+NUM:khuyen mai+bao nhieu
+NUM:bao nhieu diem
+NUM:diem+bao nhieu
+NUM:diem+cao khong
+NUM:diem+the nao
+SEL:la+hay
+HUM:la ai
+HUM:ai la
+HUM:cua dao dien nao
+HUM:co+nhung ai
+HUM:dien vien+nao
+HUM:co ai
+HUM:co nhung ai
+HUM:co+sao nao
+HUM:co danh cho+khong
+HUM:co cam+khong
+HUM:doi tuong nao
+HUM:ten+la gi

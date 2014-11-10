@@ -1,0 +1,64 @@
+tiếng anh	English
+tiếng việt	Vietnamese
+tiếng đức	German
+tiếng ả rập	Arabic
+tiếng hà lan	Dutch
+tiếng bỉ	Bulgarian
+tiếng trung quốc	Chinese
+tiếng croatia	Croatian
+tiếng phần lan	Finnish
+tiếng pháp	French
+tiếng hy lạp	Greek
+tiếng do thái	Hebrew
+tiếng hin-đi	Hindi
+tiếng Hungary	Hungarian
+tiếng iceland	Icelandic
+tiếng ý	Italian
+tiếng nhật	Japanese
+tiếng hàn quốc	Korean
+tiếng na uy	Norwegian
+tiếng ba tư	Persian
+tiếng ba lan	Polish
+tiếng bồ đào nha 	Portuguese
+tiếng pujabi	Punjabi
+tiếng rumani	Romanian
+tiếng nga	Russian
+tiếng tây ban nha	Spanish
+tiếng thụy điển	Swedish
+tiếng thổ nhĩ kỳ	Turkish
+tiếng ukraina	Ukrainian
+tiếng hawaii	Hawaiian
+tiếng lào	Lao
+tiếng thái	Thai
+tieng anh	English
+tieng viet	Vietnamese
+tieng duc	German
+tieng a rap	Arabic
+tieng ha lan	Dutch
+tieng bi	Bulgarian
+tieng trung quoc	Chinese
+tieng croatia	Croatian
+tieng phan lan	Finnish
+tieng phap	French
+tieng hy lap	Greek
+tieng do thai	Hebrew
+tieng hin-di	Hindi
+tieng Hungary	Hungarian
+tieng iceland	Icelandic
+tieng y	Italian
+tieng nhat	Japanese
+tieng han quoc	Korean
+tieng na uy	Norwegian
+tieng ba tu	Persian
+tieng ba lan	Polish
+tieng bo dao nha 	Portuguese
+tieng pujabi	Punjabi
+tieng rumani	Romanian
+tieng nga	Russian
+tieng tay ban nha	Spanish
+tieng thuy dien	Swedish
+tieng tho nhi ky	Turkish
+tieng ukraina	Ukrainian
+tieng hawaii	Hawaiian
+tieng lao	Lao
+tieng thai	Thai

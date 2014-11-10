@@ -1,0 +1,30 @@
+  ENV.defaults["stage"] = 1
+  ENV.defaults["ruleType"] = "tokens"
+
+  $POSS = "( /'s/ | /'/ /s/ )"
+  { (/đêm/? /giao//thừa/ ) => IsoDate(NIL, 12, 31) }
+  { (/tết/ /dương/ /lịch/?) => IsoDate(NIL, 1, 1) }
+  { (/năm/ /mới/) => IsoDate(NIL, 1, 1) }
+  { (/ngày/? /quốc/ /tế/ /phụ/ /nữ/) => IsoDate(NIL, 3, 8) }
+  { (/ngày/? /phụ/ /nữ/ /Việt/ /Nam/ ) => IsoDate(NIL, 10, 20) }
+  { (/ngày/? /lễ/ /tình/ /nhân?|yêu?/ ) => IsoDate(NIL, 2, 14) }
+  { (/ngày/? /valentine/) => IsoDate(NIL, 2, 14) }
+  { (/ngày/ /quốc/? /tế/? /thiếu/ /nhi/) => IsoDate(NIL, 6, 1) }
+  { (/ngày/?/quốc/? /tế/? /người/ /cao/ /tuổi/) => IsoDate(NIL, 10, 1) }
+  {	( /lễ/ /hội/? /hóa/ /trang/) => IsoDate(NIL, 10, 31) }
+  { (/halloween/ ) => IsoDate(NIL, 10, 31) }
+  { (/ngày/? /x-?mas|christmas/ ) => IsoDate(NIL, 12, 25) }
+  { (/ngày/? /quốc/ /khánh/ /nước/? /CHXHCN/? /Việt/? /Nam/? ) => IsoDate(NIL, 9, 2) }
+  { (/ngày/ /quốc/? /tế/? /lao/ /động/ ) => IsoDate(NIL, 5, 1) }
+  { (/ngày/ /thành/ /lập/ /đảng/ /cộng/? /sản/? /việt/? /nam/?) => IsoDate(NIL, 2, 3) }
+  { (/memorial/ /day/) => JH_MEMORIAL }
+  { (/mother/ $POSS /day/) => JH_MOTHERS_DAY }
+  { (/father/ $POSS /day/) => JH_FATHERS_DAY }
+  { (/labou?r/ /day/) => JH_LABOUR_DAY }
+  { (/columbus/ /day/) => JH_COLUMBUS_DAY }
+  { (/thanksgiving/) => JH_THANKSGIVING }
+
+  { (/easter/ (/day/|/sunday/)?) => JH_EASTER }
+  { (/clean/ /monday/) => JH_CLEAN_MONDAY }
+  { (/good/ /friday/) => JH_GOOD_FRIDAY }
+  { (/ash/ /wednesday/) => JH_ASH_WEDNESDAY }

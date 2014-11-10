@@ -13,8 +13,8 @@ import com.fpt.ruby.business.model.TVProgram;
 import com.fpt.ruby.business.model.TimeExtract;
 import com.fpt.ruby.business.service.LogService;
 import com.fpt.ruby.business.service.TVProgramService;
-import com.fpt.ruby.conjunction.ConjunctionHelper;
 import com.fpt.ruby.model.RubyAnswer;
+import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 
 import fpt.qa.intent.detection.TVIntentDetect;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;

@@ -10,7 +10,7 @@ import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.model.QuestionStructure;
 import com.fpt.ruby.business.model.TimeExtract;
 import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.conjunction.ConjunctionHelper;
+import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 
 import fpt.qa.additionalinformation.modifier.AbsoluteTime;
 import fpt.qa.additionalinformation.modifier.AbsoluteTime.TimeResult;

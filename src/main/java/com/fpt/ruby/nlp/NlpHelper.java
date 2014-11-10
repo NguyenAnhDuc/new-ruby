@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.QuestionStructure;
 import com.fpt.ruby.business.model.TimeExtract;
-import com.fpt.ruby.conjunction.ConjunctionHelper;
+import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 
 import fpt.qa.additionalinformation.modifier.AbsoluteTime;
 import fpt.qa.additionalinformation.modifier.AbsoluteTime.TimeResult;

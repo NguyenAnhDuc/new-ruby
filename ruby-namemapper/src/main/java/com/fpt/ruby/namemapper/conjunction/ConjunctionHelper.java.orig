@@ -1,0 +1,52 @@
+
+package com.fpt.ruby.conjunction;
+
+import java.io.File;
+import java.util.List;
+
+import mdnlib.struct.pair.Pair;
+import modifier.ConjunctionWithType;
+
+public class ConjunctionHelper{
+	private ConjunctionWithType conjunctionWithType;
+<<<<<<< HEAD
+
+	public ConjunctionHelper() {
+		conjunctionWithType = new ConjunctionWithType();
+		conjunctionWithType.loadConjunctionType( new File( "movies_infor.txt" ) );
+	}
+
+	public ConjunctionHelper( String dir ) {
+		conjunctionWithType = new ConjunctionWithType();
+		conjunctionWithType.loadConjunctionType( new File( dir + "/movies_infor.txt" ) );
+	}
+
+	public List< Pair< String, String >> getConjunction( String text ) {
+		return conjunctionWithType.getRelevantConjunctionsWithType( text );
+=======
+	public ConjunctionHelper(){
+		 conjunctionWithType = new ConjunctionWithType( "" );
+		 conjunctionWithType.loadConjunctionType( new File( "movies_infor.txt"));
+	}
+	public ConjunctionHelper(String dir){
+		 conjunctionWithType = new ConjunctionWithType( dir );
+		 conjunctionWithType.loadConjunctionType( new File(dir + "cj/movies_infor.txt"));
+	}
+	
+	public List<Pair<String, String>> getConjunction(String text){
+		return conjunctionWithType.getOriginRelevantConjunctionsWithType(text); 
+>>>>>>> 26ac1b92c8787f83332d2f8a28de39fa4f4260fd
+	}
+
+	/*
+	 * public List<Pair<String, String>> getConjunction(String text){ return
+	 * conjunctionWithType.getOriginRelevantConjunctionsWithType(text); }
+	 */
+
+	/*
+	 * public List<Pair<ArrayList<String>, String>> getListConjunction(String
+	 * text){ return
+	 * conjunctionWithType.getListRelevantConjunctionsWithType(text); }
+	 */
+
+}

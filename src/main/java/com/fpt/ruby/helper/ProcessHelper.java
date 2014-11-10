@@ -23,8 +23,8 @@ import com.fpt.ruby.business.service.MovieFlyService;
 import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.business.service.QuestionStructureService;
-import com.fpt.ruby.conjunction.ConjunctionHelper;
 import com.fpt.ruby.model.RubyAnswer;
+import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.AnswerMapper;
 import com.fpt.ruby.nlp.NlpHelper;
 

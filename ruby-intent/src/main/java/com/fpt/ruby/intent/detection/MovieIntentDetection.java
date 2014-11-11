@@ -100,7 +100,7 @@ public class MovieIntentDetection {
         }
 
         if (tunedSent.indexOf("DUR\t") == 0) {
-            if (tunedSent.contains("kéo dài") || tunedSent.contains("th�?i lượng")) {
+            if (tunedSent.contains("kéo dài") || tunedSent.contains("thời lượng")) {
                 return IntentConstants.MOV_RUNTIME;
             }
             if (tunedSent.contains("cách đây") || tunedSent.contains("mất bao lâu") ||
@@ -197,7 +197,7 @@ public class MovieIntentDetection {
         }
 
         if (tunedSent.indexOf("DES\t") == 0) {
-            if (tunedSent.indexOf("đư�?ng đến") == 4 || tunedSent.indexOf("chỉ đư�?ng") == 4 ||
+            if (tunedSent.indexOf("đường đến") == 4 || tunedSent.indexOf("chỉ đường") == 4 ||
             		tunedSent.indexOf("duong den") == 4 || tunedSent.indexOf("chi duong") == 4) {
                 return IntentConstants.CIN_MAP;
             }
@@ -224,7 +224,7 @@ public class MovieIntentDetection {
         if (tunedSent.indexOf("POL\t") == 0) {
         	// handle wrong question classification result such as in the sentence:
         	// rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�?
-        	if (tunedSent.contains("mấy gi�?") || tunedSent.contains("may gio")){
+        	if (tunedSent.contains("mấy giờ") || tunedSent.contains("may gio")){
         		return IntentConstants.MOV_DATE;
         	}
         	

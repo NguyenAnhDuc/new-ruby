@@ -80,12 +80,12 @@ public class MovieIntentDetection {
             return IntentConstants.MOV_DATE;
         }
         if (tunedSent.indexOf("DES\t") == 0 && (tunedSent.contains("nội dung")
-                || tunedSent.contains("v�? cái gì"))) {
+                || tunedSent.contains("với cái gì"))) {
             return IntentConstants.MOV_PLOT;
         }
         if (tunedSent.indexOf("DTI\t") == 0) {
             if (tunedSent.contains("phim") || tunedSent.contains("suất chiếu") || 
-                    tunedSent.contains("xuất chiếu") || (tunedSent.contains(" chiếu ") && tunedSent.contains("mấy gi�?"))) {
+                    tunedSent.contains("xuất chiếu") || (tunedSent.contains(" chiếu ") && tunedSent.contains("mấy gi�?"))) {
                 return IntentConstants.MOV_DATE;
             }
             return IntentConstants.CIN_DATE;
@@ -100,7 +100,7 @@ public class MovieIntentDetection {
         }
 
         if (tunedSent.indexOf("DUR\t") == 0) {
-            if (tunedSent.contains("kéo dài") || tunedSent.contains("th�?i lượng")) {
+            if (tunedSent.contains("kéo dài") || tunedSent.contains("th�?i lượng")) {
                 return IntentConstants.MOV_RUNTIME;
             }
             if (tunedSent.contains("cách đây") || tunedSent.contains("mất bao lâu") ||
@@ -197,7 +197,7 @@ public class MovieIntentDetection {
         }
 
         if (tunedSent.indexOf("DES\t") == 0) {
-            if (tunedSent.indexOf("đư�?ng đến") == 4 || tunedSent.indexOf("chỉ đư�?ng") == 4 ||
+            if (tunedSent.indexOf("đư�?ng đến") == 4 || tunedSent.indexOf("chỉ đư�?ng") == 4 ||
             		tunedSent.indexOf("duong den") == 4 || tunedSent.indexOf("chi duong") == 4) {
                 return IntentConstants.CIN_MAP;
             }
@@ -223,8 +223,8 @@ public class MovieIntentDetection {
 
         if (tunedSent.indexOf("POL\t") == 0) {
         	// handle wrong question classification result such as in the sentence:
-        	// rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�?
-        	if (tunedSent.contains("mấy gi�?") || tunedSent.contains("may gio")){
+        	// rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�?
+        	if (tunedSent.contains("mấy gi�?") || tunedSent.contains("may gio")){
         		return IntentConstants.MOV_DATE;
         	}
         	
@@ -273,8 +273,8 @@ public class MovieIntentDetection {
         String sent1 = "ngoài rạp có phim chiến tranh gì không";
         String sent2 = "phim tâm lý kinh dị nào đang chiếu rạp";
         String sent3 = "phim tâm lý tình cảm nào đang chiếu rạp";
-        String sent4 = "rạp vincom bà triệu tối nay chiếu the maze runner lúc mấy gi�??";
-        String sent5 = "rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�??";
+        String sent4 = "rạp vincom bà triệu tối nay chiếu the maze runner lúc mấy gi�??";
+        String sent5 = "rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�??";
         
         System.out.println(getTunedSent(sent1));
         System.out.println(getIntent(sent1));

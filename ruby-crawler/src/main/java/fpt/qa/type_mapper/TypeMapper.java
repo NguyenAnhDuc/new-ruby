@@ -48,7 +48,9 @@ public class TypeMapper {
 		types.add(new ScienceTypeRecognizer());
 		types.add(new StyleTypeRecognizer());
 		types.add(new GolfTypeRecognizer());
+
 		setRootType();
+
 		for (TypeRecognizer tp : types) {
 			tp.show();
 			System.out.println("\n________________");
@@ -58,9 +60,9 @@ public class TypeMapper {
 		} catch (Exception ex) {
 			System.out.println("ERROR " + ex.getMessage());
 			ex.printStackTrace();
-			loadData("./classes/type_mapper/type_mapper.txt");
-
+			loadData("./classes" + PATH);
 		}
+
 		retrieveTaggedProgram();
 	}
 

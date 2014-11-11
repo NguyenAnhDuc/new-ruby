@@ -1,16 +1,14 @@
-/*package fpt.qa.rubyweb;
+package fpt.qa;
 
+import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.service.LogService;
 import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.business.service.TVProgramService;
-import com.fpt.ruby.conjunction.ConjunctionHelper;
-import com.fpt.ruby.crawler.CrawlPhimChieuRap;
-import com.fpt.ruby.crawler.CrawlerMyTV;
-import com.fpt.ruby.crawler.CrawlerVTVCab;
-import com.fpt.ruby.crawler.moveek.MoveekCrawler;
-import com.fpt.ruby.helper.RedisHelper;
 
+import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
+import fpt.qa.crawler.CrawlerMyTV;
+import fpt.qa.crawler.CrawlerVTVCab;
 import fpt.qa.type_mapper.TypeMapper;
 
 public class AutoCrawler {
@@ -89,4 +87,3 @@ public class AutoCrawler {
 	}
 
 }
-*/

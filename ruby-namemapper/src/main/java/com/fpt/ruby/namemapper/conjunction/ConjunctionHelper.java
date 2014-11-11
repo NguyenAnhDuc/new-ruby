@@ -16,7 +16,7 @@ import fpt.qa.mdnlib.struct.pair.Pair;
 public class ConjunctionHelper {
 	private ConjunctionWithType conjunctionWithType;
 	public ConjunctionHelper(NameMapperService nameMapperService){
-		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath(); 
+		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
 		conjunctionWithType = new ConjunctionWithType( dir, nameMapperService );
 	}
 	public ConjunctionHelper(String dir, NameMapperService nameMapperService){

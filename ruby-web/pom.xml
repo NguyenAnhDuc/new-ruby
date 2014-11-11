@@ -23,5 +23,11 @@
 		    <artifactId>ruby-namemapper</artifactId>
 		    <version>1.0.1</version>
 	  	</dependency>
+
+	  <dependency>
+		  <groupId>fpt.qa</groupId>
+		  <artifactId>ruby-crawler</artifactId>
+		  <version>1.0.1</version>
+	  </dependency>
   </dependencies>
 </project>

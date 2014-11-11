@@ -5,7 +5,7 @@
     <artifactId>ruby</artifactId>
     <version>1.0.1</version>
   </parent>
-  <artifactId>ruby-web</artifactId>
+  <artifactId>rubyweb</artifactId>
   <packaging>war</packaging>
   <dependencies>
   		<dependency>

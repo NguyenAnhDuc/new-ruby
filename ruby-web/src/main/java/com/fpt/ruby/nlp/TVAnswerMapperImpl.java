@@ -27,7 +27,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 	private TVIntentDetect intentDetector = new TVIntentDetect();
 	private TVIntentDetect nonDiacritic = new TVIntentDetect();
 	private TVProgramService tps = new TVProgramService();
-	private final int limitSizeAnswer = 200;
+	private final int limitSizeAnswer = 10;
 	public void init() {
 		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
 //		String dir = "D:/Workspace/Code/FTI/rubyweb/src/main/resources";

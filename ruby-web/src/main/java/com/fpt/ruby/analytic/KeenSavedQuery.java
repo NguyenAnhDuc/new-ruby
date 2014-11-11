@@ -46,7 +46,7 @@ public class KeenSavedQuery {
 		//saveQuery("intentQuestion", json);
 				
 		// domainQuestionPerday
-		json = "{\"analysis_type\": \"count\",\"event_collection\": \"userActivity\", \"group_by\":\"intent\",\"timezone\":\"25200\",\"interval\": \"daily\",\"timeframe\":\"this_month\"}";
-		saveQuery("intentPerday", json);
+		json = "{\"analysis_type\": \"count\",\"event_collection\": \"userActivity\", \"group_by\":\"userID\",\"timezone\":\"25200\",\"interval\": \"hourly\",\"timeframe\":\"this_day\"}";
+		saveQuery("count_GROUPBY_userid_THISDAY_HOURLY", json);
 	}
 }

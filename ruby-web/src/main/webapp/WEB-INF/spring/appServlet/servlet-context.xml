@@ -23,6 +23,7 @@
 	</bean>
 	<context:component-scan base-package="fpt.qa.rubyweb" />
 	<context:component-scan base-package="com.fpt.ruby.business.service" />
+	<context:component-scan base-package="com.fpt.ruby.service" />
 	<context:component-scan base-package="com.fpt.ruby.business.service.mongo" />
 	<!-- Tiles configuration -->
 	<bean id="tilesConfigurer"

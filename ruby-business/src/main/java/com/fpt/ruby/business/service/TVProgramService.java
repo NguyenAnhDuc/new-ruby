@@ -213,8 +213,10 @@ public class TVProgramService {
 
 	public List<TVProgram> findByTitleInPeriodAtChannel(String title,
 			Date start, Date end, String channel) {
+		String channel2 = channel.replace("\\+", "\\\\+");
+
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel + "$", "i").and("title")
+				.regex("^" + channel2 + "$", "i").and("title")
 				.regex("^.*" + title + ".*", "i").and("start_date").gt(start)
 				.and("end_date").lt(end));
 		return mongoOperations.find(query, TVProgram.class);

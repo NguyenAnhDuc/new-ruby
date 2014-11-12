@@ -195,7 +195,7 @@
 											<div class="pull-right action-buttons">
 
 												<a href="deleteTicket?ticketId=${log.id}"
-													class="simpleConfirm trash"><span
+													class="trash"><span
 													class="glyphicon glyphicon-trash"></span></a>
 											</div>
 										</td>

@@ -48,7 +48,9 @@ public class TypeMapper {
 		types.add(new ScienceTypeRecognizer());
 		types.add(new StyleTypeRecognizer());
 		types.add(new GolfTypeRecognizer());
+
 		setRootType();
+
 		for (TypeRecognizer tp : types) {
 			tp.show();
 			System.out.println("\n________________");
@@ -58,9 +60,9 @@ public class TypeMapper {
 		} catch (Exception ex) {
 			System.out.println("ERROR " + ex.getMessage());
 			ex.printStackTrace();
-			loadData("./classes/type_mapper/type_mapper.txt");
-
+			loadData("./classes" + PATH);
 		}
+
 		retrieveTaggedProgram();
 	}
 
@@ -75,12 +77,15 @@ public class TypeMapper {
 		rootType.put(ProgramType.GOLF, ProgramType.SPORT);
 		
 		rootType.put(ProgramType.CARTOON, ProgramType.FILM);
-		
 	}
 
 	public static void clear() {
 		typeMapper.clear();
 		tagged.clear();
+	}
+
+	private static void reload(String dir) {
+
 	}
 
 	public static void init() {
@@ -247,7 +252,7 @@ public class TypeMapper {
 	public static void main(String[] args) {
 		System.out.println("NEW CODE2");
 //	FootballTypeRecognizer
-		System.out.println("RESULTX: " + TypeMapper.getType("vtv1", "OLIVE KITTERIDGE"));
+		System.out.println("RESULTX: " + TypeMapper.getType("vtv1", "Phim tài liệu Huyền thoại tuyến hậu cần đường Trường Sơn - Tập 2 : Muôn nẻo đường Trường Sơn"));
 	}
 
 }

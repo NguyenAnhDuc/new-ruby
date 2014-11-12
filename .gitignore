@@ -74,7 +74,7 @@ local.properties
 
 # IDEA
 *.iml
-.idea/
+.idea/*
 
 #
 .classpath
@@ -84,3 +84,6 @@ local.properties
 hs_err_pid*
 target/*
 *~
+
+.idea
+/bin

@@ -1,4 +1,4 @@
-/*package fpt.qa.rubyweb;
+package fpt.qa.rubyweb;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +9,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fpt.ruby.business.model.*;
+import com.fpt.ruby.business.service.*;
+import fpt.qa.additionalinformation.modifier.AbsoluteTime;
+import fpt.qa.crawler.CrawlerMyTV;
+import fpt.qa.crawler.moveek.MoveekCrawler;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,18 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fpt.ruby.analytic.DataChart;
 import com.fpt.ruby.analytic.DataPieChart;
-import com.fpt.ruby.business.service.CinemaService;
-import com.fpt.ruby.business.service.LogService;
-import com.fpt.ruby.business.service.MovieTicketService;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.crawler.CrawlPhimChieuRap;
-import com.fpt.ruby.crawler.moveek.MoveekCrawler;
-import com.fpt.ruby.model.Cinema;
-import com.fpt.ruby.model.Log;
-import com.fpt.ruby.model.MovieTicket;
-import com.fpt.ruby.model.NameMapper;
-import com.fpt.ruby.model.TVProgram;
-import com.fpt.ruby.service.TVProgramService;
+
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 
@@ -49,21 +43,21 @@ public class AdminController {
 	@Autowired
 	private NameMapperService nameMapperService;
 	
-	@RequestMapping(value="/crawlPhimChieuRap", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public BasicDBObject crawlPhimChieuRap(){
-		CrawlPhimChieuRap crawlPhimChieuRap = new CrawlPhimChieuRap();
-		try{
-			movieTicketService.cleanOldData();
-			crawlPhimChieuRap.crawlHaNoi();
-			
-		}
-		catch (Exception ex){
-			System.out.println("Done");
-			return new BasicDBObject().append("status", "failed");
-		}
-		return new BasicDBObject().append("status", "success");
-	}
+//	@RequestMapping(value="/crawlPhimChieuRap", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
+//	@ResponseBody
+//	public BasicDBObject crawlPhimChieuRap(){
+//		CrawlPhimChieuRap crawlPhimChieuRap = new CrawlPhimChieuRap();
+//		try{
+//			movieTicketService.cleanOldData();
+//			crawlPhimChieuRap.crawlHaNoi();
+//
+//		}
+//		catch (Exception ex){
+//			System.out.println("Done");
+//			return new BasicDBObject().append("status", "failed");
+//		}
+//		return new BasicDBObject().append("status", "success");
+//	}
 	
 	@RequestMapping(value="/crawl-mytv", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
 	@ResponseBody
@@ -71,7 +65,7 @@ public class AdminController {
 		CrawlerMyTV crawlerMyTV = new CrawlerMyTV();
 		try{
 			tvProgramService.cleanOldData();
-			crawlerMyTV.crawlMyTV(tvProgramService);
+			crawlerMyTV.doCrawl(tvProgramService);
 		}
 		catch (Exception ex){
 			System.out.println("Done");
@@ -85,7 +79,7 @@ public class AdminController {
 	public BasicDBObject crawlMoveek(){
 		try{
 			movieTicketService.cleanOldData();
-			MoveekCrawler.doCrawl( movieTicketService );
+			MoveekCrawler.doCrawl(movieTicketService);
 		}
 		catch (Exception ex){
 			System.out.println("Done");
@@ -97,7 +91,7 @@ public class AdminController {
 	@RequestMapping(value="/old", method = RequestMethod.GET)
 	public String testCombo(Model model){
 		AbsoluteTime absoluteTime = new AbsoluteTime();
-		TimeResult timeResult = absoluteTime.getAbsoluteTime("hôm nay là ngày gì");
+		AbsoluteTime.TimeResult timeResult = absoluteTime.getAbsoluteTime("hôm nay là ngày gì");
 		System.out.println(timeResult.getBeginTime());
 		System.out.println(timeResult.getEndTime());
 		return "admin";
@@ -347,4 +341,3 @@ public class AdminController {
 		return "admin-dashboard";
 	}
 }
-*/

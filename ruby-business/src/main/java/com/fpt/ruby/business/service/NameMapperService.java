@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fpt.ruby.business.model.MovieTicket;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -97,7 +98,7 @@ public class NameMapperService {
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));
 		n.setVariant(variants);
-		
+
 		n.setName(title);
 		n.setDomain("tv");
 		n.setType("program_title");
@@ -106,6 +107,25 @@ public class NameMapperService {
 		
 		save(n);
 	}
+
+	public static void save(MovieTicket mt) {
+		NameMapper n = new NameMapper();
+
+		String title = mt.getMovie();
+		Set<String> variants = new HashSet<String>();
+		variants.add(title);
+		variants.add(TypeMapperHelper.normalize(title));
+		n.setVariant(variants);
+
+		n.setName(title);
+		n.setDomain("movie");
+		n.setType("mov_title");
+		n.setEnteredDate(new Date());
+		n.setLastMention(new Date());
+
+		save(n);
+	}
+
 	
 	public static void main(String[] args) {
 		NameMapperService nameMapperService = new NameMapperService();

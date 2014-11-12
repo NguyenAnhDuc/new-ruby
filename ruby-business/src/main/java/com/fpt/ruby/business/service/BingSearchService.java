@@ -43,7 +43,7 @@ private String appId;
 	
 	public static void main(String[] args){
 		BingSearchService bingWebSearchProvider = new BingSearchService();
-		List<BingSearchAnswer> docs = bingWebSearchProvider.getDocuments("có món gì ngon",5);
+		List<BingSearchAnswer> docs = bingWebSearchProvider.getDocuments("hello",5);
 		System.out.println( DisplayAnswerHelper.display(docs));
 		System.out.println("DONE!");
 	}

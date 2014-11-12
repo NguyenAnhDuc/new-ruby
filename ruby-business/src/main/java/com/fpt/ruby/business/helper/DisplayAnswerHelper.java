@@ -1,5 +1,7 @@
 package com.fpt.ruby.business.helper;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import com.fpt.ruby.business.model.BingSearchAnswer;
@@ -12,16 +14,23 @@ public class DisplayAnswerHelper {
 			result.append(bingSearchAnswer.getTitle());
 			result.append("</a>");
 			result.append("</br>");
-			
-			String website = bingSearchAnswer.getDisplayUrl();
-			int end = website.indexOf("/");
-			if (end != -1) {
-				website = website.substring(0, end);
-			}
+
+			String website = extractHost(bingSearchAnswer.getUrl());
 			result.append("<strong>" + website + "</strong>").append("</br>");
 			result.append(bingSearchAnswer.getDescription()).append("</br>");
 			result.append("</br>");
 		}
 		return result.toString();
+	}
+
+	public static String extractHost(String url) {
+		String result = url;
+		try {
+			URL u = new URL(url);
+			result = u.getHost();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

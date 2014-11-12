@@ -311,6 +311,7 @@ public class TVProgramService {
 	}
 
 	public void save(TVProgram tvProgram) {
+		NameMapperService.save(tvProgram); // save to namemapper
 		mongoOperations.save(tvProgram);
 	}
 

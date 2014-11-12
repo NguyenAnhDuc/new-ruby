@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fpt.ruby.business.helper.NameMapperHelper;
 import com.fpt.ruby.business.model.MovieTicket;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -93,7 +94,7 @@ public class NameMapperService {
 	public static void save(TVProgram prog) {
 		NameMapper n = new NameMapper();
 		
-		String title = prog.getTitle().toLowerCase();
+		String title = NameMapperHelper.getRealName(prog.getTitle());
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));

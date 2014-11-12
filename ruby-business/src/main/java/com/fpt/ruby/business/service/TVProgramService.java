@@ -205,8 +205,10 @@ public class TVProgramService {
 
 	public List<TVProgram> findInPeriodAtChannel(Date start, Date end,
 			String channel) {
+		String chn = channel.replaceAll("\\+", "\\\\+");
+
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel + "$", "i").and("start_date").gte(start)
+				.regex("^" + chn + "$", "i").and("start_date").gte(start)
 				.lte(end));
 		return mongoOperations.find(query, TVProgram.class);
 	}
@@ -236,16 +238,18 @@ public class TVProgramService {
 	}
 
 	public List<TVProgram> findAtTimeAtChannel(Date date, String channel) {
+		String chn = channel.replaceAll("\\+", "\\\\+");
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel + "$", "i").and("start_date").lt(date)
+				.regex("^" + chn + "$", "i").and("start_date").lt(date)
 				.and("end_date").gt(date));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findByTitleAtTimeAtChannel(String title, Date date,
 			String channel) {
+		String chn = channel.replaceAll("\\+", "\\\\+");
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel + "$", "i").and("title")
+				.regex("^" + chn + "$", "i").and("title")
 				.regex("^.*" + title + ".*", "i").and("start_date").lt(date)
 				.and("end_date").gt(date));
 		return mongoOperations.find(query, TVProgram.class);
@@ -265,16 +269,19 @@ public class TVProgramService {
 	}
 
 	public List<TVProgram> findAfterAtChannel(Date date, String channel) {
+		String chn = channel.replaceAll("\\+", "\\\\+");
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel + "$", "i").and("start_date").gt(date))
+				.regex("^" + chn + "$", "i").and("start_date").gt(date))
 				.with(new Sort(Direction.ASC, "start_date"));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findAfterByTitleAtChannel(String title, Date date,
 			String channel) {
+		String chn = channel.replaceAll("\\+", "\\\\+");
+
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel + "$", "i").and("title")
+				.regex("^" + chn + "$", "i").and("title")
 				.regex("^.*" + title + ".*", "i").and("start_date").gt(date))
 				.with(new Sort(Direction.ASC, "start_date"));
 		return mongoOperations.find(query, TVProgram.class);

@@ -22,10 +22,10 @@ public class MoveekCrawler {
 	private static HashMap<String, String> cin_cities = new HashMap<String, String>();
 
 	static {
-		String dir = "./classes/dicts/";
+		String dir = "./classes/dicts/"; // TODO: correct default dir to allow run singly.
 
 		try {
-			dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath() + "/dicts";
+			dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath() + "/moveek";
 		} catch (Exception ex) {
 			System.out.println("Error init Moveek Crawler: " + ex.getMessage());
 		} finally {
@@ -111,7 +111,6 @@ public class MoveekCrawler {
 
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -136,7 +135,6 @@ public class MoveekCrawler {
 
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -161,15 +159,12 @@ public class MoveekCrawler {
 
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//testCrawl();
 		doCrawl(new MovieTicketService());
 	}
 }

@@ -9,6 +9,7 @@ import com.fpt.ruby.business.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.crawler.CrawlerMyTV;
 import fpt.qa.crawler.CrawlerVTVCab;
+import fpt.qa.crawler.moveek.MoveekCrawler;
 import fpt.qa.type_mapper.TypeMapper;
 
 public class AutoCrawler {
@@ -20,7 +21,7 @@ public class AutoCrawler {
 	// private CinemaService cinemaService;
 
 	private void init() {
-//		movieTicketService = new MovieTicketService();
+		movieTicketService = new MovieTicketService();
 		tvProgramService = new TVProgramService();
 		logService = new LogService();
 //		cinemaService = new CinemaService();
@@ -28,7 +29,7 @@ public class AutoCrawler {
 
 	private void cleanData() {
 		try {
-//			movieTicketService.cleanOldData();
+			movieTicketService.cleanOldData();
 		} catch (Exception e) {
 			System.out.println("error clean movie ticket.");
 		}
@@ -40,10 +41,10 @@ public class AutoCrawler {
 		}
 
 		try {
-//			movieTicketService.clearDataOnSpecificDay(0);
-//			movieTicketService.clearDataOnSpecificDay(1);
-			tvProgramService.clearDataOnSpecificDay(0);
-			tvProgramService.clearDataOnSpecificDay(1);
+			for (int i = 0; i <= 1; ++i) {
+				movieTicketService.clearDataOnSpecificDay(i);
+				tvProgramService.clearDataOnSpecificDay(i);
+			}
 		} catch (Exception e) {
 			System.out.println("Error clear today data. " + e.getMessage());
 		}
@@ -52,10 +53,10 @@ public class AutoCrawler {
 	private void doCrawl(ConjunctionHelper conjunctionHelper) {
 		CrawlerVTVCab crawvtvcab = new CrawlerVTVCab();
 		CrawlerMyTV crawlmytv = new CrawlerMyTV();
-//		CrawlPhimChieuRap crawlPhimChieuRap = new CrawlPhimChieuRap();
 		NameMapperService nameMapperService = new NameMapperService();
+
 		try {
-			crawlmytv.crawlMyTV(tvProgramService);
+			crawlmytv.doCrawl(tvProgramService, conjunctionHelper);
 		} catch (Exception ex) {
 			System.out.println("Error crawling my tv!! Message = " + ex.getMessage());
 		}
@@ -68,19 +69,22 @@ public class AutoCrawler {
 
 		TypeMapper.clear(); // clear data
 
-//		try {
-//			MoveekCrawler.doCrawl(movieTicketService);
-//		} catch (Exception ex) {
-//			System.out.println("Eror crawling moveek!! Message = " + ex.getMessage());
-//		}
+		try {
+			MoveekCrawler.doCrawl(movieTicketService);
+		} catch (Exception ex) {
+			System.out.println("Eror crawling moveek!! Message = " + ex.getMessage());
+		}
 	}
 
 	public static void main(String[] args) {
-		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
+//		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
+		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
 		NameMapperService nameMapperService = new NameMapperService();
 		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nameMapperService);
+
 		System.out.println("Start!");
 		AutoCrawler x = new AutoCrawler();
+
 		x.init();
 		x.cleanData();
 		x.doCrawl(conjunctionHelper);

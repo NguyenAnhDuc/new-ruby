@@ -1,7 +1,6 @@
 package fpt.qa.crawler;
 
 import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.Channel;
 import com.fpt.ruby.business.model.TVProgram;
 import com.fpt.ruby.business.service.NameMapperService;
@@ -37,7 +36,6 @@ public class CrawlerMyTV {
     public static String sendGet(String url) throws Exception {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
-
         // add request header
         HttpResponse response = client.execute(request);
 
@@ -54,15 +52,10 @@ public class CrawlerMyTV {
     }
 
     public List<Channel> getChanel(ConjunctionHelper conjunctionHelper) throws Exception {
-//        String dir = "./classes/"; // hack for standalone crawler and
-//        // in-web-app crawler.
-//        try {
-//            dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-//        } catch (Exception e) {
-//            System.out.println("[get Channel] Life goes on! Dir = " + dir);
-//        }
         List<Channel> channels = new ArrayList<Channel>();
-        Document doc = Jsoup.parse(sendGet("http://www.mytv.com.vn/lich-phat-song"));
+        Document doc = Jsoup.parse(CrawlerUtils.getResponse("http://www.mytv.com.vn/lich-phat-song", "", "GET"));
+//        Document doc = Jsoup.parse(sendGet("http://www.mytv.com.vn/lich-phat-song"));
+        System.out.println(doc.toString());
         Element chanel = doc.getElementById("channelId");
 
         Elements chanElements = chanel.select("option");
@@ -80,12 +73,38 @@ public class CrawlerMyTV {
         return channels;
     }
 
-    public void crawlMyTV(TVProgramService tvProgramService) throws Exception {
-
+    public void doCrawl(TVProgramService tvs, ConjunctionHelper cjh) throws Exception {
         System.out.println("Crawling from MYTV");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         NameMapperService nameMapperService = new NameMapperService();
-        ConjunctionHelper conjunctionHelper = new ConjunctionHelper(nameMapperService);
+        List<Channel> channels = getChanel(cjh);
+        Date today = new Date();
+
+        for (Channel channel : channels) {
+            if (crawlChannels.contains(channel.getName().toUpperCase())) {
+                try {
+                    System.out.println("Crawling from " + channel.getName());
+                    for (int i = 0; i <= FUTUREDAY_CRAWL; i++) {
+                        String date = df.format(new Date(today.getTime() + ONE_DAY * i));
+                        List<TVProgram> tvPrograms = crawlChannel(channel, date);
+
+                        tvPrograms = calculateEndTime(tvPrograms);
+                        tvPrograms.forEach(tvs::save);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    continue;
+                }
+            }
+        }
+    }
+
+    // TODO: check
+    public void doCrawl(String dir, TVProgramService tvProgramService) throws Exception {
+        System.out.println("Crawling from MYTV");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        NameMapperService nameMapperService = new NameMapperService();
+        ConjunctionHelper conjunctionHelper = (dir.equals("") ? new ConjunctionHelper(nameMapperService) : new ConjunctionHelper(dir, nameMapperService));
         List<Channel> channels = getChanel(conjunctionHelper);
         Date today = new Date();
 
@@ -110,6 +129,10 @@ public class CrawlerMyTV {
 
         }
 
+    }
+
+    public void doCrawl(TVProgramService tvProgramService) throws Exception {
+        doCrawl("", tvProgramService);
     }
 
     public List<TVProgram> calculateEndTime(List<TVProgram> tvPrograms) {
@@ -178,6 +201,7 @@ public class CrawlerMyTV {
     public static void main(String[] args) throws Exception {
         TVProgramService tvProgramService = new TVProgramService();
         CrawlerMyTV crawlerMyTV = new CrawlerMyTV();
-        crawlerMyTV.crawlMyTV(tvProgramService);
+        String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+        crawlerMyTV.doCrawl(dir, tvProgramService);
     }
 }

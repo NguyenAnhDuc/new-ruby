@@ -77,12 +77,15 @@ public class TypeMapper {
 		rootType.put(ProgramType.GOLF, ProgramType.SPORT);
 		
 		rootType.put(ProgramType.CARTOON, ProgramType.FILM);
-		
 	}
 
 	public static void clear() {
 		typeMapper.clear();
 		tagged.clear();
+	}
+
+	private static void reload(String dir) {
+
 	}
 
 	public static void init() {
@@ -249,7 +252,7 @@ public class TypeMapper {
 	public static void main(String[] args) {
 		System.out.println("NEW CODE2");
 //	FootballTypeRecognizer
-		System.out.println("RESULTX: " + TypeMapper.getType("vtv1", "OLIVE KITTERIDGE"));
+		System.out.println("RESULTX: " + TypeMapper.getType("vtv1", "Phim tài liệu Huyền thoại tuyến hậu cần đường Trường Sơn - Tập 2 : Muôn nẻo đường Trường Sơn"));
 	}
 
 }

@@ -65,7 +65,7 @@ public class AdminController {
 		CrawlerMyTV crawlerMyTV = new CrawlerMyTV();
 		try{
 			tvProgramService.cleanOldData();
-			crawlerMyTV.crawlMyTV(tvProgramService);
+			crawlerMyTV.doCrawl(tvProgramService);
 		}
 		catch (Exception ex){
 			System.out.println("Done");

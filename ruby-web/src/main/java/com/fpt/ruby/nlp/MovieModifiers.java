@@ -328,7 +328,8 @@ public class MovieModifiers {
 			for (int j = i+1; j < toks.length - 2; j++){
 				for (int k = j+1; k < toks.length - 1; k++){
 					for (int l = k+1; l < toks.length; l++){
-						res.add(toks[i] + " " + toks[j] + " " + toks[k] + " " + toks[l]);
+						res.add(toks[i] + " " + toks[j] + " " + toks[k] + " "
+								+ toks[l]);
 					}
 				}
 			}

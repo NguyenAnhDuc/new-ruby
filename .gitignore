@@ -86,3 +86,4 @@ target/*
 *~
 
 .idea
+/bin

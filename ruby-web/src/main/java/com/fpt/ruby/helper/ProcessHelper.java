@@ -29,12 +29,14 @@ import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.AnswerMapper;
 import com.fpt.ruby.nlp.NlpHelper;
+import com.github.mustachejava.PragmaHandler;
 
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
 
 public class ProcessHelper {
 	private static final Logger logger = LoggerFactory
 			.getLogger(ProcessHelper.class);
+
 	public static void init(NameMapperService nameMapperService) {
 		String dir = (new RedisHelper()).getClass().getClassLoader()
 				.getResource("").getPath();
@@ -56,17 +58,21 @@ public class ProcessHelper {
 	public static RubyAnswer getAnswer(String question,
 			MovieFlyService movieFlyService,
 			MovieTicketService movieTicketService, CinemaService cinemaService,
-			LogService logService, ConjunctionHelper conjunctionHelperNoneDiacritic,ConjunctionHelper  conjunctionHelperWithDiacritic ) {
+			LogService logService,
+			ConjunctionHelper conjunctionHelperNoneDiacritic,
+			ConjunctionHelper conjunctionHelperWithDiacritic) {
 		if (DiacriticConverter.hasDiacriticAccents(question)) {
 			System.out.println("DIACRITIC");
 			RubyAnswer rubyAnswerDiacritic = getAnswer(true, question,
 					movieFlyService, movieTicketService, cinemaService,
-					logService, conjunctionHelperNoneDiacritic,  conjunctionHelperWithDiacritic);
+					logService, conjunctionHelperNoneDiacritic,
+					conjunctionHelperWithDiacritic);
 			return rubyAnswerDiacritic;
 		}
 		System.out.println("NONE DIACRITIC");
 		RubyAnswer rubyAnswerNoneDiacritic = getAnswer(false, question,
-				movieFlyService, movieTicketService, cinemaService, logService, conjunctionHelperNoneDiacritic,  conjunctionHelperWithDiacritic);
+				movieFlyService, movieTicketService, cinemaService, logService,
+				conjunctionHelperNoneDiacritic, conjunctionHelperWithDiacritic);
 		return rubyAnswerNoneDiacritic;
 		/*
 		 * RubyAnswer rubyAnswerDiacritic = getAnswer(true, question,
@@ -78,7 +84,9 @@ public class ProcessHelper {
 	private static RubyAnswer getAnswer(boolean isDiacritic, String question,
 			MovieFlyService movieFlyService,
 			MovieTicketService movieTicketService, CinemaService cinemaService,
-			LogService logService, ConjunctionHelper conjunctionHelperNoneDiacritic, ConjunctionHelper conjunctionHelperWithDiacritic) {
+			LogService logService,
+			ConjunctionHelper conjunctionHelperNoneDiacritic,
+			ConjunctionHelper conjunctionHelperWithDiacritic) {
 		// Conjunction
 		ConjunctionHelper conjunctionHelper;
 		if (isDiacritic)
@@ -87,6 +95,18 @@ public class ProcessHelper {
 			conjunctionHelper = conjunctionHelperNoneDiacritic;
 
 		String intent = "";
+
+		//Time Extracter
+		TimeExtract timeExtract = NlpHelper.getTimeCondition(question
+				.replaceAll("(\\d+)(h)", "$1 giờ"));
+
+		if (question.contains("đang") || question.contains("dang")
+				|| question.contains("hiện tại")
+				|| question.contains("hien tai")
+				|| question.contains("hien")
+				|| question.contains("hiện")) {
+			timeExtract = NlpHelper.getTimeCondition("hôm nay");
+		}
 		// Intent
 		if (isDiacritic)
 			intent = MovieIntentDetection.getIntent(question);
@@ -144,45 +164,64 @@ public class ProcessHelper {
 
 			} else if (questionType.equals(AnswerMapper.Dynamic_Question)) {
 				System.out.println("Dynamic ....");
-				MovieTicket matchMovieTicket = conjunctionHelper.getMovieTicket(question);
-				TimeExtract timeExtract = NlpHelper.getTimeCondition(question
-						.replaceAll("(\\d+)(h)", "$1 giờ"));
-				if(question.contains("đang")|| question.contains("dang")||question.contains("hiện tại")) {
-					timeExtract = NlpHelper.getTimeCondition("hôm nay");
-				}
+				MovieTicket matchMovieTicket = conjunctionHelper
+						.getMovieTicket(question);
+
+
 				List<MovieTicket> movieTickets = movieTicketService
 						.findMoviesMatchCondition(matchMovieTicket,
 								timeExtract.getBeforeDate(),
 								timeExtract.getAfterDate());
 				System.out.println("Size: " + movieTickets.size());
-				if (timeExtract.getBeforeDate() != null)
+				if (timeExtract.getBeforeDate() != null) {
+					queryParamater.setBeginTime(timeExtract.getBeforeDate());
 					rubyAnswer.setBeginTime(timeExtract.getBeforeDate());
-					
-				if (timeExtract.getAfterDate() != null)
+				}
+
+				if (timeExtract.getAfterDate() != null) {
+					queryParamater.setBeginTime(timeExtract.getAfterDate());
 					rubyAnswer.setEndTime(timeExtract.getAfterDate());
+				}
+
+				if (rubyAnswer.getBeginTime() == null) {
+					queryParamater.setBeginTime(timeExtract.getAfterDate());
+					rubyAnswer.setBeginTime(NlpHelper.getTimeCondition(
+							"hôm nay").getBeforeDate());
+				}
 				queryParamater.setMovieTitle(matchMovieTicket.getMovie());
 				queryParamater.setCinName(matchMovieTicket.getCinema());
 				rubyAnswer.setQueryParamater(queryParamater);
 				rubyAnswer.setAnswer(AnswerMapper.getDynamicAnswer(intent,
 						movieTickets, matchMovieTicket,
-						timeExtract.getBeforeDate() != null));
+						true));
 				rubyAnswer.setQuestionType(AnswerMapper.Dynamic_Question);
 				System.out.println("DONE Process");
 			} else {
 				System.out.println("Feature ..");
-				MovieTicket matchMovieTicket = conjunctionHelper.getMovieTicket(question);
+				MovieTicket matchMovieTicket = conjunctionHelper
+						.getMovieTicket(question);
 				Date today = new Date();
 				System.out.println("afterdate: " + today);
-				TimeExtract timeExtract = NlpHelper.getTimeCondition(question);
-				if (timeExtract.getBeforeDate() != null)
+				if (timeExtract.getBeforeDate() != null) {
+					queryParamater.setBeginTime(timeExtract.getBeforeDate());
 					rubyAnswer.setBeginTime(timeExtract.getBeforeDate());
-				if (timeExtract.getAfterDate() != null)
+				}
+
+				if (timeExtract.getAfterDate() != null) {
+					queryParamater.setBeginTime(timeExtract.getAfterDate());
 					rubyAnswer.setEndTime(timeExtract.getAfterDate());
+				}
+
+				if (rubyAnswer.getBeginTime() == null) {
+					queryParamater.setBeginTime(timeExtract.getAfterDate());
+					rubyAnswer.setBeginTime(NlpHelper.getTimeCondition(
+							"hôm nay").getBeforeDate());
+				}
 				// list movie tickets for the duration of one day
 				List<MovieTicket> movieTickets = movieTicketService
 						.findMoviesMatchCondition(matchMovieTicket,
-								timeExtract.getBeforeDate(),
-								timeExtract.getAfterDate());
+								queryParamater.getBeginTime(),
+								queryParamater.getEndTime());
 				System.out.println("No of returned tickets: "
 						+ movieTickets.size());
 				queryParamater.setMovieTitle(matchMovieTicket.getMovie());

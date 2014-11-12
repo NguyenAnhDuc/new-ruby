@@ -1,0 +1,14 @@
+FILM	phim truyen, film, banh duc co xuong, ninja rua, bao qua lang, bao thanh thien, Hai trái tim vàng, 5s online, Đùa chút thôi, RANH GIỚI - TẬP 4, ĐƯỜNG TỚI THẾ VẬN HỘI, Make it or break it, Cánh chim cô đơn (62 tập), BLUE BLOODS (SEASON 4), Chương trình Hài, Thổ địa truyền kỳ, Anh hùng liêm chính, NaTra, Tay du ki, Ơn giời, cậu đây rồi, Phút giây cảnh giác, Camera giấu kín,  Thái Bình công chúa
+CARTOON	cartoon network, tom and jerry, phim hoat hinh, nang bach tuyen va bay chu lun, Cuộc chiến giữa Coop và mèo Kat
+SPORT	champion league, laliga world, ngoai hang anh, the thao, bong da, world cup, asiad, Nhịp đập 360 độ thể thao, Thể thao 24/7, PGA TOUR 2014, ASIAN TOUR GOLF SHOW,Trận đấu 10 phút, EUROPEAN TOUR 2014, Yachting, Thể dục, Karatedo  		
+FOOTBALL	champion league, laliga world, ngoai hang anh, bong da, world cup, confedaration cup, seria a, seria b, uefa cup, cup quoc gia - lien doan, champion league, uefa champion leage, Russian Premier Liga, VDQG Italia, Vdqg duc, seria a, LIGUE, LA LIGA WORLD, VĐGQ Đức, UEFA, Europa, BUNDESLIGA, VĐQG Tây Ban Nha  
+TENIS	atp world tour, tenis, wimbledon, wta tour, atp challenger tour, grand slam
+MUSIC	the gioi am nhac, am nhac va cuoc song, bai hat viet, Đồ rê mí, Tôi hát, KHÚC HÁT QUÊ HƯƠNG, MUZIK + SỐ 206, VZ, M-plus, mplus	
+GAMESHOW	ai la trieu phu, chiec non ky dieu, giong hat viet nhi, the voice kid, vietnam idol, hay chon gia dung, dau truong 100, vi ban xung dang, Đồ rê mí, Gương mặt thân quen, Đừng để tiền rơi, Thử thách đường phố, Đường lên đỉnh Olympia, Đường tới vương miện, Nhân tố bí ẩn, x-factor, xfactor, vietnam's got idol, tim kiem tai nang viet nam, Siêu sao giải ngoại hạng 
+NEWS	thoi su, ban tin, the gioi 24h, diem tin, the gioi 24 gio, the gioi tuan qua, news, world news, breaking news, tin tuc, Cà phê sáng, Thông tin 260, Thế giới góc nhìn, Tài chính - Kinh doanh, Thoi su 12h, Thoi su 19h, Tin quốc tế,Thể thao 24/7, Bản tin Tài chính - Đầu tư, Bản tin tiếng Anh, Bản tin tiếng Trung, chao buoi sang, chuyen dong 24h, chuyen dong 24 gio, magazine, Điểm báo, Tin cuối ngày, Thế giới ngày qua, Chào ngày mới, Thế giới 24G, 10 phút cập nhật, An ninh ngày mới 
+FASHION	thoi trang va cuoc song, style, Xưởng thời trang
+STYLE	Sắc màu phái đẹp, Kỹ năng sống, Vui song moi ngay, Xưởng thời trang
+ENTERTAINMENT	chung toi la chien si, Đùa chút thôi, Bua trua vui ve, Hoa khôi Áo dài Việt Nam 2014, Thư giãn cuối tuần, F5 Refresh
+REPORT	phóng sự, report
+DISCOVERY	Hành trình khám phá, Khám phá thế giới, Khám phá Việt Nam 	 
+SCIENCE	7 Ngày Công nghệ, Mười vạn câu hỏi vì sao, Câu chuyện khoa học, Y học bốn phương, Bạn của nhà nông, 10 phút cập nhật

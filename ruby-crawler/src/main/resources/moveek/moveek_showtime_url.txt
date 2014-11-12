@@ -1,0 +1,10 @@
+CGV MIPEC Tower	http://moveek.com/ajax/showtimesCinema/ha-noi?t=megastar-mipec-tower
+CGV Vincom City Towers	http://moveek.com/ajax/showtimesCinema/ha-noi?t=megastar-vincom-ba-trieu
+Lotte Cinema Hà Đông	http://moveek.com/ajax/showtimesCinema/ha-noi?t=lotte-melinh-plaza-ha-dong
+Lotte Cinema Landmark	http://moveek.com/ajax/showtimesCinema/ha-noi?t=lotte-landmark
+Platinum Garden Mall	http://moveek.com/ajax/showtimesCinema/ha-noi?t=platinum-garden-mall
+Platinum Cineplex Times City	http://moveek.com/ajax/showtimesCinema/ha-noi?t=platinum-times-city
+Platinum Vincom Long Biên	http://moveek.com/ajax/showtimesCinema/ha-noi?t=platinum-vincom-long-bien
+Platinum Vincom Royal City	http://moveek.com/ajax/showtimesCinema/ha-noi?t=platinum-vincom-royal-city
+Tháng 8 Cinema	http://moveek.com/ajax/showtimesCinema/ha-noi?t=rap-thang-8
+TT Chiếu Phim Quốc Gia	http://moveek.com/ajax/showtimesCinema/ha-noi?t=trung-tam-chieu-phim-quoc-gia

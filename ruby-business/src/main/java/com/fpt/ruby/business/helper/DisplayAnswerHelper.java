@@ -28,6 +28,9 @@ public class DisplayAnswerHelper {
 		try {
 			URL u = new URL(url);
 			result = u.getHost();
+			if (result.contains("www.")) {
+				result = result.substring(result.indexOf("www.") + 4);
+			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

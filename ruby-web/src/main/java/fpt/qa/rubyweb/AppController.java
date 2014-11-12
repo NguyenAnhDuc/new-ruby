@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 /*import net.sf.uadetector.ReadableUserAgent;
  import net.sf.uadetector.UserAgentStringParser;
  import net.sf.uadetector.service.UADetectorServiceFactory;*/
@@ -50,6 +51,7 @@ import com.fpt.ruby.nlp.NonDiacriticNlpHelper;
 import com.fpt.ruby.nlp.TVAnswerMapper;
 import com.fpt.ruby.nlp.TVAnswerMapperImpl;
 import com.fpt.ruby.nlp.TVModifiersHelper;
+import com.fpt.ruby.service.ReportQuestionService;
 
 import fpt.qa.domainclassifier.DomainClassifier;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
@@ -71,7 +73,7 @@ public class AppController {
 	NameMapperService nameMapperService;
 	@Autowired
 	BingSearchService bingSearchService;
-	//@Autowired	ReportQuestionService reportQuestionService;
+	@Autowired	ReportQuestionService reportQuestionService;
 	
 	static TVAnswerMapper tam = new TVAnswerMapperImpl();
 	static DomainClassifier classifier;
@@ -251,13 +253,13 @@ public class AppController {
 	}
 	
 	
-	@RequestMapping(value = "/reportQuestion", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/report", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String reportQuestion(@RequestParam("question") String question){
 		try{
 			ReportQuestion re = new ReportQuestion();
 			re.setQuestion(question);
-			//reportQuestionService.save(re);
+			reportQuestionService.save(re);
 			return "success";
 		}
 		catch (Exception ex){

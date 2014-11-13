@@ -1,16 +1,10 @@
 package com.fpt.ruby.nlp;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
 import com.fpt.ruby.business.model.MovieTicket;
-
 import fpt.qa.mdnlib.util.string.StrUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class TicketAnswerMapperImpl implements TicketAnswerMapper {
 	public String getTypeTicketAnswer(List<MovieTicket> ans){
@@ -103,7 +97,7 @@ public class TicketAnswerMapperImpl implements TicketAnswerMapper {
 		}
 		
 		Object[] obs = movMap.keySet().toArray();
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm:ss a");
 		if (!haveTimeInfo){
 			sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm");
 		}

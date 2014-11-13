@@ -31,7 +31,7 @@ public class HttpHelper {
 		}
 		return result.toString();
 	}
-	
+
 	private static void test(){
 		String question = "hôm nay có phim gì hay không";
 		

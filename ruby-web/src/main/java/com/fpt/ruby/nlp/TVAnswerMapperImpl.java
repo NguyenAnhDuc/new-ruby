@@ -23,6 +23,11 @@ import fpt.qa.typeclassifier.ProgramTypeExtractor;
 
 public class TVAnswerMapperImpl implements TVAnswerMapper {
 	public static final String DEF_ANS = "Xin lỗi, chúng tôi không có thông tin cho câu trả lời của bạn";
+	public static final String DEF_ANS_CHANNEL = "Nếu tôi không nhầm thì không có kênh nào cả";
+	public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
+	//public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
+
+
 	public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
 	private TVIntentDetect intentDetector = new TVIntentDetect();
 	private TVIntentDetect nonDiacritic = new TVIntentDetect();
@@ -126,7 +131,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		if (mod.getChannel() == null){
 			System.err.println("[TVAnserMapper]: Channel null");
 			if ( intent.equals( IntentConstants.TV_POL ) && progs.isEmpty()){
-				rubyAnswer.setAnswer( "Không!"  );
+				rubyAnswer.setAnswer( "Theo kết quả phân tích của tôi thì là không"  );
 				return rubyAnswer;
 			}
 			if (intent.equals( IntentConstants.TV_DAT )){
@@ -225,7 +230,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 
 	public String  getTitle ( List< TVProgram > progs ) {
 		if (progs.isEmpty())
-			return DEF_ANS;
+			return DEF_ANS_TITLE;
 		
 		String title = "";
 		
@@ -247,7 +252,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 
 	public String  getChannel ( List< TVProgram > progs ) {
 		if (progs.isEmpty())
-			return DEF_ANS;
+			return DEF_ANS_CHANNEL;
 		
 		String channel = "";
 		

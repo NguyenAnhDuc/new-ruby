@@ -38,7 +38,6 @@ public class NameMapperHelper {
 
     public static String getRealName(String programTitle) {
         String prog = programTitle.toLowerCase().trim();
-
         // Prefix
         int max = 0;
         String rs = "";
@@ -88,9 +87,9 @@ public class NameMapperHelper {
     }
 
     public static void main(String[] args) {
-        String[] prog = {"Phim Việt Nam Hai phía chân trời - Tập 25", "Tanked (S4)", "Cánh chim cô đơn (62 tập)", "America The Wild - American Vampire S4 - 2", "Phim tài liệu Sự hình thành Âu lục - Tập 3", "Phim ngắn - Dọc đường đen trắng, tập 76/150", "FRIENDS S10", "Thành thật với tình yêu (59T)", "Đời sống chợ đêm - P2", "Bad Dog! (S3)", "HAWAII FIVE-0 (SEASON 4)", "Phim Lệnh truyền của thiên sứ", "Phim truyền hình mỹ Ranh giới - Tập 14", "Phim truyện : Tiếu ngạo giang hồ, tập 21/40", "Tình yêu và thù hận (150 tập)", "Duyên nợ miền tây - T12", "Phim truyện Việt Nam : Vòng vây hoa hồng"};
+        String[] prog = {"phim việt nam tình yêu học trò - tập 6", "Phim truyện ngày xửa ngày xưa phần 3 - tập 16", "Phim Việt Nam Hai phía chân trời - Tập 25", "Tanked (S4)", "Cánh chim cô đơn (62 tập)", "America The Wild - American Vampire S4 - 2", "Phim tài liệu Sự hình thành Âu lục - Tập 3", "Phim ngắn - Dọc đường đen trắng, tập 76/150", "FRIENDS S10", "Thành thật với tình yêu (59T)", "Đời sống chợ đêm - P2", "Bad Dog! (S3)", "HAWAII FIVE-0 (SEASON 4)", "Phim Lệnh truyền của thiên sứ", "Phim truyền hình mỹ Ranh giới - Tập 14", "Phim truyện : Tiếu ngạo giang hồ, tập 21/40", "Tình yêu và thù hận (150 tập)", "Duyên nợ miền tây - T12", "Phim truyện Việt Nam : Vòng vây hoa hồng"};
         for (String p: prog) {
-            System.out.println(p + " ***** " + getRealName(p));
+            System.out.println(p + " ***** " + getRealName(getRealName(p)));
         }
     }
 

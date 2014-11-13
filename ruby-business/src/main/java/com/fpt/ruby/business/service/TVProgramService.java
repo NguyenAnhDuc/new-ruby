@@ -205,51 +205,52 @@ public class TVProgramService {
 
 	public List<TVProgram> findInPeriodAtChannel(Date start, Date end,
 			String channel) {
-		String chn = channel.replaceAll("\\+", "\\\\+");
-
+//		String chn = channel.replaceAll("\\+", "\\\\+");
+		String chn = channel.trim().toLowerCase();
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + chn + "$", "i").and("start_date").gte(start)
+				.is(chn).and("start_date").gte(start)
 				.lte(end));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findByTitleInPeriodAtChannel(String title,
 			Date start, Date end, String channel) {
-		String channel2 = channel.replace("\\+", "\\\\+");
-
-		Query query = new Query(Criteria.where("channel")
-				.regex("^" + channel2 + "$", "i").and("title")
-				.regex("^.*" + title + ".*", "i").and("start_date").gt(start)
-				.and("end_date").lt(end));
+//		String channel2 = channel.replace("\\+", "\\\\+");
+		String chn = channel.trim().toLowerCase();
+		Query query = new Query(Criteria.where("channel").is(chn)
+				.and("title").regex(title, "i")
+				.and("start_date").gte(start).and("end_date").lte(end));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findAtTime(Date startDate) {
-		Query query = new Query(Criteria.where("start_date").lt(startDate)
-				.and("end_date").gt(startDate));
+		Query query = new Query(Criteria.where("start_date").lte(startDate)
+				.and("end_date").gte(startDate));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findByTitleAtTime(String title, Date date) {
 		Query query = new Query(Criteria.where("title")
-				.regex("^.*" + title + ".*", "i").and("start_date").lt(date)
+				.regex(title, "i").and("start_date").lt(date)
 				.and("end_date").gt(date));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findAtTimeAtChannel(Date date, String channel) {
-		String chn = channel.replaceAll("\\+", "\\\\+");
+//		String chn = channel.replaceAll("\\+", "\\\\+");
+		String chn = channel.trim().toLowerCase();
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + chn + "$", "i").and("start_date").lt(date)
-				.and("end_date").gt(date));
+				.is(chn).and("start_date").lte(date)
+				.and("end_date").gte(date));
 		return mongoOperations.find(query, TVProgram.class);
 	}
 
 	public List<TVProgram> findByTitleAtTimeAtChannel(String title, Date date,
 			String channel) {
-		String chn = channel.replaceAll("\\+", "\\\\+");
+//		String chn = channel.replaceAll("\\+", "\\\\+");
+		String chn = channel.trim().toLowerCase();
 		Query query = new Query(Criteria.where("channel")
-				.regex("^" + chn + "$", "i").and("title")
+				.is(chn).and("title")
 				.regex("^.*" + title + ".*", "i").and("start_date").lt(date)
 				.and("end_date").gt(date));
 		return mongoOperations.find(query, TVProgram.class);
@@ -331,12 +332,11 @@ public class TVProgramService {
 			String curType = prog.getType();
 			if (curType == null)
 				continue;
-			for (String t : type) {
+			for (String t : type)
 				if (curType.contains(t)) {
 					res.add(prog);
 					break;
 				}
-			}
 		}
 		return res;
 	}

@@ -1,7 +1,6 @@
 package fpt.qa.crawler.moveek;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import fpt.qa.crawler.CrawlerUtils;
+import com.fpt.ruby.business.helper.CrawlerHelper;
 import jmdn.struct.pair.Pair;
 
 public class MoveekCrawlerUtils {
@@ -20,7 +19,7 @@ public class MoveekCrawlerUtils {
 	public static List<Pair<String, String>> GetMoviesByCinemas(String url, String urlParameters){
 		List<Pair<String, String>> res = new ArrayList<Pair<String, String>>();
 		try {
-			String response = CrawlerUtils.sendGet(url, urlParameters);
+			String response = CrawlerHelper.sendGet(url, urlParameters);
 			
 			return parseMovieList(response);
 		} catch (Exception e) {
@@ -59,7 +58,7 @@ public class MoveekCrawlerUtils {
 		List<Pair<String, Date>> res = new ArrayList<Pair<String, Date>>();
 	
 		try {
-			String response = CrawlerUtils.sendGet(url, "p[]=" + mov);
+			String response = CrawlerHelper.sendGet(url, "p[]=" + mov);
 			return parseSessionTime(response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -74,7 +73,7 @@ public class MoveekCrawlerUtils {
 		List<Pair<String, Date>> res = new ArrayList<Pair<String, Date>>();
 	
 		try {
-			String response = CrawlerUtils.sendGet(url, "p[]=" + mov);
+			String response = CrawlerHelper.sendGet(url, "p[]=" + mov);
 			return parseSessionTime2(response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -56,8 +56,9 @@ public class TVModifiersHelper {
 				|| mod.getProg_title().equalsIgnoreCase("thể thao")
 				|| mod.getProg_title().equalsIgnoreCase("game show")
 				|| mod.getProg_title().equalsIgnoreCase("bóng đá")
-				|| mod.getProg_title().equalsIgnoreCase("thời sự")) {
-
+				|| mod.getProg_title().equalsIgnoreCase("thời sự")
+				|| mod.getProg_title().equalsIgnoreCase("tin tức")) {
+			mod.setProg_title(null);
 			if (mod.getType() == null) {
 				List<ProgramType> ptype = typeExtractor.getTypes(question);
 				if (ptype != null) {

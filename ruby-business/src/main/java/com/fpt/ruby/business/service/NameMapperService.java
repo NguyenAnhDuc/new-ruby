@@ -64,6 +64,9 @@ public class NameMapperService {
 	public static List<NameMapper> findAll() {
 		return db.findAll(NameMapper.class);
 	}
+	public List<NameMapper> getAll() {
+		return db.findAll(NameMapper.class);
+	}
 
 	public static List<NameMapper> findByDomain(String domain){
 		Query query = new Query(Criteria.where("domain").is(domain));
@@ -109,6 +112,10 @@ public class NameMapperService {
 		save(n);
 	}
 
+	public void remove(NameMapper nameMapper){
+		db.remove(nameMapper);
+	}
+
 	public static void save(MovieTicket mt) {
 		NameMapper n = new NameMapper();
 
@@ -130,7 +137,14 @@ public class NameMapperService {
 	
 	public static void main(String[] args) {
 		NameMapperService nameMapperService = new NameMapperService();
-		nameMapperService.findAll();
-		System.out.println("Done");
+		List<NameMapper> nameMappers =  nameMapperService.findAll();
+		System.out.println(nameMappers.size());
+		for (NameMapper nameMapper : nameMappers){
+			if (nameMapper.getName().toLowerCase().equals("bóng đá") || nameMapper.getName().toLowerCase().equals("bong da")
+					|| nameMapper.getName().toLowerCase().equals("phim") || nameMapper.getName().toLowerCase().equals("phim")){
+				nameMappers.remove(nameMapper);
+			}
+		}
+		System.out.println("DONE");
 	}
 }

@@ -87,7 +87,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 			end = start;
 		}
 
-		if(timeExtract.getAfterDate()==null && timeExtract.getBeforeDate() == null && ( intent.equalsIgnoreCase("tv_ttl") || intent.equalsIgnoreCase("tv_pol") )) {
+		if(start==null && end == null && ( intent.equalsIgnoreCase("tv_ttl") || intent.equalsIgnoreCase("tv_pol") )) {
 			start = NlpHelper.getTimeCondition("hôm nay").getBeforeDate();
 			end = NlpHelper.getTimeCondition("hôm nay").getAfterDate();
 		}

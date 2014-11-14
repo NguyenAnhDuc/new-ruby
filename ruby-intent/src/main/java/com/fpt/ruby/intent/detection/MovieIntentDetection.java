@@ -145,7 +145,9 @@ public class MovieIntentDetection {
             	idx = tunedSent.indexOf("gì");
             }
             //System.out.println("tune : " + tunedSent);
-            int idx1 = Math.abs(idx - (tunedSent.indexOf("phim") > 0 ? tunedSent.indexOf("phim") : tunedSent.indexOf("chiếu")));
+            int temp = tunedSent.indexOf("chiếu") > 0 ? tunedSent.indexOf("chiếu") : tunedSent.indexOf("chieu");
+           /// int temp2 = tunedSent.indexOf("có") > 0 ? tunedSent.indexOf("có") : tunedSent.indexOf("co");
+            int idx1 = Math.abs(idx - (tunedSent.indexOf("phim") > 0 ? tunedSent.indexOf("phim") : temp));
             int idx2 = Math.abs(idx - (tunedSent.indexOf("rạp") > 0 ? tunedSent.indexOf("rạp") : tunedSent.indexOf("rap")));
             int idx3 = Math.abs(idx - (tunedSent.indexOf("diễn viên") > 0 ? tunedSent.indexOf("diễn viên") : tunedSent.indexOf("dien vien")));
             int idx4 = Math.abs(idx - tunedSent.indexOf("sao"));

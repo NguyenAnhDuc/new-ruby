@@ -1,14 +1,7 @@
 package fpt.qa.additionalinformation.modifier;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 
 
@@ -28,7 +21,8 @@ public class SurroundingWords {
 	
 	private void loadSurroundWords( File file ){
 		try{
-			BufferedReader reader = new BufferedReader( new FileReader( file ) );
+			BufferedReader reader = new BufferedReader(  new InputStreamReader(
+					new FileInputStream(file), "UTF8") );
 			
 			String line;
 			while( ( line = reader.readLine() ) != null ){
@@ -71,7 +65,7 @@ public class SurroundingWords {
 	}
 	
 	public static void main(String[] args) {
-		SurroundingWords testSW = new SurroundingWords( "src/main/resources" );
+		SurroundingWords testSW = new SurroundingWords( "C:\\Users\\quang\\workspace\\new\\new-ruby\\ruby-web\\src\\main\\resources\\" );
 		System.out.println( testSW.countSurroundingWords(  "Rạp lotte chiếu phim gì?", "cin_name", "cin_name" ) );
 	}
 

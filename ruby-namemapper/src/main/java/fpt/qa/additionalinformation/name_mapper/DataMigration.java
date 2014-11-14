@@ -1,4 +1,5 @@
-/*package fpt.qa.additionalinformation.name_mapper;
+/*
+package fpt.qa.additionalinformation.name_mapper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +16,7 @@ import vn.hus.nlp.utils.UTF8FileUtility;
 
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.model.NameMapper;
+
 
 public class DataMigration {
 	private static NameMapperService ns = new NameMapperService();
@@ -138,5 +139,4 @@ public class DataMigration {
 		
 		System.out.println("DONE!");
 	}
-
-}*/
+*/

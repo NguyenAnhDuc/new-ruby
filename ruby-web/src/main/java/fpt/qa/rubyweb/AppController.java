@@ -1,60 +1,41 @@
 package fpt.qa.rubyweb;
 
+import com.fpt.ruby.business.helper.DisplayAnswerHelper;
+import com.fpt.ruby.business.helper.RedisHelper;
+import com.fpt.ruby.business.model.Log;
+import com.fpt.ruby.business.model.QueryParamater;
+import com.fpt.ruby.business.service.*;
+import com.fpt.ruby.helper.ProcessHelper;
+import com.fpt.ruby.model.ReportQuestion;
+import com.fpt.ruby.model.RubyAnswer;
+import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
+import com.fpt.ruby.nlp.*;
+import com.fpt.ruby.service.ReportQuestionService;
+import fpt.qa.domainclassifier.DomainClassifier;
+import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import io.keen.client.java.JavaKeenClientBuilder;
 import io.keen.client.java.KeenClient;
 import io.keen.client.java.KeenProject;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-
-
-
-/*import net.sf.uadetector.ReadableUserAgent;
- import net.sf.uadetector.UserAgentStringParser;
- import net.sf.uadetector.service.UADetectorServiceFactory;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.fpt.ruby.business.helper.DisplayAnswerHelper;
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.Log;
-import com.fpt.ruby.business.model.QueryParamater;
-import com.fpt.ruby.business.service.BingSearchService;
-import com.fpt.ruby.business.service.CinemaService;
-import com.fpt.ruby.business.service.LogService;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.MovieTicketService;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.helper.ProcessHelper;
-import com.fpt.ruby.model.ReportQuestion;
-import com.fpt.ruby.model.RubyAnswer;
-import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import com.fpt.ruby.nlp.NlpHelper;
-import com.fpt.ruby.nlp.NonDiacriticNlpHelper;
-import com.fpt.ruby.nlp.TVAnswerMapper;
-import com.fpt.ruby.nlp.TVAnswerMapperImpl;
-import com.fpt.ruby.nlp.TVModifiersHelper;
-import com.fpt.ruby.service.ReportQuestionService;
+import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-import fpt.qa.domainclassifier.DomainClassifier;
-import fpt.qa.mdnlib.util.string.DiacriticConverter;
+/*import net.sf.uadetector.ReadableUserAgent;
+ import net.sf.uadetector.UserAgentStringParser;
+ import net.sf.uadetector.service.UADetectorServiceFactory;*/
 
 @Controller
 @RequestMapping("/")
@@ -140,6 +121,7 @@ public class AppController {
 		 * agent.getDeviceCategory().getName() ); System.out.println("Family: "
 		 * + agent.getFamily() );
 		 */
+		System.out.println("Question: " + question);
 		String userID = browserUserID;
 		if (!inputType.equals("text")) inputType = "voice";
 		if (!appUserID.isEmpty()) userID = appUserID;

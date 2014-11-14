@@ -26,7 +26,7 @@
       <page-encoding>UTF-8</page-encoding>
     </jsp-property-group>
   </jsp-config>
-  <filter>
+  <!--<filter>
     <filter-name>encoding-filter</filter-name>
     <filter-class>
 		org.springframework.web.filter.CharacterEncodingFilter
@@ -44,4 +44,21 @@
     <filter-name>encoding-filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  &lt;!&ndash;CharsetFilter start&ndash;&gt;
+-->
+  <filter>
+    <filter-name>CharsetFilter</filter-name>
+    <filter-class>com.fpt.ruby.helper.CharsetFilter</filter-class>
+    <init-param>
+      <param-name>requestEncoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CharsetFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
 </web-app>

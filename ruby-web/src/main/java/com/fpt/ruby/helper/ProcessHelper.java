@@ -1,37 +1,24 @@
 package com.fpt.ruby.helper;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.Cinema;
-import com.fpt.ruby.business.model.MovieFly;
-import com.fpt.ruby.business.model.MovieTicket;
-import com.fpt.ruby.business.model.QueryParamater;
-import com.fpt.ruby.business.model.QuestionStructure;
-import com.fpt.ruby.business.model.TimeExtract;
-import com.fpt.ruby.business.service.CinemaService;
-import com.fpt.ruby.business.service.LogService;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.MovieTicketService;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.business.service.QuestionStructureService;
+import com.fpt.ruby.business.model.*;
+import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.intent.detection.MovieIntentDetection;
 import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.AnswerMapper;
 import com.fpt.ruby.nlp.NlpHelper;
-import com.github.mustachejava.PragmaHandler;
-
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ProcessHelper {
 	private static final Logger logger = LoggerFactory
@@ -167,27 +154,26 @@ public class ProcessHelper {
 				MovieTicket matchMovieTicket = conjunctionHelper
 						.getMovieTicket(question);
 
-
-				List<MovieTicket> movieTickets = movieTicketService
-						.findMoviesMatchCondition(matchMovieTicket,
-								timeExtract.getBeforeDate(),
-								timeExtract.getAfterDate());
-				System.out.println("Size: " + movieTickets.size());
-				if (timeExtract.getBeforeDate() != null) {
+				if (timeExtract.getBeforeDate() == null) {
 					queryParamater.setBeginTime(timeExtract.getBeforeDate());
-					rubyAnswer.setBeginTime(timeExtract.getBeforeDate());
-				}
-
-				if (timeExtract.getAfterDate() != null) {
-					queryParamater.setBeginTime(timeExtract.getAfterDate());
-					rubyAnswer.setEndTime(timeExtract.getAfterDate());
-				}
-
-				if (rubyAnswer.getBeginTime() == null) {
-					queryParamater.setBeginTime(timeExtract.getAfterDate());
 					rubyAnswer.setBeginTime(NlpHelper.getTimeCondition(
 							"hôm nay").getBeforeDate());
 				}
+				if (timeExtract.getAfterDate() != null) {
+					queryParamater.setBeginTime(timeExtract.getBeforeDate());
+					rubyAnswer.setBeginTime(timeExtract.getBeforeDate());
+				}
+				if (timeExtract.getAfterDate() != null) {
+					queryParamater.setEndTime(timeExtract.getAfterDate());
+					rubyAnswer.setEndTime(timeExtract.getAfterDate());
+				}
+				List<MovieTicket> movieTickets = movieTicketService
+						.findMoviesMatchCondition(matchMovieTicket,
+								rubyAnswer.getBeginTime(),
+								rubyAnswer.getEndTime());
+				System.out.println("Size: " + movieTickets.size());
+
+
 				queryParamater.setMovieTitle(matchMovieTicket.getMovie());
 				queryParamater.setCinName(matchMovieTicket.getCinema());
 				rubyAnswer.setQueryParamater(queryParamater);

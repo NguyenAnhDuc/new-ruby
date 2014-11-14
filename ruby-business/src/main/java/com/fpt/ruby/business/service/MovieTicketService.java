@@ -132,14 +132,17 @@ public class MovieTicketService {
                 matches.add(movieTicket);
         }
         if (beforeDate == null && afterDate == null) {
+            System.out.println("[MovieTicketService]: beforeDate-afterDate null");
             return matches;
         } else if (beforeDate == null && afterDate != null) {
+            System.out.println("[MovieTicketService]: afterDate-null");
             for (MovieTicket movieTicket : matches) {
                 if (movieTicket.getDate().before(afterDate))
                     results.add(movieTicket);
             }
             return results;
         } else if (beforeDate != null && afterDate == null) {
+            System.out.println("[MovieTicketService]: beforeDate-null");
             for (MovieTicket movieTicket : matches) {
                 if (movieTicket.getDate().after(beforeDate))
                     results.add(movieTicket);
@@ -147,6 +150,7 @@ public class MovieTicketService {
             return results;
         } else {
             for (MovieTicket movieTicket : matches) {
+                System.out.println("[MovieTicketService]: beforeDate-afterDate not null");
                 if (movieTicket.getDate() != null) {
                     logger.debug(movieTicket.getDate().toLocaleString() + " | " + beforeDate.toLocaleString()
                             + " | " + afterDate.toLocaleString() + " | " + (movieTicket.getDate().before(afterDate) && movieTicket.getDate().after(beforeDate)));

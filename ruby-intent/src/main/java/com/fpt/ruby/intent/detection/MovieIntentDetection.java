@@ -83,11 +83,23 @@ public class MovieIntentDetection {
                 || tunedSent.contains("với cái gì"))) {
             return IntentConstants.MOV_PLOT;
         }
+
+        String[] happenWord = {"mấy giờ", "khi nào", "lúc nào"};
         if (tunedSent.indexOf("DTI\t") == 0) {
             if (tunedSent.contains("phim") || tunedSent.contains("suất chiếu") || 
-                    tunedSent.contains("xuất chiếu") || (tunedSent.contains(" chiếu ") && tunedSent.contains("mấy gi�?"))) {
+                    tunedSent.contains("xuất chiếu")) {
                 return IntentConstants.MOV_DATE;
             }
+
+            if (tunedSent.contains(" chiếu ")) {
+                for (String w : happenWord) {
+                    if (tunedSent.contains(w)) {
+                        return IntentConstants.MOV_DATE;
+                    }
+                }
+            }
+
+
             return IntentConstants.CIN_DATE;
         }
 

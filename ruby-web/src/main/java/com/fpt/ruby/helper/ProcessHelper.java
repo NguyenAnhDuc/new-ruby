@@ -250,6 +250,8 @@ public class ProcessHelper {
 			if (answer.contains("sraix_wiki"))
 				answer = new JSONObject(answer).getJSONObject("response")
 						.getString("content").trim();
+			if (answer.trim().equals("null"))
+				return null;
 			if (!answer.isEmpty() && isUdfAnswer(answer, udfAnswers))
 				return null;
 			return answer;

@@ -8,10 +8,13 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
 @Configuration
 public class SpringMongoConfig extends AbstractMongoConfiguration {
+    private static String DEV_DB = "testdb";
+    private static String PRO_DB = "yourdb";
+    private static Boolean isDevelop = true;
 
     @Override
     public String getDatabaseName() {
-        return "testdb";
+        return isDevelop ? DEV_DB : PRO_DB;
     }
 
     @Override
@@ -19,6 +22,5 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
     public Mongo mongo() throws Exception {
          return new MongoClient("10.3.9.236");
         //return new MongoClient("localhost");
-//  return new MongoClient("10.3.9.81");
     }
 }

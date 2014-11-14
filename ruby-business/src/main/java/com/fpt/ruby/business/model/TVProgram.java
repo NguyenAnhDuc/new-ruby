@@ -14,17 +14,9 @@ public class TVProgram {
 	private String title = "";
 	private String description = "";
 	private String type = "";
-	//private List<String> types = new ArrayList<String>();
 	private Date start_date;
 	private Date end_date;
 	private String channel = "";
-
-	/*public List<String> getTypes() {
-		return types;
-	}
-	public void setTypes(List<String> types) {
-		this.types = types;
-	}*/
 
 	public String getDescription() {
 		return description;
@@ -55,7 +47,7 @@ public class TVProgram {
 	}
 
 	public void setType(String type) {
-		this.type = type;
+		this.type = type.toLowerCase().trim();
 	}
 
 	public String getChannel() {
@@ -82,15 +74,10 @@ public class TVProgram {
 		this.end_date = end_date;
 	}
 
-	/*public String showTypes() {
-		if (types.equals(null) || types.isEmpty())
-			return "{}";
-		return "{" + String.join(", ", types) + "}";
-	}
 	@Override
 	public String toString() {
-		return String.format("id = %s; title = %s; type = %s; start_date = %s; end_date = %s; channel= %s", id, title,
-				showTypes(), start_date, end_date, channel);
-	}*/
+		return String.format("title = %s; type = %s; start_date = %s; end_date = %s; channel= %s", title,
+				type, start_date, end_date, channel);
+	}
 
 }

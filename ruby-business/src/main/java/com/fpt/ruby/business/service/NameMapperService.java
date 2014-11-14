@@ -94,7 +94,7 @@ public class NameMapperService {
 	public static void save(TVProgram prog) {
 		NameMapper n = new NameMapper();
 		
-		String title = NameMapperHelper.getRealName(prog.getTitle());
+		String title = NameMapperHelper.getRealName(prog.getTitle()).toLowerCase();
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));

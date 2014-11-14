@@ -10,7 +10,7 @@ public class NameMapperHelper {
     private static Set<Pattern> postfix = new HashSet<Pattern>();
 
     static {
-        String[] prefixes1 = {"phim truyện", "phim truyền hình", "phim", "phim ngắn", "phim hài"};
+        String[] prefixes1 = {"phim truyện", "phim truyền hình", "phim", "phim ngắn", "phim hài", "phim cuối tuần"};
         String[] prefixes2 = {"trẻ", "người lớn", "ngắn", "tài liệu", "mỹ", "hàn quốc", "trung quốc", "nước ngoài", "anh", "thái lan", "hoa kỳ", "hoạt hình", "việt nam", "thiếu nhi", "hoạt hình", ""};
 
         prefix.clear();
@@ -35,8 +35,9 @@ public class NameMapperHelper {
             postfix.add(Pattern.compile(p));
         }
     }
+    public static String getRealName2(String programTitle) {
+        if (prefix.contains(programTitle.toLowerCase().trim())) return programTitle.toLowerCase().trim();
 
-    public static String getRealName(String programTitle) {
         String prog = programTitle.toLowerCase().trim();
         // Prefix
         int max = 0;
@@ -86,10 +87,14 @@ public class NameMapperHelper {
         return rs2;
     }
 
+    public static String getRealName(String programTitle) {
+        return getRealName2(getRealName2(programTitle));
+    }
+
     public static void main(String[] args) {
-        String[] prog = {"tôi là tôi", "phim hài", "phim việt nam tình yêu học trò - tập 6", "Phim truyện ngày xửa ngày xưa phần 3 - tập 16", "Phim Việt Nam Hai phía chân trời - Tập 25", "Tanked (S4)", "Cánh chim cô đơn (62 tập)", "America The Wild - American Vampire S4 - 2", "Phim tài liệu Sự hình thành Âu lục - Tập 3", "Phim ngắn - Dọc đường đen trắng, tập 76/150", "FRIENDS S10", "Thành thật với tình yêu (59T)", "Đời sống chợ đêm - P2", "Bad Dog! (S3)", "HAWAII FIVE-0 (SEASON 4)", "Phim Lệnh truyền của thiên sứ", "Phim truyền hình mỹ Ranh giới - Tập 14", "Phim truyện : Tiếu ngạo giang hồ, tập 21/40", "Tình yêu và thù hận (150 tập)", "Duyên nợ miền tây - T12", "Phim truyện Việt Nam : Vòng vây hoa hồng"};
+        String[] prog = {"phim tài liệu", "phim hoạt hình", "phim cuối tuần", "tôi là tôi", "phim hài", "phim việt nam tình yêu học trò - tập 6", "Phim truyện ngày xửa ngày xưa phần 3 - tập 16", "Phim Việt Nam Hai phía chân trời - Tập 25", "Tanked (S4)", "Cánh chim cô đơn (62 tập)", "America The Wild - American Vampire S4 - 2", "Phim tài liệu Sự hình thành Âu lục - Tập 3", "Phim ngắn - Dọc đường đen trắng, tập 76/150", "FRIENDS S10", "Thành thật với tình yêu (59T)", "Đời sống chợ đêm - P2", "Bad Dog! (S3)", "HAWAII FIVE-0 (SEASON 4)", "Phim Lệnh truyền của thiên sứ", "Phim truyền hình mỹ Ranh giới - Tập 14", "Phim truyện : Tiếu ngạo giang hồ, tập 21/40", "Tình yêu và thù hận (150 tập)", "Duyên nợ miền tây - T12", "Phim truyện Việt Nam : Vòng vây hoa hồng"};
         for (String p: prog) {
-            System.out.println(p + " ***** " + getRealName(getRealName(p)));
+            System.out.println(p + " ***** " + getRealName(p));
         }
     }
 

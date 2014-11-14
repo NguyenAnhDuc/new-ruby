@@ -1,14 +1,12 @@
 package fpt.qa.type_mapper;
 
-import fpt.qa.mdnlib.struct.pair.Pair;
-
+import com.fpt.ruby.business.basic.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TypeMapperUtil {
-
     static List<Pair<Pattern, Integer>> regexes = new ArrayList<Pair<Pattern, Integer>>();
     static Integer SAME = 20;
     static Integer MAX_LEN = 40;

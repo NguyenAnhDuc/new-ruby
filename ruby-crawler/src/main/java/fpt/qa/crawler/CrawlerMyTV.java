@@ -1,6 +1,7 @@
 package fpt.qa.crawler;
 
 import com.fpt.ruby.business.constants.ProgramType;
+import com.fpt.ruby.business.helper.CrawlerHelper;
 import com.fpt.ruby.business.model.Channel;
 import com.fpt.ruby.business.model.TVProgram;
 import com.fpt.ruby.business.service.NameMapperService;
@@ -53,7 +54,7 @@ public class CrawlerMyTV {
 
     public List<Channel> getChanel(ConjunctionHelper conjunctionHelper) throws Exception {
         List<Channel> channels = new ArrayList<Channel>();
-        Document doc = Jsoup.parse(CrawlerUtils.getResponse("http://www.mytv.com.vn/lich-phat-song", "", "GET"));
+        Document doc = Jsoup.parse(CrawlerHelper.getResponse("http://www.mytv.com.vn/lich-phat-song", "", "GET"));
 //        Document doc = Jsoup.parse(sendGet("http://www.mytv.com.vn/lich-phat-song"));
         System.out.println(doc.toString());
         Element chanel = doc.getElementById("channelId");

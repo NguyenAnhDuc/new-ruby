@@ -255,10 +255,16 @@ public class AppController {
 	
 	@RequestMapping(value = "/report", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String reportQuestion(@RequestParam("question") String question){
+	public String reportQuestion(@RequestParam("question") String question,
+								 @RequestParam("answer") String answer,
+								 @RequestParam("intent") String intent,
+								 @RequestParam("domain") String domain){
 		try{
 			ReportQuestion re = new ReportQuestion();
 			re.setQuestion(question);
+			re.setAnswer(answer);
+			re.setDomain(domain);
+			re.setIntent(intent);
 			reportQuestionService.save(re);
 			return "success";
 		}

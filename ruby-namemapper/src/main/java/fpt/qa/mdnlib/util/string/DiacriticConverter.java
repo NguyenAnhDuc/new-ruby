@@ -15,16 +15,16 @@ import java.util.Set;
  * @author hieupx
  */
 public class DiacriticConverter {
-    private static final Set<Character> diacriticChars = new HashSet();    
+    private static final Set<Character> diacriticChars = new HashSet();
     private static final Map<Character, Character> vnCharMap = new HashMap();
-    
+
     static {
         String chars = "ÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬĐÐÈẺẼÉẸÊỀỂỄẾỆÌỈĨÍỊÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢÙỦŨÚỤƯỪỬỮỨỰỲỶỸÝỴàảãáạăằẳẵắặâầẩẫấậđèẻẽéẹêềểễếệìỉĩíịòỏõóọôồổỗốộơờởỡớợùủũúụưừửữứựỳỷỹýỵ";
-        
+
         for (int i = 0; i < chars.length(); i++) {
             diacriticChars.add(chars.charAt(i));
         }
-        
+
         vnCharMap.put('à', 'a');
         vnCharMap.put('ả', 'a');
         vnCharMap.put('ã', 'a');
@@ -95,27 +95,27 @@ public class DiacriticConverter {
         vnCharMap.put('ð', 'd');
         vnCharMap.put('û', 'u');
     }
-    
+
     public static boolean hasDiacriticAccents(String str) {
         for (int i = 0; i < str.length(); i++) {
             if (diacriticChars.contains(str.charAt(i))) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     public static String removeDiacritics(String str) {
         String result = "";
-        
+
         for (int i = 0; i < str.length(); i++) {
             Character sourceChar = str.charAt(i);
             Character destinationChar = vnCharMap.get(sourceChar);
             if (Character.isUpperCase(sourceChar)){
-            	if (vnCharMap.get(Character.toLowerCase(sourceChar)) != null){
-            		destinationChar = Character.toUpperCase(vnCharMap.get(Character.toLowerCase(sourceChar)));
-            	}
+                if (vnCharMap.get(Character.toLowerCase(sourceChar)) != null){
+                    destinationChar = Character.toUpperCase(vnCharMap.get(Character.toLowerCase(sourceChar)));
+                }
             }
             if (destinationChar != null) {
                 result += destinationChar;
@@ -123,35 +123,35 @@ public class DiacriticConverter {
                 result += sourceChar;
             }
         }
-        
+
         return result;
     }
-    
+
     public static void removeDiacritics(String fileIn, String fileOut){
-    	try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(fileOut));
-			BufferedReader reader = new BufferedReader(new FileReader(fileIn));
-			
-			String line;
-			while((line = reader.readLine()) != null){
-				if (hasDiacriticAccents(line)){
-					writer.write(removeDiacritics(line) + "\n");
-				}
-			}
-			
-			reader.close();
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileOut));
+            BufferedReader reader = new BufferedReader(new FileReader(fileIn));
+
+            String line;
+            while((line = reader.readLine()) != null){
+                if (hasDiacriticAccents(line)){
+                    writer.write(removeDiacritics(line) + "\n");
+                }
+            }
+
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
+
     public static void main(String[] args){
 //    	removeDiacritics("/home/ngan/Work/AHongPhuong/Intent_detection/data/qc/train.txt",
 //    			"/home/ngan/Work/AHongPhuong/Intent_detection/data/qc/non-diacritic-train.txt");
-    	String resourceDir = "/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/src/main/resources/dicts/";
-    	String nonDiacriticDir = "/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/src/main/resources/dicts/non-diacritic/";
+        String resourceDir = "/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/src/main/resources/dicts/";
+        String nonDiacriticDir = "/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/src/main/resources/dicts/non-diacritic/";
 //    	removeDiacritics(resourceDir + "actors.txt",
 //    			nonDiacriticDir + "actors.txt");
 //    	removeDiacritics(resourceDir + "directors.txt",

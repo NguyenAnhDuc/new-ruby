@@ -83,11 +83,23 @@ public class MovieIntentDetection {
                 || tunedSent.contains("với cái gì"))) {
             return IntentConstants.MOV_PLOT;
         }
+
+        String[] happenWord = {"mấy giờ", "khi nào", "lúc nào"};
         if (tunedSent.indexOf("DTI\t") == 0) {
             if (tunedSent.contains("phim") || tunedSent.contains("suất chiếu") || 
-                    tunedSent.contains("xuất chiếu") || (tunedSent.contains(" chiếu ") && tunedSent.contains("mấy gi�?"))) {
+                    tunedSent.contains("xuất chiếu")) {
                 return IntentConstants.MOV_DATE;
             }
+
+            if (tunedSent.contains(" chiếu ")) {
+                for (String w : happenWord) {
+                    if (tunedSent.contains(w)) {
+                        return IntentConstants.MOV_DATE;
+                    }
+                }
+            }
+
+
             return IntentConstants.CIN_DATE;
         }
 
@@ -145,7 +157,9 @@ public class MovieIntentDetection {
             	idx = tunedSent.indexOf("gì");
             }
             //System.out.println("tune : " + tunedSent);
-            int idx1 = Math.abs(idx - (tunedSent.indexOf("phim") > 0 ? tunedSent.indexOf("phim") : tunedSent.indexOf("chiếu")));
+            int temp = tunedSent.indexOf("chiếu") > 0 ? tunedSent.indexOf("chiếu") : tunedSent.indexOf("chieu");
+            int temp2 = tunedSent.indexOf("có gì") > 0 ? tunedSent.indexOf("có gì") : tunedSent.indexOf("co gi");
+            int idx1 = Math.abs(idx - (tunedSent.indexOf("phim") > 0 ? tunedSent.indexOf("phim") : temp > 0 ? temp :temp2));
             int idx2 = Math.abs(idx - (tunedSent.indexOf("rạp") > 0 ? tunedSent.indexOf("rạp") : tunedSent.indexOf("rap")));
             int idx3 = Math.abs(idx - (tunedSent.indexOf("diễn viên") > 0 ? tunedSent.indexOf("diễn viên") : tunedSent.indexOf("dien vien")));
             int idx4 = Math.abs(idx - tunedSent.indexOf("sao"));

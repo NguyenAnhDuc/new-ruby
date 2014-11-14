@@ -74,11 +74,22 @@ public class NonDiacriticMovieIntentDetection {
                 || tunedSent.contains("ve cai gi"))) {
             return IntentConstants.MOV_PLOT;
         }
+
+        String[] happenWord = {"may gio", "khi nao", "luc nao"};
         if (tunedSent.indexOf("DTI\t") == 0) {
             if (tunedSent.contains("phim") || tunedSent.contains("suat chieu") || 
-                    tunedSent.contains("xuat chieu") || (tunedSent.contains(" chieu ") && tunedSent.contains("may gio"))) {
+                    tunedSent.contains("xuat chieu")) {
                 return IntentConstants.MOV_DATE;
             }
+
+            if (tunedSent.contains(" chieu ")) {
+                for (String w: happenWord) {
+                    if (tunedSent.contains(w)) {
+                        return IntentConstants.MOV_DATE;
+                    }
+                }
+            }
+
             return IntentConstants.CIN_DATE;
         }
 

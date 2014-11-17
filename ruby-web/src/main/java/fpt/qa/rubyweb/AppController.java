@@ -110,7 +110,7 @@ public class AppController {
 			@RequestParam("question") String question,
 			@RequestParam(value="userID", defaultValue = "") String appUserID,
 			@RequestParam(value="inputType", defaultValue = "text") String inputType,
-			@RequestParam(value="useWebSearch", defaultValue = "no") String useWebSearch,
+			@RequestParam(value="useWebSearch", defaultValue = "yes") String useWebSearch,
 			@CookieValue(value = "userID", defaultValue = "") String browserUserID) {
 		/*
 		 * UserAgentStringParser parser =
@@ -212,6 +212,7 @@ public class AppController {
 		track("userActivity", event);
 
 		logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
+		rubyAnswer.setAnswer(rubyAnswer.getAnswer() + " ^_^");
 		return rubyAnswer;
 		// return app.getAnswer(question);
 	}

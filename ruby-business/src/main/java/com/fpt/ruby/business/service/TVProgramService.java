@@ -90,8 +90,8 @@ public class TVProgramService {
 
     public List<TVProgram> getList(TVModifiers mod, String question) {
 
-        String channel = mod.getChannel();
-        String title = mod.getProg_title();
+        String channel = mod.getChannel().toLowerCase().trim();
+        String title = mod.getProg_title().toLowerCase().trim();
         Date start = mod.getStart();
         Date end = mod.getEnd();
         List<String> types = mod.getType();
@@ -100,7 +100,7 @@ public class TVProgramService {
 
         List<TVProgram> result = new ArrayList<TVProgram>();
 
-        if (mod.getStart() == null && mod.getEnd() == null) {
+        if (start == null && end == null) {
             if (question.contains("hết")
                     || question.contains("kết thúc")
                     || (question.contains("đến") && (question
@@ -278,7 +278,6 @@ public class TVProgramService {
 
     // TODO: implement
     public List<TVProgram> findByTitleInPeriod(String title, Date start, Date end, List<String> types) {
-        title = title.toLowerCase().trim();
         Query query = new Query(Criteria.where("type").regex(genRegex(types)).and("title")
                 .regex(title).and("start_date").gt(start)
                 .and("end_date").lt(end));
@@ -287,26 +286,23 @@ public class TVProgramService {
 
     public List<TVProgram> findInPeriodAtChannel(Date start, Date end,
                                                  String channel) {
-        String chn = channel.trim().toLowerCase();
         Query query = new Query(Criteria.where("channel")
-                .is(chn).and("start_date").gte(start)
+                .is(channel).and("start_date").gte(start)
                 .lte(end));
         return mongoOperations.find(query, TVProgram.class);
     }
 
     // TODO: implement
     public List<TVProgram> findInPeriodAtChannel(Date start, Date end, String channel, List<String> types) {
-        String chn = channel.trim().toLowerCase();
         Query query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel")
-                .is(chn).and("start_date").gte(start)
+                .is(channel).and("start_date").gte(start)
                 .lte(end));
         return mongoOperations.find(query, TVProgram.class);
     }
 
     public List<TVProgram> findByTitleInPeriodAtChannel(String title,
                                                         Date start, Date end, String channel) {
-        String chn = channel.trim().toLowerCase();
-        Query query = new Query(Criteria.where("channel").is(chn)
+        Query query = new Query(Criteria.where("channel").is(channel)
                 .and("title").regex(title)
                 .and("start_date").gte(start).and("end_date").lte(end));
         return mongoOperations.find(query, TVProgram.class);
@@ -314,8 +310,7 @@ public class TVProgramService {
 
     // TODO: implement
     public List<TVProgram> findByTitleInPeriodAtChannel(String title, Date start, Date end, String channel, List<String> types) {
-        String chn = channel.trim().toLowerCase();
-        Query query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel").is(chn)
+        Query query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel").is(channel)
                 .and("title").regex(title)
                 .and("start_date").gte(start).and("end_date").lte(end));
         return mongoOperations.find(query, TVProgram.class);
@@ -350,27 +345,24 @@ public class TVProgramService {
     }
 
     public List<TVProgram> findAtTimeAtChannel(Date date, String channel) {
-        String chn = channel.trim().toLowerCase();
         Query query = new Query(Criteria.where("channel")
-                .is(chn).and("start_date").lte(date)
+                .is(channel).and("start_date").lte(date)
                 .and("end_date").gte(date));
         return mongoOperations.find(query, TVProgram.class);
     }
 
     // TODO: implement
     public List<TVProgram> findAtTimeAtChannel(Date date, String channel, List<String> types) {
-        String chn = channel.trim().toLowerCase();
         Query query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel")
-                .is(chn).and("start_date").lte(date)
+                .is(channel).and("start_date").lte(date)
                 .and("end_date").gte(date));
         return mongoOperations.find(query, TVProgram.class);
     }
 
     public List<TVProgram> findByTitleAtTimeAtChannel(String title, Date date,
                                                       String channel) {
-        String chn = channel.trim().toLowerCase();
         Query query = new Query(Criteria
-                .where("channel").is(chn)
+                .where("channel").is(channel)
                 .and("title").regex(title)
                 .and("start_date").lt(date)
                 .and("end_date").gt(date));
@@ -379,10 +371,9 @@ public class TVProgramService {
 
     // TODO: implement
     public List<TVProgram> findByTitleAtTimeAtChannel(String title, Date date, String channel, List<String> types) {
-        String chn = channel.trim().toLowerCase();
         Query query = new Query(Criteria
                 .where("type").regex(genRegex(types))
-                .and("channel").is(chn)
+                .and("channel").is(channel)
                 .and("title").regex(title)
                 .and("start_date").lt(date)
                 .and("end_date").gt(date));
@@ -430,10 +421,9 @@ public class TVProgramService {
 
     // TODO: implement
     public List<TVProgram> findAfterAtChannel(Date date, String channel, List<String> types) {
-        String chn = channel.toLowerCase().trim();
         Query query = new Query(Criteria
                 .where("type").regex(genRegex(types))
-                .and("channel").is(chn)
+                .and("channel").is(channel)
                 .and("start_date").gt(date))
                 .with(new Sort(Direction.ASC, "start_date"));
         return mongoOperations.find(query, TVProgram.class);
@@ -441,22 +431,19 @@ public class TVProgramService {
 
     public List<TVProgram> findAfterByTitleAtChannel(String title, Date date,
                                                      String channel) {
-        String chn = channel.toLowerCase().trim();
 
         Query query = new Query(Criteria.where("channel")
-                .is(chn).and("title").regex(title).and("start_date").gt(date))
+                .is(channel).and("title").regex(title).and("start_date").gt(date))
                 .with(new Sort(Direction.ASC, "start_date"));
         return mongoOperations.find(query, TVProgram.class);
     }
 
     // TODO: implement
     public List<TVProgram> findAfterByTitleAtChannel(String title, Date date, String channel, List<String> type) {
-        String chn = channel.toLowerCase().trim();
-
         Query query = new Query(Criteria
                 .where("type").regex(genRegex(type))
                 .and("channel")
-                .is(chn).and("title").regex(title).and("start_date").gt(date))
+                .is(channel).and("title").regex(title).and("start_date").gt(date))
                 .with(new Sort(Direction.ASC, "start_date"));
         return mongoOperations.find(query, TVProgram.class);
     }

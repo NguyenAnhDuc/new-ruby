@@ -41,7 +41,7 @@ public class AutoCrawler {
 		}
 
 		try {
-			for (int i = 0; i <= 1; ++i) {
+			for (int i = 0; i <= 6; ++i) {
 				movieTicketService.clearDataOnSpecificDay(i);
 				tvProgramService.clearDataOnSpecificDay(i);
 			}

@@ -32,7 +32,7 @@ public class CrawlerMyTV {
             "HTV7", "HTV9", "HTV1", "HTV1", "DISNEY", "CARTOON", "VITV", "O2 TV", "DISCOVERY", "ANTV", "VTVCAB1",
             "VTVCAB2", "STAR WORLD HD", "VOV", "K+1", "K+NS", "NATIONAL GEOGRAPHIC"}));
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
-    private static long FUTUREDAY_CRAWL = 1;
+    private static long FUTUREDAY_CRAWL = 7;
 
     public static String sendGet(String url) throws Exception {
         HttpClient client = HttpClientBuilder.create().build();

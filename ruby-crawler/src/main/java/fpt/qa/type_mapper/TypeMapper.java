@@ -37,7 +37,7 @@ public class TypeMapper {
 		types.add(new GameShowTypeRecognizer());
 		types.add(new MusicTypeRecognizer());
 		types.add(new SportTypeRecognizer());
-		types.add(new CartoonTypeRecognize());
+		types.add(new CartoonTypeRecognizer());
 		types.add(new NewsTypeRecognizer());
 		types.add(new FootballTypeRecognizer());
 		types.add(new TenisTypeRecognizer());
@@ -48,6 +48,7 @@ public class TypeMapper {
 		types.add(new ScienceTypeRecognizer());
 		types.add(new StyleTypeRecognizer());
 		types.add(new GolfTypeRecognizer());
+		types.add(new RacingTypeRecognizer());
 
 		setRootType();
 
@@ -75,7 +76,8 @@ public class TypeMapper {
 		rootType.put(ProgramType.FOOTBALL, ProgramType.SPORT);
 		rootType.put(ProgramType.TENNIS, ProgramType.SPORT);
 		rootType.put(ProgramType.GOLF, ProgramType.SPORT);
-		
+		rootType.put(ProgramType.RACING, ProgramType.SPORT);
+
 		rootType.put(ProgramType.CARTOON, ProgramType.FILM);
 	}
 
@@ -238,6 +240,22 @@ public class TypeMapper {
 				}
 			}
 		}
+
+		// Remove duplicate
+		if(rs.contains(ProgramType.FOOTBALL) && (rs.contains(ProgramType.GOLF) || rs.contains(ProgramType.RACING)
+				|| rs.contains(ProgramType.TENNIS))) {
+			rs.remove(ProgramType.FOOTBALL);
+		}
+
+		if (rs.contains(ProgramType.FILM) && rs.contains(ProgramType.REPORT)) {
+			rs.remove(ProgramType.FILM);
+		}
+
+		if (rs.contains(ProgramType.CARTOON) && rs.contains(ProgramType.REPORT)) {
+			rs.remove(ProgramType.CARTOON);
+		}
+
+		// Add root type
 		ArrayList<ProgramType> allTypes = new ArrayList<ProgramType>();
 		for (ProgramType t: rs) {
 			allTypes.add(t);
@@ -251,8 +269,12 @@ public class TypeMapper {
 
 	public static void main(String[] args) {
 		System.out.println("NEW CODE2");
+		TypeRecognizer f = new FootballTypeRecognizer();
+		String chn = "vtvcab1";
+		String prog = "bánh đúc có xương (tập 19/20)";
+		System.out.println(f.contains(chn, prog));
 //	FootballTypeRecognizer
-		System.out.println("RESULTX: " + TypeMapper.getType("vtv1", "Phim tài liệu Huyền thoại tuyến hậu cần đường Trường Sơn - Tập 2 : Muôn nẻo đường Trường Sơn"));
+		System.out.println("RESULTX: " + TypeMapper.getType(chn, prog));
 	}
 
 }

@@ -45,7 +45,7 @@ public class CrawlerVTVCab {
 					"DISCOVERY WORLD", "STARMOVIE"}));
 
 	private final static long ONE_DAY = 24 * 60 * 60 * 1000;
-	private final static long FUTUREDAY_CRAWL = 1;
+	private final static long FUTUREDAY_CRAWL = 7;
 	private final static String ROOT_URL = "http://www.vtvcab.vn/lich-phat-song";
 
 	public static String getResponse(String url, String requestType)

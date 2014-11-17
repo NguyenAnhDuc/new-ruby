@@ -116,6 +116,9 @@ public class NameMapperService {
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));
+		variants.add(mt.getAnotherName());
+		variants.add(TypeMapperHelper.normalize(mt.getAnotherName()));
+
 		n.setVariant(variants);
 
 		n.setName(title);

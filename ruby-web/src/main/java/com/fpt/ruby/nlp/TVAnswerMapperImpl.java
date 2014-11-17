@@ -183,7 +183,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		
 		if (intent.equals( IntentConstants.TV_POL )){
 			if (progs.size() > 0){
-				rubyAnswer.setAnswer( "Có"  );
+				//rubyAnswer.setAnswer( "Có"  );
 				rubyAnswer.setAnswer(getTitleAndTime(progs));
 				return rubyAnswer;
 			}
@@ -354,6 +354,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		return progs.get( 0 ).getEnd_date().toString();
 	}
 	
+
 	
 	/*public void studyFile(String fileIn, String fileOut){
 		try{

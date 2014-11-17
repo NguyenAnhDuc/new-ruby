@@ -4,11 +4,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fpt.ruby.business.helper.RedisHelper;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -148,11 +152,10 @@ public class VnTimeParser {
 		List<CoreMap> timexAnnsAll = (List<CoreMap>) annotation
 				.get(TimeAnnotations.TimexAnnotations.class);
 		Integer id = Integer.valueOf(1);
-		
-		
-//		if (timexAnnsAll.isEmpty()) {
-//			return parser3("hôm nay", referenceDate);
-//		}
+
+		// if (timexAnnsAll.isEmpty()) {
+		// return parser3("hôm nay", referenceDate);
+		// }
 		for (CoreMap cm : timexAnnsAll) {
 			Integer tmp98_96 = id;
 			String range = "";
@@ -240,5 +243,30 @@ public class VnTimeParser {
 			rangeList.add(timeRange);
 		}
 		return rangeList;
+	}
+
+	public static String getTimeRange(String question) {
+		try {
+			TimeRange range = new VnTimeParser((new RedisHelper()).getClass()
+					.getClassLoader().getResource("").getPath()).parser3(
+					question, IConstants.CURRENT_DATE).get(0);
+			if (range == null) {
+				return "";
+			} else {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm:ss a");
+				String fDate = sdf.format(range.getfDate()).toString();
+				String sDate = sdf.format(range.getsDate()).toString();
+				if (range.getfDate().equals(range.getsDate())) {
+					return "Lúc " + fDate + " ";
+				} else {
+					return "Từ "+ fDate + " đến "+sDate +" " ;
+				}
+				
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			return "";
+		}
 	}
 }

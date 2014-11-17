@@ -23,7 +23,7 @@ import fpt.qa.typeclassifier.ProgramTypeExtractor;
 
 public class TVAnswerMapperImpl implements TVAnswerMapper {
 	public static final String DEF_ANS = "Xin lỗi, chúng tôi không có thông tin cho câu trả lời của bạn";
-	public static final String DEF_ANS_CHANNEL = "Nếu tôi không nhầm thì không có kênh nào cả";
+	public static final String DEF_ANS_CHANNEL = "Nếu tôi không nhầm thì không kênh nào chiếu cả";
 	public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
 	//public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
 
@@ -87,7 +87,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 			end = start;
 		}
 
-		if(timeExtract.getAfterDate()==null && timeExtract.getBeforeDate() == null && ( intent.equalsIgnoreCase("tv_ttl") || intent.equalsIgnoreCase("tv_pol") )) {
+		if(start==null && end == null && ( !intent.equalsIgnoreCase(IntentConstants.TV_CHN) )) {
 			start = NlpHelper.getTimeCondition("hôm nay").getBeforeDate();
 			end = NlpHelper.getTimeCondition("hôm nay").getAfterDate();
 		}

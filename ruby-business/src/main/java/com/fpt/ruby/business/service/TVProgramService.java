@@ -498,6 +498,10 @@ public class TVProgramService {
         mongoOperations.save(tvProgram);
     }
 
+    public void remove(TVProgram tvProgram) {
+        mongoOperations.remove(tvProgram);
+    }
+
     public void dropCollection() {
         mongoOperations.dropCollection(TVProgram.class);
     }

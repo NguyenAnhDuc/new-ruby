@@ -110,6 +110,7 @@ public class AppController {
 			@RequestParam("question") String question,
 			@RequestParam(value="userID", defaultValue = "") String appUserID,
 			@RequestParam(value="inputType", defaultValue = "text") String inputType,
+			@RequestParam(value="useWebSearch", defaultValue = "no") String useWebSearch,
 			@CookieValue(value = "userID", defaultValue = "") String browserUserID) {
 		/*
 		 * UserAgentStringParser parser =
@@ -181,7 +182,7 @@ public class AppController {
 			
 			
 			// If can't answer, take result from Bing Search
-			if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
+			if (useWebSearch.equals("yes") && rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
 				rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
 			}
 			

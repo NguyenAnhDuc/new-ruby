@@ -200,7 +200,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		
 		if (mod.getStart().equals( mod.getEnd() )){
 			if (progs.isEmpty()){
-				rubyAnswer.setAnswer( "Không có " + mod.getProg_title() + " nào trên kênh " + mod.getChannel() + " vào lúc " + temporalString );
+				rubyAnswer.setAnswer( "Không có " + mod.getProg_title() + " trên kênh " + mod.getChannel() + " vào lúc " + temporalString );
 				return rubyAnswer;
 			}
 			rubyAnswer.setAnswer( getTitle( progs )  );
@@ -209,7 +209,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		
 		if (progs.isEmpty()){
 			rubyAnswer.setAnswer( "Không có chương trình " + mod.getProg_title() +
-					" nào trên " + mod.getChannel() + " vào lúc " + temporalString );
+					" trên " + mod.getChannel() + " vào lúc " + temporalString );
 			return rubyAnswer;
 		}
 		rubyAnswer.setAnswer( getTitleAndTime( progs )  );

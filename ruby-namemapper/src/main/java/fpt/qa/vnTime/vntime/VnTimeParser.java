@@ -27,6 +27,10 @@ import fpt.qa.vnTime.utils.RangeParser;
 
 public class VnTimeParser {
 	StanfordCoreNLP coreNLP;
+	String temporal = " hôm nay " ;
+	public String getTemporal() {
+		return temporal;
+	}
 
 	public VnTimeParser() {
 		Properties props = new Properties();
@@ -156,6 +160,7 @@ public class VnTimeParser {
 		// if (timexAnnsAll.isEmpty()) {
 		// return parser3("hôm nay", referenceDate);
 		// }
+		
 		for (CoreMap cm : timexAnnsAll) {
 			Integer tmp98_96 = id;
 			String range = "";
@@ -172,6 +177,7 @@ public class VnTimeParser {
 			if (cmString.endsWith("giờ") || cmString.endsWith("phút")
 					|| cmString.endsWith("trưa") || cmString.endsWith("chiều")
 					|| cmString.endsWith("tối")) {
+				temporal = "Hôm nay" ;
 				return parser3(
 						textInput.replace(cmString, cmString + " hôm nay"),
 						referenceDate);
@@ -242,31 +248,51 @@ public class VnTimeParser {
 
 			rangeList.add(timeRange);
 		}
+		if(!timexAnnsAll.isEmpty()) {
+			temporal = timexAnnsAll.get(0).toString();
+		}
+		
 		return rangeList;
 	}
-
+	
+	
 	public static String getTimeRange(String question) {
+		VnTimeParser timeParser =  new VnTimeParser((new RedisHelper()).getClass().getClassLoader().getResource("").getPath()+"vnsutime/");
+		if(question.contains("đang")||question.contains("dang") || question.contains("bây giờ")|| question.contains("bay gio")) {
+			return "bây giờ";
+		}
 		try {
-			TimeRange range = new VnTimeParser((new RedisHelper()).getClass()
-					.getClassLoader().getResource("").getPath()).parser3(
-					question, IConstants.CURRENT_DATE).get(0);
-			if (range == null) {
-				return "";
-			} else {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm:ss a");
-				String fDate = sdf.format(range.getfDate()).toString();
-				String sDate = sdf.format(range.getsDate()).toString();
-				if (range.getfDate().equals(range.getsDate())) {
-					return "Lúc " + fDate + " ";
-				} else {
-					return "Từ "+ fDate + " đến "+sDate +" " ;
-				}
-				
-			}
+			
+			timeParser.parser3(question, new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
+			System.out.println("~~~~~~~~~~~~~~~~~~~~ "+timeParser.getTemporal());
+			
+			return timeParser.getTemporal();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			return "";
+			return "hôm nay";
 		}
+		
+//		try {
+//			TimeRange range = new VnTimeParser((new RedisHelper()).getClass()
+//					.getClassLoader().getResource("").getPath()).parser3(
+//					question, IConstants.CURRENT_DATE).get(0);
+//			if (range == null) {
+//				return "";
+//			} else {
+//				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm:ss a");
+//				String fDate = sdf.format(range.getfDate()).toString();
+//				String sDate = sdf.format(range.getsDate()).toString();
+//				if (range.getfDate().equals(range.getsDate())) {
+//					return "Lúc " + fDate + " ";
+//				} else {
+//					return "Từ "+ fDate + " đến "+sDate +" " ;
+//				}
+//				
+//			}
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			// e.printStackTrace();
+//			return "";
+//		}
 	}
 }

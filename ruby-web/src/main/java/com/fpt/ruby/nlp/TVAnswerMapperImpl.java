@@ -20,6 +20,7 @@ import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import fpt.qa.mdnlib.util.string.StrUtil;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
+import fpt.qa.vnTime.vntime.VnTimeParser;
 
 public class TVAnswerMapperImpl implements TVAnswerMapper {
 	public static final String DEF_ANS = "Xin lỗi, chúng tôi không có thông tin cho câu trả lời của bạn";
@@ -43,6 +44,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 	
 	public RubyAnswer getAnswer ( String question, LogService logService, ConjunctionHelper conjunctionHelper ) {
 		RubyAnswer rubyAnswer = new RubyAnswer();
+		String temporalString = VnTimeParser.getTimeRange(question);
 		String tmp = "\t" + question + "\n";
 		
 		String intent = intentDetector.getIntent( question );
@@ -177,7 +179,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 				rubyAnswer.setAnswer( getTime( progs )  );
 				return rubyAnswer;
 			}
-			rubyAnswer.setAnswer(mod.getChannel() + " không chiếu " + mod.getProg_title());
+			rubyAnswer.setAnswer(temporalString  + " " + mod.getChannel() + " không chiếu " + mod.getProg_title() );
 			return rubyAnswer;
 		}
 		
@@ -187,7 +189,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 				rubyAnswer.setAnswer(getTitleAndTime(progs));
 				return rubyAnswer;
 			}
-			rubyAnswer.setAnswer(mod.getChannel() + " không chiếu " + mod.getProg_title());
+			rubyAnswer.setAnswer(temporalString  + " " + mod.getChannel() + " không chiếu " + mod.getProg_title() );
 			return rubyAnswer;
 		}
 		
@@ -198,7 +200,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		
 		if (mod.getStart().equals( mod.getEnd() )){
 			if (progs.isEmpty()){
-				rubyAnswer.setAnswer( "Không có " + mod.getProg_title() + " nào trên kênh " + mod.getChannel() + " vào lúc đó!" );
+				rubyAnswer.setAnswer( "Không có " + mod.getProg_title() + " nào trên kênh " + mod.getChannel() + " vào lúc " + temporalString );
 				return rubyAnswer;
 			}
 			rubyAnswer.setAnswer( getTitle( progs )  );
@@ -207,7 +209,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 		
 		if (progs.isEmpty()){
 			rubyAnswer.setAnswer( "Không có chương trình " + mod.getProg_title() +
-					" nào trên " + mod.getChannel() + " vào lúc đó" );
+					" nào trên " + mod.getChannel() + " vào lúc " + temporalString );
 			return rubyAnswer;
 		}
 		rubyAnswer.setAnswer( getTitleAndTime( progs )  );

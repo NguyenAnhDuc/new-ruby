@@ -13,8 +13,7 @@ public class ProgramTypeExtractor {
 	public ConjType conjType;
 
 	public ProgramTypeExtractor() {
-		this.conjType = new ConjType((new RedisHelper()).getClass()
-				.getClassLoader().getResource("").getPath());
+		this.conjType = IConstands.CONJ_TYPE;
 	}
 
 	public ProgramTypeExtractor(String resourcePath) {

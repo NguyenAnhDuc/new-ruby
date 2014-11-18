@@ -271,8 +271,6 @@ public class VnTimeParser {
 
 			timeParser.parser3(question, new SimpleDateFormat(
 					"yyyy-MM-dd HH:mm").format(new Date()));
-			System.out.println("~~~~~~~~~~~~~~~~~~~~ "
-					+ timeParser.getTemporal());
 			System.out.println();
 			return timeParser.getTemporal();
 		} catch (ParseException e) {

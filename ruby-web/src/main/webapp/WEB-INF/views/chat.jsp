@@ -81,16 +81,19 @@
 							if (result.queryParamater.cinName != null) queryParamater += "Cinema: " +  result.queryParamater.cinName + "</br>";
 							if (result.queryParamater.tvChannel != null) queryParamater += "Channel: " + result.queryParamater.tvChannel + "</br>";
 							if (result.queryParamater.tvProTitle != null) queryParamater += "TV Program: " + result.queryParamater.tvProTitle + "</br>";
-							if (result.queryParamater.types != null )  queryParamater += "Question Type: " + result.queryParamater.types + "</br>";
+							if (result.queryParamater.types != null ) {
+								queryParamater += "Question Type: " + result.queryParamater.types + "</br>";
+							}
 							$('#result-paramaters').html(queryParamater);	
 						}
-						var htmlParamater = '', dateExtract = '';
+	var htmlParamater = '', dateExtract = '';
 						if (result.beginTime != null)
 							dateExtract += 'Begin Time: '
 									+ new Date(result.beginTime) + "</br>";
 						if (result.endTime != null)
-							dateExtract += 'End Time: ' + new Date( result.endTime);
-									+ "</br>";
+							dateExtract += 'End Time: '
+									+ new Date(result.endTime);
+						+"</br>";
 						$('#result-time').html(dateExtract);
 						$('#result-final').html(result.answer);
 					},

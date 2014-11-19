@@ -1,26 +1,21 @@
 package com.fpt.ruby.nlp;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.Log;
-import com.fpt.ruby.business.model.QueryParamater;
-import com.fpt.ruby.business.model.TVModifiers;
-import com.fpt.ruby.business.model.TVProgram;
-import com.fpt.ruby.business.model.TimeExtract;
+import com.fpt.ruby.business.model.*;
 import com.fpt.ruby.business.service.LogService;
 import com.fpt.ruby.business.service.TVProgramService;
 import com.fpt.ruby.intent.detection.TVIntentDetect;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import fpt.qa.mdnlib.util.string.StrUtil;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
 import fpt.qa.vnTime.vntime.VnTimeParser;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class TVAnswerMapperImpl implements TVAnswerMapper {
 	public static final String DEF_ANS = "Xin lỗi, chúng tôi không có thông tin cho câu trả lời của bạn";
@@ -33,7 +28,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 	private TVIntentDetect intentDetector = new TVIntentDetect();
 	private TVIntentDetect nonDiacritic = new TVIntentDetect();
 	private TVProgramService tps = new TVProgramService();
-	private final int limitSizeAnswer = 200;
+	private final int limitSizeAnswer = 10;
 	public void init() {
 		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
 //		String dir = "D:/Workspace/Code/FTI/rubyweb/src/main/resources";

@@ -19,7 +19,51 @@
 		$('#ui_element').scrollablecombo();
 	});
 	
-	function report(){
+	function searchWeb(question){
+		$
+				.ajax({
+					type : "POST",
+					url : "/rubyweb/searchWeb",
+					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+					data : "question=" + encodeURIComponent(question),
+					success : function(result) {
+						$('#loading').addClass('hidden');
+						var htmlResult = "";
+						//question
+						htmlResult = htmlResult
+								.concat("<li class=\"left clearfix\"><span class=\"chat-img pull-left\">");
+						htmlResult = htmlResult
+								.concat("<img src=\"http://placehold.it/50/55C1E7/fff&text=U\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
+						htmlResult = htmlResult
+								.concat("<div class=\"chat-body clearfix\">");
+						htmlResult = htmlResult.concat("<p>");
+						htmlResult = htmlResult.concat(result.question);
+						htmlResult = htmlResult.concat("</p></div></li>");
+						//answer
+						htmlResult = htmlResult
+								.concat("<li class=\"right clearfix\"><span class=\"chat-img pull-right\">");
+						htmlResult = htmlResult
+								.concat("<img src=\"http://placehold.it/50/FA6F57/fff&text=ME\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
+						htmlResult = htmlResult
+								.concat("<div class=\"chat-body clearfix\">");
+						htmlResult = htmlResult.concat("<p>");
+						htmlResult = htmlResult.concat(result.answer);
+						htmlResult = htmlResult.concat("</p></div></li>");
+						$('#btn-input').val('');
+						$('.chat').append(htmlResult);
+						$('.panel-body').scrollTop(oldHeight+400);
+						//show debug
+						$('#panel-debug').removeClass('hidden');
+						$('.report').removeClass('hidden');
+
+						// Query Paramaters
+
+						$('#result-final').html(result.answer);
+					},
+					error : function(result) {
+						alert("Error");
+					}
+				});
 	};
 	
 	function onChat() {

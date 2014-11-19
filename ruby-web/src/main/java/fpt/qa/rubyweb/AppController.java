@@ -182,8 +182,17 @@ public class AppController {
 			
 			
 			// If can't answer, take result from Bing Search
-			if (useWebSearch.equals("yes") && rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
-				rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+			if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
+				// If on the mobile
+				/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+						"<a href=\"searchWeb?question=" + question +  "\">Search on the Web</a>");*/
+
+				//If on the web
+				rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+						"<a href=\"#\" class=\"btn simpleConfirm\" onclick=\"searchWeb('"
+						 +  question  +
+						"')\">Search on the Web</a> ");
+				//rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
 			}
 			
 			System.out.println("Total time = "+ (System.currentTimeMillis()-sTime));
@@ -212,7 +221,7 @@ public class AppController {
 		track("userActivity", event);
 
 		logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
-		rubyAnswer.setAnswer(rubyAnswer.getAnswer() + " ^_^");
+		if (rubyAnswer.getAnswer().length() < 50) rubyAnswer.setAnswer(rubyAnswer.getAnswer() + " ^_^");
 		return rubyAnswer;
 		// return app.getAnswer(question);
 	}
@@ -254,6 +263,20 @@ public class AppController {
 		}
 		catch (Exception ex){
 			return "error";
+		}
+	}
+
+	@RequestMapping(value = "/searchWeb", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public RubyAnswer confirmWebSearch(@RequestParam("question") String question){
+		RubyAnswer rubyAnswer = new RubyAnswer();
+		try{
+			rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+			return rubyAnswer;
+		}
+		catch (Exception ex){
+			rubyAnswer.setAnswer("Some thing went wrong! Please try again!");
+			return rubyAnswer;
 		}
 	}
 	/*

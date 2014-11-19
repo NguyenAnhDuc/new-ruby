@@ -18,37 +18,51 @@
 	$(function() {
 		$('#ui_element').scrollablecombo();
 	});
-	
+
+	function buildHtmlQuestion(question){
+		var htmlResult = "";
+		//question
+		htmlResult = htmlResult
+				.concat("<li class=\"left clearfix\"><span class=\"chat-img pull-left\">");
+		htmlResult = htmlResult
+				.concat("<img src=\"http://placehold.it/50/55C1E7/fff&text=U\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
+		htmlResult = htmlResult
+				.concat("<div class=\"chat-body clearfix\">");
+		htmlResult = htmlResult.concat("<p>");
+		htmlResult = htmlResult.concat(question);
+		htmlResult = htmlResult.concat("</p></div></li>");
+		return htmlResult;
+	}
+
+	function buildHtmlAnswer(answer, text){
+		var htmlResult = "";
+		//answer
+		htmlResult = htmlResult
+				.concat("<li class=\"right clearfix\"><span class=\"chat-img pull-right\">");
+		htmlResult = htmlResult
+				.concat("<img src=\"http://placehold.it/50/FA6F57/fff&text=" + text + "\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
+		htmlResult = htmlResult
+				.concat("<div class=\"chat-body clearfix\">");
+		htmlResult = htmlResult.concat("<p>");
+		htmlResult = htmlResult.concat(answer);
+		htmlResult = htmlResult.concat("</p></div></li>");
+		return htmlResult;
+	}
+
 	function searchWeb(question){
+		$('#loading').removeClass('hidden');
+		$('.report').addClass('hidden');
+		$('.panel-body').scrollTop(1E10);
+		var oldHeight = $('.panel-body').scrollTop();
 		$
 				.ajax({
 					type : "POST",
 					url : "/rubyweb/searchWeb",
 					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-					data : "question=" + encodeURIComponent(question),
+					data : "question=" + encodeURIComponent(question) ,
 					success : function(result) {
 						$('#loading').addClass('hidden');
-						var htmlResult = "";
-						//question
-						htmlResult = htmlResult
-								.concat("<li class=\"left clearfix\"><span class=\"chat-img pull-left\">");
-						htmlResult = htmlResult
-								.concat("<img src=\"http://placehold.it/50/55C1E7/fff&text=U\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
-						htmlResult = htmlResult
-								.concat("<div class=\"chat-body clearfix\">");
-						htmlResult = htmlResult.concat("<p>");
-						htmlResult = htmlResult.concat(result.question);
-						htmlResult = htmlResult.concat("</p></div></li>");
-						//answer
-						htmlResult = htmlResult
-								.concat("<li class=\"right clearfix\"><span class=\"chat-img pull-right\">");
-						htmlResult = htmlResult
-								.concat("<img src=\"http://placehold.it/50/FA6F57/fff&text=ME\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
-						htmlResult = htmlResult
-								.concat("<div class=\"chat-body clearfix\">");
-						htmlResult = htmlResult.concat("<p>");
-						htmlResult = htmlResult.concat(result.answer);
-						htmlResult = htmlResult.concat("</p></div></li>");
+						var htmlResult =  buildHtmlQuestion(result.question).concat(buildHtmlAnswer(result.answer,"WEB"));
 						$('#btn-input').val('');
 						$('.chat').append(htmlResult);
 						$('.panel-body').scrollTop(oldHeight+400);
@@ -84,30 +98,10 @@
 					type : "POST",
 					url : "/rubyweb/getAnswer",
 					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-					data : "question=" + encodeURIComponent(question),
+					data : "question=" + encodeURIComponent(question) + "&confirmWebSearch=" + encodeURIComponent("yes"),
 					success : function(result) {
 						$('#loading').addClass('hidden');
-						var htmlResult = "";
-						//question
-						htmlResult = htmlResult
-								.concat("<li class=\"left clearfix\"><span class=\"chat-img pull-left\">");
-						htmlResult = htmlResult
-								.concat("<img src=\"http://placehold.it/50/55C1E7/fff&text=U\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
-						htmlResult = htmlResult
-								.concat("<div class=\"chat-body clearfix\">");
-						htmlResult = htmlResult.concat("<p>");
-						htmlResult = htmlResult.concat(result.question);
-						htmlResult = htmlResult.concat("</p></div></li>");
-						//answer
-						htmlResult = htmlResult
-								.concat("<li class=\"right clearfix\"><span class=\"chat-img pull-right\">");
-						htmlResult = htmlResult
-								.concat("<img src=\"http://placehold.it/50/FA6F57/fff&text=ME\" alt=\"User Avatar\" class=\"img-circle\" /></span>");
-						htmlResult = htmlResult
-								.concat("<div class=\"chat-body clearfix\">");
-						htmlResult = htmlResult.concat("<p>");
-						htmlResult = htmlResult.concat(result.answer);
-						htmlResult = htmlResult.concat("</p></div></li>");
+						var htmlResult = buildHtmlQuestion(result.question).concat(buildHtmlAnswer(result.answer,"ME"));
 						$('#btn-input').val('');
 						$('.chat').append(htmlResult);
 						$('.panel-body').scrollTop(oldHeight+400);
@@ -130,7 +124,7 @@
 							}
 							$('#result-paramaters').html(queryParamater);	
 						}
-	var htmlParamater = '', dateExtract = '';
+						var htmlParamater = '', dateExtract = '';
 						if (result.beginTime != null)
 							dateExtract += 'Begin Time: '
 									+ new Date(result.beginTime) + "</br>";

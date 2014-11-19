@@ -110,7 +110,7 @@ public class AppController {
 			@RequestParam("question") String question,
 			@RequestParam(value="userID", defaultValue = "") String appUserID,
 			@RequestParam(value="inputType", defaultValue = "text") String inputType,
-			@RequestParam(value="useWebSearch", defaultValue = "yes") String useWebSearch,
+			@RequestParam(value="confirmWebSearch", defaultValue = "no") String confirmWebSearch,
 			@CookieValue(value = "userID", defaultValue = "") String browserUserID) {
 		/*
 		 * UserAgentStringParser parser =
@@ -183,17 +183,23 @@ public class AppController {
 			
 			// If can't answer, take result from Bing Search
 			if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
-				// If on the mobile
-				/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+				if (confirmWebSearch.equals("yes")){
+					String htmlAnswer = "";
+					// If on the mobile
+					/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
 						"<a href=\"searchWeb?question=" + question +  "\">Search on the Web</a>");*/
 
-				//If on the web
-				rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
-						"<a href=\"#\" class=\"btn simpleConfirm\" onclick=\"searchWeb('"
-						 +  question  +
-						"')\">Search on the Web</a> ");
-				//rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+					//If on the web
+					htmlAnswer = String.format("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+							"<a href=\"#\" class=\"btn\" onclick=\"searchWeb('%s')\"><center>Search on the Web</a></center>",question);
+					rubyAnswer.setAnswer(htmlAnswer);
+				}
+				else {
+					rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+				}
+
 			}
+
 			
 			System.out.println("Total time = "+ (System.currentTimeMillis()-sTime));
 		}
@@ -270,6 +276,7 @@ public class AppController {
 	@ResponseBody
 	public RubyAnswer confirmWebSearch(@RequestParam("question") String question){
 		RubyAnswer rubyAnswer = new RubyAnswer();
+		rubyAnswer.setQuestion(question.trim());
 		try{
 			rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
 			return rubyAnswer;

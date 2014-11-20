@@ -60,7 +60,16 @@
     label: "WE",
     value: TimeWithRange(TimeRange(SATURDAY, SUNDAY, Duration(DAY, 2)))
   } 
-
+  
+  
+  EARLY_WEEK = {
+  	type: DAYS_OF_WEEK,
+  	label: "EARWEEK",
+  	value: TimeWithRange(TimeRange(MONDAY, TUESDAY, Duration(DAY, 2)))
+  }
+  
+  
+  
   JANUARY = MonthOfYear(1);
   FEBRUARY = MonthOfYear(2);
   MARCH = MonthOfYear(3);

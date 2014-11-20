@@ -149,6 +149,10 @@ public class VnTimeParser {
 	public List<TimeRange> parser3(String textInput, String referenceDate)
 			throws ParseException {
 
+		if (checkSpe(textInput)) {
+			return parser3("ngày mai", referenceDate);
+		}
+
 		Annotation annotation = new Annotation(textInput);
 		annotation.set(CoreAnnotations.DocDateAnnotation.class, referenceDate);
 		this.coreNLP.annotate(annotation);
@@ -171,7 +175,6 @@ public class VnTimeParser {
 				continue;
 			}
 			// System.out.println("cm.toString: " + cmString);
-
 			if (cmString.equals("giờ") || cmString.equals("chiều")) {
 				continue;
 			}
@@ -300,5 +303,30 @@ public class VnTimeParser {
 		// // e.printStackTrace();
 		// return "";
 		// }
+	}
+
+	private boolean checkSpe(String textInput) {
+		String[] tokens = textInput.split(" ");
+		String temp = " sáng sang ngay chieu toi ngày mai mãi chiều tối sau ban";
+		int index = -1;
+		for (int i = 0; i < tokens.length; ++i) {
+			if (tokens[i].equalsIgnoreCase("mai")) {
+				index = i;
+				break;
+			}
+		}
+		if (index != -1) {
+			if ((index - 1 >= 0 && temp.contains(tokens[index - 1])) || ( index + 1 < tokens.length && temp.contains(tokens[index + 1]))) {
+				return false ;
+			}
+			if (index - 1 >= 0 && !temp.contains(tokens[index - 1])) {
+				return true;
+			}
+			if (index + 1 < tokens.length && !temp.contains(tokens[index + 1])) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 }

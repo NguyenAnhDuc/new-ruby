@@ -1,0 +1,22 @@
+  ENV.defaults["stage"] = 1
+  ENV.defaults["ruleType"] = "tokens"
+
+  $POSS = "( /'s/ | /'/ /s/ )"
+  { (/dem/? /giao//thua/ ) => IsoDate(NIL, 12, 31) }
+  { (/tet/ /duong/ /lich/?) => IsoDate(NIL, 1, 1) }
+  { (/nam/ /moi/) => IsoDate(NIL, 1, 1) }
+  { (/ngay/? /quoc/ /te/ /phu/ /nu/) => IsoDate(NIL, 3, 8) }
+  { (/ngay/? /phu/ /nu/ /viet/ /nam/ ) => IsoDate(NIL, 10, 20) }
+  { (/ngay/? /le/ /tinh/ /nhan|yeu/? ) => IsoDate(NIL, 2, 14) }
+  { (/ngay/? /valentine/) => IsoDate(NIL, 2, 14) }
+  { (/ngay/ /quoc/? /te/? /thieu/ /nhi/) => IsoDate(NIL, 6, 1) }
+  { (/ngay/ /quoc/? /te/? /nguoi/ /cao/ /tuoi/) => IsoDate(NIL, 10, 1) }
+  {	( /le/ /hoi/? /hoa/ /trang/) => IsoDate(NIL, 10, 31) }
+  { (/halloween/ ) => IsoDate(NIL, 10, 31) }
+  { (/ngay/? /x-?mas|christmas/ ) => IsoDate(NIL, 12, 25) }
+  { (/ngay/? /quoc/ /khanh/ /nuoc/? /chxhcn/? /viet/? /nam/? ) => IsoDate(NIL, 9, 2) }
+  { (/ngay/ /quoc/? /te/? /lao/ /dong/ ) => IsoDate(NIL, 5, 1) }
+  
+  { (/ngay/ /thanh/ /lap/ /dang/ /cong/? /san/? /viet/? /nam/?) => IsoDate(NIL, 2, 3) }
+  { (/ngay/ /nha/ /giao/ ) => IsoDate(NIL, 11,20) }
+  { (/ngay/? /giáng/ /sinh/) => IsoDate(NIL, 12, 25) }

@@ -22,6 +22,7 @@ public class WebSearchAnswerEngine extends AnswerEngine {
         answer.setQuestion(getQuestion());
         answer.setIntent("udf");
         answer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(getQuestion(), LIMIT)));
+
         setAnswer(answer);
     }
 

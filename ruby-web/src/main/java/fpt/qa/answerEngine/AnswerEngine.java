@@ -49,12 +49,9 @@ public abstract class AnswerEngine extends Thread {
 
     @Override
     public void run() {
-        try {
-            setAnswer(null);
-            doRun();
-        } finally {
-            notifyListeners();
-        }
+        setAnswer(null);
+        doRun();
+        notifyListeners();
     }
 
 //    public stavoid config(Object... params);

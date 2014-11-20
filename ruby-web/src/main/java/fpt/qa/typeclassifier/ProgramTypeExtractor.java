@@ -10,11 +10,13 @@ import fpt.qa.mdnlib.struct.pair.Pair;
 
 public class ProgramTypeExtractor {
 
-	public ConjType conjType;
+	public static ConjType conjType;
 
 	public ProgramTypeExtractor() {
-		this.conjType = new ConjType((new RedisHelper()).getClass()
-				.getClassLoader().getResource("").getPath());
+		if (conjType == null) {
+			this.conjType = new ConjType((new RedisHelper()).getClass()
+					.getClassLoader().getResource("").getPath());
+		}
 	}
 
 	public ProgramTypeExtractor(String resourcePath) {

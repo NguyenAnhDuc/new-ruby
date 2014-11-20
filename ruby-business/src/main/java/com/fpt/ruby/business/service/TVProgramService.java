@@ -535,7 +535,6 @@ public class TVProgramService {
             System.out.println("program : [" + program2.getChannel() + " , "
                     + program2.getTitle() + " , " + program2.getType() + " , ");
         }
-
     }
 
 }

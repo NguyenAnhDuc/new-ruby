@@ -6,6 +6,7 @@ hbo
 disney
 star movie
 starmovie
+national geographic
 bbc
 cnn
 starsport
@@ -17,8 +18,17 @@ vtv2
 vtv3
 vtv4
 vtv6
+styletv
+k+pm
+k+1
+k+ns
+k+
 
 vtvcab
+vtc1
+vtc2
+vtc3
+
 
 kênh thể thao
 kenh the thao
@@ -48,11 +58,17 @@ ca nhạc
 ca nhac
 giải trí
 giai tri
+gameshow
+game show
+đua xe
+đua oto
 
 chiếu phim
 chieu phim
 
 tv
+tivi
+ti vi
 
 truyền hình
 truyen hinh

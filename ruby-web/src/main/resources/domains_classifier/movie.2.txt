@@ -74,6 +74,7 @@ suất chiếu
 suat chieu
 
 imdb rating
+imdb
 điểm imdb
 diem imdb
 đánh giá imdb

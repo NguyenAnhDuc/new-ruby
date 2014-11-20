@@ -115,4 +115,11 @@ public class DiacriticConverter{
 
 		return result;
 	}
+
+	public static void main(String[] args){
+		String input = "xin chào";
+		System.out.println(removeDiacritics(input));
+
+
+	}
 }

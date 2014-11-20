@@ -35,8 +35,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 	private final int limitSizeAnswer = 10;
 	public void init() {
 		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-//		String dir = "D:/Workspace/Code/FTI/rubyweb/src/main/resources";
-		
+
 		intentDetector.init( dir + "/qc/tv", dir + "/dicts");
 		nonDiacritic.init( dir + "/qc/tv/non-diacritic", dir + "/dicts/non-diacritic");
 	}

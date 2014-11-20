@@ -1,9 +1,6 @@
 package fpt.qa.rubyweb;
 
-import com.fpt.ruby.business.helper.DisplayAnswerHelper;
 import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.Log;
-import com.fpt.ruby.business.model.QueryParamater;
 import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.helper.ProcessHelper;
 import com.fpt.ruby.model.ReportQuestion;
@@ -11,8 +8,10 @@ import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.*;
 import com.fpt.ruby.service.ReportQuestionService;
+import fpt.qa.answerEngine.AIMLInfoWrapper;
+import fpt.qa.answerEngine.AnswerFinder;
+import fpt.qa.answerEngine.NLPInfoWrapper;
 import fpt.qa.domainclassifier.DomainClassifier;
-import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import io.keen.client.java.JavaKeenClientBuilder;
 import io.keen.client.java.KeenClient;
 import io.keen.client.java.KeenProject;
@@ -28,232 +27,223 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-/*import net.sf.uadetector.ReadableUserAgent;
- import net.sf.uadetector.UserAgentStringParser;
- import net.sf.uadetector.service.UADetectorServiceFactory;*/
 
 @Controller
 @RequestMapping("/")
 public class AppController {
-	@Autowired
-	HttpServletRequest request;
-	@Autowired
-	MovieTicketService movieTicketService;
-	@Autowired
-	MovieFlyService movieFlyService;
-	@Autowired
-	CinemaService cinemaService;
-	@Autowired
-	LogService logService;
-	@Autowired 
-	NameMapperService nameMapperService;
-	@Autowired
-	BingSearchService bingSearchService;
-	@Autowired	ReportQuestionService reportQuestionService;
-	
-	static TVAnswerMapper tam = new TVAnswerMapperImpl();
-	static DomainClassifier classifier;
-	private static final Logger logger = LoggerFactory
-			.getLogger(AppController.class);
-	@Value("${aimlBotID}")
-	private String botId;
-	@Value("${aimlToken}")
-	private String token;
+    public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
+    private static final Logger logger = LoggerFactory
+            .getLogger(AppController.class);
+    static TVAnswerMapper tam;
+    static DomainClassifier classifier;
+    @Autowired
+    HttpServletRequest request;
+    @Autowired
+    MovieTicketService movieTicketService;
+    @Autowired
+    MovieFlyService movieFlyService;
+    @Autowired
+    CinemaService cinemaService;
+    @Autowired
+    LogService logService;
+    @Autowired
+    NameMapperService nameMapperService;
+    @Autowired
+    BingSearchService bingSearchService;
+    @Autowired
+    ReportQuestionService reportQuestionService;
+    //Conjunction
+    ConjunctionHelper conjunctionHelperWithDiacritic, conjunctionHelperNoneDiacritic;
+    @Value("${aimlBotID}")
+    private String botId;
+    @Value("${aimlToken}")
+    private String token;
+    // Keen
+    private KeenClient keenClient;
+    @Value("${keenProjectID}")
+    private String KEEN_PROJECT_ID;
+    @Value("${keenWriteKey}")
+    private String KEEN_WRITE_KEY;
+    @Value("${keenReadKey}")
+    private String KEEN_READ_KEY;
 
-	// Keen
-	private KeenClient keenClient;
-	@Value("${keenProjectID}")
-	private String KEEN_PROJECT_ID;
-	@Value("${keenWriteKey}")
-	private String KEEN_WRITE_KEY;
-	@Value("${keenReadKey}")
-	private String KEEN_READ_KEY;
-	
-	//Conjunction 
-	ConjunctionHelper conjunctionHelperWithDiacritic, conjunctionHelperNoneDiacritic;
-	
-	// get user agent
-	/*
-	 * private String getUserAgent() { return request.getHeader("user-agent"); }
-	 */
-	public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
-	@PostConstruct
-	public void init() {
-		tam.init();
-		NlpHelper.init();
-		ProcessHelper.init(nameMapperService);
-		TVModifiersHelper.init(nameMapperService);
-		NonDiacriticNlpHelper.init(nameMapperService);
-		String dir = (new RedisHelper()).getClass().getClassLoader()
-				.getResource("").getPath();
-		conjunctionHelperWithDiacritic = new ConjunctionHelper(dir, nameMapperService);
-		conjunctionHelperNoneDiacritic = new ConjunctionHelper(dir+ "/non-diacritic", nameMapperService);
-		classifier = new DomainClassifier(dir, nameMapperService);
-		keenClient = new JavaKeenClientBuilder().build();
-		KeenProject keenProject = new KeenProject(KEEN_PROJECT_ID,
-				KEEN_WRITE_KEY, KEEN_READ_KEY);
-		keenClient.setDefaultProject(keenProject);
-	}
+    AnswerFinder god;
 
-	private void track(String filter, Map<String, Object> event) {
-		keenClient.addEvent(filter, event);
-	}
+    @PostConstruct
+    public void init() {
+        tam = new TVAnswerMapperImpl();
+        tam.init();
+        NlpHelper.init();
+        ProcessHelper.init(nameMapperService);
+        TVModifiersHelper.init(nameMapperService);
+        NonDiacriticNlpHelper.init(nameMapperService);
 
-	@RequestMapping(value = "/getAnswer", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public RubyAnswer prototypeGetAnswer(
-			@RequestParam("question") String question,
-			@RequestParam(value="userID", defaultValue = "") String appUserID,
-			@RequestParam(value="inputType", defaultValue = "text") String inputType,
-			@CookieValue(value = "userID", defaultValue = "") String browserUserID) {
-		/*
-		 * UserAgentStringParser parser =
-		 * UADetectorServiceFactory.getResourceModuleParser(); ReadableUserAgent
-		 * agent = parser.parse(request.getHeader("User-Agent"));
-		 * System.out.println("Operating system: " +
-		 * agent.getOperatingSystem().getName());
-		 * System.out.println("Device category: " +
-		 * agent.getDeviceCategory().getName() ); System.out.println("Family: "
-		 * + agent.getFamily() );
-		 */
-		System.out.println("Question: " + question);
-		String userID = browserUserID;
-		if (!inputType.equals("text")) inputType = "voice";
-		if (!appUserID.isEmpty()) userID = appUserID;
-		logger.info("UserID: " + userID);
-		Log log = new Log();
-		log.setInputType(inputType);
-		log.setUserAgent(request.getHeader("User-Agent"));
-		log.setQuestion(question);
-		log.setDate(new Date());
-		RubyAnswer rubyAnswer = new RubyAnswer();
-		// AIML Layer First
-		String answer = ProcessHelper.getAIMLAnswer(question, botId, token);
-		if (answer != null && !answer.trim().equalsIgnoreCase("")) {
-			rubyAnswer.setAnswer(answer);
-			rubyAnswer.setQuestion(question);
-			rubyAnswer.setDomain("aiml");
-			rubyAnswer.setIntent("aiml");
-			log.setAnswer(rubyAnswer.getAnswer());
-			log.setIntent("AIML");
-			log.setDomain("AIML");
-			logService.save(log);
-		} else {
-			long sTime = System.currentTimeMillis();
-			String key = NlpHelper.normalizeQuestion(question);
-			String domain = classifier.getDomain(key);
-			logger.info("Current time: " + new Date() + " | domain: " + domain);
+        String dir = (new RedisHelper()).getClass().getClassLoader()
+                .getResource("").getPath();
+        conjunctionHelperWithDiacritic = new ConjunctionHelper(dir, nameMapperService);
+        conjunctionHelperNoneDiacritic = new ConjunctionHelper(dir + "/non-diacritic", nameMapperService);
 
-			// rubyAnswer.setInCache(this.questionStructureService.isInCache(key));
-			// rubyAnswer.setQuestion(question);
-			// Process question
-			// QuestionStructure questionStructure =
-			// ProcessHelper.getQuestionStucture(question,
-			// questionStructureService );
-			// QuestionStructure questionStructure = new QuestionStructure();
-			// Process answer
-			try{
-				if (domain.equals("tv")) {
-					// if ( question.startsWith( "tv" ) ){
-					System.err.println("[AppController] Domain TV");
-					rubyAnswer = tam.getAnswer(key, logService, conjunctionHelperWithDiacritic);
-					// Neu khong tra loi duoc cau hoi co dau, thi chuyen cau hoi do
-					// ve cau hoi khong dau va xu ly
-					if (DiacriticConverter.hasDiacriticAccents(key)
-							&& rubyAnswer.getAnswer().contains(	TVAnswerMapperImpl.UDF_ANS)) {
-						rubyAnswer = tam.getAnswer(DiacriticConverter.removeDiacritics(key),logService, conjunctionHelperWithDiacritic);
-					}
-				} else {
-					System.err.println("[AppController] Domain Movie");
-					rubyAnswer = ProcessHelper.getAnswer(key, movieFlyService,
-							movieTicketService, cinemaService, logService, conjunctionHelperNoneDiacritic, conjunctionHelperWithDiacritic);
-				}
-				rubyAnswer.setDomain(domain);
-			}
-			catch (Exception ex){
-				rubyAnswer.setAnswer(UDF_ANS);
-			}
-			
-			
-			// If can't answer, take result from Bing Search
-			if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
-				rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
-			}
-			
-			System.out.println("Total time = "+ (System.currentTimeMillis()-sTime));
-		}
+        classifier = new DomainClassifier(dir, nameMapperService);
+        keenClient = new JavaKeenClientBuilder().build();
+        KeenProject keenProject = new KeenProject(KEEN_PROJECT_ID,
+                KEEN_WRITE_KEY, KEEN_READ_KEY);
+        keenClient.setDefaultProject(keenProject);
 
-		// Log
-		log.setAnswer(rubyAnswer.getAnswer());
-		log.setDomain(rubyAnswer.getDomain());
-		log.setIntent(rubyAnswer.getIntent());
-		QueryParamater queryParamater = new QueryParamater();
-		queryParamater.setBeginTime(rubyAnswer.getBeginTime());
-		queryParamater.setEndTime(rubyAnswer.getEndTime());
-		queryParamater.setMovieTitle(rubyAnswer.getMovieTitle());
-		queryParamater.setMovieTicket(rubyAnswer.getMovieTicket());
-		log.setQueryParamater(rubyAnswer.getQueryParamater());
-		logService.save(log);
-		
-		// Analytic
-		Map<String, Object> event = new HashMap<String, Object>();
-		event.put("userID", userID);
-		event.put("inputType", inputType);
-		event.put("domain", rubyAnswer.getDomain());
-		event.put("intent", rubyAnswer.getIntent());
-		event.put("question", rubyAnswer.getQuestion());
-		event.put("answer", rubyAnswer.getAnswer());
-		track("userActivity", event);
+        AIMLInfoWrapper aimlInfo = new AIMLInfoWrapper(botId, token);
+        NLPInfoWrapper nlpInfo = new NLPInfoWrapper();
+        nlpInfo.setCins(cinemaService);
+        nlpInfo.setClassifier(classifier);
+        nlpInfo.setDia(conjunctionHelperWithDiacritic);
+        nlpInfo.setNonDia(conjunctionHelperNoneDiacritic);
+        nlpInfo.setMfs(movieFlyService);
+        nlpInfo.setMts(movieTicketService);
+        nlpInfo.setTvans(tam);
+        nlpInfo.setLog(logService);
 
-		logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
-		return rubyAnswer;
-		// return app.getAnswer(question);
-	}
+        god = new AnswerFinder(aimlInfo, nlpInfo);
+        System.err.println("CONTRUCT DONE!!!");
+    }
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model,
-			@CookieValue(value = "userID", defaultValue = "") String userID,
-			HttpServletResponse response) {
-		logger.info("HOME CONTROLLER");
-		logger.info("userID from cookies: " + userID);
-		if (userID.isEmpty()) {
-			Cookie cookie = new Cookie("userID", UUID.randomUUID().toString());
-			response.addCookie(cookie);
-		}
+    private void track(String filter, Map<String, Object> event) {
+        keenClient.addEvent(filter, event);
+    }
 
-		return "chat";
-	}
+    @RequestMapping(value = "/getAnswer", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public RubyAnswer prototypeGetAnswer(
+            @RequestParam("question") String question,
+            @RequestParam(value = "userID", defaultValue = "") String appUserID,
+            @RequestParam(value = "inputType", defaultValue = "text") String inputType,
+            @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
+        RubyAnswer ans = god.getAnswer(question);
+        return ans;
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(Model model){
-		return "chat";
-	}
-	
-	
-	@RequestMapping(value = "/report", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public String reportQuestion(@RequestParam("question") String question,
-								 @RequestParam("answer") String answer,
-								 @RequestParam("intent") String intent,
-								 @RequestParam("domain") String domain){
-		try{
-			ReportQuestion re = new ReportQuestion();
-			re.setQuestion(question);
-			re.setAnswer(answer);
-			re.setDomain(domain);
-			re.setIntent(intent);
-			reportQuestionService.save(re);
-			return "success";
-		}
-		catch (Exception ex){
-			return "error";
-		}
-	}
+//        System.out.println("Question: " + question);
+//        String userID = browserUserID;
+//        if (!inputType.equals("text")) inputType = "voice";
+//        if (!appUserID.isEmpty()) userID = appUserID;
+//        logger.info("UserID: " + userID);
+//        Log log = new Log();
+//        log.setInputType(inputType);
+//        log.setUserAgent(request.getHeader("User-Agent"));
+//        log.setQuestion(question);
+//        log.setDate(new Date());
+//        RubyAnswer rubyAnswer = new RubyAnswer();
+//
+//        // AIML Layer First
+//        String answer = ProcessHelper.getAIMLAnswer(question, botId, token);
+//        if (answer != null && !answer.trim().equalsIgnoreCase("")) {
+//            rubyAnswer.setAnswer(answer);
+//            rubyAnswer.setQuestion(question);
+//            rubyAnswer.setDomain("aiml");
+//            rubyAnswer.setIntent("aiml");
+//            log.setAnswer(rubyAnswer.getAnswer());
+//            log.setIntent("AIML");
+//            log.setDomain("AIML");
+//            logService.save(log);
+//        } else {
+//            long sTime = System.currentTimeMillis();
+//            String key = NlpHelper.normalizeQuestion(question);
+//            String domain = classifier.getDomain(key);
+//            logger.info("Current time: " + new Date() + " | domain: " + domain);
+//
+//            try {
+//                if (domain.equals("tv")) {
+//                    // if ( question.startsWith( "tv" ) ){
+//                    System.err.println("[AppController] Domain TV");
+//                    rubyAnswer = tam.getAnswer(key, logService, conjunctionHelperWithDiacritic);
+//                    // Neu khong tra loi duoc cau hoi co dau, thi chuyen cau hoi do
+//                    // ve cau hoi khong dau va xu ly
+//                    if (DiacriticConverter.hasDiacriticAccents(key)
+//                            && rubyAnswer.getAnswer().contains(TVAnswerMapperImpl.UDF_ANS)) {
+//                        rubyAnswer = tam.getAnswer(DiacriticConverter.removeDiacritics(key), logService, conjunctionHelperWithDiacritic);
+//                    }
+//                } else {
+//                    System.err.println("[AppController] Domain Movie");
+//                    rubyAnswer = ProcessHelper.getAnswer(key, movieFlyService,
+//                            movieTicketService, cinemaService, logService, conjunctionHelperNoneDiacritic, conjunctionHelperWithDiacritic);
+//                }
+//                rubyAnswer.setDomain(domain);
+//            } catch (Exception ex) {
+//                rubyAnswer.setAnswer(UDF_ANS);
+//            }
+//
+//
+//            // If can't answer, take result from Bing Search
+//            if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")) {
+//                rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+//            }
+//
+//            System.out.println("Total time = " + (System.currentTimeMillis() - sTime));
+//        }
+//
+//        // Log
+//        log.setAnswer(rubyAnswer.getAnswer());
+//        log.setDomain(rubyAnswer.getDomain());
+//        log.setIntent(rubyAnswer.getIntent());
+//        QueryParamater queryParamater = new QueryParamater();
+//        queryParamater.setBeginTime(rubyAnswer.getBeginTime());
+//        queryParamater.setEndTime(rubyAnswer.getEndTime());
+//        queryParamater.setMovieTitle(rubyAnswer.getMovieTitle());
+//        queryParamater.setMovieTicket(rubyAnswer.getMovieTicket());
+//        log.setQueryParamater(rubyAnswer.getQueryParamater());
+//        logService.save(log);
+//
+//        // Analytic
+//        Map<String, Object> event = new HashMap<String, Object>();
+//        event.put("userID", userID);
+//        event.put("inputType", inputType);
+//        event.put("domain", rubyAnswer.getDomain());
+//        event.put("intent", rubyAnswer.getIntent());
+//        event.put("question", rubyAnswer.getQuestion());
+//        event.put("answer", rubyAnswer.getAnswer());
+//        track("userActivity", event);
+//
+//        logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
+//        return rubyAnswer;
+        // return app.getAnswer(question);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home(Model model,
+                       @CookieValue(value = "userID", defaultValue = "") String userID,
+                       HttpServletResponse response) {
+        logger.info("HOME CONTROLLER");
+        logger.info("userID from cookies: " + userID);
+        if (userID.isEmpty()) {
+            Cookie cookie = new Cookie("userID", UUID.randomUUID().toString());
+            response.addCookie(cookie);
+        }
+
+        return "chat";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test(Model model) {
+        return "chat";
+    }
+
+
+    @RequestMapping(value = "/report", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String reportQuestion(@RequestParam("question") String question,
+                                 @RequestParam("answer") String answer,
+                                 @RequestParam("intent") String intent,
+                                 @RequestParam("domain") String domain) {
+        try {
+            ReportQuestion re = new ReportQuestion();
+            re.setQuestion(question);
+            re.setAnswer(answer);
+            re.setDomain(domain);
+            re.setIntent(intent);
+            reportQuestionService.save(re);
+            return "success";
+        } catch (Exception ex) {
+            return "error";
+        }
+    }
 	/*
 	 * @RequestMapping(value="/allCinema", method = RequestMethod.GET, produces
 	 * = "application/json; charset=UTF-8")

@@ -1,0 +1,31 @@
+package fpt.qa.answerEngine;
+
+
+import com.fpt.ruby.business.helper.DisplayAnswerHelper;
+import com.fpt.ruby.business.service.BingSearchService;
+import com.fpt.ruby.model.RubyAnswer;
+
+public class WebSearchAnswerEngine extends AnswerEngine {
+    private static int LIMIT;
+    private static BingSearchService bingSearchService = new BingSearchService();
+
+    WebSearchAnswerEngine(ThreadGroup group, String name) {
+        super(group, name);
+    }
+
+    @Override
+    public void doRun() {
+        setAnswer(null);
+
+        RubyAnswer answer = new RubyAnswer();
+        answer.setDomain("websearch");
+        answer.setQuestion(getQuestion());
+        answer.setIntent("udf");
+        answer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(getQuestion(), LIMIT)));
+        setAnswer(answer);
+    }
+
+    public static void config(Object... params) {
+        LIMIT = (Integer) params[0];
+    }
+}

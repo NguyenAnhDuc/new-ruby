@@ -48,6 +48,7 @@ public class TVProgramService {
     }
 
     private static String genRegex(List<String> types) {
+        if (types == null) return "";
         List<String> finedType = new ArrayList<String>();
         types.forEach((t) -> finedType.add(t.toLowerCase().trim()));
         return String.join("|", finedType);
@@ -90,8 +91,12 @@ public class TVProgramService {
 
     public List<TVProgram> getList(TVModifiers mod, String question) {
 
-        String channel = mod.getChannel().toLowerCase().trim();
-        String title = mod.getProg_title().toLowerCase().trim();
+        String channel = mod.getChannel();
+        if (channel != null) channel = channel.toLowerCase().trim();
+
+        String title = mod.getProg_title();
+        if (title != null) title = title.toLowerCase().trim();
+
         Date start = mod.getStart();
         Date end = mod.getEnd();
         List<String> types = mod.getType();
@@ -139,7 +144,9 @@ public class TVProgramService {
                         return findAtTime(start, types);
                     else return findAtTime(start);
                 }
-                return findInPeriod(start, end, types);
+                if (types == null) {
+                    return findInPeriod(start, end);
+                } else return findInPeriod(start, end, types);
             }
             if (start == null && end == null) {
                 if (types != null)

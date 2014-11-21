@@ -1,14 +1,16 @@
 package fpt.qa.answerEngine;
 
 
-import com.fpt.ruby.business.service.*;
+import com.fpt.ruby.business.service.CinemaService;
+import com.fpt.ruby.business.service.LogService;
+import com.fpt.ruby.business.service.MovieFlyService;
+import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.helper.ProcessHelper;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.NlpHelper;
 import com.fpt.ruby.nlp.TVAnswerMapper;
 import com.fpt.ruby.nlp.TVAnswerMapperImpl;
-import com.fpt.ruby.service.ReportQuestionService;
 import fpt.qa.domainclassifier.DomainClassifier;
 import fpt.qa.mdnlib.diacritic.DiacriticConverter;
 
@@ -42,8 +44,8 @@ public class NLPAnswerEngine extends AnswerEngine {
 
     @Override
     public void doRun() {
+        long start = System.currentTimeMillis();
         setAnswer(null);
-
         RubyAnswer ans = new RubyAnswer();
         String key = NlpHelper.normalizeQuestion(getQuestion());
         String domain = classifier.getDomain(key);
@@ -66,5 +68,6 @@ public class NLPAnswerEngine extends AnswerEngine {
         }
         ans.setDomain(domain);
         setAnswer(ans);
+        System.err.println("AIML Answer Time: " + (System.currentTimeMillis() - start));
     }
 }

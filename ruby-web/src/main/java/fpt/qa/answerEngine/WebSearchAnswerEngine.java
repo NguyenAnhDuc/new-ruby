@@ -15,15 +15,15 @@ public class WebSearchAnswerEngine extends AnswerEngine {
 
     @Override
     public void doRun() {
+        long start = System.currentTimeMillis();
         setAnswer(null);
-
         RubyAnswer answer = new RubyAnswer();
         answer.setDomain("websearch");
         answer.setQuestion(getQuestion());
         answer.setIntent("udf");
         answer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(getQuestion(), LIMIT)));
-
         setAnswer(answer);
+        System.err.println("WebSearch Answer Time: " + (System.currentTimeMillis() - start));
     }
 
     public static void config(Object... params) {

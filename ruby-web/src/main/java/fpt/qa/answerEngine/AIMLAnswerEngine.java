@@ -13,14 +13,15 @@ public class AIMLAnswerEngine extends AnswerEngine {
 
     @Override
     public void doRun() {
+        long start = System.currentTimeMillis();
         this.setAnswer(null);
         RubyAnswer answer = new RubyAnswer();
         answer.setQuestion(getQuestion());
         answer.setDomain("aiml");
         answer.setIntent("aiml");
         answer.setAnswer(ProcessHelper.getAIMLAnswer(getQuestion(), botID, token));
-
         this.setAnswer(answer);
+        System.err.println("AIML Answer Time: " + (System.currentTimeMillis() - start));
     }
 
     public static void config(Object... params) {

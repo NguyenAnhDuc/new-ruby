@@ -131,6 +131,7 @@ public class AppController {
         logger.info("UserID : " + userID);
 
         RubyAnswer ans = god.getAnswer(question);
+        ans.setAnswer(ans.getAnswer() + "</br>");
         long pivot2 = (new Date()).getTime();
         TrackingThread ti = new TrackingThread(question, ans, userID, inputType, request.getHeader("User-Agent"));
         ti.start();

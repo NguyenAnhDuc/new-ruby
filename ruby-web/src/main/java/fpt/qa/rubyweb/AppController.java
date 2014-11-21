@@ -140,10 +140,10 @@ public class AppController {
 			rubyAnswer.setQuestion(question);
 			rubyAnswer.setDomain("aiml");
 			rubyAnswer.setIntent("aiml");
+            log.setIntent("AIML");
+            log.setDomain("AIML");
 			log.setAnswer(rubyAnswer.getAnswer());
-			log.setIntent("AIML");
-			log.setDomain("AIML");
-			logService.save(log);
+
 		} else {
 			long sTime = System.currentTimeMillis();
 			String key = NlpHelper.normalizeQuestion(question);
@@ -199,8 +199,7 @@ public class AppController {
 		queryParamater.setMovieTitle(rubyAnswer.getMovieTitle());
 		queryParamater.setMovieTicket(rubyAnswer.getMovieTicket());
 		log.setQueryParamater(rubyAnswer.getQueryParamater());
-		logService.save(log);
-		
+
 		// Analytic
 		Map<String, Object> event = new HashMap<String, Object>();
 		event.put("userID", userID);
@@ -209,13 +208,30 @@ public class AppController {
 		event.put("intent", rubyAnswer.getIntent());
 		event.put("question", rubyAnswer.getQuestion());
 		event.put("answer", rubyAnswer.getAnswer());
-		track("userActivity", event);
+
+        TrackingThread t = new TrackingThread(event, log);
+        t.start();
 
 		logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
 		rubyAnswer.setAnswer(rubyAnswer.getAnswer() + " ^_^");
+
 		return rubyAnswer;
 		// return app.getAnswer(question);
 	}
+
+    public class TrackingThread extends Thread {
+        Map<String, Object> event;
+        Log log;
+        public TrackingThread(Map<String, Object> event, Log log) {
+            this.event = event;
+            this.log = log;
+        }
+
+        public void run() {
+            logService.save(log);
+            track("userActivity", event);
+        }
+    }
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model,

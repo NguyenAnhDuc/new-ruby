@@ -123,7 +123,6 @@ public class AppController {
             @RequestParam(value = "inputType", defaultValue = "text") String inputType,
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
 
-        // Log
         long pivot1 = (new Date()).getTime();
 
         String userID = browserUserID;
@@ -131,21 +130,12 @@ public class AppController {
         if (!appUserID.isEmpty()) userID = appUserID;
         logger.info("UserID : " + userID);
 
-        Log log = new Log();
-        log.setInputType(inputType);
-        log.setUserAgent(request.getHeader("User-Agent"));
-        log.setQuestion(question);
-        log.setDate(new Date());
-
         RubyAnswer ans = god.getAnswer(question);
         long pivot2 = (new Date()).getTime();
-        TrackingThread ti = new TrackingThread(ans, log, userID, inputType);
+        TrackingThread ti = new TrackingThread(ans, userID, inputType, question);
         ti.start();
 
-        long pivot3 = (new Date()).getTime();
-        System.out.println((new Date()).getTime() + " . DONE LOG AND ANALYTICS  ");
-        System.out.println("question -> answer: " + (pivot2 - pivot1) / 1000.0 + " seconds");
-        System.out.println("answer -> log: " + (pivot3 - pivot2) / 1000.0 + " seconds");
+        System.out.println("[Q -> A]: " + (pivot2 - pivot1) / 1000.0 + " seconds");
         return ans;
     }
 
@@ -204,18 +194,23 @@ public class AppController {
     }
 
     private class TrackingThread extends Thread {
-        String userID, inputType;
+        String userID, inputType, question;
         RubyAnswer ans;
-        Log log;
 
-        public TrackingThread(RubyAnswer ans, Log log, String userID, String inputType) {
+        public TrackingThread(RubyAnswer ans,  String userID, String inputType, String question) {
             this.ans = ans;
-            this.log = log;
             this.userID = userID;
             this.inputType = inputType;
+            this.question = question;
         }
 
         public void run() {
+            Log log = new Log();
+            log.setInputType(inputType);
+            log.setUserAgent(request.getHeader("User-Agent"));
+            log.setQuestion(question);
+            log.setDate(new Date());
+
             log.setAnswer(ans.getAnswer());
             log.setIntent(ans.getIntent());
             log.setDomain(ans.getDomain());

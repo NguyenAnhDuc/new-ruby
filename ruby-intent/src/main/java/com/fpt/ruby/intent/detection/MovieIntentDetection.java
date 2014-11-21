@@ -7,6 +7,10 @@ package com.fpt.ruby.intent.detection;
 
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
+import jmdn.nlp.diacritic.DiacriticConverter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,7 +19,6 @@ import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
 public class MovieIntentDetection {
 
     static VnIntentDetection classifier;
-
     public static void init(String qcDir, String dictDir) {
         FreqConjDict.loadConjList(dictDir + "/movie_conjunction.txt");
         classifier = new VnIntentDetection(qcDir);
@@ -71,6 +74,7 @@ public class MovieIntentDetection {
             return IntentConstants.MOV_LANG;
         }
 
+
         if (tunedSent.startsWith("PRI\t")) {
 //            return "(rạp, how much)";
             return IntentConstants.TICKET_PRICE;
@@ -83,6 +87,23 @@ public class MovieIntentDetection {
                 || tunedSent.contains("với cái gì"))) {
             return IntentConstants.MOV_PLOT;
         }
+
+
+        // TODO: pre-init
+        /* START: MOV_PLOT hard code */
+        //1. Phim XYZ co noi dung j & noi dung cua XYZ la gi
+        String[] PRE_PLOT = new String[] {"nói về", "kể về", "nội dung", "câu chuyện", "content", "cốt chuyện", "cốt truyện", "cốt phim", "cốt film", "about"};
+        String[] AFTER_PLOT = new String[] {"j", "cái gì", "cái j", "như thế nào", "ntn", "là j", "là gì", "là cái gì", "là như thế nào", "là ntn"};
+
+        for (String a : AFTER_PLOT) {
+            if (tunedSent.endsWith(a) || tunedSent.endsWith(DiacriticConverter.removeDiacritics(a))) {
+                for (String f: PRE_PLOT) {
+                    if (tunedSent.contains(f) || tunedSent.contains(DiacriticConverter.removeDiacritics(f)))
+                        return IntentConstants.MOV_PLOT;
+                }
+            }
+        }
+        /* END : MOV_PLOT hard code */
 
         String[] happenWord = {"mấy giờ", "khi nào", "lúc nào"};
         if (tunedSent.indexOf("DTI\t") == 0) {

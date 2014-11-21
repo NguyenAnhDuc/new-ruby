@@ -119,6 +119,7 @@ public class MovieTicketService {
             System.out.println("[MovieTicketService]: beforeDate-afterDate null");
             if (matchMovieTicket.getCinema() == null && matchMovieTicket.getMovie() == null)
                 return  new ArrayList<>();
+
             else if (matchMovieTicket.getCinema() == null)
                 query =  new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(), "i"));
             else if (matchMovieTicket.getMovie() == null)

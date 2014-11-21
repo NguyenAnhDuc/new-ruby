@@ -1,11 +1,9 @@
 package fpt.qa;
 
-import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.service.LogService;
 import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.business.service.TVProgramService;
-
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.crawler.CrawlerMyTV;
 import fpt.qa.crawler.CrawlerVTVCab;
@@ -78,7 +76,8 @@ public class AutoCrawler {
 
 	public static void main(String[] args) {
 //		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+		//String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+		String dir = "C:\\Users\\quang\\workspace\\new\\new-ruby\\ruby-web\\src\\main\\resources/";
 		NameMapperService nameMapperService = new NameMapperService();
 		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nameMapperService);
 

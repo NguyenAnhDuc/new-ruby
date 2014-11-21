@@ -11,6 +11,11 @@ import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import fpt.qa.mdnlib.util.string.StrUtil;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
+import fpt.qa.vnTime.vntime.VnTimeParser;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +26,6 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
     public static final String DEF_ANS_CHANNEL = "Nếu tôi không nhầm thì không có kênh nào cả";
     public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
     //public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
-
 
     public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
     private final int limitSizeAnswer = 10;
@@ -349,17 +353,17 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         return progs.get(0).getEnd_date().toString();
     }
 
-	
+
 	/*public void studyFile(String fileIn, String fileOut){
 		try{
 			BufferedReader reader = new BufferedReader( new FileReader( fileIn ) );
 			BufferedWriter writer = new BufferedWriter( new FileWriter( fileOut ) );
-			
+
 			String line;
 			while ((line = reader.readLine()) != null){
 				writer.write( getAnswer( line  ) + "\n");
 			}
-			
+
 			writer.close();
 			reader.close();
 		}catch ( IOException e ){
@@ -367,7 +371,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main (String[] args){
 		TVAnswerMapperImpl tam = new TVAnswerMapperImpl();
 		tam.init();

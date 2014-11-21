@@ -1,5 +1,6 @@
 package fpt.qa.rubyweb;
 
+import com.fpt.ruby.business.helper.DisplayAnswerHelper;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.Log;
 import com.fpt.ruby.business.model.QueryParamater;
@@ -184,6 +185,21 @@ public class AppController {
             return "success";
         } catch (Exception ex) {
             return "error";
+        }
+    }
+
+    @RequestMapping(value = "/searchWeb", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public RubyAnswer confirmWebSearch(@RequestParam("question") String question){
+        RubyAnswer rubyAnswer = new RubyAnswer();
+        rubyAnswer.setQuestion(question.trim());
+        try{
+            rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+            return rubyAnswer;
+        }
+        catch (Exception ex){
+            rubyAnswer.setAnswer("Some thing went wrong! Please try again!");
+            return rubyAnswer;
         }
     }
 

@@ -2,6 +2,8 @@ package fpt.qa.answerEngine;
 
 import com.fpt.ruby.model.RubyAnswer;
 
+import java.util.Date;
+
 public class AnswerFinder implements ThreadCompleteListener {
     final static int NUM_WORKER = 3;
     final static String UDF = "#^#";
@@ -74,8 +76,8 @@ public class AnswerFinder implements ThreadCompleteListener {
             if (thread instanceof WebSearchAnswerEngine) {
                 System.out.println("ans from web: " + answer.getAnswer());
                 workerAnswers[2] = answer;
-            }
 
+            }
             checkInterrupt();
         }
     }
@@ -85,7 +87,10 @@ public class AnswerFinder implements ThreadCompleteListener {
             if (workerAnswers[i] == null) return false;
             if (!workerAnswers[i].getAnswer().equals(UDF)) {
                 this.answer = workerAnswers[i];
-                group.interrupt();
+                System.out.println(i + " threads interrupt other! " + (new Date()).getTime());
+                group.stop();
+//                group.interrupt();
+//                group.destroy();
                 return true;
             }
         }

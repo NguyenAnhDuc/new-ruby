@@ -155,9 +155,10 @@ public class ProcessHelper {
 						.getMovieTicket(question);
 
 				if (timeExtract.getBeforeDate() == null) {
-					queryParamater.setBeginTime(timeExtract.getBeforeDate());
-					rubyAnswer.setBeginTime(NlpHelper.getTimeCondition(
-							"hôm nay").getBeforeDate());
+					Date defaultDate = NlpHelper.getTimeCondition(
+							"hôm nay").getBeforeDate();
+					queryParamater.setBeginTime(defaultDate);
+					rubyAnswer.setBeginTime(defaultDate);
 				}
 				if (timeExtract.getAfterDate() != null) {
 					queryParamater.setBeginTime(timeExtract.getBeforeDate());
@@ -199,9 +200,10 @@ public class ProcessHelper {
 				}
 
 				if (rubyAnswer.getBeginTime() == null) {
-					queryParamater.setBeginTime(timeExtract.getAfterDate());
-					rubyAnswer.setBeginTime(NlpHelper.getTimeCondition(
-							"hôm nay").getBeforeDate());
+					Date defaultDate = NlpHelper.getTimeCondition(
+							"hôm nay").getBeforeDate();
+					queryParamater.setBeginTime(defaultDate);
+					rubyAnswer.setBeginTime(defaultDate);
 				}
 				// list movie tickets for the duration of one day
 				List<MovieTicket> movieTickets = movieTicketService

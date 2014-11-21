@@ -24,12 +24,11 @@ public class AnswerFinder implements ThreadCompleteListener {
 
     public RubyAnswer getAnswer(String question) {
         System.out.println("[QUESTION] " + question);
-
         threads[0] = new AIMLAnswerEngine(group, "aiml");
         threads[1] = new NLPAnswerEngine(group, "nlp");
         threads[2] = new WebSearchAnswerEngine(group, "web");
 
-        for (AnswerEngine t: threads) {
+        for (AnswerEngine t : threads) {
             t.addListener(this);
             t.setQuestion(question);
         }
@@ -41,14 +40,16 @@ public class AnswerFinder implements ThreadCompleteListener {
             threads[i].start();
         }
 
-        for (Thread t: threads) {
+        for (Thread t : threads) {
             try {
                 t.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
+        if (answer == null) { //
+            answer.setAnswer("Hmm. Something wrong!");
+        }
         return answer;
     }
 

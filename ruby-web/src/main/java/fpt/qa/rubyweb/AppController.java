@@ -132,7 +132,7 @@ public class AppController {
 
         RubyAnswer ans = god.getAnswer(question);
         long pivot2 = (new Date()).getTime();
-        TrackingThread ti = new TrackingThread(ans, userID, inputType, question);
+        TrackingThread ti = new TrackingThread(question, ans, userID, inputType, request.getHeader("User-Agent"));
         ti.start();
 
         System.out.println("[Q -> A]: " + (pivot2 - pivot1) / 1000.0 + " seconds");
@@ -194,10 +194,10 @@ public class AppController {
     }
 
     private class TrackingThread extends Thread {
-        String userID, inputType, question;
+        String userID, inputType, question, userAgent;
         RubyAnswer ans;
 
-        public TrackingThread(RubyAnswer ans,  String userID, String inputType, String question) {
+        public TrackingThread(String question, RubyAnswer ans,  String userID, String inputType, String userAgent) {
             this.ans = ans;
             this.userID = userID;
             this.inputType = inputType;
@@ -207,7 +207,7 @@ public class AppController {
         public void run() {
             Log log = new Log();
             log.setInputType(inputType);
-            log.setUserAgent(request.getHeader("User-Agent"));
+            log.setUserAgent(userAgent);
             log.setQuestion(question);
             log.setDate(new Date());
 

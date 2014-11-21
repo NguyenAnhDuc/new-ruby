@@ -68,6 +68,6 @@ public class NLPAnswerEngine extends AnswerEngine {
         }
         ans.setDomain(domain);
         setAnswer(ans);
-        System.err.println("AIML Answer Time: " + (System.currentTimeMillis() - start));
+        System.err.println("Nlp Answer Time: " + (System.currentTimeMillis() - start));
     }
 }

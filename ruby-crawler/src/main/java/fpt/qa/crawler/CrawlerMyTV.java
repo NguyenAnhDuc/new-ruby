@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class CrawlerMyTV {
@@ -32,7 +33,7 @@ public class CrawlerMyTV {
             "HTV7", "HTV9", "HTV1", "HTV1", "DISNEY", "CARTOON", "VITV", "O2 TV", "DISCOVERY", "ANTV", "VTVCAB1",
             "VTVCAB2", "STAR WORLD HD", "VOV", "K+1", "K+NS", "NATIONAL GEOGRAPHIC"}));
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
-    private static long FUTUREDAY_CRAWL = 7;
+    private static long FUTUREDAY_CRAWL = 3;
 
     public static String sendGet(String url) throws Exception {
         HttpClient client = HttpClientBuilder.create().build();
@@ -45,7 +46,7 @@ public class CrawlerMyTV {
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
         StringBuffer result = new StringBuffer();
-        String line = "";
+        String line;
         while ((line = rd.readLine()) != null) {
             result.append(line);
         }
@@ -55,7 +56,6 @@ public class CrawlerMyTV {
     public List<Channel> getChanel(ConjunctionHelper conjunctionHelper) throws Exception {
         List<Channel> channels = new ArrayList<Channel>();
         Document doc = Jsoup.parse(CrawlerHelper.getResponse("http://www.mytv.com.vn/lich-phat-song", "", "GET"));
-//        Document doc = Jsoup.parse(sendGet("http://www.mytv.com.vn/lich-phat-song"));
         System.out.println(doc.toString());
         Element chanel = doc.getElementById("channelId");
 
@@ -89,7 +89,7 @@ public class CrawlerMyTV {
                         String date = df.format(new Date(today.getTime() + ONE_DAY * i));
                         List<TVProgram> tvPrograms = crawlChannel(channel, date);
 
-                        tvPrograms = calculateEndTime(tvPrograms);
+                        tvPrograms = CrawlerHelper.calculateEndTime(tvPrograms);
                         tvPrograms.forEach(tvs::save);
                     }
                 } catch (Exception ex) {
@@ -117,10 +117,8 @@ public class CrawlerMyTV {
                         String date = df.format(new Date(today.getTime() + ONE_DAY * i));
                         List<TVProgram> tvPrograms = crawlChannel(channel, date);
 
-                        tvPrograms = calculateEndTime(tvPrograms);
-                        for (TVProgram tvProgram : tvPrograms) {
-                            tvProgramService.save(tvProgram);
-                        }
+                        tvPrograms = CrawlerHelper.calculateEndTime(tvPrograms);
+                        tvPrograms.forEach(tvProgramService::save);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -134,17 +132,6 @@ public class CrawlerMyTV {
 
     public void doCrawl(TVProgramService tvProgramService) throws Exception {
         doCrawl("", tvProgramService);
-    }
-
-    public List<TVProgram> calculateEndTime(List<TVProgram> tvPrograms) {
-        List<TVProgram> results = new ArrayList<TVProgram>();
-        for (int i = 0; i < tvPrograms.size() - 1; i++) {
-            TVProgram tvProgram = new TVProgram();
-            tvProgram = tvPrograms.get(i);
-            tvProgram.setEnd_date(tvPrograms.get(i + 1).getStart_date());
-            results.add(tvProgram);
-        }
-        return results;
     }
 
     public List<TVProgram> crawlChannel(Channel channel, String date) {
@@ -178,10 +165,7 @@ public class CrawlerMyTV {
                 tvProgram.setTitle(StringEscapeUtils.unescapeJava(programName));
                 tvProgram.setStart_date(channelDate);
                 List<ProgramType> types = TypeMapper.getType(channel.getName(), tvProgram.getTitle());
-                List<String> typesStr = new ArrayList<String>();
-                for (ProgramType t : types) {
-                    typesStr.add(t.toString());
-                }
+                List<String> typesStr = types.stream().map(ProgramType::toString).collect(Collectors.toList());
 
                 if (typesStr.size() > 0) {
                     tvProgram.setType(String.join(",", typesStr));

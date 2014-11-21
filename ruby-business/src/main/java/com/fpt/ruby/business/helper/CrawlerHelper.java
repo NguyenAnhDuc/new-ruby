@@ -10,10 +10,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class CrawlerHelper {
 	private static List<String> ALLOWED_REQ_TYPE = new ArrayList<String>(Arrays.asList("GET", "POST"));
+	private final static long ONE_DAY = 24 * 60 * 60 * 1000;
 
 	public static String getResponse(String url, String urlParameters, String requestType) throws Exception {
 
@@ -51,11 +53,18 @@ public class CrawlerHelper {
 	public static List<TVProgram> calculateEndTime(List<TVProgram> tvPrograms) {
 		List<TVProgram> results = new ArrayList<TVProgram>();
 		for (int i = 0; i < tvPrograms.size() - 1; i++) {
-			TVProgram tvProgram = new TVProgram();
-			tvProgram = tvPrograms.get(i);
+			TVProgram tvProgram = tvPrograms.get(i);
 			tvProgram.setEnd_date(tvPrograms.get(i + 1).getStart_date());
 			results.add(tvProgram);
 		}
+
+		TVProgram lastProg = tvPrograms.get(tvPrograms.size() - 1);
+		Date end = (Date) lastProg.getStart_date().clone();
+		end.setHours(0); end.setMinutes(0); end.setSeconds(0);
+		end = new Date(end.getTime() + ONE_DAY - 1);
+		lastProg.setEnd_date(end);
+		results.add(lastProg);
+
 		return results;
 	}
 

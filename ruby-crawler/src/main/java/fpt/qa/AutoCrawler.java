@@ -76,8 +76,8 @@ public class AutoCrawler {
 
 	public static void main(String[] args) {
 //		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-		//String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
-		String dir = "C:\\Users\\quang\\workspace\\new\\new-ruby\\ruby-web\\src\\main\\resources/";
+		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+//		String dir = "C:\\Users\\quang\\workspace\\new\\new-ruby\\ruby-web\\src\\main\\resources/";
 		NameMapperService nameMapperService = new NameMapperService();
 		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nameMapperService);
 

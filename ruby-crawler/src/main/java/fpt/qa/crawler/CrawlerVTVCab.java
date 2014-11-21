@@ -11,8 +11,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fpt.ruby.business.constants.ProgramType;
+import com.fpt.ruby.business.helper.CrawlerHelper;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.Channel;
 import com.fpt.ruby.business.model.TVProgram;
@@ -45,7 +47,7 @@ public class CrawlerVTVCab {
 					"DISCOVERY WORLD", "STARMOVIE"}));
 
 	private final static long ONE_DAY = 24 * 60 * 60 * 1000;
-	private final static long FUTUREDAY_CRAWL = 7;
+	private final static long FUTUREDAY_CRAWL = 3;
 	private final static String ROOT_URL = "http://www.vtvcab.vn/lich-phat-song";
 
 	public static String getResponse(String url, String requestType)
@@ -96,7 +98,7 @@ public class CrawlerVTVCab {
 				.getEntity().getContent()));
 
 		StringBuffer result = new StringBuffer();
-		String line = "";
+		String line;
 		while ((line = br.readLine()) != null) {
 			result.append(line);
 		}
@@ -118,24 +120,10 @@ public class CrawlerVTVCab {
 		return dir;
 	}
 
-	private static List<TVProgram> calculateEndTime(List<TVProgram> tvPrograms) {
-		// TODO: should write comparator for TVProgram
-
-		List<TVProgram> results = new ArrayList<TVProgram>();
-		for (int i = 0; i < tvPrograms.size() - 1; i++) {
-			TVProgram tvProgram = new TVProgram();
-			tvProgram = tvPrograms.get(i);
-			tvProgram.setEnd_date(tvPrograms.get(i + 1).getStart_date());
-			results.add(tvProgram);
-		}
-		return results;
-	}
-
-	@SuppressWarnings("deprecation")
 	public List<TVProgram> getPrograms(Channel channel, Date date)
 			throws Exception {
 		List<TVProgram> progs = new ArrayList<TVProgram>();
-		TypeMapper tm = new TypeMapper();
+//		TypeMapper tm = new TypeMapper();
 		String url = makeUrl(channel, date);
 		System.out.println(url);
 		Document doc = Jsoup.parse(getResponse(url, "get"));
@@ -167,11 +155,7 @@ public class CrawlerVTVCab {
 			prog.setDescription(info.get(2).text());
 
 			List<ProgramType> types = TypeMapper.getType(prog.getChannel(), prog.getTitle(), prog.getDescription());
-			List<String> typesStr = new ArrayList<String>();
-			for (ProgramType t: types) {
-				typesStr.add(t.toString());
-			}
-			//prog.setTypes(typesStr);
+			List<String> typesStr = types.stream().map(ProgramType::toString).collect(Collectors.toList());
 			if (typesStr.size() > 0) {
 				prog.setType(String.join(",", typesStr));
 			} else {
@@ -231,7 +215,7 @@ public class CrawlerVTVCab {
 					for (int i =  0; i <= FUTUREDAY_CRAWL; ++i) {
 						Date crawlDate = new Date(today.getTime() + ONE_DAY * i);
 						List<TVProgram> progs = getPrograms(channel, crawlDate);
-						progs = calculateEndTime(progs);
+						progs = CrawlerHelper.calculateEndTime(progs);
 
 						for (TVProgram prog : progs) {
 							tvProgramService.save(prog);

@@ -4,11 +4,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fpt.ruby.business.helper.RedisHelper;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -23,6 +27,11 @@ import fpt.qa.vnTime.utils.RangeParser;
 
 public class VnTimeParser {
 	StanfordCoreNLP coreNLP;
+	String temporal = " hôm nay ";
+
+	public String getTemporal() {
+		return temporal;
+	}
 
 	public VnTimeParser() {
 		Properties props = new Properties();
@@ -50,7 +59,8 @@ public class VnTimeParser {
 		String tmp = modelDir + "//defs.sutime.txt," + modelDir
 				+ "//vn.sutime.txt," + modelDir
 				+ "//vietnamese.holidays.sutime.txt," + modelDir
-				+ "//vn.sutime.removeAccent.txt";
+				+ "//vn.sutime.removeAccent.txt," + modelDir
+				+ "//vietnamese.holidays.sutime.removeAccent.txt";
 		props.setProperty("sutime.rules", tmp);
 		this.coreNLP = new StanfordCoreNLP(props);
 	}
@@ -140,6 +150,10 @@ public class VnTimeParser {
 	public List<TimeRange> parser3(String textInput, String referenceDate)
 			throws ParseException {
 
+		if (checkSpe(textInput)) {
+			return parser3("ngày mai", referenceDate);
+		}
+
 		Annotation annotation = new Annotation(textInput);
 		annotation.set(CoreAnnotations.DocDateAnnotation.class, referenceDate);
 		this.coreNLP.annotate(annotation);
@@ -148,11 +162,11 @@ public class VnTimeParser {
 		List<CoreMap> timexAnnsAll = (List<CoreMap>) annotation
 				.get(TimeAnnotations.TimexAnnotations.class);
 		Integer id = Integer.valueOf(1);
-		
-		
-//		if (timexAnnsAll.isEmpty()) {
-//			return parser3("hôm nay", referenceDate);
-//		}
+
+		// if (timexAnnsAll.isEmpty()) {
+		// return parser3("hôm nay", referenceDate);
+		// }
+
 		for (CoreMap cm : timexAnnsAll) {
 			Integer tmp98_96 = id;
 			String range = "";
@@ -162,13 +176,13 @@ public class VnTimeParser {
 				continue;
 			}
 			// System.out.println("cm.toString: " + cmString);
-
 			if (cmString.equals("giờ") || cmString.equals("chiều")) {
 				continue;
 			}
 			if (cmString.endsWith("giờ") || cmString.endsWith("phút")
 					|| cmString.endsWith("trưa") || cmString.endsWith("chiều")
 					|| cmString.endsWith("tối")) {
+				temporal = "Hôm nay";
 				return parser3(
 						textInput.replace(cmString, cmString + " hôm nay"),
 						referenceDate);
@@ -239,6 +253,81 @@ public class VnTimeParser {
 
 			rangeList.add(timeRange);
 		}
+		if (!timexAnnsAll.isEmpty() || !rangeList.isEmpty()) {
+			temporal = timexAnnsAll.get(0).toString();
+		}
+
 		return rangeList;
+	}
+
+	public static String getTimeRange(String question) {
+		VnTimeParser timeParser = new VnTimeParser((new RedisHelper())
+				.getClass().getClassLoader().getResource("").getPath()
+				+ "vnsutime/");
+		if (question.contains("đang") || question.contains("dang")
+				|| question.contains("bây giờ") || question.contains("bay gio")
+				|| question.contains("lúc này") || question.contains("luc nay")
+				|| question.contains("hiện tại")
+				|| question.contains("hien tai")) {
+			return " này";
+		}
+		try {
+
+			timeParser.parser3(question, new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm").format(new Date()));
+			System.out.println();
+			return timeParser.getTemporal();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			return " hôm nay ";
+		}
+
+		// try {
+		// TimeRange range = new VnTimeParser((new RedisHelper()).getClass()
+		// .getClassLoader().getResource("").getPath()).parser3(
+		// question, IConstants.CURRENT_DATE).get(0);
+		// if (range == null) {
+		// return "";
+		// } else {
+		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm:ss a");
+		// String fDate = sdf.format(range.getfDate()).toString();
+		// String sDate = sdf.format(range.getsDate()).toString();
+		// if (range.getfDate().equals(range.getsDate())) {
+		// return "Lúc " + fDate + " ";
+		// } else {
+		// return "Từ "+ fDate + " đến "+sDate +" " ;
+		// }
+		//
+		// }
+		// } catch (ParseException e) {
+		// // TODO Auto-generated catch block
+		// // e.printStackTrace();
+		// return "";
+		// }
+	}
+
+	private boolean checkSpe(String textInput) {
+		String[] tokens = textInput.split(" ");
+		String temp = " sáng sang ngay chieu toi ngày mai mãi chiều tối sau ban";
+		int index = -1;
+		for (int i = 0; i < tokens.length; ++i) {
+			if (tokens[i].equalsIgnoreCase("mai")) {
+				index = i;
+				break;
+			}
+		}
+		if (index != -1) {
+			if ((index - 1 >= 0 && temp.contains(tokens[index - 1])) || ( index + 1 < tokens.length && temp.contains(tokens[index + 1]))) {
+				return false ;
+			}
+			if (index - 1 >= 0 && !temp.contains(tokens[index - 1])) {
+				return true;
+			}
+			if (index + 1 < tokens.length && !temp.contains(tokens[index + 1])) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 }

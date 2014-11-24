@@ -31,7 +31,6 @@ public class ConjType extends ConjunctionChecker{
 
 		nameMapperEngine = new NameMapperEngine( resourcePath );
 		nameMapperEngine.loadDomainMapper( "type", "type.txt" );
-		System.err.println("Loading type..." + resourcePath);
 		surroundingWords = new SurroundingWords( resourcePath );
 
 		loadConjunctionFromNameMapper( nameMapperEngine );

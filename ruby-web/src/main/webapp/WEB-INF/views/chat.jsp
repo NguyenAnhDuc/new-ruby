@@ -57,7 +57,7 @@
 			$
 					.ajax({
 						type : "POST",
-						url : "/rubyweb/searchWeb",
+						url : "searchWeb",
 						contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 						data : "question=" + encodeURIComponent(question) ,
 						success : function(result) {
@@ -96,7 +96,7 @@
 			$
 					.ajax({
 						type : "POST",
-						url : "/rubyweb/getAnswer",
+						url : "getAnswer",
 						contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 						data : "question=" + encodeURIComponent(question) + "&confirmWebSearch=" + encodeURIComponent("yes"),
 						success : function(result) {

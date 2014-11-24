@@ -1,7 +1,7 @@
 package com.fpt.ruby.business.constants;
 
 public enum ProgramType {
-	FILM, CARTOON, SPORT, FOOTBALL, TENNIS, ENTERTAINMENT, MUSIC, GAMESHOW, NEWS, FASHION, STYLE, REPORT, OTHER, DISCOVERY, SCIENCE, GOLF, ProgramType;
+	FILM, CARTOON, SPORT, FOOTBALL, TENNIS, ENTERTAINMENT, MUSIC, GAMESHOW, NEWS, FASHION, STYLE, REPORT, OTHER, DISCOVERY, SCIENCE, GOLF, RACING;
 
 	public static ProgramType getType(String typeName) {
 		typeName = typeName.toLowerCase().trim();

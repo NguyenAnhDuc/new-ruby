@@ -272,6 +272,7 @@
   { (/[C]n/) => SUNDAY }
 
   { (/[Cc]uối/ /tuần/) => WEEKEND }
+  { (/[Đđ]ầu/ /tuần/ ) => EARLY_WEEK }
   { (/[Cc]uối/ /ngày/) => InexactTime(TimeRange(IsoTime(15,0,0),IsoTime(23,0,0) ))}
   { (/[Đđ]ầu/ /ngày/) => InexactTime(TimeRange(IsoTime(6,0,0),IsoTime(10,0,0) )) }
 #  { (/weekends?/) => WEEKEND }

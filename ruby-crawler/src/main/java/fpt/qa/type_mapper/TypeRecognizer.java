@@ -58,7 +58,7 @@ public class TypeRecognizer {
 		String nCh = TypeMapperUtil.normalize(channel);
 		String nProg = TypeMapperUtil.normalize(prog);
 		for (String c: dedicatedChannels) {
-			if (c.contains(nCh) || nCh.contains(c)) {
+			if (c.equals(nCh)) {
 				return true;
 			}
 		}

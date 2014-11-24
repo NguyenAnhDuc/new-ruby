@@ -15,7 +15,7 @@ public class AutoCrawler {
 	private MovieTicketService movieTicketService;
 	private TVProgramService tvProgramService;
 	private LogService logService;
-
+	private static Integer FUTURE_DAY = 3;
 	// private CinemaService cinemaService;
 
 	private void init() {
@@ -39,7 +39,7 @@ public class AutoCrawler {
 		}
 
 		try {
-			for (int i = 0; i <= 1; ++i) {
+			for (int i = 0; i <= 6; ++i) {
 				movieTicketService.clearDataOnSpecificDay(i);
 				tvProgramService.clearDataOnSpecificDay(i);
 			}
@@ -76,8 +76,8 @@ public class AutoCrawler {
 
 	public static void main(String[] args) {
 //		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-		//String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
-		String dir = "C:\\Users\\quang\\workspace\\new\\new-ruby\\ruby-web\\src\\main\\resources/";
+		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+//		String dir = "C:\\Users\\quang\\workspace\\new\\new-ruby\\ruby-web\\src\\main\\resources/";
 		NameMapperService nameMapperService = new NameMapperService();
 		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nameMapperService);
 

@@ -110,7 +110,7 @@ public class AppController {
             @RequestParam("question") String question,
             @RequestParam(value="userID", defaultValue = "") String appUserID,
             @RequestParam(value="inputType", defaultValue = "text") String inputType,
-            @RequestParam(value="useWebSearch", defaultValue = "yes") String useWebSearch,
+            @RequestParam(value="confirmWebSearch", defaultValue = "no") String confirmWebSearch,
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
 		/*
 		 * UserAgentStringParser parser =
@@ -140,10 +140,10 @@ public class AppController {
             rubyAnswer.setQuestion(question);
             rubyAnswer.setDomain("aiml");
             rubyAnswer.setIntent("aiml");
-            log.setAnswer(rubyAnswer.getAnswer());
             log.setIntent("AIML");
             log.setDomain("AIML");
-            logService.save(log);
+            log.setAnswer(rubyAnswer.getAnswer());
+
         } else {
             long sTime = System.currentTimeMillis();
             String key = NlpHelper.normalizeQuestion(question);
@@ -182,8 +182,22 @@ public class AppController {
 
 
             // If can't answer, take result from Bing Search
-            if (useWebSearch.equals("yes") && rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
-                rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+            if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
+                if (confirmWebSearch.equals("yes")){
+                    String htmlAnswer = "";
+                    // If on the mobile
+					/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+						"<a href=\"searchWeb?question=" + question +  "\">Search on the Web</a>");*/
+
+                    //If on the web
+                    htmlAnswer = String.format("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+                            "<a href=\"#\" class=\"btn\" onclick=\"searchWeb('%s')\"><center>Search on the Web</a></center>",question);
+                    rubyAnswer.setAnswer(htmlAnswer);
+                }
+                else {
+                    rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+                }
+
             }
 
             System.out.println("Total time = "+ (System.currentTimeMillis()-sTime));
@@ -199,7 +213,6 @@ public class AppController {
         queryParamater.setMovieTitle(rubyAnswer.getMovieTitle());
         queryParamater.setMovieTicket(rubyAnswer.getMovieTicket());
         log.setQueryParamater(rubyAnswer.getQueryParamater());
-        logService.save(log);
 
         // Analytic
         Map<String, Object> event = new HashMap<String, Object>();
@@ -209,12 +222,29 @@ public class AppController {
         event.put("intent", rubyAnswer.getIntent());
         event.put("question", rubyAnswer.getQuestion());
         event.put("answer", rubyAnswer.getAnswer());
-        track("userActivity", event);
+
+        TrackingThread t = new TrackingThread(event, log);
+        t.start();
 
         logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
-        rubyAnswer.setAnswer(rubyAnswer.getAnswer() + " ^_^");
+        rubyAnswer.setAnswer(rubyAnswer.getAnswer() + "</br>");
+
         return rubyAnswer;
         // return app.getAnswer(question);
+    }
+
+    public class TrackingThread extends Thread {
+        Map<String, Object> event;
+        Log log;
+        public TrackingThread(Map<String, Object> event, Log log) {
+            this.event = event;
+            this.log = log;
+        }
+
+        public void run() {
+            logService.save(log);
+            track("userActivity", event);
+        }
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -256,6 +286,22 @@ public class AppController {
             return "error";
         }
     }
+
+    @RequestMapping(value = "/searchWeb", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public RubyAnswer confirmWebSearch(@RequestParam("question") String question){
+        RubyAnswer rubyAnswer = new RubyAnswer();
+        rubyAnswer.setQuestion(question.trim());
+        try{
+            rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+            return rubyAnswer;
+        }
+        catch (Exception ex){
+            rubyAnswer.setAnswer("Some thing went wrong! Please try again!");
+            return rubyAnswer;
+        }
+    }
+
 	/*
 	 * @RequestMapping(value="/allCinema", method = RequestMethod.GET, produces
 	 * = "application/json; charset=UTF-8")

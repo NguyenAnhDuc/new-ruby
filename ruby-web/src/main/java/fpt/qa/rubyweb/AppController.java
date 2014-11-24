@@ -227,7 +227,7 @@ public class AppController {
         t.start();
 
         logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
-        rubyAnswer.setAnswer(rubyAnswer.getAnswer() + "</br>");
+        if (rubyAnswer.getAnswer().length() < 50) rubyAnswer.setAnswer(rubyAnswer.getAnswer() + "^_^");
 
         return rubyAnswer;
         // return app.getAnswer(question);

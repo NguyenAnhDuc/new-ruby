@@ -7,7 +7,7 @@ public class ReportTypeRecognizer extends TypeRecognizer {
 		SetType(ProgramType.REPORT);
 
 		String[] dedicatedChannels = new String[] {};
-		String[] typeKeywords = new String[] { "phong su" , "phim tai lieu"};
+		String[] typeKeywords = new String[] { "phong su" , "phim tai lieu", "tap chi"};
 		super.loadConfig(dedicatedChannels, typeKeywords);
 	}
 }

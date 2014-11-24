@@ -74,10 +74,9 @@ public class CrawlerMyTV {
         return channels;
     }
 
-    public void doCrawl(TVProgramService tvs, ConjunctionHelper cjh) throws Exception {
+    public void doCrawl(TVProgramService tvs, ConjunctionHelper cjh, int numdays) throws Exception {
         System.out.println("Crawling from MYTV");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        NameMapperService nameMapperService = new NameMapperService();
         List<Channel> channels = getChanel(cjh);
         Date today = new Date();
 
@@ -85,7 +84,7 @@ public class CrawlerMyTV {
             if (crawlChannels.contains(channel.getName().toUpperCase())) {
                 try {
                     System.out.println("Crawling from " + channel.getName());
-                    for (int i = 0; i <= FUTUREDAY_CRAWL; i++) {
+                    for (int i = 0; i <= numdays; i++) {
                         String date = df.format(new Date(today.getTime() + ONE_DAY * i));
                         List<TVProgram> tvPrograms = crawlChannel(channel, date);
 
@@ -94,45 +93,44 @@ public class CrawlerMyTV {
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    continue;
                 }
             }
         }
     }
 
-    // TODO: check
-    public void doCrawl(String dir, TVProgramService tvProgramService) throws Exception {
-        System.out.println("Crawling from MYTV");
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        NameMapperService nameMapperService = new NameMapperService();
-        ConjunctionHelper conjunctionHelper = (dir.equals("") ? new ConjunctionHelper(nameMapperService) : new ConjunctionHelper(dir, nameMapperService));
-        List<Channel> channels = getChanel(conjunctionHelper);
-        Date today = new Date();
-
-        for (Channel channel : channels) {
-            if (crawlChannels.contains(channel.getName().toUpperCase())) {
-                try {
-                    System.out.println("Crawling from " + channel.getName());
-                    for (int i = 0; i <= FUTUREDAY_CRAWL; i++) {
-                        String date = df.format(new Date(today.getTime() + ONE_DAY * i));
-                        List<TVProgram> tvPrograms = crawlChannel(channel, date);
-
-                        tvPrograms = CrawlerHelper.calculateEndTime(tvPrograms);
-                        tvPrograms.forEach(tvProgramService::save);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    continue;
-                }
-            }
-
-        }
-
-    }
-
-    public void doCrawl(TVProgramService tvProgramService) throws Exception {
-        doCrawl("", tvProgramService);
-    }
+//    // TODO: check
+//    public void doCrawl(String dir, TVProgramService tvProgramService) throws Exception {
+//        System.out.println("Crawling from MYTV");
+//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//        NameMapperService nameMapperService = new NameMapperService();
+//        ConjunctionHelper conjunctionHelper = (dir.equals("") ? new ConjunctionHelper(nameMapperService) : new ConjunctionHelper(dir, nameMapperService));
+//        List<Channel> channels = getChanel(conjunctionHelper);
+//        Date today = new Date();
+//
+//        for (Channel channel : channels) {
+//            if (crawlChannels.contains(channel.getName().toUpperCase())) {
+//                try {
+//                    System.out.println("Crawling from " + channel.getName());
+//                    for (int i = 0; i <= FUTUREDAY_CRAWL; i++) {
+//                        String date = df.format(new Date(today.getTime() + ONE_DAY * i));
+//                        List<TVProgram> tvPrograms = crawlChannel(channel, date);
+//
+//                        tvPrograms = CrawlerHelper.calculateEndTime(tvPrograms);
+//                        tvPrograms.forEach(tvProgramService::save);
+//                    }
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                    continue;
+//                }
+//            }
+//
+//        }
+//
+//    }
+//
+//    public void doCrawl(TVProgramService tvProgramService) throws Exception {
+//        doCrawl("", tvProgramService);
+//    }
 
     public List<TVProgram> crawlChannel(Channel channel, String date) {
         List<TVProgram> tvPrograms = new ArrayList<TVProgram>();
@@ -172,7 +170,7 @@ public class CrawlerMyTV {
                 } else {
                     tvProgram.setType(ProgramType.OTHER.toString());
                 }
-                System.out.println(tvProgram.toString());
+//                System.out.println(tvProgram.toString());
 
                 tvPrograms.add(tvProgram);
             }
@@ -184,9 +182,5 @@ public class CrawlerMyTV {
     }
 
     public static void main(String[] args) throws Exception {
-        TVProgramService tvProgramService = new TVProgramService();
-        CrawlerMyTV crawlerMyTV = new CrawlerMyTV();
-        String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
-        crawlerMyTV.doCrawl(dir, tvProgramService);
     }
 }

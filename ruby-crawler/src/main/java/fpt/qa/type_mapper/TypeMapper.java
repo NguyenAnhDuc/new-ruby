@@ -15,6 +15,7 @@ import java.util.TreeMap;
 
 import com.fpt.ruby.business.constants.ProgramType;
 import com.fpt.ruby.business.helper.RedisHelper;
+import com.fpt.ruby.business.helper.TypeMapperHelper;
 import com.fpt.ruby.business.model.TVProgram;
 import com.fpt.ruby.business.service.TVProgramService;
 
@@ -122,7 +123,7 @@ public class TypeMapper {
 			for (String str : tstr) {
 				types.add(ProgramType.getType(str.toLowerCase()));
 			}
-			tagged.add(new Pair<String, List<ProgramType>>(TypeMapperUtil.getTitle(prog.getTitle()), types));
+			tagged.add(new Pair<String, List<ProgramType>>(TypeMapperHelper.getTitle(prog.getTitle()), types));
 		}
 
 		// get from file
@@ -131,7 +132,7 @@ public class TypeMapper {
 
 			for (String str : e.getValue()) {
 				List<ProgramType> type = new ArrayList<ProgramType>(Arrays.asList(e.getKey()));
-				str = TypeMapperUtil.getTitle(str);
+				str = TypeMapperHelper.getTitle(str);
 				Pair<String, List<ProgramType>> t = new Pair<String, List<ProgramType>>(str, type);
 				// System.out.println("add " + str + " " + type.get(0));
 				tagged.add(t);
@@ -158,7 +159,7 @@ public class TypeMapper {
 				Set<String> s = new HashSet<String>();
 				String[] progs = part[1].split(",");
 				for (String prog : progs) {
-					prog = TypeMapperUtil.normalize(prog);
+					prog = TypeMapperHelper.normalize(prog);
 					s.add(prog);
 				}
 				typeMapper.put(type, s);
@@ -189,10 +190,9 @@ public class TypeMapper {
 	}
 	
 	public static List<ProgramType> getType(String channel, String program) {
-		System.out.println("Get type for: " + channel + " " + program);
-		
-		channel = TypeMapperUtil.normalize(channel);
-		program = TypeMapperUtil.normalize(program);
+//		System.out.println("Get type for: " + channel + " " + program);
+		channel = TypeMapperHelper.normalize(channel);
+		program = TypeMapperHelper.normalize(program);
 
 		Set<ProgramType> rs = new HashSet<ProgramType>();
 		
@@ -204,7 +204,7 @@ public class TypeMapper {
 			if (typeMapper.containsKey(type)) {
 				Set<String> progs = typeMapper.get(type);
 				for (String prog : progs) {
-					if (TypeMapperUtil.contains(prog, program)) {
+					if (TypeMapperHelper.contains(prog, program)) {
 						isOK = true;
 						break;
 					}
@@ -226,10 +226,10 @@ public class TypeMapper {
 			// query from tagged.
 			int totalProg = tagged.size();
 			System.out.println(totalProg);
-			program = TypeMapperUtil.getTitle(program);
+			program = TypeMapperHelper.getTitle(program);
 			for (int i = 0; i < totalProg; ++i) {
 				Pair<String, List<ProgramType>> progWithType = tagged.get(i);
-				if (TypeMapperUtil.isSame2(progWithType.first, program)) {
+				if (TypeMapperHelper.isSame(progWithType.first, program)) {
 					rs.addAll(progWithType.second);
 				}
 			}
@@ -271,7 +271,7 @@ public class TypeMapper {
 		System.out.println("NEW CODE2");
 		TypeRecognizer f = new FootballTypeRecognizer();
 		String chn = "vtvcab1";
-		String prog = "bánh đúc có xương (tập 19/20)";
+		String prog = "muon mau the thao";
 		System.out.println(f.contains(chn, prog));
 //	FootballTypeRecognizer
 		System.out.println("RESULTX: " + TypeMapper.getType(chn, prog));

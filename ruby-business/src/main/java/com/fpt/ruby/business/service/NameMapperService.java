@@ -123,8 +123,8 @@ public class NameMapperService {
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));
-		variants.add(mt.getAnotherName());
-		variants.add(TypeMapperHelper.normalize(mt.getAnotherName()));
+		variants.add(mt.getAlias());
+		variants.add(TypeMapperHelper.normalize(mt.getAlias()));
 
 		n.setVariant(variants);
 

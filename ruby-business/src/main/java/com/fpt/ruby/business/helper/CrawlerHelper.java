@@ -51,6 +51,8 @@ public class CrawlerHelper {
 	}
 
 	public static List<TVProgram> calculateEndTime(List<TVProgram> tvPrograms) {
+		if (tvPrograms == null || tvPrograms.size() == 0) return tvPrograms;
+
 		List<TVProgram> results = new ArrayList<TVProgram>();
 		for (int i = 0; i < tvPrograms.size() - 1; i++) {
 			TVProgram tvProgram = tvPrograms.get(i);

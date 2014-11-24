@@ -38,7 +38,6 @@ public class MovieAnswerMapperImpl implements MovieAnswerMapper {
 			
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

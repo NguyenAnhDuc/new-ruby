@@ -139,6 +139,13 @@ public class AppController {
         return ans;
     }
 
+    @RequestMapping(value = "/updateNameMapper", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public boolean updateNameMapper() {
+        return true;
+    }
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model,
                        @CookieValue(value = "userID", defaultValue = "") String userID,

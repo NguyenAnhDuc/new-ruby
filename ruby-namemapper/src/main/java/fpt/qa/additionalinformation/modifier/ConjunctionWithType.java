@@ -46,13 +46,10 @@ public class ConjunctionWithType extends ConjunctionChecker{
 	}*/
 	
 	public ConjunctionWithType( String resourcePath, NameMapperService nameMapperService ) {
-		conjunctionType = new HashMap< String, HashSet< String > >();
+		conjunctionType = new HashMap<>();
 
 		nameMapperEngine = new NameMapperEngine( resourcePath );
 		
-		//nameMapperEngine.loadDomainMapper( "movie", "movieNames.txt" );
-		//nameMapperEngine.loadDomainMapper( "food", "foodNames.txt" );
-		//nameMapperEngine.loadDomainMapper( "tv", "tv_domain.txt" );
 		nameMapperEngine.loadDomainMapper(nameMapperService, "tv");
 		nameMapperEngine.loadDomainMapper(nameMapperService, "movie");
 		nameMapperEngine.loadDomainMapper( "type", "type.txt" );
@@ -60,9 +57,13 @@ public class ConjunctionWithType extends ConjunctionChecker{
 
 		loadConjunctionFromNameMapper( nameMapperEngine );
 
-
 		VnTokenizer.loadSpecialChars( resourcePath + "/dicts/specialchars/special-chars.xml" );
 		VnTokenizer.loadRegexXMLFile( resourcePath + "/regexes/regular-expressions.xml" );
+	}
+
+	public void reload(NameMapperService nms) {
+		nameMapperEngine.loadDomainMapper(nms, "tv");
+		nameMapperEngine.loadDomainMapper(nms, "movie");
 	}
 
 	public void loadConjunctionType( File file ) {

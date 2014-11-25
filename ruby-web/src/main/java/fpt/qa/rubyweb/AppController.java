@@ -75,7 +75,8 @@ public class AppController {
     private String KEEN_READ_KEY;
 
     AnswerFinder god;
-
+    AIMLInfoWrapper aimlInfo;
+    NLPInfoWrapper nlpInfo;
     @PostConstruct
     public void init() {
         tam = new TVAnswerMapperImpl();
@@ -96,8 +97,8 @@ public class AppController {
                 KEEN_WRITE_KEY, KEEN_READ_KEY);
         keenClient.setDefaultProject(keenProject);
 
-        AIMLInfoWrapper aimlInfo = new AIMLInfoWrapper(botId, token);
-        NLPInfoWrapper nlpInfo = new NLPInfoWrapper();
+        aimlInfo = new AIMLInfoWrapper(botId, token);
+        nlpInfo = new NLPInfoWrapper();
         nlpInfo.setCins(cinemaService);
         nlpInfo.setClassifier(classifier);
         nlpInfo.setDia(conjunctionHelperWithDiacritic);
@@ -106,8 +107,6 @@ public class AppController {
         nlpInfo.setMts(movieTicketService);
         nlpInfo.setTvans(tam);
         nlpInfo.setLog(logService);
-
-        god = new AnswerFinder(aimlInfo, nlpInfo);
         System.err.println("CONTRUCT DONE!!!");
     }
 
@@ -122,7 +121,7 @@ public class AppController {
             @RequestParam(value = "userID", defaultValue = "") String appUserID,
             @RequestParam(value = "inputType", defaultValue = "text") String inputType,
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
-
+        god = new AnswerFinder(aimlInfo, nlpInfo);
         // Log
         long pivot1 = (new Date()).getTime();
 

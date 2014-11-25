@@ -24,16 +24,16 @@ import fpt.qa.mdnlib.struct.pair.Pair;
 public class TypeMapper {
 	static List<TypeRecognizer> types;
 	private static Map<ProgramType, Set<String>> typeMapper;
-	private static List<Pair<String, List<ProgramType>>> tagged;
+	private static List<Pair<String, List<ProgramType>>> tagged = new ArrayList<>();
 	private static Map<ProgramType, ProgramType> rootType;
 	private static TVProgramService tvs;
-
+	private static Boolean useTagged = false;
 	private static String PATH = File.separator + "type_mapper" + File.separator + "type_mapper.txt";
 	private static long ONE_WEEK = 7 * 24 * 60 * 60;
 
 	static {
 		tvs = new TVProgramService();
-		types = new ArrayList<TypeRecognizer>();
+		types = new ArrayList<>();
 		types.add(new FilmTypeRecognizer());
 		types.add(new GameShowTypeRecognizer());
 		types.add(new MusicTypeRecognizer());
@@ -41,8 +41,8 @@ public class TypeMapper {
 		types.add(new CartoonTypeRecognizer());
 		types.add(new NewsTypeRecognizer());
 		types.add(new FootballTypeRecognizer());
-		types.add(new TenisTypeRecognizer());
 		types.add(new EntertainmentTypeRecognizer());
+		types.add(new TenisTypeRecognizer());
 		types.add(new FashionTypeRecognizer());
 		types.add(new ReportTypeRecognizer());
 		types.add(new DiscoveryTypeRecognizer());
@@ -64,7 +64,7 @@ public class TypeMapper {
 			ex.printStackTrace();
 			loadData("./classes" + PATH);
 		}
-
+		if (useTagged)
 		retrieveTaggedProgram();
 	}
 
@@ -72,7 +72,7 @@ public class TypeMapper {
 	}
 
 	private static void setRootType() {
-		rootType = new TreeMap<ProgramType, ProgramType>();
+		rootType = new TreeMap<>();
 		
 		rootType.put(ProgramType.FOOTBALL, ProgramType.SPORT);
 		rootType.put(ProgramType.TENNIS, ProgramType.SPORT);
@@ -100,12 +100,13 @@ public class TypeMapper {
 			loadData("./classes" + PATH);
 
 		}
-		retrieveTaggedProgram();
+		if (useTagged)
+			retrieveTaggedProgram();
 	}
 
 	private static void retrieveTaggedProgram() {
 		System.out.println("Retrieve tagged program");
-		tagged = new ArrayList<Pair<String, List<ProgramType>>>();
+		tagged = new ArrayList<>();
 		// get from db
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR, 0); cal.set(Calendar.MINUTE, 0); cal.set(Calendar.SECOND, 0);
@@ -119,11 +120,11 @@ public class TypeMapper {
 			if (prog.getTitle().trim().isEmpty())
 				continue;
 			String[] tstr = prog.getType().split(",");
-			List<ProgramType> types = new ArrayList<ProgramType>();
+			List<ProgramType> types = new ArrayList<>();
 			for (String str : tstr) {
 				types.add(ProgramType.getType(str.toLowerCase()));
 			}
-			tagged.add(new Pair<String, List<ProgramType>>(TypeMapperHelper.getTitle(prog.getTitle()), types));
+			tagged.add(new Pair<>(TypeMapperHelper.getTitle(prog.getTitle()), types));
 		}
 
 		// get from file
@@ -131,9 +132,9 @@ public class TypeMapper {
 		for (Map.Entry<ProgramType, Set<String>> e : typeMapper.entrySet()) {
 
 			for (String str : e.getValue()) {
-				List<ProgramType> type = new ArrayList<ProgramType>(Arrays.asList(e.getKey()));
+				List<ProgramType> type = new ArrayList<>(Arrays.asList(e.getKey()));
 				str = TypeMapperHelper.getTitle(str);
-				Pair<String, List<ProgramType>> t = new Pair<String, List<ProgramType>>(str, type);
+				Pair<String, List<ProgramType>> t = new Pair<>(str, type);
 				// System.out.println("add " + str + " " + type.get(0));
 				tagged.add(t);
 			}
@@ -145,7 +146,7 @@ public class TypeMapper {
 		try {
 			System.out.println("Load data: " + fileName);
 			BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
-			typeMapper = new TreeMap<ProgramType, Set<String>>();
+			typeMapper = new TreeMap<>();
 			String line;
 
 			while ((line = br.readLine()) != null) {
@@ -156,7 +157,7 @@ public class TypeMapper {
 					continue;
 
 				ProgramType type = ProgramType.getType(part[0]);
-				Set<String> s = new HashSet<String>();
+				Set<String> s = new HashSet<>();
 				String[] progs = part[1].split(",");
 				for (String prog : progs) {
 					prog = TypeMapperHelper.normalize(prog);
@@ -165,7 +166,6 @@ public class TypeMapper {
 				typeMapper.put(type, s);
 				} catch (Exception ex) {
 					System.out.println(ex.getMessage());
-					continue;
 				}
 			}
 		} catch (Exception ex) {
@@ -194,7 +194,7 @@ public class TypeMapper {
 		channel = TypeMapperHelper.normalize(channel);
 		program = TypeMapperHelper.normalize(program);
 
-		Set<ProgramType> rs = new HashSet<ProgramType>();
+		Set<ProgramType> rs = new HashSet<>();
 		
 		for (TypeRecognizer tc : types) {
 			Boolean isOK = false;
@@ -222,7 +222,7 @@ public class TypeMapper {
 			}
 		}
 
-		if (rs.size() == 0) {
+		if (rs.size() == 0 && tagged.size() > 0) {
 			// query from tagged.
 			int totalProg = tagged.size();
 			System.out.println(totalProg);
@@ -256,7 +256,7 @@ public class TypeMapper {
 		}
 
 		// Add root type
-		ArrayList<ProgramType> allTypes = new ArrayList<ProgramType>();
+		ArrayList<ProgramType> allTypes = new ArrayList<>();
 		for (ProgramType t: rs) {
 			allTypes.add(t);
 			if (rootType.containsKey(t) && !allTypes.contains(t)) {
@@ -271,7 +271,7 @@ public class TypeMapper {
 		System.out.println("NEW CODE2");
 		TypeRecognizer f = new FootballTypeRecognizer();
 		String chn = "vtvcab1";
-		String prog = "muon mau the thao";
+		String prog = "hậu trường showbiz – vn-tập 96";
 		System.out.println(f.contains(chn, prog));
 //	FootballTypeRecognizer
 		System.out.println("RESULTX: " + TypeMapper.getType(chn, prog));

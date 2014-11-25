@@ -44,7 +44,7 @@ public class MovieIntentDetection {
     public static String getIntent(String sent) {
         String tunedSent = getTunedSent(sent);
         System.out.println("Tuned sent: " + tunedSent);
-        if (tunedSent.contains("nước nào") && !tunedSent.contains("tiếng nước nào") || 
+        if (tunedSent.contains("nước nào") && !tunedSent.contains("tiếng nước nào") ||
                 tunedSent.contains("quốc gia nào")) {
             return IntentConstants.MOV_COUNTRY;
         }
@@ -54,7 +54,7 @@ public class MovieIntentDetection {
         }
 
         if (tunedSent.contains("sản xuất năm nào") || tunedSent.contains("sản xuất năm bao nhiêu") ||
-        		tunedSent.contains("sản xuất năm") || tunedSent.contains("năm sản xuất")) {
+                tunedSent.contains("sản xuất năm") || tunedSent.contains("năm sản xuất")) {
             return IntentConstants.MOV_YEAR;
         }
 
@@ -107,7 +107,7 @@ public class MovieIntentDetection {
 
         String[] happenWord = {"mấy giờ", "khi nào", "lúc nào"};
         if (tunedSent.indexOf("DTI\t") == 0) {
-            if (tunedSent.contains("phim") || tunedSent.contains("suất chiếu") || 
+            if (tunedSent.contains("phim") || tunedSent.contains("suất chiếu") ||
                     tunedSent.contains("xuất chiếu")) {
                 return IntentConstants.MOV_DATE;
             }
@@ -142,13 +142,13 @@ public class MovieIntentDetection {
             }
             return IntentConstants.CIN_SERVICETIME;
         }
-        
+
         if (tunedSent.indexOf("HUM\t") == 0){
             if (tunedSent.contains("đạo diễn") || tunedSent.contains("dao dien")){
                 return IntentConstants.MOV_DIRECTOR;
             }
             if (tunedSent.contains("diễn viên") || tunedSent.contains("sao nào") || tunedSent.contains("dàn sao") ||
-            		tunedSent.contains("dien vien") || tunedSent.contains("sao nao") || tunedSent.contains("dan sao")){
+                    tunedSent.contains("dien vien") || tunedSent.contains("sao nao") || tunedSent.contains("dan sao")){
                 return IntentConstants.MOV_ACTOR;
             }
             return IntentConstants.MOV_AUDIENCE;
@@ -158,24 +158,24 @@ public class MovieIntentDetection {
             return IntentConstants.MOV_GENRE;
         }
         if (tunedSent.indexOf("NAM\t") == 0 && (tunedSent.contains("rạp nào") || tunedSent.contains("rạp gì") ||
-        		tunedSent.contains("rap nao") || tunedSent.contains("rap gi"))) {
+                tunedSent.contains("rap nao") || tunedSent.contains("rap gi"))) {
             return IntentConstants.CIN_NAME;
         }
-        
+
         if (tunedSent.indexOf("NAM\t") == 0 && (tunedSent.contains("phim gì") || tunedSent.contains("phim nào") ||
-        		tunedSent.contains("phim nao"))) {
+                tunedSent.contains("phim nao"))) {
             return IntentConstants.MOV_TITLE;
         }
-        
+
         if (tunedSent.indexOf("NAM\t") == 0 && (tunedSent.contains("diễn viên nào") || tunedSent.contains("dien vien nao")
-        		|| tunedSent.contains("dien vien nào"))) {
+                || tunedSent.contains("dien vien nào"))) {
             return IntentConstants.MOV_ACTOR;
         }
-        if (tunedSent.indexOf("NAM\t") == 0 && 
-        		(tunedSent.contains("nào") || tunedSent.contains("nao") || tunedSent.contains("gì") || tunedSent.contains("gi"))) {
+        if (tunedSent.indexOf("NAM\t") == 0 &&
+                (tunedSent.contains("nào") || tunedSent.contains("nao") || tunedSent.contains("gì") || tunedSent.contains("gi"))) {
             int idx = tunedSent.indexOf("nào");
             if (idx < 0){
-            	idx = tunedSent.indexOf("gì");
+                idx = tunedSent.indexOf("gì");
             }
             //System.out.println("tune : " + tunedSent);
             int temp = tunedSent.indexOf("chiếu") > 0 ? tunedSent.indexOf("chiếu") : tunedSent.indexOf("chieu");
@@ -201,11 +201,11 @@ public class MovieIntentDetection {
             int idx1 = tunedSent.indexOf("phim");
             int idx2 = tunedSent.indexOf("rạp");
             if (idx2 < 0){
-            	idx2 = tunedSent.indexOf("rap");
+                idx2 = tunedSent.indexOf("rap");
             }
             if (idx2 > 0 && idx1 < 0) {
-            	if (tunedSent.contains( "rạp" ) && tunedSent.contains("có gì"))
-            		return IntentConstants.MOV_TITLE;
+                if (tunedSent.contains( "rạp" ) && tunedSent.contains("có gì"))
+                    return IntentConstants.MOV_TITLE;
                 return IntentConstants.CIN_NAME;
             }
             int idx3 = tunedSent.indexOf("diễn viên");
@@ -233,7 +233,7 @@ public class MovieIntentDetection {
 
         if (tunedSent.indexOf("DES\t") == 0) {
             if (tunedSent.indexOf("đường đến") == 4 || tunedSent.indexOf("chỉ đường") == 4 ||
-            		tunedSent.indexOf("duong den") == 4 || tunedSent.indexOf("chi duong") == 4) {
+                    tunedSent.indexOf("duong den") == 4 || tunedSent.indexOf("chi duong") == 4) {
                 return IntentConstants.CIN_MAP;
             }
             return IntentConstants.MOV_IMDBRATING;
@@ -243,7 +243,7 @@ public class MovieIntentDetection {
             if (tunedSent.contains("phim") && (tunedSent.contains("2D")||tunedSent.contains("3D") )) {
                 return IntentConstants.MOV_TYPE;
             }
-            
+
             if (tunedSent.contains("phim")) {
                 return IntentConstants.MOV_GENRE;
             }
@@ -257,15 +257,15 @@ public class MovieIntentDetection {
         }
 
         if (tunedSent.indexOf("POL\t") == 0) {
-        	// handle wrong question classification result such as in the sentence:
-        	// rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�?
-        	if (tunedSent.contains("mấy giờ") || tunedSent.contains("may gio")){
-        		return IntentConstants.MOV_DATE;
-        	}
-        	
+            // handle wrong question classification result such as in the sentence:
+            // rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�?
+            if (tunedSent.contains("mấy giờ") || tunedSent.contains("may gio")){
+                return IntentConstants.MOV_DATE;
+            }
+
             if (tunedSent.contains("đặt vé") || tunedSent.contains("còn") ||
-            		tunedSent.contains("dat ve")  || tunedSent.contains("đặt ve")|| tunedSent.contains("con")
-            		|| tunedSent.contains("đat vé") || tunedSent.contains("dat vé")) {
+                    tunedSent.contains("dat ve")  || tunedSent.contains("đặt ve")|| tunedSent.contains("con")
+                    || tunedSent.contains("đat vé") || tunedSent.contains("dat vé")) {
                 return IntentConstants.TICKET_STATUS;
             }
 
@@ -285,7 +285,7 @@ public class MovieIntentDetection {
         init("/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/src/main/resources/qc/movie",
 //        		"/home/ngan/Work/AHongPhuong/Intent_detection/data/qc/1", 
                 "/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/src/main/resources/dicts");
-        
+
 //        try {
 //            BufferedReader reader = new BufferedReader(new FileReader("/home/ngan/Work/AHongPhuong/Intent_detection/data/whole.txt"));
 //            BufferedWriter writer = new BufferedWriter(new FileWriter("/home/ngan/Work/AHongPhuong/Intent_detection/data/test.result"));
@@ -304,16 +304,16 @@ public class MovieIntentDetection {
 //        } catch (IOException ex) {
 //            Logger.getLogger(MovieIntentDetection.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
+
         String sent1 = "ngoài rạp có phim chiến tranh gì không";
         String sent2 = "phim tâm lý kinh dị nào đang chiếu rạp";
         String sent3 = "phim tâm lý tình cảm nào đang chiếu rạp";
         String sent4 = "rạp vincom bà triệu tối nay chiếu the maze runner lúc mấy gi�??";
         String sent5 = "rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�??";
-        
+
         System.out.println(getTunedSent(sent1));
         System.out.println(getIntent(sent1));
-        
+
 //        System.out.println(getTunedSent(sent2));
 //        System.out.println(getIntent(sent2));
 //        

@@ -1,12 +1,11 @@
 package com.fpt.ruby.business.service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.helper.NameMapperHelper;
+import com.fpt.ruby.business.helper.TypeMapperHelper;
 import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.model.NameMapper;
+import com.fpt.ruby.business.model.TVProgram;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -14,24 +13,24 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.fpt.ruby.business.config.SpringMongoConfig;
-import com.fpt.ruby.business.helper.TypeMapperHelper;
-import com.fpt.ruby.business.model.NameMapper;
-import com.fpt.ruby.business.model.TVProgram;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class NameMapperService {
 	static Set<String> x = new HashSet<String>();
-	
+
 	private static MongoOperations db;
-	
+
 	static {
 		ApplicationContext context = new AnnotationConfigApplicationContext(
 				SpringMongoConfig.class);
 		db = (MongoOperations) context.getBean("mongoTemplate");
 		List<NameMapper> names = findAll();
 		x.clear();
-		
+
 		for (NameMapper n: names) {
 			x.add(n.getName().toLowerCase() + n.getType() + n.getDomain());
 			Set<String> ss = n.getVariants();
@@ -40,18 +39,18 @@ public class NameMapperService {
 			}
 		}
 	}
-	
+
 	public NameMapperService(MongoOperations db) {
 		this.db = db;
 	}
-	
+
 	public NameMapperService() {
 		ApplicationContext context = new AnnotationConfigApplicationContext(
 				SpringMongoConfig.class);
 		this.db = (MongoOperations) context.getBean("mongoTemplate");
 		List<NameMapper> names = findAll();
 		x.clear();
-		
+
 		for (NameMapper n: names) {
 			x.add(n.getName().toLowerCase() + n.getType() + n.getDomain());
 			Set<String> ss = n.getVariants();
@@ -60,7 +59,7 @@ public class NameMapperService {
 			}
 		}
 	}
-	
+
 	public static List<NameMapper> findAll() {
 		return db.findAll(NameMapper.class);
 	}
@@ -72,7 +71,7 @@ public class NameMapperService {
 		Query query = new Query(Criteria.where("domain").is(domain));
 		return db.find(query, NameMapper.class);
 	}
-	
+
 	public NameMapper findByName(String name){
 		Query query = new Query(Criteria.where("name").regex(name,"i"));
 		return db.findOne(query, NameMapper.class);
@@ -82,7 +81,7 @@ public class NameMapperService {
 			db.save(name);
 		}
 	}
-	
+
 	public static void save(NameMapper inst) {
 		if (!x.contains(inst.getName().toLowerCase() + inst.getType() + inst.getDomain())) {
 			db.save(inst);
@@ -93,10 +92,10 @@ public class NameMapperService {
 			}
 		}
 	}
-	
+
 	public static void save(TVProgram prog) {
 		NameMapper n = new NameMapper();
-		
+
 		String title = NameMapperHelper.getRealName(prog.getTitle()).toLowerCase();
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
@@ -108,7 +107,7 @@ public class NameMapperService {
 		n.setType("program_title");
 		n.setEnteredDate(new Date());
 		n.setLastMention(new Date());
-		
+
 		save(n);
 	}
 
@@ -137,7 +136,7 @@ public class NameMapperService {
 		save(n);
 	}
 
-	
+
 	public static void main(String[] args) {
 		NameMapperService nameMapperService = new NameMapperService();
 		List<NameMapper> nameMappers =  nameMapperService.findAll();

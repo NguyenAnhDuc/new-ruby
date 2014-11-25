@@ -90,8 +90,6 @@ public class AnswerFinder implements ThreadCompleteListener {
                 this.answer = workerAnswers[i];
                 System.out.println(i + " threads interrupt other! " + (new Date()).getTime());
                 group.stop();
-//                group.interrupt();
-//                group.destroy();
                 return true;
             }
         }

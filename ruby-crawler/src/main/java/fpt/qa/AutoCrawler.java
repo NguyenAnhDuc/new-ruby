@@ -15,7 +15,7 @@ public class AutoCrawler {
 	private MovieTicketService movieTicketService;
 	private TVProgramService tvProgramService;
 	private LogService logService;
-
+	private static Integer FUTURE_DAY = 3;
 	// private CinemaService cinemaService;
 
 	private void init() {

@@ -35,14 +35,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/*import net.sf.uadetector.ReadableUserAgent;
+ import net.sf.uadetector.UserAgentStringParser;
+ import net.sf.uadetector.service.UADetectorServiceFactory;*/
+
 @Controller
 @RequestMapping("/")
 public class AppController {
-    public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
-    private static final Logger logger = LoggerFactory
-            .getLogger(AppController.class);
-    static TVAnswerMapper tam;
-    static DomainClassifier classifier;
     @Autowired
     HttpServletRequest request;
     @Autowired
@@ -59,12 +58,16 @@ public class AppController {
     BingSearchService bingSearchService;
     @Autowired
     ReportQuestionService reportQuestionService;
-    //Conjunction
-    ConjunctionHelper conjunctionHelperWithDiacritic, conjunctionHelperNoneDiacritic;
+
+    static TVAnswerMapper tam = new TVAnswerMapperImpl();
+    static DomainClassifier classifier;
+    private static final Logger logger = LoggerFactory
+            .getLogger(AppController.class);
     @Value("${aimlBotID}")
     private String botId;
     @Value("${aimlToken}")
     private String token;
+
     // Keen
     private KeenClient keenClient;
     @Value("${keenProjectID}")
@@ -77,20 +80,26 @@ public class AppController {
     AnswerFinder god;
     AIMLInfoWrapper aimlInfo;
     NLPInfoWrapper nlpInfo;
+    //Conjunction
+    ConjunctionHelper conjunctionHelperWithDiacritic, conjunctionHelperNoneDiacritic;
+
+    // get user agent
+    /*
+     * private String getUserAgent() { return request.getHeader("user-agent"); }
+	 */
+    public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
+
     @PostConstruct
     public void init() {
-        tam = new TVAnswerMapperImpl();
         tam.init();
         NlpHelper.init();
         ProcessHelper.init(nameMapperService);
         TVModifiersHelper.init(nameMapperService);
         NonDiacriticNlpHelper.init(nameMapperService);
-
         String dir = (new RedisHelper()).getClass().getClassLoader()
                 .getResource("").getPath();
         conjunctionHelperWithDiacritic = new ConjunctionHelper(dir, nameMapperService);
         conjunctionHelperNoneDiacritic = new ConjunctionHelper(dir + "/non-diacritic", nameMapperService);
-
         classifier = new DomainClassifier(dir, nameMapperService);
         keenClient = new JavaKeenClientBuilder().build();
         KeenProject keenProject = new KeenProject(KEEN_PROJECT_ID,
@@ -120,10 +129,12 @@ public class AppController {
             @RequestParam("question") String question,
             @RequestParam(value = "userID", defaultValue = "") String appUserID,
             @RequestParam(value = "inputType", defaultValue = "text") String inputType,
+            @RequestParam(value = "confirmWebSearch", defaultValue = "no") String confirmWebSearch,
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
         god = new AnswerFinder(aimlInfo, nlpInfo);
         // Log
         long pivot1 = (new Date()).getTime();
+
 
         String userID = browserUserID;
         if (!inputType.equals("text")) inputType = "voice";
@@ -145,6 +156,23 @@ public class AppController {
         System.out.println((new Date()).getTime() + " . DONE LOG AND ANALYTICS  ");
         System.out.println("question -> answer: " + (pivot2 - pivot1) / 1000.0 + " seconds");
         System.out.println("answer -> log: " + (pivot3 - pivot2) / 1000.0 + " seconds");
+        // If can't answer, take result from Bing Search
+        if (ans.getAnswer().toLowerCase().contains("xin lỗi,")) {
+            if (confirmWebSearch.equals("yes")) {
+                String htmlAnswer = "";
+                // If on the mobile
+					/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+						"<a href=\"searchWeb?question=" + question +  "\">Search on the Web</a>");*/
+
+                //If on the web
+                htmlAnswer = String.format("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+                        "<a href=\"#\" class=\"btn\" onclick=\"searchWeb('%s')\"><center>Search on the Web</a></center>", question);
+                ans.setAnswer(htmlAnswer);
+            } else {
+                ans.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
+            }
+        }
+        if (ans.getAnswer().length() < 50) ans.setAnswer(ans.getAnswer() + " ^_^");
         return ans;
     }
 
@@ -189,14 +217,13 @@ public class AppController {
 
     @RequestMapping(value = "/searchWeb", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public RubyAnswer confirmWebSearch(@RequestParam("question") String question){
+    public RubyAnswer confirmWebSearch(@RequestParam("question") String question) {
         RubyAnswer rubyAnswer = new RubyAnswer();
         rubyAnswer.setQuestion(question.trim());
-        try{
+        try {
             rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
             return rubyAnswer;
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             rubyAnswer.setAnswer("Some thing went wrong! Please try again!");
             return rubyAnswer;
         }
@@ -239,4 +266,6 @@ public class AppController {
             track("userActivity", event);
         }
     }
+
+
 }

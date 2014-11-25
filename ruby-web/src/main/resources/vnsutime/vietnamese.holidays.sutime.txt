@@ -18,7 +18,7 @@
   { (/ngày/ /quốc/? /tế/? /lao/ /động/ ) => IsoDate(NIL, 5, 1) }
   
   { (/ngày/ /thành/ /lập/ /đảng/ /cộng/? /sản/? /việt/? /nam/?) => IsoDate(NIL, 2, 3) }
-  { (/ngày/ /nhà/ /giáo/ /việt/? /nam/? ) => IsoDate(NIL, 11,20) }
+  { (/ngày/ /nhà/ /giáo/ ) => IsoDate(NIL, 11,20) }
   { (/ngày/? /giáng/ /sinh/) => IsoDate(NIL, 12, 25) }
        
   

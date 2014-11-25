@@ -59,7 +59,8 @@ public class VnTimeParser {
 		String tmp = modelDir + "//defs.sutime.txt," + modelDir
 				+ "//vn.sutime.txt," + modelDir
 				+ "//vietnamese.holidays.sutime.txt," + modelDir
-				+ "//vn.sutime.removeAccent.txt";
+				+ "//vn.sutime.removeAccent.txt," + modelDir
+				+ "//vietnamese.holidays.sutime.removeAccent.txt";
 		props.setProperty("sutime.rules", tmp);
 		this.coreNLP = new StanfordCoreNLP(props);
 	}

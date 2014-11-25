@@ -25,6 +25,8 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
     public static final String DEF_ANS = "Xin lỗi, chúng tôi không có thông tin cho câu trả lời của bạn";
     public static final String DEF_ANS_CHANNEL = "Nếu tôi không nhầm thì không có kênh nào cả";
     public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
+    public static final String DEF_ANSWER_DATE = "Nếu tôi không nhầm thì %s không được phát.";
+
     //public static final String DEF_ANS_TITLE = "Nếu tôi không nhầm thì không có chương trình nào cả";
 
     public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
@@ -140,6 +142,9 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
             }
             if (intent.equals(IntentConstants.TV_DAT)) {
                 rubyAnswer.setAnswer(getChannelAndTime(progs));
+                if (rubyAnswer.getAnswer().isEmpty()) {
+                    rubyAnswer.setAnswer(String.format(DEF_ANSWER_DATE, "chương trình này"));
+                }
                 return rubyAnswer;
             }
             if (intent.equals(IntentConstants.TV_CHN)) {

@@ -142,10 +142,7 @@ public class NameMapperService {
 		List<NameMapper> nameMappers =  nameMapperService.findAll();
 		System.out.println(nameMappers.size());
 		for (NameMapper nameMapper : nameMappers){
-			if (nameMapper.getName().toLowerCase().equals("bóng đá") || nameMapper.getName().toLowerCase().equals("bong da")
-					|| nameMapper.getName().toLowerCase().equals("phim") || nameMapper.getName().toLowerCase().equals("phim")){
-				nameMappers.remove(nameMapper);
-			}
+
 		}
 		System.out.println("DONE");
 	}

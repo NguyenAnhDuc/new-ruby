@@ -460,7 +460,8 @@ public class TVProgramService {
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
-        Query query = new Query(Criteria.where("start_date").gt(date))
+        Date afterDate = new Date(date.getTime() + ONE_DAY);
+        Query query = new Query(Criteria.where("start_date").gt(date).lt(afterDate))
                 .with(new Sort(Direction.ASC, "start_date"));
         return mongoOperations.find(query, TVProgram.class);
     }

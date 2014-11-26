@@ -23,7 +23,7 @@ public class ConjLang extends ConjunctionChecker{
 		conjunctionType = new HashMap< String, HashSet< String > >();
 
 		nameMapperEngine = new NameMapperEngine( resourcePath );
-		nameMapperEngine.loadDomainMapper( "lang", "lang.txt" );
+		nameMapperEngine.loadDomainMapper( "Lang", "Lang.txt" );
 		surroundingWords = new SurroundingWords( resourcePath );
 
 		loadConjunctionFromNameMapper( nameMapperEngine );

@@ -6,14 +6,13 @@ import com.fpt.ruby.business.model.TVModifiers;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.additionalinformation.modifier.AbsoluteTime;
+import fpt.qa.genreclassifier.GenreExtractor;
+import fpt.qa.langclassifier.LangExtractor;
 import fpt.qa.mdnlib.diacritic.DiacriticConverter;
 import fpt.qa.mdnlib.struct.pair.Pair;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TVModifiersHelper {
     private static final String CHANNEL = "chanel_title";
@@ -81,6 +80,25 @@ public class TVModifiersHelper {
         } else {
             mod.setType(null);
         }
+
+        if(mod.getType() != null && mod.getType().contains(ProgramType.FILM.toString())) {
+            System.err.println("|||||||||||||||||||||||||||||||||||||||||||");
+            GenreExtractor genreExtractor = new GenreExtractor();
+            LangExtractor langExtractor = new LangExtractor();
+            List<String> genre = genreExtractor.getGenre(question);
+            if(genre != null) {
+                List<String> types = mod.getType();
+                types.addAll(genre);
+                mod.setType(types);
+            }
+            List<String> langs = langExtractor.getLanguage(question);
+            if(langs != null) {
+                List<String> types = mod.getType();
+                types.addAll(langs);
+                mod.setType(types);
+            }
+        }
+        System.out.println("mod.type = " + mod.getType());
         return mod;
     }
 

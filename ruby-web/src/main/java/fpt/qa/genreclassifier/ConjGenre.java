@@ -1,69 +1,45 @@
-package fpt.qa.additionalinformation.modifier;
+package fpt.qa.genreclassifier;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.fasterxml.jackson.core.sym.Name;
 import com.fpt.ruby.business.service.NameMapperService;
-
-import fpt.qa.additionalinformation.name_mapper.NameMapper;
+import fpt.qa.additionalinformation.modifier.SurroundingWords;
 import fpt.qa.additionalinformation.name_mapper.NameMapperEngine;
 import fpt.qa.mdnlib.nlp.vn.vntokenizer.VnTokenizer;
 import fpt.qa.mdnlib.struct.conjunction.ConjunctionChecker;
 import fpt.qa.mdnlib.struct.pair.Pair;
 
-public class ConjunctionWithType extends ConjunctionChecker{
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+
+public class ConjGenre extends ConjunctionChecker{
 	private Map< String, HashSet< String > > conjunctionType;
 	private NameMapperEngine nameMapperEngine;
 	private SurroundingWords surroundingWords;
 	private NameMapperService nameMapperService;
-	
-	/*public ConjunctionWithType( String resourcePath ) {
+
+	public NameMapperEngine getNameMapperEngine() {
+		return nameMapperEngine;
+	}
+
+	public ConjGenre(String resourcePath){
 		conjunctionType = new HashMap< String, HashSet< String > >();
 
 		nameMapperEngine = new NameMapperEngine( resourcePath );
-		nameMapperEngine.loadDomainMapper( "movie", "movieNames.txt" );
-		nameMapperEngine.loadDomainMapper( "food", "foodNames.txt" );
-		nameMapperEngine.loadDomainMapper( "tv", "tv_domain.txt" );
-		nameMapperEngine.loadDomainMapper( "type", "type.txt" );
-		System.err.println("Loading type..." + resourcePath);
+		nameMapperEngine.loadDomainMapper( "Genre", "Genre.txt" );
 		surroundingWords = new SurroundingWords( resourcePath );
 
 		loadConjunctionFromNameMapper( nameMapperEngine );
 
-
-		VnTokenizer.loadSpecialChars( resourcePath + "/dicts/specialchars/special-chars.xml" );
-		VnTokenizer.loadRegexXMLFile( resourcePath + "/regexes/regular-expressions.xml" );
-	}*/
-	
-	public ConjunctionWithType( String resourcePath, NameMapperService nameMapperService ) {
-		conjunctionType = new HashMap<>();
-
-		nameMapperEngine = new NameMapperEngine( resourcePath );
-		
-		nameMapperEngine.loadDomainMapper(nameMapperService, "tv");
-		nameMapperEngine.loadDomainMapper(nameMapperService, "movie");
-		nameMapperEngine.loadDomainMapper( "type", "type.txt" );
-		surroundingWords = new SurroundingWords( resourcePath );
-
-		loadConjunctionFromNameMapper( nameMapperEngine );
 
 		VnTokenizer.loadSpecialChars( resourcePath + "/dicts/specialchars/special-chars.xml" );
 		VnTokenizer.loadRegexXMLFile( resourcePath + "/regexes/regular-expressions.xml" );
 	}
 
-	public void reload(NameMapperService nms) {
-		nameMapperEngine.loadDomainMapper(nms, "tv");
-		nameMapperEngine.loadDomainMapper(nms, "movie");
+	public void reloadNameMapperEngine() {
+
+//		nameMapperEngine.re
 	}
 
 	public void loadConjunctionType( File file ) {
@@ -95,28 +71,14 @@ public class ConjunctionWithType extends ConjunctionChecker{
 	}
 
 	private void loadConjunctionFromNameMapper( NameMapperEngine nameMapperEngine ) {
-		int i = 0;
 		for( Pair< String, String > pair : nameMapperEngine.getAllNames() ){
 			String name = pair.first;
 			String type = pair.second;
 			addConjunctionWithType( name, type );
-			++i;
 		}
-		System.out.println("load " + i);
 	}
 
 	public void addConjunctionWithType( String str, String type ) {
-		addConjunction( "{" + str + "}" );
-		String normalizedConjunction = str.toLowerCase();
-		if( conjunctionType.containsKey( normalizedConjunction ) ){
-			conjunctionType.get( normalizedConjunction ).add( type );
-		}else{
-			conjunctionType
-					.put( normalizedConjunction, new HashSet< String >( Arrays.asList( new String[] { type } ) ) );
-		}
-	}
-	
-	public void addConjunctionWithType( String str, String type, String domain, Set< String > variants ) {
 		addConjunction( "{" + str + "}" );
 		String normalizedConjunction = str.toLowerCase();
 		if( conjunctionType.containsKey( normalizedConjunction ) ){

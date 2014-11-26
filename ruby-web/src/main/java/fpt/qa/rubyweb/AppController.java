@@ -131,7 +131,7 @@ public class AppController {
             @RequestParam(value = "inputType", defaultValue = "text") String inputType,
             @RequestParam(value = "confirmWebSearch", defaultValue = "no") String confirmWebSearch,
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
-        god = new AnswerFinder(aimlInfo, nlpInfo);
+        god = new AnswerFinder(aimlInfo, nlpInfo, !confirmWebSearch.equals("no"));
         // Log
         long pivot1 = (new Date()).getTime();
 
@@ -269,3 +269,4 @@ public class AppController {
 
 
 }
+

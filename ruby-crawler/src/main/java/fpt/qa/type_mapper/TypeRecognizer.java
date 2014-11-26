@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fpt.ruby.business.constants.ProgramType;
+import com.fpt.ruby.business.helper.TypeMapperHelper;
 
 public class TypeRecognizer {
 	private ProgramType type;
@@ -15,11 +16,11 @@ public class TypeRecognizer {
 		typeKeywords = new HashSet<String>();
 
 		for (String chn : chns) {
-			dedicatedChannels.add(TypeMapperUtil.normalize(chn));
+			dedicatedChannels.add(TypeMapperHelper.normalize(chn));
 		}
 
 		for (String kw : kws) {
-			typeKeywords.add(TypeMapperUtil.normalize(kw));
+			typeKeywords.add(TypeMapperHelper.normalize(kw));
 		}
 	}
 	
@@ -55,8 +56,8 @@ public class TypeRecognizer {
 	}
 
 	public Boolean contains(String channel, String prog) {
-		String nCh = TypeMapperUtil.normalize(channel);
-		String nProg = TypeMapperUtil.normalize(prog);
+		String nCh = TypeMapperHelper.normalize(channel);
+		String nProg = TypeMapperHelper.normalize(prog);
 		for (String c: dedicatedChannels) {
 			if (c.equals(nCh)) {
 				return true;

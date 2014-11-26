@@ -2,12 +2,15 @@ package com.fpt.ruby.business.helper;
 
 import com.fpt.ruby.business.basic.Pair;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TypeMapperHelper {
 	static List<Pair<Pattern, Integer>> regexes = new ArrayList<Pair<Pattern, Integer>>();
+	static Map<Character, Character> convert = new HashMap<>();
 	static Integer SAME = 20;
 	static Integer MAX_LEN = 40;
 
@@ -62,11 +65,16 @@ public class TypeMapperHelper {
 			"U", "U", "U", "U", "U", "U", "Y", "Y", "Y", "Y", "Y", "D", " "};
 
 	static {
-		regexes.add(new Pair<Pattern, Integer>(Pattern.compile("((\\w|\\s)+)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)(\\d+)(((\\s*)(/|\\\\|:)(\\s*)\\d+)*)"), 1));
-		regexes.add(new Pair<Pattern, Integer>(Pattern.compile("((\\w|\\s)+)((\\W|\\s|\\w)+)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)(\\d+)"), 1));
-		regexes.add(new Pair<Pattern, Integer>(Pattern.compile("((\\w|\\s)+)(\\s*)\\((\\s*)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)(\\d+)(\\s*)\\)"), 1));
-		regexes.add(new Pair<Pattern, Integer>(Pattern.compile("((\\w|\\s)+)(\\s*)\\((\\s*)(\\d+)(\\s*)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)\\)"), 1));
-		regexes.add(new Pair<Pattern, Integer>(Pattern.compile("((\\w|\\s)+)(\\s)((\\d+)(\\s*)(/|\\\\|:|-)(\\s*)(\\d+))"), 1));
+		regexes.add(new Pair<>(Pattern.compile("((\\w|\\s)+)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)(\\d+)(((\\s*)(/|\\\\|:)(\\s*)\\d+)*)"), 1));
+		regexes.add(new Pair<>(Pattern.compile("((\\w|\\s)+)((\\W|\\s|\\w)+)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)(\\d+)"), 1));
+		regexes.add(new Pair<>(Pattern.compile("((\\w|\\s)+)(\\s*)\\((\\s*)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)(\\d+)(\\s*)\\)"), 1));
+		regexes.add(new Pair<>(Pattern.compile("((\\w|\\s)+)(\\s*)\\((\\s*)(\\d+)(\\s*)(tap|phan|episode|ep|eps|t|s|season|so)(\\s*)\\)"), 1));
+		regexes.add(new Pair<>(Pattern.compile("((\\w|\\s)+)(\\s)((\\d+)(\\s*)(/|\\\\|:|-)(\\s*)(\\d+))"), 1));
+
+		for (int i = 0; i < khong_dau.length; ++i) {
+			convert.put(dung_sang_co_dau[i].charAt(0), khong_dau[i].charAt(0));
+			convert.put(to_hop_co_dau[i].charAt(0), khong_dau[i].charAt(0));
+		}
 	}
 
 	public static String normalize(String name) {
@@ -74,14 +82,13 @@ public class TypeMapperHelper {
 
 		String[] parts = name.split("\\s+");
 		name = String.join(" ", parts);
-		for (int i = 0; i < dung_sang_co_dau.length; ++i) {
-			name = name.replaceAll(dung_sang_co_dau[i], khong_dau[i]);
+		StringBuilder norm = new StringBuilder();
+		for (int i = 0; i < name.length(); ++i) {
+			Character n = (convert.containsKey(name.charAt(i)) ? convert.get(name.charAt(i)) : name.charAt(i));
+			norm.append(n);
 		}
 
-		for (int i = 0; i < to_hop_co_dau.length; ++i) {
-			name = name.replaceAll(to_hop_co_dau[i], khong_dau[i]);
-		}
-		return name;
+		return norm.toString().toLowerCase();
 	}
 
 	public static String getTitle(String mess) {
@@ -106,14 +113,6 @@ public class TypeMapperHelper {
 	}
 
 	public static boolean isSame(String origin, String variant) {
-		origin = getTitle(origin);
-		variant = getTitle(variant);
-		System.out.println("check btw " + origin + " - " + variant);
-		return isSame2(origin, variant);
-	}
-
-	public static boolean isSame2(String origin, String variant) {
-		System.out.println("check isSame2: " + origin + " - " + variant);
 		if (contains(origin, variant)) return true;
 		variant = variant.substring(0, Math.min(variant.length(), SAME));
 		origin = origin.substring(0, Math.min(origin.length(), SAME));

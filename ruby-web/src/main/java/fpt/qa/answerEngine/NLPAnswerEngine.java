@@ -55,7 +55,7 @@ public class NLPAnswerEngine extends AnswerEngine {
         try {
             if (domain.equalsIgnoreCase("tv")) {
                 ans = tvans.getAnswer(key, lgs, diaConj);
-                if (DiacriticConverter.hasDiacriticAccents(key) && ans.getAnswer().contains(TVAnswerMapperImpl.UDF_ANS))
+                if (DiacriticConverter.hasDiacriticAccents(key) && ans.getAnswer().contains(TVAnswerMapperImpl.DEF_ANS))
                     ans = tvans.getAnswer(DiacriticConverter.removeDiacritics(key), lgs, nonDiaConj);
             } else {
                 ans = ProcessHelper.getAnswer(key, mfs, mts, cins, lgs, nonDiaConj, diaConj);

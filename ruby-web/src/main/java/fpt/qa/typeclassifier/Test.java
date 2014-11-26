@@ -14,7 +14,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		/*List<String> list = fileReader("questions_tv");
-		ProgramTypeExtractor extractor = new ProgramTypeExtractor();
+		LangExtractor extractor = new LangExtractor();
 		// System.out.println(list);
 		for (String s : list) {
 			System.out

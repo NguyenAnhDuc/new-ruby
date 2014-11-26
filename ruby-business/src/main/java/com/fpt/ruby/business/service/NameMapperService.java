@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -58,6 +59,8 @@ public class NameMapperService {
 				x.add(s.toLowerCase() + n.getType() + n.getDomain());
 			}
 		}
+		System.out.println(x.size());
+
 	}
 
 	public static List<NameMapper> findAll() {
@@ -122,8 +125,8 @@ public class NameMapperService {
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));
-		variants.add(mt.getAnotherName());
-		variants.add(TypeMapperHelper.normalize(mt.getAnotherName()));
+		variants.add(mt.getAlias());
+		variants.add(TypeMapperHelper.normalize(mt.getAlias()));
 
 		n.setVariant(variants);
 

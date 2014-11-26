@@ -2,15 +2,15 @@ package fpt.qa.crawler.moveek;
 
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.service.MovieFlyService;
 import com.fpt.ruby.business.service.MovieTicketService;
 import jmdn.struct.pair.Pair;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 public class MoveekCrawler {
 
@@ -35,7 +35,10 @@ public class MoveekCrawler {
     }
 
     public static void doCrawl(MovieTicketService mts) {
+        MovieFlyService mfs = new MovieFlyService();
         Object[] keys = movie_urls.keySet().toArray();
+        Set<String> movieNames = new HashSet<>();
+
         for (Object key : keys) {
             String cinName = (String) key;
             String city = cin_cities.get(cinName);
@@ -54,11 +57,22 @@ public class MoveekCrawler {
 
                     newTicket.setCity(city);
                     newTicket.setMovie(movie.second.first);
-                    newTicket.setAnotherName(movie.second.second);
+                    newTicket.setAlias(movie.second.second);
                     if (!mts.existedInDb(newTicket)) {
                         mts.save(newTicket);
                     }
                 }
+
+                movieNames.add(movie.first);
+            }
+        }
+
+        // save moviefly
+        for (String name : movieNames) {
+            try {
+                mfs.findByTitle(name);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
             }
         }
     }

@@ -39,15 +39,14 @@ import fpt.qa.type_mapper.TypeMapper;
 @Component
 public class CrawlerVTVCab {
 	List<String> crawlChannels = Collections.unmodifiableList(Arrays
-			.asList(new String[] { "VTVCAB3", "VTVCAB4", "VTVCAB5", "VTVCAB6",
-					"VTVCAB7", "VTVCAB8", "VTVCAB12", "VTVCAB16", "VTVCAB17",
+			.asList("VTVCAB3", "VTVCAB4", "VTVCAB5", "VTVCAB6",
+					"VTVCAB7", "VTVCAB8", "VTVCAB12", "VTVCAB16", "VTVCAB15", "VTVCAB17",
 					"VTVCAB19","K+PM", "FOX SPORTS",
 					"CINEMA WORLD", "WARNER", "GEM", "AXN", "ANIMAL PLANET",
 					"CINEMAX", "SCREEN RED", "NGC", "TRAVEL LIVING",
-					"DISCOVERY WORLD", "STARMOVIE"}));
+					"DISCOVERY WORLD", "STARMOVIE", "CHANNEL V","CNN"));
 
 	private final static long ONE_DAY = 24 * 60 * 60 * 1000;
-	private final static long FUTUREDAY_CRAWL = 3;
 	private final static String ROOT_URL = "http://www.vtvcab.vn/lich-phat-song";
 
 	public static String getResponse(String url, String requestType)
@@ -163,13 +162,13 @@ public class CrawlerVTVCab {
 			}
 
 			progs.add(prog);
-			System.out.println(prog.toString());
+//			System.out.println(prog.toString());
 		}
 
 		return progs;
 	}
 
-	public List<Channel> getChannels(NameMapperService nameMapperService, ConjunctionHelper conjunctionHelperNoneDiacritic) throws Exception {
+	public List<Channel> getChannels(ConjunctionHelper conjunctionHelperNoneDiacritic) throws Exception {
 		List<Channel> channels = new ArrayList<Channel>();
 		String dir = getRscDir("./classes/");
 		Document doc = Jsoup.parse(getResponse(ROOT_URL, "GET"));
@@ -183,8 +182,7 @@ public class CrawlerVTVCab {
 			try {
 				System.out.println("PRE: " + ce.text().trim());
 				String name = conjunctionHelperNoneDiacritic.getChannelName(ce.text().trim());
-
-				if (!(name.equals(null) || name.isEmpty())) {
+				if (!(name == null || name.isEmpty())) {
 					c.setName(name);
 				} else {
 					c.setName(ce.text().trim());
@@ -195,16 +193,17 @@ public class CrawlerVTVCab {
 						+ c.getName() + " | " + c.getId());
 			} catch (Exception ex) {
 				System.out.println(ex.getMessage());
+				ex.printStackTrace();
 			}
 		}
 
 		return channels;
 	}
 
-	public void doCrawl(TVProgramService tvProgramService, NameMapperService nameMapperService, ConjunctionHelper conjunctionHelper) throws Exception {
+	public void doCrawl(TVProgramService tvProgramService, ConjunctionHelper conjunctionHelper, int numdays) throws Exception {
 		System.out.println("Crawling from VTVCAB");
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		List<Channel> channels = getChannels(nameMapperService, conjunctionHelper);
+		List<Channel> channels = getChannels(conjunctionHelper);
 
 		for (Channel channel : channels) {
 			if (crawlChannels.contains(channel.getName().toUpperCase())) {
@@ -212,14 +211,12 @@ public class CrawlerVTVCab {
 					System.out.println("Going to craw schedule for channel: "
 							+ channel.getName());
 					Date today = new Date();
-					for (int i =  0; i <= FUTUREDAY_CRAWL; ++i) {
+					for (int i =  0; i <= numdays; ++i) {
 						Date crawlDate = new Date(today.getTime() + ONE_DAY * i);
 						List<TVProgram> progs = getPrograms(channel, crawlDate);
 						progs = CrawlerHelper.calculateEndTime(progs);
 
-						for (TVProgram prog : progs) {
-							tvProgramService.save(prog);
-						}
+						progs.forEach(tvProgramService::save);
 					}
 
 				} catch (Exception ex) {
@@ -238,7 +235,7 @@ public class CrawlerVTVCab {
 		ConjunctionHelper ch = new ConjunctionHelper(dir, nms);
 
 		CrawlerVTVCab crawler = new CrawlerVTVCab();
-		crawler.doCrawl(ts, nms, ch);
+		crawler.doCrawl(ts, ch, 3);
 	}
 
 }

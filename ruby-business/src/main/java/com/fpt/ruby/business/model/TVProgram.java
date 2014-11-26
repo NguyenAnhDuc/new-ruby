@@ -55,7 +55,7 @@ public class TVProgram {
 	}
 
 	public void setChannel(String channel) {
-		this.channel = channel;
+		this.channel = channel.toLowerCase();
 	}
 
 	public Date getStart_date() {

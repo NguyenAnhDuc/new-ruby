@@ -39,7 +39,11 @@ public class ConjType extends ConjunctionChecker{
 		VnTokenizer.loadSpecialChars( resourcePath + "/dicts/specialchars/special-chars.xml" );
 		VnTokenizer.loadRegexXMLFile( resourcePath + "/regexes/regular-expressions.xml" );
 	}
-	
+
+	public void reloadNameMapperEngine() {
+
+//		nameMapperEngine.re
+	}
 
 	public void loadConjunctionType( File file ) {
 		try{

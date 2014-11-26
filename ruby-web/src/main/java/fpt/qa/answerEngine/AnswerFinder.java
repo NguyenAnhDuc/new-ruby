@@ -12,21 +12,23 @@ public class AnswerFinder implements ThreadCompleteListener {
     AnswerEngine[] threads;
     RubyAnswer[] workerAnswers;
     RubyAnswer answer;
+    Boolean websearch;
 
-    public AnswerFinder(AIMLInfoWrapper aimlInfo, NLPInfoWrapper nlpInfo) {
+    public AnswerFinder(AIMLInfoWrapper aimlInfo, NLPInfoWrapper nlpInfo, Boolean webSearchByDefault) {
         AIMLAnswerEngine.config(aimlInfo.getBotID(), aimlInfo.getToken());
         WebSearchAnswerEngine.config(5);
         NLPAnswerEngine.config(nlpInfo);
 
         threads = new AnswerEngine[NUM_WORKER];
         workerAnswers = new RubyAnswer[NUM_WORKER];
+        websearch = webSearchByDefault;
     }
 
     public RubyAnswer getAnswer(String question) {
         System.out.println("[QUESTION] " + question);
         threads[0] = new AIMLAnswerEngine(group, "aiml");
         threads[1] = new NLPAnswerEngine(group, "nlp");
-        threads[2] = new WebSearchAnswerEngine(group, "web");
+        threads[2] = new WebSearchAnswerEngine(group, "web", websearch);
 
         for (AnswerEngine t : threads) {
             t.addListener(this);

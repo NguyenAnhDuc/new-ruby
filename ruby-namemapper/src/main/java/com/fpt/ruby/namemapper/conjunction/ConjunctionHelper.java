@@ -1,5 +1,6 @@
 package com.fpt.ruby.namemapper.conjunction;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.fpt.ruby.business.constants.IntentConstants;
@@ -57,8 +58,9 @@ public class ConjunctionHelper {
 		return null;
 	}
 	
-	public String getChannelName(String text){
+	public String getChannelName(String text) {
 		List<Pair<String, String>> conjunctions = getConjunction(text);
+		System.out.println(conjunctions.size());
 		for (Pair<String, String> conjunction : conjunctions ){
 			if (conjunction.second.equals("chanel_title"))
 				return conjunction.first.replace("{", "").replace("}", "");

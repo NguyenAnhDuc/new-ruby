@@ -11,7 +11,7 @@ public class MovieTicket {
     String id;
     private String cinema;
     private String movie;
-    private String anotherName;
+    private String alias;
     private String type;
     private Date date;
     private String city;
@@ -21,15 +21,15 @@ public class MovieTicket {
         type = null;
         date = null;
         city = null;
-        anotherName = null;
+        alias = null;
     }
 
-    public String getAnotherName() {
-        return anotherName;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setAnotherName(String anotherName) {
-        this.anotherName = anotherName;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getId() {

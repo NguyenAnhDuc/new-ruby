@@ -57,7 +57,7 @@ public class AutoCrawler {
 		}
 
 		try {
-			vtvcab.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
+//			vtvcab.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
 		} catch (Exception ex) {
 			System.out.println("Eror crawling vtvcab!! Message = " + ex.getMessage());
 		}
@@ -65,7 +65,7 @@ public class AutoCrawler {
 		TypeMapper.clear(); // clear data
 
 		try {
-			MoveekCrawler.doCrawl(movieTicketService);
+//			MoveekCrawler.doCrawl(movieTicketService);
 		} catch (Exception ex) {
 			System.out.println("Eror crawling moveek!! Message = " + ex.getMessage());
 		}

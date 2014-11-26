@@ -1,5 +1,6 @@
 package fpt.qa;
 
+import com.fpt.ruby.business.model.NameMapper;
 import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.business.service.TVProgramService;
@@ -46,7 +47,8 @@ public class AutoCrawler {
 		}
 
 		// Start crawling
-		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, new NameMapperService());
+		NameMapperService nms = new NameMapperService();
+		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nms);
 
 		try {
 			mytv.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
@@ -70,7 +72,6 @@ public class AutoCrawler {
 	}
 
 	public static void main(String[] args) {
-//		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath(
 		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
 		int numday = 3;
 

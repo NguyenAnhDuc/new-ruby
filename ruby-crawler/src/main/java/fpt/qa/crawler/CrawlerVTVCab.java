@@ -40,11 +40,11 @@ import fpt.qa.type_mapper.TypeMapper;
 public class CrawlerVTVCab {
 	List<String> crawlChannels = Collections.unmodifiableList(Arrays
 			.asList("VTVCAB3", "VTVCAB4", "VTVCAB5", "VTVCAB6",
-					"VTVCAB7", "VTVCAB8", "VTVCAB12", "VTVCAB16", "VTVCAB17",
+					"VTVCAB7", "VTVCAB8", "VTVCAB12", "VTVCAB16", "VTVCAB15", "VTVCAB17",
 					"VTVCAB19","K+PM", "FOX SPORTS",
 					"CINEMA WORLD", "WARNER", "GEM", "AXN", "ANIMAL PLANET",
 					"CINEMAX", "SCREEN RED", "NGC", "TRAVEL LIVING",
-					"DISCOVERY WORLD", "STARMOVIE"));
+					"DISCOVERY WORLD", "STARMOVIE", "CHANNEL V","CNN"));
 
 	private final static long ONE_DAY = 24 * 60 * 60 * 1000;
 	private final static String ROOT_URL = "http://www.vtvcab.vn/lich-phat-song";
@@ -182,8 +182,7 @@ public class CrawlerVTVCab {
 			try {
 				System.out.println("PRE: " + ce.text().trim());
 				String name = conjunctionHelperNoneDiacritic.getChannelName(ce.text().trim());
-
-				if (!(name.equals(null) || name.isEmpty())) {
+				if (!(name == null || name.isEmpty())) {
 					c.setName(name);
 				} else {
 					c.setName(ce.text().trim());
@@ -194,6 +193,7 @@ public class CrawlerVTVCab {
 						+ c.getName() + " | " + c.getId());
 			} catch (Exception ex) {
 				System.out.println(ex.getMessage());
+				ex.printStackTrace();
 			}
 		}
 

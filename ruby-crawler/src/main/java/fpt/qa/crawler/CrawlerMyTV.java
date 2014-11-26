@@ -31,7 +31,8 @@ public class CrawlerMyTV {
     List<String> crawlChannels = Collections.unmodifiableList(Arrays.asList(new String[]{"VTV1", "VTV2", "VTV3",
             "VTV4", "VTV5", "VTV6", "VTV9", "HBO", "STAR MOVIES", "MAX", "Hà Nội 1", "Hà Nội 2", "VTC1", "VTC2",
             "HTV7", "HTV9", "HTV1", "HTV1", "DISNEY", "CARTOON", "VITV", "O2 TV", "DISCOVERY", "ANTV", "VTVCAB1",
-            "VTVCAB2", "STAR WORLD HD", "VOV", "K+1", "K+NS", "NATIONAL GEOGRAPHIC"}));
+            "VTVCAB2", "STAR WORLD HD", "VOV", "K+1", "K+NS", "NATIONAL GEOGRAPHIC",
+            "MTV", "ITV", }));
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
     private static long FUTUREDAY_CRAWL = 3;
 
@@ -56,7 +57,7 @@ public class CrawlerMyTV {
     public List<Channel> getChanel(ConjunctionHelper conjunctionHelper) throws Exception {
         List<Channel> channels = new ArrayList<Channel>();
         Document doc = Jsoup.parse(CrawlerHelper.getResponse("http://www.mytv.com.vn/lich-phat-song", "", "GET"));
-        System.out.println(doc.toString());
+//        System.out.println(doc.toString());
         Element chanel = doc.getElementById("channelId");
 
         Elements chanElements = chanel.select("option");

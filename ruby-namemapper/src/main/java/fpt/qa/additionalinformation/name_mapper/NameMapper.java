@@ -8,7 +8,7 @@ import java.util.*;
 
 public class NameMapper {
 
-    private static HashMap<NamedEntity, Set<String>> nameMap;
+    private HashMap<NamedEntity, Set<String>> nameMap;
 
     public NameMapper(NameMapperService nameMapperService, String domain) {
         if (nameMap != null && nameMap.size() == 0) return;
@@ -46,13 +46,14 @@ public class NameMapper {
 
     }
 
-    public static void load(NameMapperService nameMapperService, String domain) {
+    public void load(NameMapperService nameMapperService, String domain) {
         nameMap = new HashMap<>();
         List<com.fpt.ruby.business.model.NameMapper> nameMappers = nameMapperService.findByDomain(domain);
         for (com.fpt.ruby.business.model.NameMapper nameMapper : nameMappers) {
             NamedEntity namedEntity = new NamedEntity(nameMapper.getType(), nameMapper.getName());
             nameMap.put(namedEntity, nameMapper.getVariants());
         }
+        System.out.println(domain + " -> " + nameMap.size());
     }
 
     /**

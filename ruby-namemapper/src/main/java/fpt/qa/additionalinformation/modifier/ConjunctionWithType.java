@@ -95,11 +95,14 @@ public class ConjunctionWithType extends ConjunctionChecker{
 	}
 
 	private void loadConjunctionFromNameMapper( NameMapperEngine nameMapperEngine ) {
+		int i = 0;
 		for( Pair< String, String > pair : nameMapperEngine.getAllNames() ){
 			String name = pair.first;
 			String type = pair.second;
 			addConjunctionWithType( name, type );
+			++i;
 		}
+		System.out.println("load " + i);
 	}
 
 	public void addConjunctionWithType( String str, String type ) {

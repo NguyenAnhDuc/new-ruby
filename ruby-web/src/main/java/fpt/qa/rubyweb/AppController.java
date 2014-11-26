@@ -11,9 +11,10 @@ import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.*;
 import com.fpt.ruby.service.ReportQuestionService;
-import fpt.qa.crawler.CrawlTask;
+import fpt.qa.answerEngine.AIMLInfoWrapper;
+import fpt.qa.answerEngine.AnswerFinder;
+import fpt.qa.answerEngine.NLPInfoWrapper;
 import fpt.qa.domainclassifier.DomainClassifier;
-import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import io.keen.client.java.JavaKeenClientBuilder;
 import io.keen.client.java.KeenClient;
 import io.keen.client.java.KeenProject;
@@ -29,7 +30,10 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /*import net.sf.uadetector.ReadableUserAgent;
  import net.sf.uadetector.UserAgentStringParser;
@@ -52,7 +56,8 @@ public class AppController {
     NameMapperService nameMapperService;
     @Autowired
     BingSearchService bingSearchService;
-    @Autowired	ReportQuestionService reportQuestionService;
+    @Autowired
+    ReportQuestionService reportQuestionService;
 
     static TVAnswerMapper tam = new TVAnswerMapperImpl();
     static DomainClassifier classifier;
@@ -72,14 +77,18 @@ public class AppController {
     @Value("${keenReadKey}")
     private String KEEN_READ_KEY;
 
+    AnswerFinder god;
+    AIMLInfoWrapper aimlInfo;
+    NLPInfoWrapper nlpInfo;
     //Conjunction
     ConjunctionHelper conjunctionHelperWithDiacritic, conjunctionHelperNoneDiacritic;
 
     // get user agent
-	/*
-	 * private String getUserAgent() { return request.getHeader("user-agent"); }
+    /*
+     * private String getUserAgent() { return request.getHeader("user-agent"); }
 	 */
     public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
+
     @PostConstruct
     public void init() {
         tam.init();
@@ -90,26 +99,24 @@ public class AppController {
         String dir = (new RedisHelper()).getClass().getClassLoader()
                 .getResource("").getPath();
         conjunctionHelperWithDiacritic = new ConjunctionHelper(dir, nameMapperService);
-        conjunctionHelperNoneDiacritic = new ConjunctionHelper(dir+ "/non-diacritic", nameMapperService);
+        conjunctionHelperNoneDiacritic = new ConjunctionHelper(dir + "/non-diacritic", nameMapperService);
         classifier = new DomainClassifier(dir, nameMapperService);
         keenClient = new JavaKeenClientBuilder().build();
         KeenProject keenProject = new KeenProject(KEEN_PROJECT_ID,
                 KEEN_WRITE_KEY, KEEN_READ_KEY);
         keenClient.setDefaultProject(keenProject);
-        setUpCrawler();
-    }
 
-    private void setUpCrawler() {
-        // 1 AM every day
-        Timer timer = new Timer();
-        Calendar date = Calendar.getInstance();
-        date.set(Calendar.HOUR, 1);
-        date.set(Calendar.MINUTE, 0);
-        date.set(Calendar.SECOND, 0);
-
-        timer.schedule(new CrawlTask(),
-                date.getTime(),
-                24 * 60 * 60 * 1000);
+        aimlInfo = new AIMLInfoWrapper(botId, token);
+        nlpInfo = new NLPInfoWrapper();
+        nlpInfo.setCins(cinemaService);
+        nlpInfo.setClassifier(classifier);
+        nlpInfo.setDia(conjunctionHelperWithDiacritic);
+        nlpInfo.setNonDia(conjunctionHelperNoneDiacritic);
+        nlpInfo.setMfs(movieFlyService);
+        nlpInfo.setMts(movieTicketService);
+        nlpInfo.setTvans(tam);
+        nlpInfo.setLog(logService);
+        System.err.println("CONTRUCT DONE!!!");
     }
 
     private void track(String filter, Map<String, Object> event) {
@@ -120,151 +127,54 @@ public class AppController {
     @ResponseBody
     public RubyAnswer prototypeGetAnswer(
             @RequestParam("question") String question,
-            @RequestParam(value="userID", defaultValue = "") String appUserID,
-            @RequestParam(value="inputType", defaultValue = "text") String inputType,
-            @RequestParam(value="confirmWebSearch", defaultValue = "no") String confirmWebSearch,
+            @RequestParam(value = "userID", defaultValue = "") String appUserID,
+            @RequestParam(value = "inputType", defaultValue = "text") String inputType,
+            @RequestParam(value = "confirmWebSearch", defaultValue = "no") String confirmWebSearch,
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
-		/*
-		 * UserAgentStringParser parser =
-		 * UADetectorServiceFactory.getResourceModuleParser(); ReadableUserAgent
-		 * agent = parser.parse(request.getHeader("User-Agent"));
-		 * System.out.println("Operating system: " +
-		 * agent.getOperatingSystem().getName());
-		 * System.out.println("Device category: " +
-		 * agent.getDeviceCategory().getName() ); System.out.println("Family: "
-		 * + agent.getFamily() );
-		 */
-        System.out.println("Question: " + question);
+        god = new AnswerFinder(aimlInfo, nlpInfo, !confirmWebSearch.equals("no"));
+        // Log
+        long pivot1 = (new Date()).getTime();
+
+
         String userID = browserUserID;
         if (!inputType.equals("text")) inputType = "voice";
         if (!appUserID.isEmpty()) userID = appUserID;
-        logger.info("UserID: " + userID);
+        logger.info("UserID : " + userID);
+
         Log log = new Log();
         log.setInputType(inputType);
         log.setUserAgent(request.getHeader("User-Agent"));
         log.setQuestion(question);
         log.setDate(new Date());
-        RubyAnswer rubyAnswer = new RubyAnswer();
-        // AIML Layer First
-        String answer = ProcessHelper.getAIMLAnswer(question, botId, token);
-        if (answer != null && !answer.trim().equalsIgnoreCase("")) {
-            rubyAnswer.setAnswer(answer);
-            rubyAnswer.setQuestion(question);
-            rubyAnswer.setDomain("aiml");
-            rubyAnswer.setIntent("aiml");
-            log.setIntent("AIML");
-            log.setDomain("AIML");
-            log.setAnswer(rubyAnswer.getAnswer());
 
-        } else {
-            long sTime = System.currentTimeMillis();
-            String key = NlpHelper.normalizeQuestion(question);
-            String domain = classifier.getDomain(key);
-            logger.info("Current time: " + new Date() + " | domain: " + domain);
+        RubyAnswer ans = god.getAnswer(question);
+        long pivot2 = (new Date()).getTime();
+        TrackingThread ti = new TrackingThread(ans, log, userID, inputType);
+        ti.start();
 
-            // rubyAnswer.setInCache(this.questionStructureService.isInCache(key));
-            // rubyAnswer.setQuestion(question);
-            // Process question
-            // QuestionStructure questionStructure =
-            // ProcessHelper.getQuestionStucture(question,
-            // questionStructureService );
-            // QuestionStructure questionStructure = new QuestionStructure();
-            // Process answer
-            try{
-                if (domain.equals("tv")) {
-                    // if ( question.startsWith( "tv" ) ){
-                    System.err.println("[AppController] Domain TV");
-                    rubyAnswer = tam.getAnswer(key, logService, conjunctionHelperWithDiacritic);
-                    // Neu khong tra loi duoc cau hoi co dau, thi chuyen cau hoi do
-                    // ve cau hoi khong dau va xu ly
-                    if (DiacriticConverter.hasDiacriticAccents(key)
-                            && rubyAnswer.getAnswer().contains(	TVAnswerMapperImpl.UDF_ANS)) {
-                        rubyAnswer = tam.getAnswer(DiacriticConverter.removeDiacritics(key),logService, conjunctionHelperWithDiacritic);
-                    }
-                } else {
-                    System.err.println("[AppController] Domain Movie");
-                    rubyAnswer = ProcessHelper.getAnswer(key, movieFlyService,
-                            movieTicketService, cinemaService, logService, conjunctionHelperNoneDiacritic, conjunctionHelperWithDiacritic);
-                }
-                rubyAnswer.setDomain(domain);
-            }
-            catch (Exception ex){
-                rubyAnswer.setAnswer(UDF_ANS);
-            }
-
-
-            // If can't answer, take result from Bing Search
-            if (rubyAnswer.getAnswer().toLowerCase().contains("xin lỗi,")){
-                if (confirmWebSearch.equals("yes")){
-                    String htmlAnswer = "";
-                    // If on the mobile
+        long pivot3 = (new Date()).getTime();
+        System.out.println((new Date()).getTime() + " . DONE LOG AND ANALYTICS  ");
+        System.out.println("question -> answer: " + (pivot2 - pivot1) / 1000.0 + " seconds");
+        System.out.println("answer -> log: " + (pivot3 - pivot2) / 1000.0 + " seconds");
+        // If can't answer, take result from Bing Search
+        if (ans.getAnswer().toLowerCase().contains("xin lỗi,")) {
+            if (confirmWebSearch.equals("yes")) {
+                String htmlAnswer = "";
+                // If on the mobile
 					/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
 						"<a href=\"searchWeb?question=" + question +  "\">Search on the Web</a>");*/
 
-                    //If on the web
-                    htmlAnswer = String.format("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
-                            "<a href=\"#\" class=\"btn\" onclick=\"searchWeb('%s')\"><center>Search on the Web</a></center>",question);
-                    rubyAnswer.setAnswer(htmlAnswer);
-                }
-                else {
-                    rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
-                }
-
+                //If on the web
+                htmlAnswer = String.format("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
+                        "<a href=\"#\" class=\"btn\" onclick=\"searchWeb('%s')\"><center>Search on the Web</a></center>", question);
+                ans.setAnswer(htmlAnswer);
+            } else {
+                ans.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
             }
-
-            System.out.println("Total time = "+ (System.currentTimeMillis()-sTime));
         }
-
-        // Log
-        log.setAnswer(rubyAnswer.getAnswer());
-        log.setDomain(rubyAnswer.getDomain());
-        log.setIntent(rubyAnswer.getIntent());
-        QueryParamater queryParamater = new QueryParamater();
-        queryParamater.setBeginTime(rubyAnswer.getBeginTime());
-        queryParamater.setEndTime(rubyAnswer.getEndTime());
-        queryParamater.setMovieTitle(rubyAnswer.getMovieTitle());
-        queryParamater.setMovieTicket(rubyAnswer.getMovieTicket());
-        log.setQueryParamater(rubyAnswer.getQueryParamater());
-
-        // Analytic
-        Map<String, Object> event = new HashMap<String, Object>();
-        event.put("userID", userID);
-        event.put("inputType", inputType);
-        event.put("domain", rubyAnswer.getDomain());
-        event.put("intent", rubyAnswer.getIntent());
-        event.put("question", rubyAnswer.getQuestion());
-        event.put("answer", rubyAnswer.getAnswer());
-
-        TrackingThread t = new TrackingThread(event, log);
-        t.start();
-
-        logger.info("Returned answer:\n" + rubyAnswer.getAnswer());
-        rubyAnswer.setAnswer(rubyAnswer.getAnswer() + "</br>");
-
-        return rubyAnswer;
-        // return app.getAnswer(question);
+        if (ans.getAnswer().length() < 50) ans.setAnswer(ans.getAnswer() + " ^_^");
+        return ans;
     }
-
-    public class TrackingThread extends Thread {
-        Map<String, Object> event;
-        Log log;
-        public TrackingThread(Map<String, Object> event, Log log) {
-            this.event = event;
-            this.log = log;
-        }
-
-        public void run() {
-            logService.save(log);
-            track("userActivity", event);
-        }
-    }
-
-    @RequestMapping(value = "/updateNameMapper", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public boolean updateNameMapper() {
-        return true;
-    }
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model,
@@ -281,7 +191,7 @@ public class AppController {
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test(Model model){
+    public String test(Model model) {
         return "chat";
     }
 
@@ -291,8 +201,8 @@ public class AppController {
     public String reportQuestion(@RequestParam("question") String question,
                                  @RequestParam("answer") String answer,
                                  @RequestParam("intent") String intent,
-                                 @RequestParam("domain") String domain){
-        try{
+                                 @RequestParam("domain") String domain) {
+        try {
             ReportQuestion re = new ReportQuestion();
             re.setQuestion(question);
             re.setAnswer(answer);
@@ -300,40 +210,63 @@ public class AppController {
             re.setIntent(intent);
             reportQuestionService.save(re);
             return "success";
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             return "error";
         }
     }
 
     @RequestMapping(value = "/searchWeb", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public RubyAnswer confirmWebSearch(@RequestParam("question") String question){
+    public RubyAnswer confirmWebSearch(@RequestParam("question") String question) {
         RubyAnswer rubyAnswer = new RubyAnswer();
         rubyAnswer.setQuestion(question.trim());
-        try{
+        try {
             rubyAnswer.setAnswer(DisplayAnswerHelper.display(bingSearchService.getDocuments(question, 5)));
             return rubyAnswer;
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             rubyAnswer.setAnswer("Some thing went wrong! Please try again!");
             return rubyAnswer;
         }
     }
 
-	/*
-	 * @RequestMapping(value="/allCinema", method = RequestMethod.GET, produces
-	 * = "application/json; charset=UTF-8")
-	 * 
-	 * @ResponseBody public BasicDBObject testMovie(){ BasicDBObject result =
-	 * new BasicDBObject(); List<MovieTicket> movieTickets =
-	 * mongoOperation.findAll(MovieTicket.class); Set<String> cinemas = new
-	 * HashSet<String>(); Set<String> movies = new HashSet<String>(); for
-	 * (MovieTicket movieTicket : movieTickets) {
-	 * System.out.println(movieTicket.getCinema() + " " +
-	 * movieTicket.getMovie()); cinemas.add(movieTicket.getCinema());
-	 * movies.add(movieTicket.getMovie()); } result.append("cinemas", cinemas);
-	 * result.append("movies", movies ); return result; }
-	 */
+    private class TrackingThread extends Thread {
+        String userID, inputType;
+        RubyAnswer ans;
+        Log log;
+
+        public TrackingThread(RubyAnswer ans, Log log, String userID, String inputType) {
+            this.ans = ans;
+            this.log = log;
+            this.userID = userID;
+            this.inputType = inputType;
+        }
+
+        public void run() {
+            log.setAnswer(ans.getAnswer());
+            log.setIntent(ans.getIntent());
+            log.setDomain(ans.getDomain());
+
+            QueryParamater qu = new QueryParamater();
+            qu.setBeginTime(ans.getBeginTime());
+            qu.setEndTime(ans.getEndTime());
+            qu.setMovieTicket(ans.getMovieTicket());
+            qu.setMovieTitle(ans.getMovieTitle());
+            log.setQueryParamater(ans.getQueryParamater());
+
+            logService.save(log);
+
+            // Analytic
+            Map<String, Object> event = new HashMap<>();
+            event.put("userID", userID);
+            event.put("inputType", inputType);
+            event.put("domain", ans.getDomain());
+            event.put("intent", ans.getIntent());
+            event.put("question", ans.getQuestion());
+            event.put("answer", ans.getAnswer());
+            track("userActivity", event);
+        }
+    }
+
 
 }
+

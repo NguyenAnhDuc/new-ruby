@@ -10,12 +10,12 @@ import com.fpt.ruby.business.model.MovieFly;
 import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.service.MovieFlyService;
 import com.fpt.ruby.helper.FeaturedMovieHelper;
+import com.fpt.ruby.helper.MovieAnswerGenarator;
 
 
 public class AnswerMapper {
 	private static MovieAnswerMapper mam = new MovieAnswerMapperImpl();
-	private static TicketAnswerMapper tam = new TicketAnswerMapperImpl();
-	
+
 	public static String Static_Question = "static";
 	public static String Dynamic_Question = "dynamic";
 	public static String Featured_Question = "featured";
@@ -108,23 +108,7 @@ public class AnswerMapper {
 	}
 	
 	public static String getDynamicAnswer(String intent, List<MovieTicket> ans, MovieTicket matchMovieTicket, boolean haveTimeInfo){
-		if (intent.equals(IntentConstants.MOV_DATE)){
-			return tam.getDateTicketAnswer(ans, matchMovieTicket, haveTimeInfo);
-		}
-		
-		if (intent.equals(IntentConstants.CIN_NAME)){
-			return tam.getCinemaTicketAnswer(ans);
-		}
-		
-		if (intent.equals(IntentConstants.MOV_TYPE)){
-			return tam.getTypeTicketAnswer(ans);
-		}
-		
-		if (intent.equals(IntentConstants.MOV_TITLE)){
-			return tam.getTitleTicketAnswer(ans);
-		}
-		
-		return "Xin lỗi, chúng tôi chưa có câu trả lời cho câu hỏi của bạn";
+		return MovieAnswerGenarator.generateDynamicAnswer(ans,intent);
 	}
 	
 	

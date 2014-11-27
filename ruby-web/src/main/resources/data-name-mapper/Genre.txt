@@ -12,3 +12,4 @@ GENRE	ROMANCE; romance, romantic, tình cảm, tinh cam, lang man, lãng mạn, 
 GENRE	THRILLER; thriller, cảm động, xúc động, cam dong, xuc dong
 GENRE	WAR; war, chiến tranh, chien tranh, cuoc chien, cuộc chiến, thế chiến, the chien, tranh đấu, tranh dau, giao tranh, kháng chiến, khang chien
 GENRE	DRAMA; kịch, kich, kịch nói, vở kịch, phim kịch
+GENRE	CRIME; crime, tội phạm, toi pham, phạm tội, pham toi, truy nã, truy na, vuot nguc, vượt ngục

@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 public class SpringMongoConfig extends AbstractMongoConfiguration {
     private static String DEV_DB = "testdb";
     private static String PRO_DB = "yourdb";
-    private static Boolean isDevelop = true;
+    private static Boolean isDevelop = false;
 
     @Override
     public String getDatabaseName() {

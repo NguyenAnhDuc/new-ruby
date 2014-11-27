@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -110,50 +109,19 @@ public class MovieTicketService {
         return mongoOperations.findAll(MovieTicket.class);
     }
 
-    public List<MovieTicket> findMoviesMatchCondition(MovieTicket matchMovieTicket, Date beforeDate, Date afterDate) {
+    public List<MovieTicket> findMoviesMatchCondition(MovieTicket match, Date beforeDate, Date afterDate) {
         long start = System.currentTimeMillis();
-        if (beforeDate != null && afterDate != null)
-            logger.info("Find Movie Ticket match condition: " + beforeDate.toLocaleString() + " | " + afterDate.toLocaleString());
         Query query = new Query();
-        if (beforeDate == null && afterDate == null) {
-            System.out.println("[MovieTicketService]: beforeDate-afterDate null");
-            if (matchMovieTicket.getCinema() == null && matchMovieTicket.getMovie() == null)
-                return  new ArrayList<>();
-
-            else if (matchMovieTicket.getCinema() == null)
-                query =  new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(), "i"));
-            else if (matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_CINEMA).is(matchMovieTicket.getCinema()));
-            else query = new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(), "i").and(MT_CINEMA).is(matchMovieTicket.getCinema()));
-        }
-        else if (beforeDate == null && afterDate != null) {
-            if (matchMovieTicket.getCinema() == null && matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_DATE).lte(afterDate));
-            else if (matchMovieTicket.getCinema() == null)
-                query =  new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(), "i").and(MT_DATE).lte(afterDate));
-            else if (matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_CINEMA).is(matchMovieTicket.getCinema()).and(MT_DATE).lte(afterDate));
-            else query = new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(),"i").and(MT_CINEMA).is(matchMovieTicket.getCinema()).and(MT_DATE).lte(afterDate));
-        }
-        else if (beforeDate != null && afterDate == null) {
-            System.out.println("[MovieTicketService]: beforeDate-null");
-            if (matchMovieTicket.getCinema() == null && matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_DATE).gte(beforeDate));
-            else if (matchMovieTicket.getCinema() == null)
-                query =  new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(), "i").and(MT_DATE).gte(beforeDate));
-            else if (matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_CINEMA).is(matchMovieTicket.getCinema()).and(MT_DATE).gte(beforeDate));
-            else query = new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(), "i").and(MT_CINEMA).is(matchMovieTicket.getCinema()).and(MT_DATE).gte(beforeDate));
-        }
-        else {
-            if (matchMovieTicket.getCinema() == null && matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_DATE).lte(afterDate).gte(beforeDate));
-            else if (matchMovieTicket.getMovie() == null)
-                query =  new Query(Criteria.where(MT_CINEMA).is(matchMovieTicket.getCinema()).and(MT_DATE).lte(afterDate).gte(beforeDate));
-            else if (matchMovieTicket.getCinema() == null)
-                query =  new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(),"i").and(MT_DATE).lte(afterDate).gte(beforeDate));
-            else query = new Query(Criteria.where(MT_MOVIE).regex(matchMovieTicket.getMovie(),"i").and(MT_CINEMA).is(matchMovieTicket.getCinema()).and(MT_DATE).lte(afterDate).gte(beforeDate));
-        }
+        if (match.getCinema() != null && !match.getCinema().isEmpty())
+            query.addCriteria(Criteria.where(MT_CINEMA).regex(match.getCinema(),"i"));
+        if (match.getMovie() != null && !match.getMovie().isEmpty())
+            query.addCriteria(Criteria.where(MT_MOVIE).regex(match.getMovie(),"i"));
+        if (beforeDate != null && afterDate != null)
+            query.addCriteria(Criteria.where(MT_DATE).gte(beforeDate).lte(afterDate));
+        else if (beforeDate != null)
+            query.addCriteria(Criteria.where(MT_DATE).gte(beforeDate));
+        else if (afterDate != null)
+            query.addCriteria(Criteria.where(MT_DATE).lte(afterDate));
         System.out.println("[MovieTicketService] Time query: " + (System.currentTimeMillis() - start));
         return mongoOperations.find(query,MovieTicket.class);
     }

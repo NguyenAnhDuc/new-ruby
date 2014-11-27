@@ -3,7 +3,6 @@ package fpt.qa.rubyweb;
 import com.fpt.ruby.business.helper.DisplayAnswerHelper;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.Log;
-import com.fpt.ruby.business.model.QueryParamater;
 import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.helper.ProcessHelper;
 import com.fpt.ruby.model.ReportQuestion;
@@ -246,11 +245,6 @@ public class AppController {
             log.setIntent(ans.getIntent());
             log.setDomain(ans.getDomain());
 
-            QueryParamater qu = new QueryParamater();
-            qu.setBeginTime(ans.getBeginTime());
-            qu.setEndTime(ans.getEndTime());
-            qu.setMovieTicket(ans.getMovieTicket());
-            qu.setMovieTitle(ans.getMovieTitle());
             log.setQueryParamater(ans.getQueryParamater());
 
             logService.save(log);

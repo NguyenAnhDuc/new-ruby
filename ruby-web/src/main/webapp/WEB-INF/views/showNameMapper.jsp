@@ -1,227 +1,117 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 
 <tiles:insertDefinition name="defaultTemplate">
-	<tiles:putAttribute name="body">
-		<script type="text/javascript"
-			src="resources/js/jquery.confirm.min.js">
-			
-		</script>
-		<style>
-/* body {
-	padding-top: 50px;
-	padding-bottom: 20px;
-}
- */
-.row {
-	/* margin-top: 40px; */
-	padding: 0 10px;
-}
+    <tiles:putAttribute name="body">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var activeSystemClass = $('.list-group-item.active');
 
-.clickable {
-	cursor: pointer;
-}
+                //something is entered in search form
+                $('#btn-search').click(function () {
+                    var that = $('#system-search');
+                    // affect all table rows on in systems table
+                    var tableBody = $('.table-list-search tbody');
+                    var tableRowsClass = $('.table-list-search tbody tr');
+                    $('.search-sf').remove();
+                    tableRowsClass.each(function (i, val) {
 
-.panel-heading div {
-	margin-top: -18px;
-	font-size: 15px;
-}
+                        //Lower text for case insensitive
+                        var rowText = $(val).text().toLowerCase();
+                        var inputText = $(that).val().toLowerCase();
+                        if (inputText != '') {
+                            $('.search-query-sf').remove();
+                            tableBody.prepend('<tr class="search-query-sf"><td colspan="6"><strong>Searching for: "'
+                            + $(that).val()
+                            + '"</strong></td></tr>');
+                        }
+                        else {
+                            $('.search-query-sf').remove();
+                        }
 
-.panel-heading div span {
-	margin-left: 5px;
-}
+                        if (rowText.indexOf(inputText) == -1) {
+                            //hide rows
+                            tableRowsClass.eq(i).hide();
 
-.panel-body {
-	display: none;
-}
-</style>
+                        }
+                        else {
+                            $('.search-sf').remove();
+                            tableRowsClass.eq(i).show();
+                        }
+                    });
+                    //all tr elements are hidden
+                    if (tableRowsClass.children(':visible').length == 0) {
+                        tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
+                    }
+                });
+            });
+        </script>
 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                        <input class="form-control" id="system-search"
+                               onkeyup="if (event.keyCode == 13) document.getElementById('btn-search').click();"  placeholder="Search for" required>
+                    <span class="input-group-btn">
+                        <button id="btn-search" type="submit" class="btn btn-default">
+                            Search
+                        </button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-12">
+                    <table class="table table-list-search">
+                        <thead>
+                        <tr>
+                            <!-- <th>#</th> -->
+                            <th>Name</th>
+                            <th>Domain</th>
+                            <th>Type</th>
+                            <th>Variants</th>
+                            <th>IsDiacritic</th>
+                            <th>Date entered</th>
+                            <th>Last mentioned</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <%--  <%
+                                int i = 0;
+                            %> --%>
+                        <c:forEach var="nm" items="${nameMappers}">
+                            <%-- <%
+                                i++;
+                            %> --%>
+                            <tr>
+                                <td>${nm.name}</td>
+                                <td>${nm.domain}</td>
+                                <td>${nm.type}</td>
+                                <td>
+                                    <c:forEach var="n" items="${nm.variants}">
+                                        <c:out value="${n} | ">
+                                        </c:out>
+                                    </c:forEach></td>
+                                <td>${nm.isDiacritic}</td>
+                                <td>${nm.enteredDate.toLocaleString()}</td>
+                                <td>${nm.lastMention.toLocaleString()}</td>
+                                <td>
+                                    <div class="pull-right action-buttons">
 
-		<script type="text/javascript">
-			/**
-			 *   I don't recommend using this plugin on large tables, I just wrote it to make the demo useable. It will work fine for smaller tables 
-			 *   but will likely encounter performance issues on larger tables.
-			 *
-			 *		<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
-			 *		$(input-element).filterTable()
-			 *		
-			 *	The important attributes are 'data-action="filter"' and 'data-filters="#table-selector"'
-			 */
-			(function() {
-				'use strict';
-				var $ = jQuery;
-				$.fn
-						.extend({
-							filterTable : function() {
-								return this
-										.each(function() {
-											$(this)
-													.on(
-															'keyup',
-															function(e) {
-																$(
-																		'.filterTable_no_results')
-																		.remove();
-																var $this = $(this), search = $this
-																		.val()
-																		.toLowerCase(), target = $this
-																		.attr('data-filters'), $target = $(target), $rows = $target
-																		.find('tbody tr');
-																if (search == '') {
-																	$rows
-																			.show();
-																} else {
-																	$rows
-																			.each(function() {
-																				var $this = $(this);
-																				$this
-																						.text()
-																						.toLowerCase()
-																						.indexOf(
-																								search) === -1 ? $this
-																						.hide()
-																						: $this
-																								.show();
-																			})
-																	if ($target
-																			.find(
-																					'tbody tr:visible')
-																			.size() === 0) {
-																		var col_count = $target
-																				.find(
-																						'tr')
-																				.first()
-																				.find(
-																						'td')
-																				.size();
-																		var no_results = $('<tr class="filterTable_no_results"><td colspan="'+col_count+'">No results found</td></tr>')
-																		$target
-																				.find(
-																						'tbody')
-																				.append(
-																						no_results);
-																	}
-																}
-															});
-										});
-							}
-						});
-				$('[data-action="filter"]').filterTable();
-			})(jQuery);
-
-			$(function() {
-				// attach table filter plugin to inputs
-				$('[data-action="filter"]').filterTable();
-
-				$('.container').on(
-						'click',
-						'.panel-heading span.filter',
-						function(e) {
-							var $this = $(this), $panel = $this
-									.parents('.panel');
-
-							$panel.find('.panel-body').slideToggle();
-							if ($this.css('display') != 'none') {
-								$panel.find('.panel-body input').focus();
-							}
-						});
-				$('[data-toggle="tooltip"]').tooltip();
-			})
-		</script>
-
-		</head>
-
-
-		<body>
-
-
-			<div class="row">
-				<div class="col-md-2 col-md-offset-5"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<h4>
-						Click the filter icon <small>(<i
-							class="glyphicon glyphicon-filter"></i>)
-						</small> to filter
-					</h4>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Name Mapper</h3>
-							<div class="pull-right">
-								<span class="clickable filter" data-toggle="tooltip"
-									title="Toggle table filter" data-container="body"> <i
-									class="glyphicon glyphicon-filter"></i>
-								</span>
-							</div>
-						</div>
-						<div class="panel-body">
-							<input type="text" class="form-control" id="dev-table-filter"
-								data-action="filter" data-filters="#dev-table"
-								placeholder="Filter Bots" />
-						</div>
-						<table class="table table-hover" id="dev-table">
-							<thead>
-								<tr>
-									<!-- <th>#</th> -->
-									<th>Name</th>
-									<th>Domain</th>
-									<th>Type</th>
-									<th>Variants</th>
-									<th>IsDiacritic</th>
-									<th>Date entered</th>
-									<th>Last mentioned</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%--  <%
-									int i = 0;
-								%> --%>
-								<c:forEach var="nm" items="${nameMappers}">
-									<%-- <%
-										i++;
-									%> --%>
-									<tr>
-										<td>${nm.name}</td>
-										<td>${nm.domain}</td>
-										<td>${nm.type}</td>
-										<td>
-										<c:forEach var="n" items="${nm.variants}">
-												<c:out value="${n} | ">
-												</c:out>
-										</c:forEach></td>
-										<td>${nm.isDiacritic}</td>
-										<td>${nm.enteredDate.toLocaleString()}</td>
-										<td>${nm.lastMention.toLocaleString()}</td>
-										<td>
-											<div class="pull-right action-buttons">
-
-												<a href="deleteTicket?ticketId=xx"
-													class="trash"><span
-													class="glyphicon glyphicon-trash"></span></a>
-											</div>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<!-- <a class="btn btn-info" href="crawl">Add Data</a> -->
-				</div>
-			</div>
-			<script src="resources/js/run_prettify.js"></script>
-			<script type="text/javascript">
-				$(".simpleConfirm").confirm();
-			</script>
-	</tiles:putAttribute>
+                                        <a href="deleteTicket?ticketId=xx"
+                                           class="trash"><span
+                                                class="glyphicon glyphicon-trash"></span></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </tiles:putAttribute>
 </tiles:insertDefinition>

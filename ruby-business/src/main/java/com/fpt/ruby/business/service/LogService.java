@@ -1,8 +1,7 @@
 package com.fpt.ruby.business.service;
 
-import java.util.Date;
-import java.util.List;
-
+import com.fpt.ruby.business.config.SpringMongoConfig;
+import com.fpt.ruby.business.model.Log;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -10,8 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.fpt.ruby.business.config.SpringMongoConfig;
-import com.fpt.ruby.business.model.Log;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class LogService {
@@ -29,11 +28,7 @@ public class LogService {
 		return mongoOperations.findAll(Log.class);
 	}
 	
-	public List<Log> findByTitle(String title){
-		Query query = new Query(Criteria.where("title").regex("^" + title + "$","i"));
-		return mongoOperations.find(query, Log.class);
-	}
-	
+
 	public List<Log> findLogGtTime(Date date){
 		Query query = new Query(Criteria.where("date").gt(date));
 		return mongoOperations.find(query, Log.class);

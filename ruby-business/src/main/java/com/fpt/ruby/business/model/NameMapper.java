@@ -1,11 +1,10 @@
 package com.fpt.ruby.business.model;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.springframework.data.annotation.*;
-import org.springframework.data.mongodb.core.mapping.*;
+import java.util.Date;
+import java.util.Set;
 
 @Document
 public class NameMapper {
@@ -18,14 +17,25 @@ public class NameMapper {
 	Boolean isDiacritic;
 	Date enteredDate;
 	Date lastMention;
+	Boolean isReviewed;
+
 	
 	public NameMapper() {
 		domain = type = name = null;
 		variants = null;
 		isDiacritic = null;
 		enteredDate = lastMention = null;
+		isReviewed = false;
 	}
-	
+
+	public Boolean getIsReviewed() {
+		return isReviewed;
+	}
+
+	public void setIsReviewed(Boolean isReviewed) {
+		this.isReviewed = isReviewed;
+	}
+
 	public Boolean getIsDiacritic() {
 		return isDiacritic;
 	}

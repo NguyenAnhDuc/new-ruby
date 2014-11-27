@@ -91,18 +91,18 @@ public class QueryParamater {
 	public String toShow() {
 		StringBuilder result = new StringBuilder().append("{");
 		if (movieTitle != null)
-			result.append("Movie Title: " + movieTitle + " | ");
+			result.append("Movie Title: " + movieTitle + "</br>");
 		if (movieTicket != null)
-			result.append("Movie Ticket: " + movieTicket.toShow() + " | ");
+			result.append("Movie Ticket: " + movieTicket.toShow() + "</br>");
 		if (beginTime != null)
-			result.append("Begin Time: " + beginTime.toLocaleString() + " | ");
+			result.append("Begin Time: " + beginTime.toLocaleString() + "</br>");
 		if (endTime != null)
-			result.append("End Time: " + endTime.toLocaleString() + " | ");
+			result.append("End Time: " + endTime.toLocaleString() + "</br>");
 		if (tvChannel != null)
-			result.append("TVChannel: " + tvChannel + " | ");
+			result.append("TVChannel: " + tvChannel + "</br>");
 		if (tvProTitle != null)
-			result.append("TVProgram: " + tvProTitle + " | ");
-		result.append("Question type: " + types + " | ");
+			result.append("TVProgram: " + tvProTitle + "</br>");
+		result.append("Question type: " + types + "</br>");
 		return result.append("}").toString();
 	}
 }

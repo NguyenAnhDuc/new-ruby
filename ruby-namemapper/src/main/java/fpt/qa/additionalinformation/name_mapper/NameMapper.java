@@ -23,6 +23,7 @@ public class NameMapper {
                 continue;
             }
             int i = line.indexOf('\t');
+            System.out.println("i" + i);
             String type = line.substring(0, i).trim();
             int j = line.indexOf(';');
             String finalName;

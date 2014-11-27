@@ -9,7 +9,7 @@ TYPE	FOOTBALL; football, foot ball, đá bóng, da bong,trận bóng,tran bong ,
 TYPE	FASHION; fashion, thời trang, thoi trang, bộ sưu tập, xuân hè, catwalk, top model, bo suu tap
 TYPE	DISCOVERY; discovery, khám phá, kham pha
 TYPE	SCIENCE; science, khoa hoc, khoa học
-TYPE	ENTERTAINMENT; entertaiment, giải trí, giai tri, giai tri tong hop
+TYPE	ENTERTAINMENT; entertaiment, giải trí, giai tri, giai tri tong hop, hay, thú vị, hay ho, thu vi, đặc sắc, dac sac
 TYPE	REPORT; report, báo cáo, bao cao, diem tin, điểm tin, điểm báo, diem bao
 TYPE	STYLE; style, phong cách, phong cách sống, giới trẻ, thanh niên, teen, tuổi teen
 TYPE	GOLF;golf, gôn, giải golf, trận gôn, giai gon, tran golf

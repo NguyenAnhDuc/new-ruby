@@ -59,7 +59,7 @@ public class NameMapperService {
 				x.add(s.toLowerCase() + n.getType() + n.getDomain());
 			}
 		}
-		System.out.println(x.size());
+		//System.out.println(x.size());
 
 	}
 

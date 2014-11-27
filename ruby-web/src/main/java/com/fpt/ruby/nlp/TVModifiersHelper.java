@@ -81,14 +81,14 @@ public class TVModifiersHelper {
             mod.setType(null);
         }
 
-        if(mod.getType() != null && mod.getType().contains(ProgramType.FILM.toString())) {
+        if (mod.getType() != null && mod.getType().contains(ProgramType.FILM.toString())) {
             System.err.println("|||||||||||||||||||||||||||||||||||||||||||");
             boolean specific = false;
             GenreExtractor genreExtractor = new GenreExtractor();
             LangExtractor langExtractor = new LangExtractor();
             List<String> genre = genreExtractor.getGenre(question);
 
-            if(genre != null) {
+            if (genre != null) {
                 specific = true;
                 List<String> types = mod.getType();
                 types.addAll(genre);
@@ -96,7 +96,7 @@ public class TVModifiersHelper {
             }
 
             List<String> langs = langExtractor.getLanguage(question);
-            if(langs != null) {
+            if (langs != null) {
                 specific = true;
                 List<String> types = mod.getType();
                 types.addAll(langs);
@@ -110,6 +110,4 @@ public class TVModifiersHelper {
         System.out.println("mod.type = " + mod.getType());
         return mod;
     }
-
-
 }

@@ -23,7 +23,7 @@ public class NameMapperEngine {
 	public void loadDomainMapper(String domainName, String dataFileName) {
 		NameMapper mapper = new NameMapper(resourcePath + "/data-name-mapper/"
 				+ dataFileName);
-		System.out.println(mapper.getAllNames().size());
+		//System.out.println(mapper.getAllNames().size());
 		mappers.put(domainName, mapper);
 	}
 	
@@ -70,10 +70,10 @@ public class NameMapperEngine {
 		List<Pair<String, String>> allNames = new ArrayList<Pair<String, String>>();
 
 		for (String domainName : mappers.keySet()) {
-			System.out.println(domainName + " __ " + mappers.get(domainName).getAllNames().size());
+			//System.out.println(domainName + " __ " + mappers.get(domainName).getAllNames().size());
 			allNames.addAll(mappers.get(domainName).getAllNames());
 		}
-		System.out.println(allNames.size());
+		//System.out.println(allNames.size());
 		return allNames;
 	}
 

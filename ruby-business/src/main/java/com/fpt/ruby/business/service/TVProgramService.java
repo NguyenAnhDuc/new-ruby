@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -502,10 +503,12 @@ public class TVProgramService {
         if (type == null || type.isEmpty()) {
             return lst;
         }
+
+        List<String> andCondition = type.stream().filter(t -> t.contains(":")).collect(Collectors.toList());
+
         long start = System.currentTimeMillis();
         List<TVProgram> res = new ArrayList<TVProgram>();
         for (TVProgram prog : lst) {
-            boolean check = true;
             String curType = prog.getType();
             if (curType == null)
                 continue;
@@ -515,6 +518,23 @@ public class TVProgramService {
                     break;
                 }
         }
+
+        if (andCondition.size() > 1) {
+            List<TVProgram> finedRes = new ArrayList<>();
+
+            for (TVProgram prog: res) {
+                boolean isOK = true;
+                for (String t: andCondition) {
+                    if (!prog.getType().contains(t)) {
+                        isOK = false;
+                        break;
+                    }
+                }
+                if (isOK) finedRes.add(prog);
+            }
+            res = finedRes;
+        }
+
         return res;
     }
 

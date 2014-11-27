@@ -158,6 +158,12 @@ public class MovieTicketService {
         return mongoOperations.find(query,MovieTicket.class);
     }
 
+    public boolean matchTitle(String title) {
+        Query q = new Query(Criteria.where("title").regex("^" + title + "$", "i"));
+        List<MovieTicket> x = mongoOperations.find(q, MovieTicket.class);
+        return x.size() > 0;
+    }
+
     public boolean existedInDb(MovieTicket movTicket) {
         List<MovieTicket> movieTickets = findMatch(movTicket);
         if (movieTickets.size() == 0) {

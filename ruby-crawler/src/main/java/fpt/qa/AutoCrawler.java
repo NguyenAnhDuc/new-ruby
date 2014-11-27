@@ -1,6 +1,5 @@
 package fpt.qa;
 
-import com.fpt.ruby.business.model.NameMapper;
 import com.fpt.ruby.business.service.MovieTicketService;
 import com.fpt.ruby.business.service.NameMapperService;
 import com.fpt.ruby.business.service.TVProgramService;
@@ -12,79 +11,79 @@ import fpt.qa.type_mapper.TypeMapper;
 
 public class AutoCrawler {
 
-	private MovieTicketService movieTicketService;
-	private TVProgramService tvProgramService;
-//	private LogService logService;
-	private static Integer FUTURE_DAY = 3;
-	// private CinemaService cinemaService;
+    //	private LogService logService;
+    private static Integer FUTURE_DAY = 3;
+    private MovieTicketService movieTicketService;
+    private TVProgramService tvProgramService;
+    // private CinemaService cinemaService;
 
-	private void doCrawl(String dir, int numday) {
-		movieTicketService = new MovieTicketService();
-		tvProgramService = new TVProgramService();
-		CrawlerVTVCab vtvcab = new CrawlerVTVCab();
-		CrawlerMyTV mytv = new CrawlerMyTV();
+    public static void main(String[] args) {
+        String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+        int numday = 3;
 
-		// Clean data
-		try {
-			movieTicketService.cleanOldData();
-		} catch (Exception e) {
-			System.out.println("error clean movie ticket.");
-		}
+        if (args.length >= 1) {
+            dir = args[0];
+            if (args.length >= 2) {
+                numday = Integer.parseInt(args[1]);
+            }
+        }
 
-		try {
-			tvProgramService.cleanOldData();
-		} catch (Exception e) {
-			System.out.println("error clean movie ticket.");
-		}
+        System.out.println("Start!");
+        AutoCrawler x = new AutoCrawler();
+        x.doCrawl(dir, numday);
+    }
 
-		try {
-			for (int i = 0; i <= numday; ++i) {
-				movieTicketService.clearDataOnSpecificDay(i);
-				tvProgramService.clearDataOnSpecificDay(i);
-			}
-		} catch (Exception e) {
-			System.out.println("Error clear on specific data. Message = " + e.getMessage());
-		}
+    private void doCrawl(String dir, int numday) {
+        movieTicketService = new MovieTicketService();
+        tvProgramService = new TVProgramService();
+        CrawlerVTVCab vtvcab = new CrawlerVTVCab();
+        CrawlerMyTV mytv = new CrawlerMyTV();
 
-		// Start crawling
-		NameMapperService nms = new NameMapperService();
-		ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nms);
+        // Clean data
+        try {
+            movieTicketService.cleanOldData();
+        } catch (Exception e) {
+            System.out.println("error clean movie ticket.");
+        }
 
-		try {
-			mytv.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
-		} catch (Exception ex) {
-			System.out.println("Error crawling my tv!! Message = " + ex.getMessage());
-		}
+        try {
+            tvProgramService.cleanOldData();
+        } catch (Exception e) {
+            System.out.println("error clean movie ticket.");
+        }
 
-		try {
-//			vtvcab.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
-		} catch (Exception ex) {
-			System.out.println("Eror crawling vtvcab!! Message = " + ex.getMessage());
-		}
+        try {
+            for (int i = 0; i <= numday; ++i) {
+                movieTicketService.clearDataOnSpecificDay(i);
+                tvProgramService.clearDataOnSpecificDay(i);
+            }
+        } catch (Exception e) {
+            System.out.println("Error clear on specific data. Message = " + e.getMessage());
+        }
 
-		TypeMapper.clear(); // clear data
+        // Start crawling
+        NameMapperService nms = new NameMapperService();
+        ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nms);
 
-		try {
-//			MoveekCrawler.doCrawl(movieTicketService);
-		} catch (Exception ex) {
-			System.out.println("Eror crawling moveek!! Message = " + ex.getMessage());
-		}
-	}
+        try {
+            mytv.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
+        } catch (Exception ex) {
+            System.out.println("Error crawling my tv!! Message = " + ex.getMessage());
+        }
 
-	public static void main(String[] args) {
-		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
-		int numday = 3;
+        try {
+            vtvcab.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
+        } catch (Exception ex) {
+            System.out.println("Eror crawling vtvcab!! Message = " + ex.getMessage());
+        }
 
-		if (args.length >= 1) {
-			dir = args[0];
-			if (args.length >= 2) {
-				numday = Integer.parseInt(args[1]);
-			}
-		}
+        TypeMapper.clear(); // clear data
 
-		System.out.println("Start!");
-		AutoCrawler x = new AutoCrawler();
-		x.doCrawl(dir, numday);
-	}
+        try {
+            MoveekCrawler.doCrawl(movieTicketService);
+        } catch (Exception ex) {
+            System.out.println("Eror crawling moveek!! Message = " + ex.getMessage());
+        }
+    }
 
 }

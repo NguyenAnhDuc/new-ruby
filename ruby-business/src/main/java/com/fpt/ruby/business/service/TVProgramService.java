@@ -13,21 +13,20 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service
 public class TVProgramService {
+    private final static Comparator<TVProgram> START_CMP
+            = (o1, o2) -> o1.getStart_date().compareTo(o2.getStart_date());
     private static long ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
-    private MongoOperations mongoOperations;
     private final String FIELD_CHANNEL = "channel";
     private final String FIELD_TITLE = "title";
     private final String FIELD_TYPES = "type";
     private final String FIELD_START = "start_date";
     private final String FIELD_END = "end_date";
-    private final static Comparator<TVProgram> START_CMP
-            = (o1, o2) -> o1.getStart_date().compareTo(o2.getStart_date());
+    private MongoOperations mongoOperations;
 
     public TVProgramService(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
@@ -99,15 +98,20 @@ public class TVProgramService {
 
     }
 
-    public List<TVProgram> findByPatamates(TVModifiers mods){
+    public List<TVProgram> findByPatamates(TVModifiers mods) {
         Query query = new Query();
         Criteria criteria = new Criteria();
+
         if (mods.getChannel() != null && !mods.getChannel().isEmpty())
             query.addCriteria(Criteria.where(FIELD_CHANNEL).is(mods.getChannel().toLowerCase()));
+
         if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
             query.addCriteria(Criteria.where(FIELD_TITLE).is(mods.getProg_title().toLowerCase()));
-        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0)
+
+        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0) {
             query.addCriteria(Criteria.where(FIELD_TYPES).regex(genRegex(mods.getType())));
+        }
+
         if (mods.getStart() != null && mods.getEnd() != null && mods.getStart() == mods.getEnd())
             query.addCriteria(Criteria.where(FIELD_START).lte(mods.getStart()).and(FIELD_END).gte(mods.getStart()));
         else if (mods.getStart() != null && mods.getEnd() != null)
@@ -116,11 +120,44 @@ public class TVProgramService {
             query.addCriteria(Criteria.where(FIELD_START).gte(mods.getStart()).and(FIELD_END).gte(mods.getStart()));
         else if (mods.getEnd() != null)
             query.addCriteria(Criteria.where(FIELD_START).lte(mods.getEnd()).and(FIELD_END).lte(mods.getEnd()));
-        System.out.println("[TVPROGRAMSERVICE]: Query"+ query.toString());
+
+        System.out.println("[TVPROGRAMSERVICE]: Query" + query.toString());
 
         List<TVProgram> result = mongoOperations.find(query, TVProgram.class);
+        // Fix bug film:action && film:usa
+        result = filterListByFeatureType(result, mods.getType());
+
         result.sort(START_CMP);
         return result;
+    }
+
+    public static List<TVProgram> filterListByFeatureType(List<TVProgram> progs, List<String> types) {
+        if (types == null || types.size() < 2) return progs;
+
+        List<TVProgram> rs = new ArrayList<>();
+        List<String> featured = new ArrayList<>();
+
+        for (String type : types) {
+            if (type.contains(":")) {
+                featured.add(type);
+            }
+        }
+
+        if (featured.size() >= 2) {
+            for (TVProgram prog: progs) {
+                boolean isOK = true;
+                for (String f: featured) {
+                    if (!prog.getType().contains(f)) {
+                        isOK = false;
+                        break;
+                    }
+                }
+                if (isOK)   rs.add(prog);
+            }
+            return rs;
+        }
+
+        return progs;
     }
 
     public List<TVProgram> findAll() {

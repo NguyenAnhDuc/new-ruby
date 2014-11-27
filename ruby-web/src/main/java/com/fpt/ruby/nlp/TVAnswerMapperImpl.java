@@ -9,13 +9,7 @@ import com.fpt.ruby.intent.detection.TVIntentDetect;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
-import fpt.qa.mdnlib.util.string.StrUtil;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
-import fpt.qa.vnTime.vntime.VnTimeParser;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -115,13 +109,6 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         return rubyAnswer;
     }
 
-
-
-
-
-
-
-
     public String getChannelProgAndTime(List<TVProgram> progs) {
         if (progs.isEmpty())
             return DEF_ANS;
@@ -136,35 +123,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
             TVProgram tv = progs.get(i);
             info += tv.getChannel() + " : " + sdf.format(tv.getStart_date()) + " : " + tv.getTitle() + "</br>";
         }
-
-
         return info;
     }
-
-
-	/*public void studyFile(String fileIn, String fileOut){
-		try{
-			BufferedReader reader = new BufferedReader( new FileReader( fileIn ) );
-			BufferedWriter writer = new BufferedWriter( new FileWriter( fileOut ) );
-
-			String line;
-			while ((line = reader.readLine()) != null){
-				writer.write( getAnswer( line  ) + "\n");
-			}
-
-			writer.close();
-			reader.close();
-		}catch ( IOException e ){
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public static void main (String[] args){
-		TVAnswerMapperImpl tam = new TVAnswerMapperImpl();
-		tam.init();
-		tam.studyFile( "D:\\Workspace\\Code\\FTI\\rubyweb\\AIML_tvd_questions.txt",
-				"D:\\Workspace\\Code\\FTI\\rubyweb\\AIML_tvd_questions.out" );
-	}*/
 
 }

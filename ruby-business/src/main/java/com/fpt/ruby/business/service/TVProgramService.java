@@ -23,6 +23,11 @@ public class TVProgramService {
     private static long ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
     private MongoOperations mongoOperations;
+    private final String FIELD_CHANNEL = "channel";
+    private final String FIELD_TITLE = "title";
+    private final String FIELD_TYPES = "type";
+    private final String FIELD_START = "start_date";
+    private final String FIELD_END = "end_date";
 
     public TVProgramService(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
@@ -90,127 +95,33 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
+        return findByPatamates(mod);
 
-        String channel = mod.getChannel();
-        if (channel != null) channel = channel.toLowerCase().trim();
+    }
 
-        String title = mod.getProg_title();
-        if (title != null) title = title.toLowerCase().trim();
-
-        Date start = mod.getStart();
-        Date end = mod.getEnd();
-        List<String> types = mod.getType();
-
-        if (channel == null || channel.isEmpty()){
-            if (title != null && !title.trim().isEmpty())
-                return findByTitle(start,end,title);
-            if (types != null && types.size() > 0)
-                return findByType(start,end,types);
-            return findAtPeriod(start,end);
-        }
-        else{
-            if (title != null && !title.trim().isEmpty())
-                return findByTitleAndChannel(start, end, title, channel);
-            if (types != null && types.size() > 0)
-                return findByTypeAndChannel(start, end, types, channel);
-            return findByChannel(start,end,channel);
-        }
-
-
+    public List<TVProgram> findByPatamates(TVModifiers mods){
+        Query query = new Query();
+        Criteria criteria = new Criteria();
+        if (mods.getChannel() != null && !mods.getChannel().isEmpty())
+            query.addCriteria(Criteria.where(FIELD_CHANNEL).is(mods.getChannel().toLowerCase()));
+        if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
+            query.addCriteria(Criteria.where(FIELD_TITLE).is(mods.getProg_title().toLowerCase()));
+        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0)
+            query.addCriteria(Criteria.where(FIELD_TYPES).regex(genRegex(mods.getType())));
+        if (mods.getStart() != null && mods.getEnd() != null && mods.getStart() == mods.getEnd())
+            query.addCriteria(Criteria.where(FIELD_START).lte(mods.getStart()).and(FIELD_END).gte(mods.getStart()));
+        else if (mods.getStart() != null && mods.getEnd() != null)
+            query.addCriteria(Criteria.where(FIELD_START).gte(mods.getStart()).lte(mods.getEnd()));
+        else if (mods.getStart() != null)
+            query.addCriteria(Criteria.where(FIELD_START).gte(mods.getStart()).and(FIELD_END).gte(mods.getStart()));
+        else if (mods.getEnd() != null)
+            query.addCriteria(Criteria.where(FIELD_START).lte(mods.getEnd()).and(FIELD_END).lte(mods.getEnd()));
+        System.out.println("[TVPROGRAMSERVICE]: Query"+ query.toString());
+        return mongoOperations.find(query,TVProgram.class);
     }
 
     public List<TVProgram> findAll() {
         return mongoOperations.findAll(TVProgram.class);
-    }
-
-    public List<TVProgram> findAtPeriod(Date start, Date end) {
-        Query query = new Query();
-        if (start == null && end ==null)
-            query = new Query(Criteria.where("start_date"));
-        else if (start != null && end !=null)
-            if (start == end) query = new Query(Criteria.where("start_date").lte(start).and("end_date").gte(start));
-            else query = new Query(Criteria.where("start_date").gte(start).lte(end));
-        else if (start != null)
-            query = new Query(Criteria.where("start_date").gte(start));
-        else
-            query = new Query(Criteria.where("start_date").lte(end));
-        return mongoOperations.find(query, TVProgram.class);
-    }
-
-    public List<TVProgram> findByChannel(Date start, Date end,
-                                         String channel) {
-        Query query = new Query();
-        if (start == null && end ==null)
-            query = new Query(Criteria.where("channel").is(channel).and("start_date"));
-        else if (start != null && end !=null)
-            if (start == end) query = new Query(Criteria.where("channel").is(channel).and("start_date").lte(start).and("end_date").gte(start));
-            else query = new Query(Criteria.where("channel").is(channel).and("start_date").gte(start).lte(end));
-        else if (start != null)
-            query = new Query(Criteria.where("channel").is(channel).and("start_date").gte(start));
-        else
-            query = new Query(Criteria.where("channel").is(channel).and("start_date").lte(end));
-        return mongoOperations.find(query, TVProgram.class);
-    }
-
-    public List<TVProgram> findByTitle(Date start, Date end,
-                                       String title) {
-        Query query = new Query();
-        if (start == null && end ==null)
-            query = new Query(Criteria.where("title").is(title).and("start_date"));
-        else if (start != null && end !=null)
-            if (start == end) query = new Query(Criteria.where("title").is(title).and("start_date").lte(start).and("end_date").gte(start));
-            else query = new Query(Criteria.where("title").is(title).and("start_date").gte(start).lte(end));
-        else if (start != null)
-            query = new Query(Criteria.where("title").is(title).and("start_date").gte(start));
-        else
-            query = new Query(Criteria.where("title").is(title).and("start_date").lte(end));
-        return mongoOperations.find(query, TVProgram.class);
-    }
-
-    public List<TVProgram> findByTitleAndChannel(Date start, Date end,
-                                         String title, String channel) {
-        Query query = new Query();
-        if (start == null && end ==null)
-            query = new Query(Criteria.where("title").is(title).and("channel").is(channel).and("start_date"));
-        else if (start != null && end !=null)
-            if (start == end) query = new Query(Criteria.where("title").is(title).and("channel").is(channel).and("start_date").lte(start).and("end_date").gte(start));
-            else query = new Query(Criteria.where("title").is(title).and("channel").is(channel).and("start_date").gte(start).lte(end));
-        else if (start != null)
-            query = new Query(Criteria.where("title").is(title).and("channel").is(channel).and("start_date").gte(start));
-        else
-            query = new Query(Criteria.where("title").is(title).and("channel").is(channel).and("start_date").lte(end));
-        return mongoOperations.find(query, TVProgram.class);
-    }
-
-    public List<TVProgram> findByType(Date start, Date end,
-                                       List<String> types) {
-        Query query = new Query();
-        if (start == null && end ==null)
-            query = new Query(Criteria.where("type").regex(genRegex(types)).and("start_date"));
-        else if (start != null && end !=null)
-            if (start == end) query = new Query(Criteria.where("type").regex(genRegex(types)).and("start_date").lte(start).and("end_date").gte(start));
-            else query = new Query(Criteria.where("type").regex(genRegex(types)).and("start_date").gte(start).lte(end));
-        else if (start != null)
-            query = new Query(Criteria.where("type").regex(genRegex(types)).and("start_date").gte(start));
-        else
-            query = new Query(Criteria.where("type").regex(genRegex(types)).and("start_date").lte(end));
-        return mongoOperations.find(query, TVProgram.class);
-    }
-
-    public List<TVProgram> findByTypeAndChannel(Date start, Date end,
-                                                 List<String> types, String channel) {
-        Query query = new Query();
-        if (start == null && end ==null)
-            query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel").is(channel).and("start_date"));
-        else if (start != null && end !=null){
-            if (start == end) query = new Query(Criteria.where("type").regex(genRegex(types)).and("start_date").lte(start).and("end_date").gte(start));
-            else query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel").is(channel).and("start_date").gte(start).lte(end));
-        }
-        else if (start != null)
-            query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel").is(channel).and("start_date").gte(start));
-        else
-            query = new Query(Criteria.where("type").regex(genRegex(types)).and("channel").is(channel).and("start_date").lte(end));
-        return mongoOperations.find(query, TVProgram.class);
     }
 
     public List<TVProgram> findTaggedProgram(Date start, Date end) {

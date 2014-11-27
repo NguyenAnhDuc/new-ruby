@@ -100,7 +100,8 @@ public class FeaturedMovieHelper {
 	
 	public static String filterByGenre(List<String> genre, List<MovieFly> movieFlies){
 		System.out.println("Filter by Genre: " + genre);
-		List<String> movieNames = new ArrayList<String>(); 
+		System.out.println(movieFlies.size() + " " + genre.size());
+		List<String> movieNames = new ArrayList<String>();
 		String movTitles = "";
 		for (MovieFly mf : movieFlies){
 			String movGen = mf.getGenre() != null ? mf.getGenre().toLowerCase() : null;
@@ -116,14 +117,14 @@ public class FeaturedMovieHelper {
 					movTitles += mf.getTitle() + "</br>";
 					movieNames.add(mf.getTitle());
 				}
-				
+
 			}
 		}
 
 		if (movTitles.isEmpty()){
 			return "Xin lỗi, chúng tôi không tìm thấy phim như thế trong cơ sở dữ liệu";
 		}
-		
+
 		return movTitles.substring(0, movTitles.length() - 2);
 	}
 	

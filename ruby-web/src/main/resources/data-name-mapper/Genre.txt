@@ -1,4 +1,4 @@
-GENRE	ACTION; hành động, hanh dong, đánh nhau, danh nhau, action, ác sừn, ac sun, ach sun, kiếm hiệp, kiem hiep, dã sử, da su
+GENRE	ACTION; hành động, hanh dong, đánh nhau, danh nhau, action, ác sừn, ac sun, ach sun, kiếm hiệp, kiem hiep, dã sử, da su, chưởng, chuong, chưởng bộ, chuong bo
 GENRE	ADVENTURE; phiêu lưu, phieu luu, rpg, đi cảnh, di canh, advent, adventure
 GENRE	ANIMATION; animation, ani, hoạt hình, hoạt họa, hoat hinh, hoat hoa, thieu nhi, thiếu nhi, trẻ nhỏ, trẻ thơ, tre nho, tre tho, nhi dong, nhi đồng, tre em, trẻ em
 GENRE	DOCUMENTARY; documentary, doc, document, tài liệu, tai lieu, tu lieu, tư liệu
@@ -11,3 +11,4 @@ GENRE	MUSICAL; music, musical, âm nhạc, ca nhạc, am nhac, ca nhac
 GENRE	ROMANCE; romance, romantic, tình cảm, tinh cam, lang man, lãng mạn, tâm lý, tam ly, tâm lí, tam li
 GENRE	THRILLER; thriller, cảm động, xúc động, cam dong, xuc dong
 GENRE	WAR; war, chiến tranh, chien tranh, cuoc chien, cuộc chiến, thế chiến, the chien, tranh đấu, tranh dau, giao tranh, kháng chiến, khang chien
+GENRE	DRAMA; kịch, kich, kịch nói, vở kịch, phim kịch

@@ -3,6 +3,7 @@ package com.fpt.ruby.business.service;
 import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.helper.HttpHelper;
 import com.fpt.ruby.business.model.MovieFly;
+import com.fpt.ruby.business.model.MovieTicket;
 import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 import org.json.JSONObject;
@@ -216,6 +217,12 @@ public class MovieFlyService {
             movieFlies.addAll(findByTitle(t));
         }
         return movieFlies;
+    }
+
+    public boolean matchTitle(String title) {
+        Query q = new Query(Criteria.where("title").regex("^" + title + "$", "i"));
+        List<MovieFly> x = mongoOperations.find(q, MovieFly.class);
+        return x.size() > 0;
     }
 
     private List<MovieFly> getAllMovieFrom2013() {

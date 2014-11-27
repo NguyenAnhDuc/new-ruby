@@ -196,6 +196,11 @@ public class CrawlerMyTV {
                             String oldDesc = tvProgram.getDescription() == null ? "" : tvProgram.getDescription();
                             tvProgram.setDescription(description + "\n" + oldDesc);
                         }
+
+                        // save to db
+                        if (!mfs.matchTitle(tvProgram.getTitle().trim())) {
+                            mfs.save(detail);
+                        }
                     }
                 }
 

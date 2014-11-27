@@ -3,4 +3,4 @@ LANG	US; usa, united state, american, mỹ, hoa kì, hoa kỳ, mĩ, my, mi, hoa 
 LANG	KOR; korea, korean, hàn quốc, hàn, han quoc, han, kim chi, xứ sở kim chi, xu so kim chi
 LANG	RUS; russia, russian, nga, liên bang nga, lien bang nga, lien xo, liên xô
 LANG	VI; vietnam, vietnamese, viet nam, việt nam, việt, phim việt, phim viet
-LANG	CHI; china, chinese, trung quốc, trung quoc, tàu, tau, hồng kông, hongkong, hồng công, hong cong, hong kong, tàu khựa, tau khua
+LANG	CHI; china, chinese, trung quốc, trung quoc, tàu, tau, hồng kông, hongkong, hồng công, hong cong, hong kong, tàu khựa, tau khua, chưởng bộ, chuong bo

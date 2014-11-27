@@ -23,7 +23,6 @@ public class NameMapper {
                 continue;
             }
             int i = line.indexOf('\t');
-            System.out.println("i" + i);
             String type = line.substring(0, i).trim();
             int j = line.indexOf(';');
             String finalName;
@@ -54,7 +53,7 @@ public class NameMapper {
             NamedEntity namedEntity = new NamedEntity(nameMapper.getType(), nameMapper.getName());
             nameMap.put(namedEntity, nameMapper.getVariants());
         }
-        System.out.println(domain + " -> " + nameMap.size());
+        //System.out.println(domain + " -> " + nameMap.size());
     }
 
     /**

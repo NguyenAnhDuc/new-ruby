@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TVAnswerMapperImpl implements TVAnswerMapper {
     public static final String DEF_ANS = "Chúng tôi không tìm thấy thông tin gì.";
-
+    private static final int ONE_HOUR = 60 * 60 * 1000;
     private final int limitSizeAnswer = 10;
     private TVIntentDetect intentDetector = new TVIntentDetect();
     private TVIntentDetect nonDiacritic = new TVIntentDetect();
@@ -62,23 +62,20 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         Date end = timeExtract.getAfterDate();
 
 
-      if (question.contains("đang") && !question.contains("đang làm gì") ||
-                question.contains("bây giờ") || question.contains("hiện tại") || question.contains("hiện giờ")) {
+      if (question.contains("đang") || question.contains("dang") ||
+          question.contains("bây giờ") || question.contains("bay gio") ||
+          question.contains("hiện tại") || question.contains("hien tai") ||
+          question.contains("hiện giờ") || question.contains("hien gio")) {
             start = new Date();
             end = start;
         }
 
-        if (question.contains("dang") && !question.contains("dang lam gi") ||
-                question.contains("bay gio") || question.contains("hien tai")
-                || question.contains("sap") || question.contains("tiep theo") || question.contains("hien gio")) {
-            start = new Date();
+        if (question.contains("sắp") && question.contains("sap") ||
+            question.contains("tiếp theo") || question.contains("tiep theo")){
+            start = new Date(new Date().getTime() + ONE_HOUR);
             end = start;
         }
 
-        if (start == null && end == null ) {
-            start = NlpHelper.getTimeCondition("hôm nay").getBeforeDate();
-            if (intent.equals(IntentConstants.TV_CHN)) start = null;
-        }
         mod.setStart(start);
         mod.setEnd(end);
 
@@ -109,7 +106,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
     public String getChannelProgAndTime(List<TVProgram> progs) {
         if (progs.isEmpty())
             return DEF_ANS;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm a");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MM hh:mm a");
         String info = "";
 
         int limit = limitSizeAnswer;

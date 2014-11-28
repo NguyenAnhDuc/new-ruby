@@ -123,16 +123,17 @@
 									queryParamater += "Question Type: " + result.queryParamater.types + "</br>";
 								}
 								$('#result-paramaters').html(queryParamater);
+								var htmlParamater = '', dateExtract = '';
+								if (result.queryParamater.beginTime != null)
+									dateExtract += 'Begin Time: '
+									+ new Date(result.queryParamater.beginTime) + "</br>";
+								if (result.queryParamater.endTime != null)
+									dateExtract += 'End Time: '
+									+ new Date(result.queryParamater.endTime);
+								+"</br>";
+								$('#result-time').html(dateExtract);
 							}
-							var htmlParamater = '', dateExtract = '';
-							if (result.beginTime != null)
-								dateExtract += 'Begin Time: '
-								+ new Date(result.beginTime) + "</br>";
-							if (result.endTime != null)
-								dateExtract += 'End Time: '
-								+ new Date(result.endTime);
-							+"</br>";
-							$('#result-time').html(dateExtract);
+
 							$('#result-final').html(result.answer);
 						},
 						error : function(result) {

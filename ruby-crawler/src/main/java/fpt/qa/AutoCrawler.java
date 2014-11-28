@@ -18,7 +18,7 @@ public class AutoCrawler {
     // private CinemaService cinemaService;
 
     public static void main(String[] args) {
-        String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
+        String dir = "C:\\Users\\ducna\\workspace\\new-ruby\\ruby-web/src/main/resources/";
         int numday = 3;
 
         if (args.length >= 1) {

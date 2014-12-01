@@ -1,9 +1,9 @@
 package com.fpt.ruby.business.service;
 
 import com.fpt.ruby.business.config.SpringMongoConfig;
-import com.fpt.ruby.business.model.CachedTVPrograms;
 import com.fpt.ruby.business.model.TVModifiers;
 import com.fpt.ruby.business.model.TVProgram;
+import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
@@ -47,14 +45,6 @@ public class TVProgramService {
     public static void main(String[] args) throws Exception {
         List<String> t = new ArrayList<String>(Arrays.asList("sport", "footBALL ", "entertainment"));
         System.out.println(genRegex(t));
-//        TVProgramService tvService = new TVProgramService();
-//        ApplicationContext ctx = new AnnotationConfigApplicationContext(
-//                SpringMongoConfig.class);
-//        MongoOperations mongoOperations = (MongoOperations) ctx
-//                .getBean("mongoTemplate");
-//        mongoOperations.findAll(TVProgram.class);
-//        System.out.println("DONE");
-
     }
 
     private static String genRegex(List<String> types) {
@@ -102,28 +92,29 @@ public class TVProgramService {
     public List<TVProgram> getList(TVModifiers mod) {
         //Supplier<List<TVProgram>> cachedPrograms = Suppliers.me
         return filterByParamaters(mod);
-
+        //return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){
-        Supplier<all> cachedTVProgramsSupplier = Suppliers.memoizeWithExpiration(this::findAll,1,TimeUnit.HOURS);
-        CachedTVPrograms cachedTVPrograms;
-        List<TVProgram> tvPrograms = findAll();
-
+        List<TVProgram> tvPrograms = getAllTVPrograms();
+        System.out.println("[Filter By Paramaters: ] Size: " + tvPrograms.size() );
         if (mods.getChannel() != null && !mods.getChannel().isEmpty())
             tvPrograms = tvPrograms.stream().filter(t->t.getChannel().equalsIgnoreCase(mods.getChannel())).collect(Collectors.toList());
+            System.out.println("[Filter By Paramaters: Channel] Size: " + tvPrograms.size() );
         if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
             tvPrograms = tvPrograms.stream().filter(t->t.getTitle().equalsIgnoreCase(mods.getProg_title())).collect(Collectors.toList());
-        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0) {
+        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0)
             tvPrograms = tvPrograms.stream().filter(t->t.getType().matches(genRegex(mods.getType()))).collect(Collectors.toList());
-        }
 
         if (mods.getStart() != null && mods.getEnd() != null && mods.getStart() == mods.getEnd())
             tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getStart()) && t.getEnd_date().after(mods.getStart())).collect(Collectors.toList());
         else if (mods.getStart() != null && mods.getEnd() != null)
-            tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().after(mods.getStart()) && t.getEnd_date().before(mods.getStart())).collect(Collectors.toList());
+            tvPrograms = tvPrograms.stream().filter(t->
+                        (t.getStart_date().after(mods.getStart()) && t.getStart_date().before(mods.getEnd())
+                        || (t.getEnd_date().after(mods.getStart()) && t.getEnd_date().before(mods.getEnd()))))
+                                .collect(Collectors.toList());
         else if (mods.getStart() != null)
-            tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().after(mods.getStart())).collect(Collectors.toList());
+            tvPrograms = tvPrograms.stream().filter(t->t.getEnd_date().after(mods.getStart())).collect(Collectors.toList());
         else if (mods.getEnd() != null)
             tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getEnd())).collect(Collectors.toList());
         return tvPrograms;
@@ -197,6 +188,8 @@ public class TVProgramService {
         return mongoOperations.findAll(TVProgram.class);
     }
 
+   
+
     public List<TVProgram> findTaggedProgram(Date start, Date end) {
         Query query = new Query(Criteria.where("start_date").gte(start)
                 .lte(end).and("types").not().regex("other"));
@@ -228,5 +221,16 @@ public class TVProgramService {
         Query query = new Query(Criteria.where("start_date").gt(date).lt(afterDate))
                 .with(new Sort(Direction.ASC, "start_date"));
         return mongoOperations.find(query, TVProgram.class);
+    }
+
+    private Supplier<List<TVProgram>> allTVPrograms = Suppliers.memoizeWithExpiration(
+            new Supplier<List<TVProgram>>() {
+                public List<TVProgram> get() {
+                    return findAll();
+                }
+            }, 1, TimeUnit.MINUTES);
+
+    public List<TVProgram> getAllTVPrograms() {
+        return allTVPrograms.get();
     }
 }

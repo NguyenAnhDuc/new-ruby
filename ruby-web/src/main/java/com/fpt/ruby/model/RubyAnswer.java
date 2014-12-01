@@ -15,7 +15,7 @@ public class RubyAnswer {
 	private boolean isInCache;
 	private String intent;
 	private boolean successful = false;
-	
+	private String query;
 	
 	public String getDomain() {
 		return domain;
@@ -52,6 +52,14 @@ public class RubyAnswer {
 	}
 	public void setInCache(boolean isInCache) {
 		this.isInCache = isInCache;
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
 	}
 
 	public void setQueryParamater(QueryParamater queryParamater) {

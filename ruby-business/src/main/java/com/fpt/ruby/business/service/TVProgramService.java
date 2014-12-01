@@ -1,8 +1,10 @@
 package com.fpt.ruby.business.service;
 
 import com.fpt.ruby.business.config.SpringMongoConfig;
+import com.fpt.ruby.business.model.CachedTVPrograms;
 import com.fpt.ruby.business.model.TVModifiers;
 import com.fpt.ruby.business.model.TVProgram;
+import com.google.common.base.Suppliers;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Sort;
@@ -13,6 +15,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -31,7 +37,7 @@ public class TVProgramService {
     public TVProgramService(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
     }
-
+    private List<TVProgram> all;
     public TVProgramService() {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(
                 SpringMongoConfig.class);
@@ -94,11 +100,36 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-        return findByPatamates(mod);
+        //Supplier<List<TVProgram>> cachedPrograms = Suppliers.me
+        return filterByParamaters(mod);
 
     }
 
-    public List<TVProgram> findByPatamates(TVModifiers mods) {
+    public List<TVProgram> filterByParamaters(TVModifiers mods){
+        Supplier<all> cachedTVProgramsSupplier = Suppliers.memoizeWithExpiration(this::findAll,1,TimeUnit.HOURS);
+        CachedTVPrograms cachedTVPrograms;
+        List<TVProgram> tvPrograms = findAll();
+
+        if (mods.getChannel() != null && !mods.getChannel().isEmpty())
+            tvPrograms = tvPrograms.stream().filter(t->t.getChannel().equalsIgnoreCase(mods.getChannel())).collect(Collectors.toList());
+        if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
+            tvPrograms = tvPrograms.stream().filter(t->t.getTitle().equalsIgnoreCase(mods.getProg_title())).collect(Collectors.toList());
+        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0) {
+            tvPrograms = tvPrograms.stream().filter(t->t.getType().matches(genRegex(mods.getType()))).collect(Collectors.toList());
+        }
+
+        if (mods.getStart() != null && mods.getEnd() != null && mods.getStart() == mods.getEnd())
+            tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getStart()) && t.getEnd_date().after(mods.getStart())).collect(Collectors.toList());
+        else if (mods.getStart() != null && mods.getEnd() != null)
+            tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().after(mods.getStart()) && t.getEnd_date().before(mods.getStart())).collect(Collectors.toList());
+        else if (mods.getStart() != null)
+            tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().after(mods.getStart())).collect(Collectors.toList());
+        else if (mods.getEnd() != null)
+            tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getEnd())).collect(Collectors.toList());
+        return tvPrograms;
+    }
+
+    public List<TVProgram> findByParamaters(TVModifiers mods) {
         Query query = new Query();
         Criteria criteria = new Criteria();
 
@@ -128,8 +159,10 @@ public class TVProgramService {
         result = filterListByFeatureType(result, mods.getType());
 
         result.sort(START_CMP);
+
         return result;
     }
+
 
     public static List<TVProgram> filterListByFeatureType(List<TVProgram> progs, List<String> types) {
         if (types == null || types.size() < 2) return progs;

@@ -5,6 +5,7 @@ import com.fpt.ruby.business.model.TVModifiers;
 import com.fpt.ruby.business.model.TVProgram;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
@@ -33,6 +35,7 @@ public class TVProgramService {
     private final String FIELD_START = "start_date";
     private final String FIELD_END = "end_date";
     private MongoOperations mongoOperations;
+    private static final Logger logger = Logger.getLogger(TVProgramService.class.getName());
 
     public TVProgramService(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
@@ -44,12 +47,7 @@ public class TVProgramService {
         this.mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
     }
 
-    public static void main(String[] args) throws Exception {
-        List<String> t = new ArrayList<String>(Arrays.asList("sport", "footBALL ", "entertainment"));
-        System.out.println(genRegex(t));
-    }
-
-    private static String genRegex(List<String> types) {
+     private static String genRegex(List<String> types) {
         if (types == null) return "";
         List<String> finedType = new ArrayList<String>();
         types.forEach((t) -> finedType.add(t.toLowerCase().trim()));
@@ -92,17 +90,15 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-        //Supplier<List<TVProgram>> cachedPrograms = Suppliers.me
         return filterByParamaters(mod);
         //return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){
+        long start = System.currentTimeMillis();
         List<TVProgram> tvPrograms = getAllTVPrograms();
-        System.out.println("[Filter By Paramaters: ] Size: " + tvPrograms.size() );
         if (mods.getChannel() != null && !mods.getChannel().isEmpty())
             tvPrograms = tvPrograms.stream().filter(t->t.getChannel().equalsIgnoreCase(mods.getChannel())).collect(Collectors.toList());
-            System.out.println("[Filter By Paramaters: Channel] Size: " + tvPrograms.size() );
         if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
             tvPrograms = tvPrograms.stream().filter(t->t.getTitle().equalsIgnoreCase(mods.getProg_title())).collect(Collectors.toList());
         if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0)
@@ -119,10 +115,12 @@ public class TVProgramService {
             tvPrograms = tvPrograms.stream().filter(t->t.getEnd_date().after(mods.getStart())).collect(Collectors.toList());
         else if (mods.getEnd() != null)
             tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getEnd())).collect(Collectors.toList());
+        logger.info("Cache Query Time: " + (System.currentTimeMillis() - start));
         return tvPrograms;
     }
 
     public List<TVProgram> findByParamaters(TVModifiers mods) {
+        long start = System.currentTimeMillis();
         Query query = new Query();
         Criteria criteria = new Criteria();
 
@@ -152,7 +150,7 @@ public class TVProgramService {
         result = filterListByFeatureType(result, mods.getType());
 
         result.sort(START_CMP);
-
+        logger.info("Query DB TIME: " + (System.currentTimeMillis() - start));
         return result;
     }
 
@@ -187,6 +185,7 @@ public class TVProgramService {
     }
 
     public List<TVProgram> findAll() {
+        logger.info("FIND ALL TV Programsss");
         return mongoOperations.findAll(TVProgram.class);
     }
 
@@ -235,4 +234,13 @@ public class TVProgramService {
     public List<TVProgram> getAllTVPrograms() {
         return allTVPrograms.get();
     }
+
+    public void restartCached(){
+        allTVPrograms = Suppliers.memoizeWithExpiration(
+                new Supplier<List<TVProgram>>() {
+                    public List<TVProgram> get() {
+                        return findAll();
+                    }
+                }, 10, TimeUnit.MILLISECONDS);
+    };
 }

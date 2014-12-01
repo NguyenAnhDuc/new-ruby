@@ -10,6 +10,7 @@ import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.*;
 import com.fpt.ruby.service.ReportQuestionService;
+import com.mongodb.BasicDBObject;
 import fpt.qa.answerEngine.AIMLInfoWrapper;
 import fpt.qa.answerEngine.AnswerFinder;
 import fpt.qa.answerEngine.NLPInfoWrapper;
@@ -43,6 +44,8 @@ import java.util.UUID;
 public class AppController {
     @Autowired
     HttpServletRequest request;
+    @Autowired
+    TVProgramService tvProgramService;
     @Autowired
     MovieTicketService movieTicketService;
     @Autowired
@@ -90,7 +93,7 @@ public class AppController {
 
     @PostConstruct
     public void init() {
-        tam.init();
+        tam.init(tvProgramService);
         NlpHelper.init();
         ProcessHelper.init(nameMapperService);
         TVModifiersHelper.init(nameMapperService);
@@ -150,19 +153,11 @@ public class AppController {
         long pivot2 = (new Date()).getTime();
         TrackingThread ti = new TrackingThread(ans, log, userID, inputType);
         ti.start();
-
-        long pivot3 = (new Date()).getTime();
-        System.out.println((new Date()).getTime() + " . DONE LOG AND ANALYTICS  ");
-        System.out.println("question -> answer: " + (pivot2 - pivot1) / 1000.0 + " seconds");
-        System.out.println("answer -> log: " + (pivot3 - pivot2) / 1000.0 + " seconds");
         // If can't answer, take result from Bing Search
         if (ans.getAnswer().toLowerCase().contains("xin lỗi,")) {
             if (confirmWebSearch.equals("yes")) {
                 String htmlAnswer = "";
                 // If on the mobile
-					/*rubyAnswer.setAnswer("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
-						"<a href=\"searchWeb?question=" + question +  "\">Search on the Web</a>");*/
-
                 //If on the web
                 htmlAnswer = String.format("Xin lỗi chúng tôi chưa có thông tin cho câu hỏi của bạn nhưng tôi có thể search cho bạn: " +
                         "<a href=\"#\" class=\"btn\" onclick=\"searchWeb('%s')\"><center>Search on the Web</a></center>", question);
@@ -260,6 +255,7 @@ public class AppController {
             track("userActivity", event);
         }
     }
+
 
 
 }

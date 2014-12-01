@@ -42,105 +42,10 @@ public class AdminController {
 	private CinemaService cinemaService;
 	@Autowired
 	private NameMapperService nameMapperService;
-	
-//	@RequestMapping(value="/crawlPhimChieuRap", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public BasicDBObject crawlPhimChieuRap(){
-//		CrawlPhimChieuRap crawlPhimChieuRap = new CrawlPhimChieuRap();
-//		try{
-//			movieTicketService.cleanOldData();
-//			crawlPhimChieuRap.crawlHaNoi();
-//
-//		}
-//		catch (Exception ex){
-//			System.out.println("Done");
-//			return new BasicDBObject().append("status", "failed");
-//		}
-//		return new BasicDBObject().append("status", "success");
-//	}
-	
-	@RequestMapping(value="/crawl-mytv", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public BasicDBObject crawlMyTV(){
-		CrawlerMyTV crawlerMyTV = new CrawlerMyTV();
-		try{
-			tvProgramService.cleanOldData();
-			// TODO: FIX IT
-//			crawlerMyTV.doCrawl(tvProgramService);
-		}
-		catch (Exception ex){
-			System.out.println("Done");
-			return new BasicDBObject().append("status", "failed");
-		}
-		return new BasicDBObject().append("status", "success");
-	}
-	
-	@RequestMapping(value="/crawl-moveek", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public BasicDBObject crawlMoveek(){
-		try{
-			movieTicketService.cleanOldData();
-			MoveekCrawler.doCrawl(movieTicketService);
-		}
-		catch (Exception ex){
-			System.out.println("Done");
-			return new BasicDBObject().append("status", "failed");
-		}
-		return new BasicDBObject().append("status", "success");
-	}
-	
-	@RequestMapping(value="/old", method = RequestMethod.GET)
-	public String testCombo(Model model){
-		AbsoluteTime absoluteTime = new AbsoluteTime();
-		AbsoluteTime.TimeResult timeResult = absoluteTime.getAbsoluteTime("hôm nay là ngày gì");
-		System.out.println(timeResult.getBeginTime());
-		System.out.println(timeResult.getEndTime());
-		return "admin";
-	}
-	
-	private void saveSchedule(String cinName, String movieTitle, String time, Date date){
-		cinName = cinName.trim();movieTitle = movieTitle.trim(); time = time.trim();
-		String[] times = time.split("\\s+");
-		for (String etime : times){
-			MovieTicket movieTicket = new MovieTicket();
-			movieTicket.setCinema(cinName.trim());
-			movieTicket.setMovie(movieTitle.trim());
-				date.setHours(Integer.parseInt(etime.trim().split(":")[0]));
-				date.setMinutes(Integer.parseInt(etime.trim().split(":")[1]));
-				date.setSeconds(0);
-				movieTicket.setDate(date);
-				if (!cinName.isEmpty() && !movieTitle.isEmpty())
-					movieTicketService.save(movieTicket);
-			
-		}
-	}
-	
-	@RequestMapping(value="/crawlManual", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-	public String crawlPhimChieuRap(@RequestParam("cin_name") String cinName, @RequestParam("mov_title") String movieTitle,
-											@RequestParam("time") String time, @RequestParam("date") String date ,Model model){
-		try{
-			System.out.println("cin name: " + cinName);
-			Date adate = new Date();
-			System.out.println("Date: " + adate.toLocaleString());
-			String[] dates = date.trim().split("\\.");
-			System.out.println(dates[2] + " | " + dates[1] + " | " + dates[0]);
-			adate.setYear(Integer.parseInt(dates[2]) - 1900);
-			adate.setMonth(Integer.parseInt(dates[1]) - 1);
-			adate.setDate(Integer.parseInt(dates[0]));
-			System.out.println("Date: " + adate.toLocaleString());
-			saveSchedule(cinName, movieTitle, time, adate);
-		}
-		catch (Exception ex){
-			ex.printStackTrace();
-			model.addAttribute("status","failed");
-			return "crawl";
-		}
-		model.addAttribute("status","success");
-		List<MovieTicket> tickets = movieTicketService.findTicketToShow(0);
-		model.addAttribute("tickets",tickets);
-		return "showTicket";
-	}
-	
+
+
+
+
 	@RequestMapping(value="/addCinema", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
 	public String addCinema(@RequestParam("cin_name") String cinName, @RequestParam("cin_address") String cin_address,
 											@RequestParam("mobile") String mobile,Model model){
@@ -164,29 +69,9 @@ public class AdminController {
 	
 	@RequestMapping(value="admin", method = RequestMethod.GET)
 	public String admin(Model model){
-		return "admin";
+		return "admin-tools";
 	}
-	
-	@RequestMapping(value="/admin-crawl-manual", method = RequestMethod.GET)
-	public String crawlManual(Model model){
-		return "crawl";
-	}
-	
-	@RequestMapping(value="admin-crawl-phim-chieu-rap", method = RequestMethod.GET)
-	public String crawlPhimChieuRap(Model model){
-		return "crawlPhimChieuRap";
-	}
-	
-	@RequestMapping(value="admin-crawl-moveek", method = RequestMethod.GET)
-	public String crawlMoveek(Model model){
-		return "crawlMoveek";
-	}
-	
-	@RequestMapping(value="admin-crawl-mytv", method = RequestMethod.GET)
-	public String crawlMyTV(Model model){
-		return "crawl-mytv";
-	}
-	
+
 	@RequestMapping(value="admin-add-cinema", method = RequestMethod.GET)
 	public String addCinema(Model model){
 		return "addCinema";
@@ -276,7 +161,27 @@ public class AdminController {
 		data.add("Jan");data.add("Feb");
 		return data;
 	}
-	
+
+	@RequestMapping(value="/admin-restart-cached-tv", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public BasicDBObject crawlMyTV(){
+		try{
+			tvProgramService.restartCached();
+		}
+		catch (Exception ex){
+			return new BasicDBObject().append("status", "failed");
+		}
+		return new BasicDBObject().append("status", "success");
+	}
+
+}
+
+
+
+
+
+
+/*
 	@RequestMapping(value = "/admin-analytic", method = RequestMethod.GET)
 	public String testChart(Model model) {
 		int ONE_DAY = 24 * 3600 * 1000;
@@ -295,7 +200,7 @@ public class AdminController {
 		DataChart domainMovie = new DataChart();
 		domainMovie.name = "Movie Domain";
 		domainMovie.data = new ArrayList<Integer>();
-		
+
 		List<Log> logs = logService.findLogGtTime(firstdayOfMonth);
 		for (int i = firstdayOfMonth.getDate(); i <= today.getDate(); i++ ){
 			months.add(""+i);
@@ -321,15 +226,15 @@ public class AdminController {
 		logs = logService.findAll();
 		List<DataPieChart> dataPies = new ArrayList<DataPieChart>();
 		Map<String, Long> counted = logs.stream()
-		            .collect(Collectors.groupingBy(o -> o.getIntent(), Collectors.counting()));
+				.collect(Collectors.groupingBy(o -> o.getIntent(), Collectors.counting()));
 		Iterator iterator = counted.keySet().iterator();
 		while(iterator.hasNext()){
 			Object key   = iterator.next();
-	          Object value = counted.get(key);
-		      DataPieChart dataPieChart = new DataPieChart();
-		      dataPieChart.name = key.toString();
-		      dataPieChart.y = Integer.parseInt(value.toString()) * 1.0 / logs.size();
-		      dataPies.add(dataPieChart);
+			Object value = counted.get(key);
+			DataPieChart dataPieChart = new DataPieChart();
+			dataPieChart.name = key.toString();
+			dataPieChart.y = Integer.parseInt(value.toString()) * 1.0 / logs.size();
+			dataPies.add(dataPieChart);
 		}
 		String jsonPie = "";
 		try{
@@ -338,7 +243,6 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		model.addAttribute("jsonPie", jsonPie);
-		
+
 		return "admin-dashboard";
-	}
-}
+	}*/

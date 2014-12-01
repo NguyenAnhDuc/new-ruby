@@ -21,11 +21,11 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
     private final int limitSizeAnswer = 10;
     private TVIntentDetect intentDetector = new TVIntentDetect();
     private TVIntentDetect nonDiacritic = new TVIntentDetect();
-    private TVProgramService tps = new TVProgramService();
+    private TVProgramService tps;
 
-    public void init() {
+    public void init(TVProgramService tvProgramService) {
         String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-
+        tps = tvProgramService;
         intentDetector.init(dir + "/qc/tv", dir + "/dicts");
         nonDiacritic.init(dir + "/qc/tv/non-diacritic", dir + "/dicts/non-diacritic");
     }
@@ -82,11 +82,8 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         QueryParamater queryParamater = new QueryParamater();
 
         // end time processing
-        System.out.println("Find list TV Program");
         List<TVProgram> progs = tps.getList(mod);
-        System.out.println("List TVProgram Size: " + progs.size());
         // Log
-        System.out.println("[TVANSWERMAPPERIMPL]: WRITE LOG");
         Log log = new Log();
         queryParamater = new QueryParamater();
         queryParamater.setBeginTime(mod.getStart());

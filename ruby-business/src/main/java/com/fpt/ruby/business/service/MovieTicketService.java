@@ -2,6 +2,8 @@ package com.fpt.ruby.business.service;
 
 import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.model.MovieTicket;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 public class MovieTicketService {
     private static long ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
+    private static long ONE_HOUR =  60 * 60 * 1000;
+    private static long ONE_MINUTE =  60 * 1000;
     private static final Logger logger = LoggerFactory.getLogger(MovieTicketService.class);
     private final String MT_MOVIE = "movie";
     private final String MT_CINEMA = "cinema";
@@ -109,6 +114,22 @@ public class MovieTicketService {
         return mongoOperations.findAll(MovieTicket.class);
     }
 
+    public List<MovieTicket> filterMoviesMatchCondition(MovieTicket match, Date beforeDate, Date afterDate){
+        List<MovieTicket> movieTickets = getAllTickets();
+        if (match.getCinema() != null && !match.getCinema().isEmpty())
+            movieTickets = movieTickets.stream().filter(t->t.getCinema().equalsIgnoreCase(match.getCinema())).collect(Collectors.toList());
+        if (match.getMovie() != null && !match.getMovie().isEmpty())
+            movieTickets = movieTickets.stream().filter(t->t.getMovie().equalsIgnoreCase(match.getMovie())).collect(Collectors.toList());
+        if (beforeDate != null && afterDate != null)
+            movieTickets = movieTickets.stream().filter(t->
+                    t.getDate().after(beforeDate) && t.getDate().before(afterDate)).collect(Collectors.toList());
+        else if (beforeDate != null)
+            movieTickets = movieTickets.stream().filter(t->t.getDate().after(beforeDate)).collect(Collectors.toList());
+        else if (afterDate != null)
+            movieTickets = movieTickets.stream().filter(t->t.getDate().before(afterDate)).collect(Collectors.toList());
+        return movieTickets;
+    }
+
     public List<MovieTicket> findMoviesMatchCondition(MovieTicket match, Date beforeDate, Date afterDate) {
         long start = System.currentTimeMillis();
         Query query = new Query();
@@ -140,18 +161,14 @@ public class MovieTicketService {
         return true;
     }
 
-    public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-        MongoOperations mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
-        MovieTicket movieTicket = new MovieTicket();
-        movieTicket.setCinema("Lotte");
-        movieTicket.setCity("Ha Noi");
-        //mongoOperations.save(movieTicket);
-        List<MovieTicket> movieTickets = mongoOperations.findAll(MovieTicket.class);
-        for (MovieTicket movTicket : movieTickets) {
-            movTicket.setMovie("Biệt đội đánh thuê");
-            mongoOperations.save(movTicket);
-        }
-        System.out.println("DONE");
+    private Supplier<List<MovieTicket>> allTickets = Suppliers.memoizeWithExpiration(
+            new Supplier<List<MovieTicket>>() {
+                public List<MovieTicket> get() {
+                    return findAll();
+                }
+            }, ONE_HOUR, TimeUnit.MILLISECONDS);
+
+    public List<MovieTicket> getAllTickets() {
+        return allTickets.get();
     }
 }

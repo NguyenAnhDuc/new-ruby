@@ -164,7 +164,7 @@ public class ProcessHelper {
 					queryParamater.setEndTime(timeExtract.getAfterDate());
 				}
 				List<MovieTicket> movieTickets = movieTicketService
-						.findMoviesMatchCondition(matchMovieTicket,
+						.filterMoviesMatchCondition(matchMovieTicket,
 								queryParamater.getBeginTime(),
 								queryParamater.getEndTime());
 				System.out.println("Size: " + movieTickets.size());
@@ -198,7 +198,7 @@ public class ProcessHelper {
 				}
 				// list movie tickets for the duration of one day
 				List<MovieTicket> movieTickets = movieTicketService
-						.findMoviesMatchCondition(matchMovieTicket,
+						.filterMoviesMatchCondition(matchMovieTicket,
 								queryParamater.getBeginTime(),
 								queryParamater.getEndTime());
 				System.out.println("No of returned tickets: "

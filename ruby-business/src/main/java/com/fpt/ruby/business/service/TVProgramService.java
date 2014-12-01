@@ -25,6 +25,8 @@ public class TVProgramService {
             = (o1, o2) -> o1.getStart_date().compareTo(o2.getStart_date());
     private static long ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
+    private static int ONE_HOUR = 60*60*1000;
+    private static int ONE_MINUTE = 60*1000;
     private final String FIELD_CHANNEL = "channel";
     private final String FIELD_TITLE = "title";
     private final String FIELD_TYPES = "type";
@@ -228,7 +230,7 @@ public class TVProgramService {
                 public List<TVProgram> get() {
                     return findAll();
                 }
-            }, 1, TimeUnit.MINUTES);
+            }, ONE_HOUR, TimeUnit.MILLISECONDS);
 
     public List<TVProgram> getAllTVPrograms() {
         return allTVPrograms.get();

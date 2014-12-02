@@ -12,17 +12,16 @@ import com.fpt.ruby.nlp.AnswerMapper;
 import com.fpt.ruby.nlp.NlpHelper;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import org.json.JSONObject;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ProcessHelper {
-	private static final Logger logger = LoggerFactory
-			.getLogger(ProcessHelper.class);
+	private static final java.util.logging.Logger logger = Logger.getLogger(ProcessHelper.class.getName());
 
 	public static void init(NameMapperService nameMapperService) {
 		String dir = (new RedisHelper()).getClass().getClassLoader()
@@ -48,14 +47,14 @@ public class ProcessHelper {
 			ConjunctionHelper conjunctionHelperNoneDiacritic,
 			ConjunctionHelper conjunctionHelperWithDiacritic) {
 		if (DiacriticConverter.hasDiacriticAccents(question)) {
-			System.out.println("DIACRITIC");
+			logger.info("DIACRITIC");
 			RubyAnswer rubyAnswerDiacritic = getAnswer(true, question,
 					movieFlyService, movieTicketService, cinemaService,
 					logService, conjunctionHelperNoneDiacritic,
 					conjunctionHelperWithDiacritic);
 			return rubyAnswerDiacritic;
 		}
-		System.out.println("NONE DIACRITIC");
+		logger.info("NONE DIACRITIC");
 		RubyAnswer rubyAnswerNoneDiacritic = getAnswer(false, question,
 				movieFlyService, movieTicketService, cinemaService, logService,
 				conjunctionHelperNoneDiacritic, conjunctionHelperWithDiacritic);
@@ -100,14 +99,14 @@ public class ProcessHelper {
 			question = DiacriticConverter.removeDiacritics(question);
 			intent = NonDiacriticMovieIntentDetection.getIntent(question);
 		}
-		System.out.println("[ProcessHelper] Intent: " + intent);
+		logger.info("Intent: " + intent);
 		RubyAnswer rubyAnswer = new RubyAnswer();
 		rubyAnswer.setQuestion(question);
 		rubyAnswer.setIntent(intent);
 
 		String questionType = AnswerMapper.getTypeOfAnswer(intent, question);
 		rubyAnswer.setAnswer("Xin lỗi, tôi không trả lời được câu hỏi này");
-		System.out.println("[ProcessHelper] Question Type: " + questionType);
+		logger.info("Question Type: " + questionType);
 		// static question
 		try {
 			if (intent.equals(IntentConstants.CIN_DIS)
@@ -130,7 +129,6 @@ public class ProcessHelper {
 			if (questionType.equals(AnswerMapper.Static_Question)) {
 				if (intent.equals(IntentConstants.CIN_ADD)) {
 					String cinName = conjunctionHelper.getCinemaName(question);
-					System.out.println("[Process Helper] Cin name: " + cinName);
 					List<Cinema> cinemas = cinemaService.findByName(cinName);
 					queryParamater.setCinName(cinName);
 					rubyAnswer.setAnswer(AnswerMapper.getCinemaStaticAnswer(
@@ -138,7 +136,6 @@ public class ProcessHelper {
 				} else {
 					String movieTitle = conjunctionHelper
 							.getMovieTitle(question);
-					System.out.println("Movie Title: " + movieTitle);
 					List<MovieFly> movieFlies = movieFlyService
 							.findByTitle(movieTitle);
 					queryParamater.setMovieTitle(movieTitle);
@@ -148,7 +145,6 @@ public class ProcessHelper {
 				rubyAnswer.setQueryParamater(queryParamater);
 
 			} else if (questionType.equals(AnswerMapper.Dynamic_Question)) {
-				System.out.println("Dynamic ....");
 				MovieTicket matchMovieTicket = conjunctionHelper
 						.getMovieTicket(question);
 
@@ -167,7 +163,6 @@ public class ProcessHelper {
 						.filterMoviesMatchCondition(matchMovieTicket,
 								queryParamater.getBeginTime(),
 								queryParamater.getEndTime());
-				System.out.println("Size: " + movieTickets.size());
 
 
 				queryParamater.setMovieTitle(matchMovieTicket.getMovie());
@@ -176,13 +171,10 @@ public class ProcessHelper {
 				rubyAnswer.setAnswer(AnswerMapper.getDynamicAnswer(intent,
 						movieTickets, matchMovieTicket,
 						true));
-				System.out.println("DONE Process");
 			} else {
-				System.out.println("Feature ..");
 				MovieTicket matchMovieTicket = conjunctionHelper
 						.getMovieTicket(question);
 				Date today = new Date();
-				System.out.println("afterdate: " + today);
 				if (timeExtract.getBeforeDate() != null) {
 					queryParamater.setBeginTime(timeExtract.getBeforeDate());
 				}
@@ -201,8 +193,6 @@ public class ProcessHelper {
 						.filterMoviesMatchCondition(matchMovieTicket,
 								queryParamater.getBeginTime(),
 								queryParamater.getEndTime());
-				System.out.println("No of returned tickets: "
-						+ movieTickets.size());
 				queryParamater.setMovieTitle(matchMovieTicket.getMovie());
 				queryParamater.setCinName(matchMovieTicket.getCinema());
 				rubyAnswer.setQueryParamater(queryParamater);
@@ -238,7 +228,7 @@ public class ProcessHelper {
 			String jsonString = HttpHelper.sendGet(url);
 			JSONObject json = new JSONObject(jsonString);
 			String answer = json.getString("response");
-			System.out.println("AIML get answer: " + answer);
+			logger.info("AIML get answer: " + answer);
 			if (answer.contains("sraix_wiki"))
 				answer = new JSONObject(answer).getJSONObject("response")
 						.getString("content").trim();

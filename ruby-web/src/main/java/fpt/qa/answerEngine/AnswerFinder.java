@@ -3,11 +3,12 @@ package fpt.qa.answerEngine;
 import com.fpt.ruby.model.RubyAnswer;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class AnswerFinder implements ThreadCompleteListener {
     final static int NUM_WORKER = 3;
     final static String UDF = "#^#";
-
+    private static final Logger logger = Logger.getLogger(AnswerFinder.class.getName());
     ThreadGroup group = new ThreadGroup("answer");
     AnswerEngine[] threads;
     RubyAnswer[] workerAnswers;
@@ -65,19 +66,19 @@ public class AnswerFinder implements ThreadCompleteListener {
             if (thread instanceof AIMLAnswerEngine) {
                 if (ans.equals("") || ans.equals("null") || ans.contains("tôi không biết"))
                     answer.setAnswer(UDF);
-                System.out.println("ans from aiml: " + answer.getAnswer());
+                logger.severe("ans from aiml: " + answer.getAnswer());
                 workerAnswers[0] = answer;
             }
 
             if (thread instanceof NLPAnswerEngine) {
                 if (ans.isEmpty() || ans.contains("xin lỗi,"))
                     answer.setAnswer(UDF);
-                System.out.println("ans from nlp: " + answer.getAnswer());
+                logger.severe("ans from nlp: " + answer.getAnswer());
                 workerAnswers[1] = answer;
             }
 
             if (thread instanceof WebSearchAnswerEngine) {
-                System.out.println("ans from web: " + answer.getAnswer());
+                logger.severe("ans from web: " + answer.getAnswer());
                 workerAnswers[2] = answer;
 
             }

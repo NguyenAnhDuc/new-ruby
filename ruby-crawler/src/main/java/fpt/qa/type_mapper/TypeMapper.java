@@ -64,8 +64,8 @@ public class TypeMapper {
 			ex.printStackTrace();
 			loadData("./classes" + PATH);
 		}
-		if (useTagged)
-		retrieveTaggedProgram();
+//		if (useTagged)
+//		retrieveTaggedProgram();
 	}
 
 	public TypeMapper() {
@@ -270,8 +270,8 @@ public class TypeMapper {
 	public static void main(String[] args) {
 		System.out.println("NEW CODE2");
 		TypeRecognizer f = new FootballTypeRecognizer();
-		String chn = "vtvcab1";
-		String prog = "hậu trường showbiz – vn-tập 96";
+		String chn = "fox sports 2";
+		String prog = "golf";
 		System.out.println(f.contains(chn, prog));
 //	FootballTypeRecognizer
 		System.out.println("RESULTX: " + TypeMapper.getType(chn, prog));

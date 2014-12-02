@@ -10,7 +10,8 @@ public class FootballTypeRecognizer extends TypeRecognizer {
 		SetType(ProgramType.FOOTBALL);
 
 		String[] dedicatedChannels = new String[] {};
-		String[] typeKeywords = new String[] { "bong da", "vo dich quoc gia", "hang nhat phap", "hang nhat y", "cup c1", "world cup", "champion league", "champions league", "soccer", "cup lien doan", "bundesliga", "bundes liga", "laliga", "English Premier League"};
+		String[] typeKeywords = new String[] { "bong da", "vo dich quoc gia", "hang nhat phap", "hang nhat y", "cup c1",
+				"world cup", "soccer", "cup lien doan", "bundesliga", "bundes liga", "laliga", "English Premier League"};
 
 		super.loadConfig(dedicatedChannels, typeKeywords);
 	}

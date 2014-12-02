@@ -7,7 +7,7 @@ public class TenisTypeRecognizer extends TypeRecognizer {
 		SetType(ProgramType.TENNIS);
 
 		String[] dedicatedChannels = new String[] { };
-		String[] typeKeywords = new String[] { "atp world", "tenis", "wimbledon", "grand slam"};
+		String[] typeKeywords = new String[] { "atp world", "tenis", "wimbledon", "tennis"};
 
 		super.loadConfig(dedicatedChannels, typeKeywords);
 	}

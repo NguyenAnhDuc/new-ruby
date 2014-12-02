@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.QuestionStructure;
 import com.fpt.ruby.business.model.TimeExtract;
-import com.fpt.ruby.intent.detection.MovieIntentDetection;
+import com.fpt.ruby.intent.detection.MovieTypeDetection;
 import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 
@@ -17,14 +17,14 @@ public class NlpHelper {
 	private static AbsoluteTime absoluteTime;
 	public static void init() {
 		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
-		MovieIntentDetection.init(dir + "/qc/movie", dir + "/dicts");
+		MovieTypeDetection.init(dir + "/qc/movie", dir + "/dicts");
 		NonDiacriticMovieIntentDetection.init( dir + "/qc/movie/non-diacritic", dir + "/dicts/non-diacritic" );
 		//conjunctionHelper = new ConjunctionHelper(dir);
 		absoluteTime = new AbsoluteTime( NlpHelper.class.getClassLoader().getResource("").getPath() + "vnsutime/" );
 	}
 	
 	public String getIntent(boolean isDiacritic, String question){
-		if (isDiacritic) return MovieIntentDetection.getIntent(question);
+		if (isDiacritic) return MovieTypeDetection.getIntent(question);
 		else return NonDiacriticMovieIntentDetection.getIntent(question);
 	}
 	
@@ -34,7 +34,7 @@ public class NlpHelper {
 	public static QuestionStructure processQuestionStructure(String question){
 		QuestionStructure questionStructure = new QuestionStructure();
 		questionStructure.setKey(normalizeQuestion(question));
-		questionStructure.setHead(question.isEmpty() ? "" : MovieIntentDetection.getIntent(normalizeQuestion(question)));
+		questionStructure.setHead(question.isEmpty() ? "" : MovieTypeDetection.getIntent(normalizeQuestion(question)));
 		questionStructure.setModifiers(new ArrayList<String>());
 		return questionStructure;
 	}
@@ -74,9 +74,9 @@ public class NlpHelper {
 	
 	public static void main(String[] args) {
 		System.out.println("aaaaaaaaa".hashCode());
-		MovieIntentDetection.init("/home/ngan/Work/AHongPhuong/Intent_detection/data/qc/2",
+		MovieTypeDetection.init("/home/ngan/Work/AHongPhuong/Intent_detection/data/qc/2",
 				"/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/data/dicts");
-		System.out.println(MovieIntentDetection.getIntent(normalizeQuestion("tối nay có phim gì hay/")));
+		System.out.println(MovieTypeDetection.getIntent(normalizeQuestion("tối nay có phim gì hay/")));
 	}
 
 	

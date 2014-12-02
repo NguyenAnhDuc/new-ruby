@@ -9,14 +9,11 @@ import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
 import jmdn.nlp.diacritic.DiacriticConverter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  *
  * @author ngan
  */
-public class MovieIntentDetection {
+public class MovieTypeDetection extends TypeDetection {
 
     static VnIntentDetection classifier;
     public static void init(String qcDir, String dictDir) {
@@ -41,7 +38,7 @@ public class MovieIntentDetection {
         return classifier.classify(sent.trim()) + "\t" + cleanSent;
     }
 
-    public static String getIntent(String sent) {
+    public static String getIntent2(String sent) {
         String tunedSent = getTunedSent(sent);
         System.out.println("Tuned sent: " + tunedSent);
         if (tunedSent.contains("nước nào") && !tunedSent.contains("tiếng nước nào") ||
@@ -312,7 +309,7 @@ public class MovieIntentDetection {
         String sent5 = "rạp vincom bà triệu tối nay chiếu the maze runner mấy gi�??";
 
         System.out.println(getTunedSent(sent1));
-        System.out.println(getIntent(sent1));
+//        System.out.println(getIntent(sent1));
 
 //        System.out.println(getTunedSent(sent2));
 //        System.out.println(getIntent(sent2));

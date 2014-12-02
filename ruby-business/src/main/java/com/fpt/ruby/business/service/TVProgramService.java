@@ -97,7 +97,6 @@ public class TVProgramService {
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){
-        System.out.println("Dinh Xuan Thuc la thang cho");
         long start = System.currentTimeMillis();
         List<TVProgram> tvPrograms = getAllTVPrograms();
         tvPrograms = tvPrograms.stream().filter(t->t.getStart_date() != null && t.getEnd_date() != null).collect(Collectors.toList());
@@ -120,7 +119,7 @@ public class TVProgramService {
             tvPrograms = tvPrograms.stream().filter(t->t.getEnd_date().after(mods.getStart())).collect(Collectors.toList());
         else if (mods.getEnd() != null)
             tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getEnd())).collect(Collectors.toList());
-        logger.info("Cache Query Time: " + (System.currentTimeMillis() - start));
+        logger.info("Cache Query Time(ms): " + (System.currentTimeMillis() - start));
         return tvPrograms;
     }
 
@@ -148,7 +147,6 @@ public class TVProgramService {
         else if (mods.getEnd() != null)
             query.addCriteria(Criteria.where(FIELD_START).lte(mods.getEnd()).and(FIELD_END).lte(mods.getEnd()));
 
-        System.out.println("[TVPROGRAMSERVICE]: Query" + query.toString());
 
         List<TVProgram> result = mongoOperations.find(query, TVProgram.class);
         // Fix bug film:action && film:usa

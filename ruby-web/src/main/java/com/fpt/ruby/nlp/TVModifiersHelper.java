@@ -41,6 +41,75 @@ public class TVModifiersHelper {
     }
 
 
+    public com.fpt.ruby.template.TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
+        com.fpt.ruby.template.TVModifiers mod = new com.fpt.ruby.template.TVModifiers();
+        List<Pair<String, String>> conjunctions = conjunctionHelper
+                .getConjunction(question);
+        for (Pair<String, String> conjunction : conjunctions) {
+            if (mod.getTvChannel() == null && conjunction.second.equals(CHANNEL)) {
+                mod.setTvChannel(conjunction.first);
+                continue;
+            }
+
+            if (mod.getTvTitle() == null
+                    && conjunction.second.equals(PROGRAM)) {
+                mod.setTvTitle(conjunction.first);
+                continue;
+            }
+
+        }
+
+        String title = mod.getTvTitle();
+        if (title == null || title.isEmpty() || ignores.contains(title.toLowerCase())) {
+            mod.setTvTitle(null);
+            if (mod.getTypes() == null) {
+                List<ProgramType> ptype = typeExtractor.getTypes(question);
+                if (ptype != null) {
+                    List<String> listType = new ArrayList<>();
+                    for (ProgramType type : ptype) {
+                        if (!listType.contains(type.toString())) {
+                            listType.add(type.toString());
+                        }
+                    }
+                    mod.setTypes(listType);
+                } else {
+                    mod.setTypes(null);
+                }
+            }
+        } else {
+            mod.setTypes(null);
+        }
+
+        if (mod.getTypes() != null && mod.getTypes().contains(ProgramType.FILM.toString())) {
+            System.err.println("|||||||||||||||||||||||||||||||||||||||||||");
+            boolean specific = false;
+            GenreExtractor genreExtractor = new GenreExtractor();
+            LangExtractor langExtractor = new LangExtractor();
+            List<String> genre = genreExtractor.getGenre(question);
+
+            if (genre != null) {
+                specific = true;
+                List<String> types = mod.getTypes();
+                types.addAll(genre);
+                mod.setTypes(types);
+            }
+
+            List<String> langs = langExtractor.getLanguage(question);
+            if (langs != null) {
+                specific = true;
+                List<String> types = mod.getTypes();
+                types.addAll(langs);
+                mod.setTypes(types);
+            }
+
+            if (specific) {
+                mod.getTypes().remove(ProgramType.FILM.toString());
+            }
+        }
+        System.out.println("mod.type = " + mod.getTypes());
+        return mod;
+    }
+
     public static TVModifiers getModifiers(String question,
                                            ConjunctionHelper conjHelper) {
         TVModifiers mod = new TVModifiers();

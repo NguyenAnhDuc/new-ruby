@@ -1,12 +1,14 @@
 package com.fpt.ruby.cache;
 
+import java.util.List;
+
 /**
  * Created by quang on 12/2/2014.
  */
 public class TVModifiers {
     private String tvTitle;
     private String tvChannel;
-
+    private List<String> types;
     public String getTvTitle() {
         return tvTitle;
     }
@@ -21,5 +23,13 @@ public class TVModifiers {
 
     public void setTvChannel(String tvChannel) {
         this.tvChannel = tvChannel;
+    }
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 }

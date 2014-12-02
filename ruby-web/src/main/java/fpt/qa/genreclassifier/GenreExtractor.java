@@ -71,17 +71,4 @@ public class GenreExtractor {
 	public String makeTag(String type, String obj) {
 		return "<" + type + ">" + obj + "</" + type + ">";
 	}
-
-
-	public String typeString(String text) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("{");
-		List<String> listPro = getGenre(text);
-		if (listPro==null) return "{}";
-		for(int i = 0 ; i < listPro.size()-1;++i) {
-			builder.append(listPro.get(i).toString()+",");
-		}
-		builder.append(listPro.get(listPro.size()-1).toString()+"}");
-		return builder.toString();
-	}
 }

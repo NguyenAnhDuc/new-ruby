@@ -4,7 +4,7 @@ import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.*;
 import com.fpt.ruby.business.service.*;
-import com.fpt.ruby.intent.detection.MovieIntentDetection;
+import com.fpt.ruby.intent.detection.MovieTypeDetection;
 import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
@@ -94,7 +94,7 @@ public class ProcessHelper {
 		}
 		// Intent
 		if (isDiacritic)
-			intent = MovieIntentDetection.getIntent(question);
+			intent = MovieTypeDetection.getIntent(question);
 		else {
 			question = DiacriticConverter.removeDiacritics(question);
 			intent = NonDiacriticMovieIntentDetection.getIntent(question);

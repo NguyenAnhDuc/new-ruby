@@ -5,7 +5,7 @@ import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.*;
 import com.fpt.ruby.business.service.LogService;
 import com.fpt.ruby.business.service.TVProgramService;
-import com.fpt.ruby.intent.detection.TVIntentDetect;
+import com.fpt.ruby.intent.detection.TVTypeDetection;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.mdnlib.util.string.DiacriticConverter;
@@ -19,8 +19,8 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
     public static final String DEF_ANS = "Chúng tôi không tìm thấy thông tin gì.";
     private static final int ONE_HOUR = 60 * 60 * 1000;
     private final int limitSizeAnswer = 10;
-    private TVIntentDetect intentDetector = new TVIntentDetect();
-    private TVIntentDetect nonDiacritic = new TVIntentDetect();
+    private TVTypeDetection intentDetector = new TVTypeDetection();
+    private TVTypeDetection nonDiacritic = new TVTypeDetection();
     private TVProgramService tps;
 
     public void init(TVProgramService tvProgramService) {

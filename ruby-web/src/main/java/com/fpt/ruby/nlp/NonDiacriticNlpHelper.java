@@ -10,7 +10,7 @@ import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.model.QuestionStructure;
 import com.fpt.ruby.business.model.TimeExtract;
 import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.intent.detection.MovieIntentDetection;
+import com.fpt.ruby.intent.detection.MovieTypeDetection;
 import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 
@@ -23,7 +23,7 @@ public class NonDiacriticNlpHelper{
 	
 	public static void init(NameMapperService nameMapperService){
 		String dir = ( new RedisHelper() ).getClass().getClassLoader().getResource( "" ).getPath();
-		MovieIntentDetection.init(dir + "/qc/movie", dir + "/dicts");
+		MovieTypeDetection.init(dir + "/qc/movie", dir + "/dicts");
 		NonDiacriticMovieIntentDetection.init( dir + "/qc/movie/non-diacritic", dir + "/dicts/non-diacritic" );
 		absoluteTime = new AbsoluteTime( NonDiacriticNlpHelper.class.getClassLoader().getResource( "" ).getPath()
 				+ "vnsutime/" );

@@ -11,7 +11,7 @@ import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
  *
  * @author ngan
  */
-public class TVIntentDetect {
+public class TVTypeDetection extends TypeDetection {
 
     private VnIntentDetection classifier;
 
@@ -21,7 +21,8 @@ public class TVIntentDetect {
         classifier.init();
     }
 
-    public String getIntent(String sent) {
-    	return "tv_" + classifier.classify(sent).toLowerCase();
+    public static String getIntent2(String sent) {
+        return null;
+//        return "tv_" + classifier.classify(sent).toLowerCase();
     }
 }

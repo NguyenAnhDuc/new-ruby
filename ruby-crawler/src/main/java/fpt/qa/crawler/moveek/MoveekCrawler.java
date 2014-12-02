@@ -63,7 +63,7 @@ public class MoveekCrawler {
                     }
                 }
 
-                movieNames.add(movie.first);
+                movieNames.add(movie.second.first);
             }
         }
 

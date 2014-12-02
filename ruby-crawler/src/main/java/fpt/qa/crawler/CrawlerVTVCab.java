@@ -41,7 +41,7 @@ public class CrawlerVTVCab {
 	List<String> crawlChannels = Collections.unmodifiableList(Arrays
 			.asList("VTVCAB3", "VTVCAB4", "VTVCAB5", "VTVCAB6",
 					"VTVCAB7", "VTVCAB8", "VTVCAB12", "VTVCAB16", "VTVCAB15", "VTVCAB17",
-					"VTVCAB19","K+PM", "FOX SPORTS",
+					"VTVCAB19","K+PM", "FOX SPORTS", "FOX SPORTS 2",
 					"CINEMA WORLD", "WARNER", "GEM", "AXN", "ANIMAL PLANET",
 					"CINEMAX", "SCREEN RED", "NGC", "TRAVEL LIVING",
 					"DISCOVERY WORLD", "STARMOVIE", "CHANNEL V","CNN"));
@@ -181,7 +181,11 @@ public class CrawlerVTVCab {
 
 			try {
 				System.out.println("PRE: " + ce.text().trim());
+				if (ce.text().trim().equalsIgnoreCase("fox sports")
+						|| ce.text().trim().equalsIgnoreCase("fox sports 2")) continue;
+
 				String name = conjunctionHelperNoneDiacritic.getChannelName(ce.text().trim());
+
 				if (!(name == null || name.isEmpty())) {
 					c.setName(name);
 				} else {

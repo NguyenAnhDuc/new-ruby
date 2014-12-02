@@ -37,6 +37,7 @@ public class CrawlerMyTV {
             "MTV", "ITV"));
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
     private MovieFlyService mfs = new MovieFlyService();
+    // Check lai
     private static Set<String> filmChannel = new TreeSet<>(Arrays.asList("hbo", "max", "star movies"));
     private static Set<String> filmTitle = new TreeSet<>();
 
@@ -76,6 +77,21 @@ public class CrawlerMyTV {
             System.out.println("Channel name: " + element.text().trim() + " | " + channel.getName());
             channels.add(channel);
         }
+
+        // FIX BUG: remove hd channel if sd channel exist. Prevent duplicate schedule.
+//        List<Channel> toRemove = new ArrayList<>();
+//        for (Channel c : channels) {
+//            String name = c.getName().trim().toLowerCase();
+//            if (name.endsWith("hd")) {
+//                String origin = name.substring(0, name.length() -2 ).trim();
+//
+//                for (Channel c2: channels) {
+//                    if (c2.getName().trim().toLowerCase().equals(origin)) {
+//
+//                    }
+//                }
+//            }
+//        }
         return channels;
     }
 
@@ -102,40 +118,6 @@ public class CrawlerMyTV {
             }
         }
     }
-
-//    // TODO: check
-//    public void doCrawl(String dir, TVProgramService tvProgramService) throws Exception {
-//        System.out.println("Crawling from MYTV");
-//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//        NameMapperService nameMapperService = new NameMapperService();
-//        ConjunctionHelper conjunctionHelper = (dir.equals("") ? new ConjunctionHelper(nameMapperService) : new ConjunctionHelper(dir, nameMapperService));
-//        List<Channel> channels = getChanel(conjunctionHelper);
-//        Date today = new Date();
-//
-//        for (Channel channel : channels) {
-//            if (crawlChannels.contains(channel.getName().toUpperCase())) {
-//                try {
-//                    System.out.println("Crawling from " + channel.getName());
-//                    for (int i = 0; i <= FUTUREDAY_CRAWL; i++) {
-//                        String date = df.format(new Date(today.getTime() + ONE_DAY * i));
-//                        List<TVProgram> tvPrograms = crawlChannel(channel, date);
-//
-//                        tvPrograms = CrawlerHelper.calculateEndTime(tvPrograms);
-//                        tvPrograms.forEach(tvProgramService::save);
-//                    }
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                    continue;
-//                }
-//            }
-//
-//        }
-//
-//    }
-//
-//    public void doCrawl(TVProgramService tvProgramService) throws Exception {
-//        doCrawl("", tvProgramService);
-//    }
 
     public List<TVProgram> crawlChannel(Channel channel, String date) {
 
@@ -172,34 +154,35 @@ public class CrawlerMyTV {
                 List<String> typesStr = types.stream().map(ProgramType::toString).collect(Collectors.toList());
 
                 // HBO, CINEMAX, ...
-                if (filmChannel.contains(channel.getName().toLowerCase())) {
-                    MovieFly detail = mfs.searchOnImdbByTitle(tvProgram.getTitle().trim());
-                    if (detail != null) {
-                        String genre = detail.getGenre();
-                        if (genre != null) {
-                            typesStr.addAll(format(genre));
-                        }
+                if (filmChannel.contains(channel.getName().toLowerCase().trim())) {
+//                    MovieFly detail = mfs.searchOnImdbByTitle(tvProgram.getTitle().trim());
+                    List<MovieFly> details = mfs.findByTitle(tvProgram.getTitle().trim());
 
-                        String lang = detail.getLanguage();
-                        if (lang != null) {
-                            typesStr.addAll(format(lang));
-                        }
+                    if (details.size() > 0) {
+                        MovieFly detail = details.get(0);
 
-                        String country = detail.getCountry();
-                        if (country != null) {
-                            typesStr.addAll(format(country));
-                        }
+                        if (detail.getImdbRating() > 0) { // code -1.0 indicate no result found on imdb
+                            String genre = detail.getGenre();
+                            if (genre != null) {
+                                typesStr.addAll(format(genre));
+                            }
 
-                        // Description
-                        String description = detail.getPlot();
-                        if (description != null) {
-                            String oldDesc = tvProgram.getDescription() == null ? "" : tvProgram.getDescription();
-                            tvProgram.setDescription(description + "\n" + oldDesc);
-                        }
+                            String lang = detail.getLanguage();
+                            if (lang != null) {
+                                typesStr.addAll(format(lang));
+                            }
 
-                        // save to db
-                        if (!mfs.matchTitle(tvProgram.getTitle().trim())) {
-                            mfs.save(detail);
+                            String country = detail.getCountry();
+                            if (country != null) {
+                                typesStr.addAll(format(country));
+                            }
+
+                            // Description
+                            String description = detail.getPlot();
+                            if (description != null) {
+                                String oldDesc = tvProgram.getDescription() == null ? "" : tvProgram.getDescription();
+                                tvProgram.setDescription(description + "\n" + oldDesc);
+                            }
                         }
                     }
                 }

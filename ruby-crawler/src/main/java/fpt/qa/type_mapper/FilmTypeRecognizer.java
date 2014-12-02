@@ -8,7 +8,7 @@ public class FilmTypeRecognizer extends TypeRecognizer {
 		SetType(ProgramType.FILM);
 		
 		String[] dedicatedChannels = new String[] { "hbo", "star movie", "starmovie", 
-				"screenred", "vtvcab2", "disney", "cartoon", "vtvcab8",  "vtvcab7", "max"};
+				"screenred", "vtvcab2", "disney", "cartoon", "vtvcab8",  "vtvcab7", "max", "warner", "axn", "gem", "screen red"};
 		String[] typeKeywords = new String[] {"film", "fim", "movie"};
 
 		super.loadConfig(dedicatedChannels, typeKeywords);

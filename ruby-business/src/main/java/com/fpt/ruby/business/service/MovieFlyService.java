@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Date;
+import java.text.CharacterIterator;
 import java.text.SimpleDateFormat;
+import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,75 @@ public class MovieFlyService {
         return mongoOperations.findAll(MovieFly.class);
     }
 
-    public List<MovieFly> findByTitle(String title) throws UnsupportedEncodingException {
+    public static String forRegex(String aRegexFragment){
+        final StringBuilder result = new StringBuilder();
+
+        final StringCharacterIterator iterator =
+                new StringCharacterIterator(aRegexFragment)
+                ;
+        char character =  iterator.current();
+        while (character != CharacterIterator.DONE ){
+      /*
+       All literals need to have backslashes doubled.
+      */
+            if (character == '.') {
+                result.append("\\.");
+            }
+            else if (character == '\\') {
+                result.append("\\\\");
+            }
+            else if (character == '?') {
+                result.append("\\?");
+            }
+            else if (character == '*') {
+                result.append("\\*");
+            }
+            else if (character == '+') {
+                result.append("\\+");
+            }
+            else if (character == '&') {
+                result.append("\\&");
+            }
+            else if (character == ':') {
+                result.append("\\:");
+            }
+            else if (character == '{') {
+                result.append("\\{");
+            }
+            else if (character == '}') {
+                result.append("\\}");
+            }
+            else if (character == '[') {
+                result.append("\\[");
+            }
+            else if (character == ']') {
+                result.append("\\]");
+            }
+            else if (character == '(') {
+                result.append("\\(");
+            }
+            else if (character == ')') {
+                result.append("\\)");
+            }
+            else if (character == '^') {
+                result.append("\\^");
+            }
+            else if (character == '$') {
+                result.append("\\$");
+            }
+            else {
+                //the char is not a special one
+                //add it to the result as is
+                result.append(character);
+            }
+            character = iterator.next();
+        }
+        return result.toString();
+    }
+    public List<MovieFly> findByTitle(String title2) throws UnsupportedEncodingException {
+        // TODO: should handle title contain special characters like (+ . *). May leading to error when using regex
+        String title = forRegex(title2);
+
         Query query = new Query(Criteria.where("title").regex("^" + title + "$", "i"));
         List<MovieFly> movieFlies = mongoOperations.find(query, MovieFly.class);
         if (movieFlies.size() > 0) return movieFlies;
@@ -56,9 +126,21 @@ public class MovieFlyService {
             movieFlies = mongoOperations.find(query, MovieFly.class);
             if (movieFlies.size() == 0) {
                 save(movieFly);
+                // other name
+                MovieFly m2 = movieFly;
+                m2.setTitle(title2);
+                save(m2);
             }
             movieFlies.add(movieFly);
+        } else {
+            // save with no result code. It inditcates that no result found on imdb.
+            MovieFly cur = new MovieFly();
+            cur.setTitle(title2);
+            cur.setImdbRating((float) -1.0);
+            mongoOperations.save(cur);
+            System.out.println("save to prevent future query on imdb. Title = " + title);
         }
+
         return movieFlies;
     }
 

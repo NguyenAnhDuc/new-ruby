@@ -34,10 +34,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/*import net.sf.uadetector.ReadableUserAgent;
- import net.sf.uadetector.UserAgentStringParser;
- import net.sf.uadetector.service.UADetectorServiceFactory;*/
-
 @Controller
 @RequestMapping("/")
 public class AppController {

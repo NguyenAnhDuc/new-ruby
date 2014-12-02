@@ -38,7 +38,6 @@ public class ProcessHelper {
 		// rubyAnswer.setAnswer(getAnswer(question, movieFlyService,
 		// movieTicketService));
 		// rubyAnswer.setAnswer(getSimsimiResponse(question));
-		rubyAnswer.setQuestionStructure(questionStructure);
 		return rubyAnswer;
 	}
 
@@ -147,7 +146,6 @@ public class ProcessHelper {
 							movieFlies));
 				}
 				rubyAnswer.setQueryParamater(queryParamater);
-				rubyAnswer.setQuestionType(AnswerMapper.Static_Question);
 
 			} else if (questionType.equals(AnswerMapper.Dynamic_Question)) {
 				System.out.println("Dynamic ....");
@@ -158,20 +156,17 @@ public class ProcessHelper {
 					Date defaultDate = NlpHelper.getTimeCondition(
 							"hôm nay").getBeforeDate();
 					queryParamater.setBeginTime(defaultDate);
-					rubyAnswer.setBeginTime(defaultDate);
 				}
-				if (timeExtract.getAfterDate() != null) {
+				if (timeExtract.getBeforeDate() != null) {
 					queryParamater.setBeginTime(timeExtract.getBeforeDate());
-					rubyAnswer.setBeginTime(timeExtract.getBeforeDate());
 				}
 				if (timeExtract.getAfterDate() != null) {
 					queryParamater.setEndTime(timeExtract.getAfterDate());
-					rubyAnswer.setEndTime(timeExtract.getAfterDate());
 				}
 				List<MovieTicket> movieTickets = movieTicketService
 						.findMoviesMatchCondition(matchMovieTicket,
-								rubyAnswer.getBeginTime(),
-								rubyAnswer.getEndTime());
+								queryParamater.getBeginTime(),
+								queryParamater.getEndTime());
 				System.out.println("Size: " + movieTickets.size());
 
 
@@ -181,7 +176,6 @@ public class ProcessHelper {
 				rubyAnswer.setAnswer(AnswerMapper.getDynamicAnswer(intent,
 						movieTickets, matchMovieTicket,
 						true));
-				rubyAnswer.setQuestionType(AnswerMapper.Dynamic_Question);
 				System.out.println("DONE Process");
 			} else {
 				System.out.println("Feature ..");
@@ -191,19 +185,16 @@ public class ProcessHelper {
 				System.out.println("afterdate: " + today);
 				if (timeExtract.getBeforeDate() != null) {
 					queryParamater.setBeginTime(timeExtract.getBeforeDate());
-					rubyAnswer.setBeginTime(timeExtract.getBeforeDate());
 				}
 
 				if (timeExtract.getAfterDate() != null) {
 					queryParamater.setBeginTime(timeExtract.getAfterDate());
-					rubyAnswer.setEndTime(timeExtract.getAfterDate());
 				}
 
-				if (rubyAnswer.getBeginTime() == null) {
+				if (queryParamater.getBeginTime() == null) {
 					Date defaultDate = NlpHelper.getTimeCondition(
 							"hôm nay").getBeforeDate();
 					queryParamater.setBeginTime(defaultDate);
-					rubyAnswer.setBeginTime(defaultDate);
 				}
 				// list movie tickets for the duration of one day
 				List<MovieTicket> movieTickets = movieTicketService
@@ -217,8 +208,7 @@ public class ProcessHelper {
 				rubyAnswer.setQueryParamater(queryParamater);
 				rubyAnswer.setAnswer(AnswerMapper.getFeaturedAnswer(question,
 						movieTickets, movieFlyService));
-				rubyAnswer.setQuestionType(AnswerMapper.Featured_Question);
-				rubyAnswer.setMovieTicket(matchMovieTicket);
+				rubyAnswer.setQueryParamater(queryParamater);
 			}
 		} catch (Exception ex) {
 			System.out.println("Exception! " + ex.getMessage());
@@ -264,12 +254,6 @@ public class ProcessHelper {
 
 	}
 
-	public static RubyAnswer getAnswerFromSimsimi(String question,
-			QuestionStructure questionStructure) {
-		RubyAnswer rubyAnswer = new RubyAnswer();
-		rubyAnswer.setQuestionStructure(questionStructure);
-		return rubyAnswer;
-	}
 
 	public static QuestionStructure getQuestionStucture(String question,
 			QuestionStructureService questionStructureService) {

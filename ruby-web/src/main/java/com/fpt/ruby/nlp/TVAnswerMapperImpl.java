@@ -55,7 +55,6 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         tmp += "\t" + question.replaceAll("\\s+", " ") + "\n";
         tmp += "\t" + mod + "\n";
 
-        rubyAnswer.setQuestionType(mod.getChannel());
 
         // get Time condition
         TimeExtract timeExtract = NlpHelper.getTimeCondition(question.replaceAll("(\\d+)(h)", "$1 giờ"));
@@ -85,8 +84,6 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 
         QueryParamater queryParamater = new QueryParamater();
 
-        rubyAnswer.setBeginTime(mod.getStart());
-        rubyAnswer.setEndTime(mod.getEnd());
         // end time processing
         System.out.println("Find list TV Program");
         List<TVProgram> progs = tps.getList(mod);

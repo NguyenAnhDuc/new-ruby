@@ -126,6 +126,10 @@ public class MovieFlyService {
             movieFlies = mongoOperations.find(query, MovieFly.class);
             if (movieFlies.size() == 0) {
                 save(movieFly);
+                // other name
+                MovieFly m2 = movieFly;
+                m2.setTitle(title2);
+                save(m2);
             }
             movieFlies.add(movieFly);
         } else {

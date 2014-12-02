@@ -1,10 +1,6 @@
 package com.fpt.ruby.template;
 
-import java.util.List;
-
 import com.fpt.ruby.business.model.TimeExtract;
-
-import edu.stanford.nlp.util.Pair;
 
 public class MovieProcess extends RubyProcess {
 
@@ -15,9 +11,9 @@ public class MovieProcess extends RubyProcess {
 	}
 
 	@Override
-	List<Pair<String, String>> getModifiers(String question) {
+	RubyModifiers getModifiers(String question) {
 		// TODO Auto-generated method stub
-		return null;
+		return new MovieModifiers();
 	}
 
 	@Override

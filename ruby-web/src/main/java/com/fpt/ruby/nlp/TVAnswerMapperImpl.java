@@ -8,7 +8,6 @@ import com.fpt.ruby.business.service.TVProgramService;
 import com.fpt.ruby.intent.detection.TVTypeDetection;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import fpt.qa.mdnlib.util.string.DiacriticConverter;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +33,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         RubyAnswer rubyAnswer = new RubyAnswer();
         String tmp = "\t" + question + "\n";
 
-        String intent = intentDetector.getIntent(question);
+        /*String intent = intentDetector.getIntent(question);
         tmp += "\t" + "TV Intent: " + intent + "\n";
 
         String intent2 = nonDiacritic.getIntent(question);
@@ -42,8 +41,8 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
 
         if (!DiacriticConverter.hasDiacriticAccents(question)) {
             intent = intent2;
-        }
-
+        }*/
+        String intent = "tv_cal";
         rubyAnswer.setQuestion(question);
         rubyAnswer.setIntent(intent);
         rubyAnswer.setAnswer(DEF_ANS);

@@ -1,20 +1,9 @@
 package fpt.qa.rubyweb;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.fpt.ruby.business.model.*;
 import com.fpt.ruby.business.service.*;
-import fpt.qa.additionalinformation.modifier.AbsoluteTime;
-import fpt.qa.crawler.CrawlerMyTV;
-import fpt.qa.crawler.moveek.MoveekCrawler;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.google.common.collect.Lists;
+import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fpt.ruby.analytic.DataChart;
-import com.fpt.ruby.analytic.DataPieChart;
-
-import com.google.common.collect.Lists;
-import com.mongodb.BasicDBObject;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping("")

@@ -22,7 +22,7 @@ public class TVTypeDetection extends TypeDetection {
     }
 
     public static String getIntent2(String sent) {
-        return null;
+        return "tv_cal";
 //        return "tv_" + classifier.classify(sent).toLowerCase();
     }
 }

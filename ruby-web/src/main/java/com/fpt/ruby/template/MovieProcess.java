@@ -1,3 +1,4 @@
+/*
 package com.fpt.ruby.template;
 
 import com.fpt.ruby.business.model.TimeExtract;
@@ -25,9 +26,10 @@ public class MovieProcess extends RubyProcess {
 	@Override
 	String getAnswer(String question) {
 		normalize(question);
-		
+
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }
+*/

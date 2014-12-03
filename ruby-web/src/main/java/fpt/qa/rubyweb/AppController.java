@@ -112,7 +112,9 @@ public class AppController {
         nlpInfo.setMfs(movieFlyService);
         nlpInfo.setMts(movieTicketService);
         nlpInfo.setTvans(tam);
+        nlpInfo.setTps(tvProgramService);
         nlpInfo.setLog(logService);
+        nlpInfo.setNameMapperService(nameMapperService);
         System.err.println("CONTRUCT DONE!!!");
     }
 

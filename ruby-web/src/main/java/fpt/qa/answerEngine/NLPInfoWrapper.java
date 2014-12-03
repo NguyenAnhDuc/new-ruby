@@ -1,9 +1,6 @@
 package fpt.qa.answerEngine;
 
-import com.fpt.ruby.business.service.CinemaService;
-import com.fpt.ruby.business.service.LogService;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.MovieTicketService;
+import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.TVAnswerMapper;
 import fpt.qa.domainclassifier.DomainClassifier;
@@ -14,10 +11,11 @@ public class NLPInfoWrapper {
     MovieFlyService mfs;
     MovieTicketService mts;
     CinemaService cins;
+    TVProgramService tps;
     ConjunctionHelper dia;
     ConjunctionHelper nonDia;
     LogService log;
-
+    NameMapperService nameMapperService;
     public NLPInfoWrapper() {
     }
 
@@ -93,5 +91,21 @@ public class NLPInfoWrapper {
 
     public void setNonDia(ConjunctionHelper nonDia) {
         this.nonDia = nonDia;
+    }
+
+    public TVProgramService getTps() {
+        return tps;
+    }
+
+    public void setTps(TVProgramService tps) {
+        this.tps = tps;
+    }
+
+    public NameMapperService getNameMapperService() {
+        return nameMapperService;
+    }
+
+    public void setNameMapperService(NameMapperService nameMapperService) {
+        this.nameMapperService = nameMapperService;
     }
 }

@@ -6,7 +6,5 @@ package com.fpt.ruby.template;
 public class TestProcess {
 
     public static void main(String[] args){
-        String domain = "tv";
-
     }
 }

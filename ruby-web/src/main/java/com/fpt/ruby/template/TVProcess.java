@@ -1,43 +1,76 @@
 package com.fpt.ruby.template;
 
+import com.fpt.ruby.business.model.TVProgram;
 import com.fpt.ruby.business.model.TimeExtract;
 import com.fpt.ruby.business.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.NlpHelper;
 import com.fpt.ruby.nlp.TVModifiersHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TVProcess extends RubyProcess {
+    public RubyAnswer rubyAnswer = new RubyAnswer();
+    TVModifiers tvModifiers;
+    List<TVProgram> tvPrograms = new ArrayList<TVProgram>();
+    public static final String DEF_ANS = "Chúng tôi không tìm thấy thông tin gì.";
+    private final int limitSizeAnswer = 10;
     private TVProgramService tvProgramService;
     private ConjunctionHelper conjunctionHelper;
-    private TVModifiersHelper tvModifiersHelper;
-    public TVProcess(TVProgramService tps, ConjunctionHelper cjh, TVModifiersHelper tvh){
+    public TVProcess(TVProgramService tps, ConjunctionHelper cjh){
         tvProgramService = tps;
         conjunctionHelper = cjh;
-        tvModifiersHelper = tvh;
     }
 
     @Override
-    String getIntent(String question) {
-        // TODO Auto-generated method stub
-        return "tv_cal";
+    void normalize(String question) {
+        rubyAnswer.setQuestion(question);
     }
 
     @Override
-    RubyModifiers getModifiers(String question) {
-        // TODO Auto-generated method stub
-        return tvModifiersHelper.getTVModifiers(question,conjunctionHelper);
+    void getIntent() {
+        rubyAnswer.setIntent("tv_cal");
     }
 
     @Override
-    TimeExtract extractTime(String question) {
-        return NlpHelper.getTimeCondition(question.replaceAll("(\\d+)(h)", "$1 giờ"));
+    void getModifiers() {
+        tvModifiers = TVModifiersHelper.getTVModifiers(rubyAnswer.getQuestion(), conjunctionHelper);
+        rubyAnswer.setRubyModifiers(tvModifiers);
     }
 
     @Override
-    String getAnswer(String question) {
+    void extractTime() {
+        rubyAnswer.setTimeExtract(NlpHelper.getTimeCondition(
+                rubyAnswer.getQuestion().replaceAll("(\\d+)(h)", "$1 giờ")));
+    }
 
-        // TODO Auto-generated method stub
-        return "tv answer";
+    @Override
+    void getCandidates() {
+        TimeExtract timeExtract = rubyAnswer.getTimeExtract();
+        com.fpt.ruby.business.model.TVModifiers tvModifiers1 = new com.fpt.ruby.business.model.TVModifiers();
+        tvModifiers1.setChannel(tvModifiers.getTvChannel());tvModifiers1.setProg_title(tvModifiers.getTvTitle());
+        tvModifiers1.setStart(timeExtract.getBeforeDate());tvModifiers1.setEnd(timeExtract.getAfterDate());
+        tvPrograms = tvProgramService.getList(tvModifiers1);
+    }
+
+    @Override
+    void getAnswer() {
+        if (tvPrograms.isEmpty())
+            rubyAnswer.setAnswer(DEF_ANS);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MM hh:mm a");
+        String info = "";
+
+        int limit = limitSizeAnswer;
+        if (tvPrograms.size() < limitSizeAnswer) {
+            limit = tvPrograms.size();
+        }
+        for (int i = 0; i < limit; i++) {
+            TVProgram tv = tvPrograms.get(i);
+            info += tv.getChannel() + " : " + sdf.format(tv.getStart_date()) + " : " + tv.getTitle() + "</br>";
+        }
+        rubyAnswer.setAnswer(info);
     }
 
 }

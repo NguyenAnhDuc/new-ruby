@@ -1,18 +1,14 @@
 package fpt.qa.answerEngine;
 
 
-import com.fpt.ruby.business.service.CinemaService;
-import com.fpt.ruby.business.service.LogService;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.MovieTicketService;
+import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.helper.ProcessHelper;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.NlpHelper;
 import com.fpt.ruby.nlp.TVAnswerMapper;
-import com.fpt.ruby.nlp.TVAnswerMapperImpl;
+import com.fpt.ruby.template.TVProcess;
 import fpt.qa.domainclassifier.DomainClassifier;
-import fpt.qa.mdnlib.diacritic.DiacriticConverter;
 
 public class NLPAnswerEngine extends AnswerEngine {
     public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
@@ -21,6 +17,8 @@ public class NLPAnswerEngine extends AnswerEngine {
     private static MovieTicketService mts;
     private static MovieFlyService mfs;
     private static CinemaService cins;
+    private static TVProgramService tps;
+    private static NameMapperService nameMapperService;
     private static LogService lgs;
 //    private static NameMapperService nms;
 //    private static ReportQuestionService mqs;
@@ -38,8 +36,10 @@ public class NLPAnswerEngine extends AnswerEngine {
         mts = info.getMts();
         cins = info.getCins();
         diaConj = info.getDia();
+        tps = info.getTps();
         nonDiaConj = info.getNonDia();
         lgs = info.getLog();
+        nameMapperService = info.getNameMapperService();
     }
 
     @Override
@@ -54,9 +54,14 @@ public class NLPAnswerEngine extends AnswerEngine {
 
         try {
             if (domain.equalsIgnoreCase("tv")) {
-                ans = tvans.getAnswer(key, lgs, diaConj);
+                TVProcess rubyProcess = new TVProcess(tps,diaConj);
+                rubyProcess.process(key);
+                ans.setAnswer(rubyProcess.rubyAnswer.getAnswer());
+                ans.setDomain("tv");
+                ans.setIntent(rubyProcess.rubyAnswer.getIntent());
+                /*ans = tvans.getAnswer(key, lgs, diaConj);
                 if (DiacriticConverter.hasDiacriticAccents(key) && ans.getAnswer().contains(TVAnswerMapperImpl.DEF_ANS))
-                    ans = tvans.getAnswer(DiacriticConverter.removeDiacritics(key), lgs, nonDiaConj);
+                    ans = tvans.getAnswer(DiacriticConverter.removeDiacritics(key), lgs, nonDiaConj);*/
             } else {
                 ans = ProcessHelper.getAnswer(key, mfs, mts, cins, lgs, nonDiaConj, diaConj);
             }

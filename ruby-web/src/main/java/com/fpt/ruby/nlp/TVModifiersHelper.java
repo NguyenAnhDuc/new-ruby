@@ -41,7 +41,7 @@ public class TVModifiersHelper {
     }
 
 
-    public com.fpt.ruby.template.TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
+    public static com.fpt.ruby.template.TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
         com.fpt.ruby.template.TVModifiers mod = new com.fpt.ruby.template.TVModifiers();
         List<Pair<String, String>> conjunctions = conjunctionHelper
                 .getConjunction(question);
@@ -56,7 +56,6 @@ public class TVModifiersHelper {
                 mod.setTvTitle(conjunction.first);
                 continue;
             }
-
         }
 
         String title = mod.getTvTitle();

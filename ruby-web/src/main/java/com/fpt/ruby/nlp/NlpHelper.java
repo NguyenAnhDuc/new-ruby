@@ -1,16 +1,15 @@
 package com.fpt.ruby.nlp;
 
-import java.util.ArrayList;
-
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.QuestionStructure;
 import com.fpt.ruby.business.model.TimeExtract;
 import com.fpt.ruby.intent.detection.MovieTypeDetection;
 import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-
 import fpt.qa.additionalinformation.modifier.AbsoluteTime;
 import fpt.qa.additionalinformation.modifier.AbsoluteTime.TimeResult;
+
+import java.util.ArrayList;
 
 public class NlpHelper {
 	private static ConjunctionHelper conjunctionHelper;
@@ -19,7 +18,6 @@ public class NlpHelper {
 		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
 		MovieTypeDetection.init(dir + "/qc/movie", dir + "/dicts");
 		NonDiacriticMovieIntentDetection.init( dir + "/qc/movie/non-diacritic", dir + "/dicts/non-diacritic" );
-		//conjunctionHelper = new ConjunctionHelper(dir);
 		absoluteTime = new AbsoluteTime( NlpHelper.class.getClassLoader().getResource("").getPath() + "vnsutime/" );
 	}
 	
@@ -68,17 +66,5 @@ public class NlpHelper {
 			System.out.println("Time Exception!");
 			return new TimeExtract();
 		}
-		
-		
 	}
-	
-	public static void main(String[] args) {
-		System.out.println("aaaaaaaaa".hashCode());
-		MovieTypeDetection.init("/home/ngan/Work/AHongPhuong/Intent_detection/data/qc/2",
-				"/home/ngan/Work/AHongPhuong/RubyWeb/rubyweb/data/dicts");
-		System.out.println(MovieTypeDetection.getIntent(normalizeQuestion("tối nay có phim gì hay/")));
-	}
-
-	
-	
 }

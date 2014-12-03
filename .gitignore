@@ -4,6 +4,7 @@
 target/
 bin/
 **/SpringMongoConfig.java
+**/rebel.xml
 *.class
  
 =======

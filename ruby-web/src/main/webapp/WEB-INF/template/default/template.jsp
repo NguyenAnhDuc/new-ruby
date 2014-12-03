@@ -41,7 +41,7 @@
 				<nav class="menu">
 					<div class="icon-list">
 						<a href="/rubyweb"><i class="fa fa-fw fa-home"></i><span>Home</span></a>
-						<a href="/rubyweb/admin-show-name-mapper"><i class="fa fa-fw fa-star-o"></i><span>Admin</span></a>
+						<a href="/rubyweb/admin"><i class="fa fa-fw fa-star-o"></i><span>Admin</span></a>
 						<a href="/rubyweb/admin-show-cinemas"><i class="fa fa-fw fa-bank"></i><span>Cinemas</span></a>
 						<a href="/rubyweb/admin-show-tickets?day=0"><i class="fa fa-fw fa-list"></i><span>Tickets Today</span></a>
 						<a href="/rubyweb/admin-show-tvprograms?day=0"><i class="fa fa-fw fa-list-alt"></i><span>TV Today</span></a>

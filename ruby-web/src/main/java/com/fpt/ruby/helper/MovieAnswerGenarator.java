@@ -1,11 +1,10 @@
+
 package com.fpt.ruby.helper;
 
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.model.MovieTicket;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,11 +32,12 @@ public class MovieAnswerGenarator {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM hh:mm:ss a");
             HashSet<String> cinemas = new HashSet<String>();
             tickets.stream().forEach(t->cinemas.add(t.getCinema()));
+
             for (String cinema : cinemas){
                 result.append(cinema + ":</br>");
                 tickets.stream().filter(t->t.getCinema().equals(cinema)).collect(Collectors.groupingBy(MovieTicket::getMovie))
                         .forEach((m, lt) -> {
-                            result.append("&emsp;-" + m+": ");
+                            result.append("&emsp;-" + m + ": ");
                             lt.stream().forEach(t->result.append(sdf.format(t.getDate()) + "&emsp;"));
                             result.append("<br>");
                         });

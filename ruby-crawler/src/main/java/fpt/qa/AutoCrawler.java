@@ -47,7 +47,7 @@ public class AutoCrawler {
         }
 
         try {
-            tvProgramService.cleanOldData();
+//            tvProgramService.cleanOldData();
         } catch (Exception e) {
             System.out.println("error clean movie ticket.");
         }
@@ -55,7 +55,7 @@ public class AutoCrawler {
         try {
             for (int i = 0; i <= numday; ++i) {
                 movieTicketService.clearDataOnSpecificDay(i);
-                tvProgramService.clearDataOnSpecificDay(i);
+//                tvProgramService.clearDataOnSpecificDay(i);
             }
         } catch (Exception e) {
             System.out.println("Error clear on specific data. Message = " + e.getMessage());
@@ -65,19 +65,19 @@ public class AutoCrawler {
         NameMapperService nms = new NameMapperService();
         ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nms);
 
-        try {
-            mytv.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
-        } catch (Exception ex) {
-            System.out.println("Error crawling my tv!! Message = " + ex.getMessage());
-        }
-
-        try {
-            vtvcab.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
-        } catch (Exception ex) {
-            System.out.println("Eror crawling vtvcab!! Message = " + ex.getMessage());
-        }
-
-        TypeMapper.clear(); // clear data
+//        try {
+//            mytv.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
+//        } catch (Exception ex) {
+//            System.out.println("Error crawling my tv!! Message = " + ex.getMessage());
+//        }
+//
+//        try {
+//            vtvcab.doCrawl(tvProgramService, conjunctionHelper, FUTURE_DAY);
+//        } catch (Exception ex) {
+//            System.out.println("Eror crawling vtvcab!! Message = " + ex.getMessage());
+//        }
+//
+//        TypeMapper.clear(); // clear data
 
         try {
             MoveekCrawler.doCrawl(movieTicketService);

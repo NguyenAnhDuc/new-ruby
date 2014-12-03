@@ -5,12 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fpt.ruby.business.constants.ProgramType;
@@ -174,7 +169,7 @@ public class CrawlerVTVCab {
 		Document doc = Jsoup.parse(getResponse(ROOT_URL, "GET"));
 
 		Elements ces = doc.getElementById("channel").select("option");
-
+		Set<String> names = new HashSet<>();
 		for (Element ce : ces) {
 			Channel c = new Channel();
 			c.setId(ce.val());
@@ -187,6 +182,8 @@ public class CrawlerVTVCab {
 				String name = conjunctionHelperNoneDiacritic.getChannelName(ce.text().trim());
 
 				if (!(name == null || name.isEmpty())) {
+					if (names.contains(name)) continue;
+					else names.add(name);
 					c.setName(name);
 				} else {
 					c.setName(ce.text().trim());

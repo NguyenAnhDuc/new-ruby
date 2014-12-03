@@ -64,7 +64,7 @@ public class CrawlerMyTV {
         Document doc = Jsoup.parse(CrawlerHelper.getResponse("http://www.mytv.com.vn/lich-phat-song", "", "GET"));
 //        System.out.println(doc.toString());
         Element chanel = doc.getElementById("channelId");
-
+        Set<String> names = new HashSet<>();
         Elements chanElements = chanel.select("option");
         for (Element element : chanElements) {
             Channel channel = new Channel();
@@ -73,8 +73,11 @@ public class CrawlerMyTV {
             if (element.text().trim().equalsIgnoreCase("star movies hd")) continue;
 
             String name = conjunctionHelper.getChannelName(element.text().trim());
-            if (name != null)
+            if (name != null) {
+                if (names.contains(name)) continue;
+                else names.add(name);
                 channel.setName(name);
+            }
             else
                 channel.setName(element.text().trim());
             System.out.println("Channel name: " + element.text().trim() + " | " + channel.getName());

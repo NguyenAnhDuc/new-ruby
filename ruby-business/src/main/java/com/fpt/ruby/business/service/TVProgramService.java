@@ -92,12 +92,11 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-        return filterByParamaters(mod);
-        //return findByParamaters(mod);
+//        return filterByParamaters(mod);
+        return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){
-        System.out.println("Dinh Xuan Thuc la thang cho");
         long start = System.currentTimeMillis();
         List<TVProgram> tvPrograms = getAllTVPrograms();
         tvPrograms = tvPrograms.stream().filter(t->t.getStart_date() != null && t.getEnd_date() != null).collect(Collectors.toList());
@@ -125,6 +124,7 @@ public class TVProgramService {
     }
 
     public List<TVProgram> findByParamaters(TVModifiers mods) {
+        System.out.println("Hello2");
         long start = System.currentTimeMillis();
         Query query = new Query();
         Criteria criteria = new Criteria();

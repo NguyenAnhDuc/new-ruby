@@ -270,8 +270,8 @@ public class TypeMapper {
 	public static void main(String[] args) {
 		System.out.println("NEW CODE2");
 		TypeRecognizer f = new FootballTypeRecognizer();
-		String chn = "fox sports 2";
-		String prog = "golf";
+		String chn = "cartoon";
+		String prog = "animation cartoon hehe";
 		System.out.println(f.contains(chn, prog));
 //	FootballTypeRecognizer
 		System.out.println("RESULTX: " + TypeMapper.getType(chn, prog));

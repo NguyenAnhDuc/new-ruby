@@ -99,7 +99,7 @@ public class NameMapperService {
 	public static void save(TVProgram prog) {
 		NameMapper n = new NameMapper();
 
-		String title = NameMapperHelper.getRealName(prog.getTitle()).toLowerCase();
+		String title = NameMapperHelper.getRealName(prog.getTitle()).toLowerCase().trim();
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));
@@ -121,11 +121,11 @@ public class NameMapperService {
 	public static void save(MovieTicket mt) {
 		NameMapper n = new NameMapper();
 
-		String title = mt.getMovie();
+		String title = mt.getMovie().trim().toLowerCase();
 		Set<String> variants = new HashSet<String>();
 		variants.add(title);
 		variants.add(TypeMapperHelper.normalize(title));
-		variants.add(mt.getAlias());
+		variants.add(mt.getAlias().trim().toLowerCase());
 		variants.add(TypeMapperHelper.normalize(mt.getAlias()));
 
 		n.setVariant(variants);

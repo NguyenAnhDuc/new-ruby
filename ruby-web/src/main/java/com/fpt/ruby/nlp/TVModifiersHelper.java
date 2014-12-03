@@ -32,7 +32,9 @@ public class TVModifiersHelper {
         typeExtractor = new ProgramTypeExtractor();
 
         // ignore program title
-        String[] ignoreTitles = new String[]{"thể thao", "game show", "bóng đá", "đá bóng", "thời sự", "tin tức", "tennis", "ten nít", "ca nhạc", "tenis"};
+        String[] ignoreTitles = new String[]{
+                "thể thao", "game show", "bóng đá", "đá bóng", "thời sự", "tin tức", "tennis", "ten nít", "ca nhạc", "tenis",
+        "phim mỹ", "phim hoạt hình", "phim gia đình", "phim hành động", "phim thể thao", "phim tâm lý", "phim tình cảm", "phim", "ca nhạc", "chương trình ca nhạc"};
         ignores.clear();
         for (String title : ignoreTitles) {
             ignores.add(title);

@@ -79,13 +79,12 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         mod.setStart(start);
         mod.setEnd(end);
 
-        QueryParamater queryParamater = new QueryParamater();
-
         // end time processing
         List<TVProgram> progs = tps.getList(mod);
         // Log
         Log log = new Log();
-        queryParamater = new QueryParamater();
+
+        QueryParamater queryParamater = new QueryParamater();
         queryParamater.setBeginTime(mod.getStart());
         queryParamater.setEndTime(mod.getEnd());
         queryParamater.setTvProTitle(mod.getProg_title());

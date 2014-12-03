@@ -93,6 +93,8 @@ public class MovieTicketService {
     }
 
     public void save(MovieTicket movieTicket) {
+        System.out.println("\nSave " + movieTicket.toString());
+
         NameMapperService.save(movieTicket);
         mongoOperations.save(movieTicket);
     }

@@ -58,9 +58,12 @@ public class MoveekCrawler {
                     newTicket.setCity(city);
                     newTicket.setMovie(movie.second.first);
                     newTicket.setAlias(movie.second.second);
-                    if (!mts.matchTitle(newTicket.getMovie().toLowerCase())) {
+                    if (!mts.existedInDb(newTicket)) {
                         mts.save(newTicket);
                     }
+//                    if (!mts.matchTitle(newTicket.getMovie().toLowerCase())) {
+//                        mts.save(newTicket);
+//                    }
                 }
 
                 movieNames.add(movie.second.first);

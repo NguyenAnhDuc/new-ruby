@@ -44,7 +44,7 @@ public class CrawlerVTVCab {
 					"VTVCAB19","K+PM", "FOX SPORTS", "FOX SPORTS 2",
 					"CINEMA WORLD", "WARNER", "GEM", "AXN", "ANIMAL PLANET",
 					"CINEMAX", "SCREEN RED", "NGC", "TRAVEL LIVING",
-					"DISCOVERY WORLD", "STARMOVIE", "CHANNEL V","CNN"));
+					"DISCOVERY WORLD", "CHANNEL V","CNN"));
 
 	private final static long ONE_DAY = 24 * 60 * 60 * 1000;
 	private final static String ROOT_URL = "http://www.vtvcab.vn/lich-phat-song";

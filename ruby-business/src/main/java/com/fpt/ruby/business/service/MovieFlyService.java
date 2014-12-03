@@ -3,7 +3,6 @@ package com.fpt.ruby.business.service;
 import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.helper.HttpHelper;
 import com.fpt.ruby.business.model.MovieFly;
-import com.fpt.ruby.business.model.MovieTicket;
 import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 import org.json.JSONObject;
@@ -28,7 +27,7 @@ public class MovieFlyService {
     private static final String RT_apikey = "squrt6un22xe46uy5wmxej8e";
     private MongoOperations mongoOperations;
     /*public MovieFlyService(MongoOperations mongoOperations){
-		this.mongoOperations = mongoOperations;
+        this.mongoOperations = mongoOperations;
 	}*/
 
     public MovieFlyService() {
@@ -44,67 +43,48 @@ public class MovieFlyService {
         System.out.println("DONE");
     }
 
-    public List<MovieFly> findAll() {
-        return mongoOperations.findAll(MovieFly.class);
-    }
-
-    public static String forRegex(String aRegexFragment){
+    // TODO: should rewrite in smart way.
+    public static String forRegex(String aRegexFragment) {
         final StringBuilder result = new StringBuilder();
 
         final StringCharacterIterator iterator =
-                new StringCharacterIterator(aRegexFragment)
-                ;
-        char character =  iterator.current();
-        while (character != CharacterIterator.DONE ){
+                new StringCharacterIterator(aRegexFragment);
+        char character = iterator.current();
+        while (character != CharacterIterator.DONE) {
       /*
        All literals need to have backslashes doubled.
       */
             if (character == '.') {
                 result.append("\\.");
-            }
-            else if (character == '\\') {
+            } else if (character == '\\') {
                 result.append("\\\\");
-            }
-            else if (character == '?') {
+            } else if (character == '?') {
                 result.append("\\?");
-            }
-            else if (character == '*') {
+            } else if (character == '*') {
                 result.append("\\*");
-            }
-            else if (character == '+') {
+            } else if (character == '+') {
                 result.append("\\+");
-            }
-            else if (character == '&') {
+            } else if (character == '&') {
                 result.append("\\&");
-            }
-            else if (character == ':') {
+            } else if (character == ':') {
                 result.append("\\:");
-            }
-            else if (character == '{') {
+            } else if (character == '{') {
                 result.append("\\{");
-            }
-            else if (character == '}') {
+            } else if (character == '}') {
                 result.append("\\}");
-            }
-            else if (character == '[') {
+            } else if (character == '[') {
                 result.append("\\[");
-            }
-            else if (character == ']') {
+            } else if (character == ']') {
                 result.append("\\]");
-            }
-            else if (character == '(') {
+            } else if (character == '(') {
                 result.append("\\(");
-            }
-            else if (character == ')') {
+            } else if (character == ')') {
                 result.append("\\)");
-            }
-            else if (character == '^') {
+            } else if (character == '^') {
                 result.append("\\^");
-            }
-            else if (character == '$') {
+            } else if (character == '$') {
                 result.append("\\$");
-            }
-            else {
+            } else {
                 //the char is not a special one
                 //add it to the result as is
                 result.append(character);
@@ -113,24 +93,38 @@ public class MovieFlyService {
         }
         return result.toString();
     }
+
+    public List<MovieFly> findAll() {
+        return mongoOperations.findAll(MovieFly.class);
+    }
+
+//    public boolean findAndUpdate(String title) {
+//        String title =
+//
+//    }
+
     public List<MovieFly> findByTitle(String title2) throws UnsupportedEncodingException {
         // TODO: should handle title contain special characters like (+ . *). May leading to error when using regex
         String title = forRegex(title2);
-
-        Query query = new Query(Criteria.where("title").regex("^" + title + "$", "i"));
+        Query query = new Query(Criteria.where("title").regex("^" + title + "$", "i")); // incase-sensitive match
         List<MovieFly> movieFlies = mongoOperations.find(query, MovieFly.class);
+
         if (movieFlies.size() > 0) return movieFlies;
         MovieFly movieFly = searchOnImdbByTitle(title);
         if (movieFly != null) {
-            query = new Query(Criteria.where("title").regex(title, "i"));
-            movieFlies = mongoOperations.find(query, MovieFly.class);
-            if (movieFlies.size() == 0) {
+            save(movieFly);
+            if (!movieFly.getTitle().equalsIgnoreCase(title2)) {
+                movieFly.setTitle(title2);
                 save(movieFly);
-                // other name
-                MovieFly m2 = movieFly;
-                m2.setTitle(title2);
-                save(m2);
             }
+
+//            query = new Query(Criteria.where("title").regex("^" + title + "$", "i"));
+//            movieFlies = mongoOperations.find(query, MovieFly.class);
+//            if (movieFlies.size() == 0) {
+//                MovieFly m2 = movieFly;
+//                m2.setTitle(title2);
+//                save(m2);
+//            }
             movieFlies.add(movieFly);
         } else {
             // save with no result code. It inditcates that no result found on imdb.

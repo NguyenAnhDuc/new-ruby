@@ -69,6 +69,9 @@ public class CrawlerMyTV {
         for (Element element : chanElements) {
             Channel channel = new Channel();
             channel.setId(element.val());
+
+            if (element.text().trim().equalsIgnoreCase("star movies hd")) continue;
+
             String name = conjunctionHelper.getChannelName(element.text().trim());
             if (name != null)
                 channel.setName(name);

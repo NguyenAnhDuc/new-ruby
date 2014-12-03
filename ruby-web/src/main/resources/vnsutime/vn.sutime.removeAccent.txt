@@ -246,10 +246,10 @@
   { (/mua_thu/) => FALL }
   { (/mua_xuan/) => SPRING }
   
-  { (/[Hh]e|[Hh]a/) => SUMMER }
-  { (/[Dd]ong/) => WINTER }
-  { (/[Tt]hu/) => FALL }
-  { (/[Xx]uan/) => SPRING }
+ # { (/[Hh]e|[Hh]a/) => SUMMER }
+  #{ (/[Dd]ong/) => WINTER }
+  #{ (/[Tt]hu/) => FALL }
+  #{ (/[Xx]uan/) => SPRING }
   
   # Cac mua noi theo kieu dac trung : Mua thi, mua tuu truong, mua cuoi....
   

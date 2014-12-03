@@ -45,6 +45,7 @@ public class TVModifiersHelper {
 
     public static TVModifiers getModifiers(String question,
                                            ConjunctionHelper conjHelper) {
+        System.err.println("Start get modifiers....");
         TVModifiers mod = new TVModifiers();
         List<Pair<String, String>> conjunctions = conjHelper
                 .getConjunction(question);
@@ -67,9 +68,10 @@ public class TVModifiersHelper {
             mod.setProg_title(null);
             if (mod.getType() == null) {
                 List<ProgramType> ptype = typeExtractor.getTypes(question);
-                if (ptype != null) {
-                    List<String> listType = new ArrayList<>();
-                    for (ProgramType type : ptype) {
+                System.err.println("~~~"+ptype);
+                        if (ptype != null) {
+                            List<String> listType = new ArrayList<>();
+                            for (ProgramType type : ptype) {
                         if (!listType.contains(type.toString())) {
                             listType.add(type.toString());
                         }
@@ -83,7 +85,7 @@ public class TVModifiersHelper {
             mod.setType(null);
         }
 
-        if (mod.getType() != null && mod.getType().contains(ProgramType.FILM.toString())) {
+        if (mod.getType() != null && (mod.getType().contains(ProgramType.FILM.toString()) || mod.getType().contains(ProgramType.CARTOON.toString()))) {
             System.err.println("|||||||||||||||||||||||||||||||||||||||||||");
             boolean specific = false;
             GenreExtractor genreExtractor = new GenreExtractor();
@@ -108,8 +110,10 @@ public class TVModifiersHelper {
             if (specific) {
                 mod.getType().remove(ProgramType.FILM.toString());
             }
+            mod.setType((new ArrayList<>(new HashSet<>(mod.getType()))));
         }
         System.out.println("mod.type = " + mod.getType());
+
         return mod;
     }
 }

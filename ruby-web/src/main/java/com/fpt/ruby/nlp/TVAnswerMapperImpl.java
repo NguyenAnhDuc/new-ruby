@@ -49,7 +49,7 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
         rubyAnswer.setAnswer(DEF_ANS);
 
         if (intent.equalsIgnoreCase(IntentConstants.TV_UDF))
-            return rubyAnswer;
+            ;//return rubyAnswer;
 
         TVModifiers mod = TVModifiersHelper.getModifiers(question, conjunctionHelper);
         tmp += "\t" + question.replaceAll("\\s+", " ") + "\n";

@@ -77,6 +77,10 @@ public class ProgramTypeExtractor {
 			return null;
 		}
 
+		if(listType.size()>1 && listType.contains(ProgramType.ENTERTAINMENT)) {
+			listType.remove(ProgramType.ENTERTAINMENT);
+		}
+
 		if (listType.contains(ProgramType.ENTERTAINMENT)) {
 			listType.add(ProgramType.CARTOON);
 			listType.add(ProgramType.MUSIC);

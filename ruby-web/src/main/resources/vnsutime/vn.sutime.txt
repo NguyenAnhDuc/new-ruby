@@ -254,10 +254,10 @@
   { (/mùa_thu/) => FALL }
   { (/mùa_xuân/) => SPRING }
   
-  { (/[Hh]è|[Hh]ạ/) => SUMMER }
-  { (/[Đđ]ông/) => WINTER }
-  { (/[Tt]hu/) => FALL }
-  { (/[Xx]uân/) => SPRING }
+ # { (/[Hh]è|[Hh]ạ/) => SUMMER }
+ # { (/[Đđ]ông/) => WINTER }
+ # { (/[Tt]hu/) => FALL }
+ # { (/[Xx]uân/) => SPRING }
   
   # Các mùa nói theo kiểu đặc trưng : Mùa thi, mùa tựu trường, mùa cưới....
   

@@ -55,6 +55,7 @@ public class NlpHelper {
 	
 	public static TimeExtract getTimeCondition(String text){
 		try{
+			text = text.replaceAll("(\\d+)(h)", "$1 giờ");
 			TimeResult timeResult = absoluteTime.getAbsoluteTime(text);
 			TimeExtract timeExtract = new TimeExtract();
 			timeExtract.setBeforeDate(timeResult.getBeginTime());

@@ -1,16 +1,15 @@
 package com.fpt.ruby.namemapper.conjunction;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.model.NameMapper;
 import com.fpt.ruby.business.service.NameMapperService;
-
+import com.fpt.ruby.business.template.MovieModifiers;
 import fpt.qa.additionalinformation.modifier.ConjunctionWithType;
 import fpt.qa.mdnlib.struct.pair.Pair;
+
+import java.util.List;
 
 
 
@@ -67,7 +66,21 @@ public class ConjunctionHelper {
 		}
 		return null;
 	}
-	
+
+	public MovieModifiers getMovieModifiers(String question){
+		MovieModifiers movieModifiers = new MovieModifiers();
+		System.err.println("Conjunction Helper: " + question);
+		List<Pair<String, String>> conjunctions = getConjunction(question);
+		for (Pair<String, String> conjunction : conjunctions ){
+			System.out.println("[Conjunction Helper - getCinemaName: ]" + conjunction.first + " | " + conjunction.second);
+			if (movieModifiers.getCinName() == null && conjunction.second.equals(IntentConstants.CIN_NAME))
+				movieModifiers.setCinName(conjunction.first.replace("{", "").replace("}", ""));
+			if (movieModifiers.getMovieTitle() == null && conjunction.second.equals(IntentConstants.MOV_TITLE))
+				movieModifiers.setMovieTitle(conjunction.first.replace("{", "").replace("}", ""));
+		}
+		return movieModifiers;
+	}
+
 	public MovieTicket getMovieTicket(String question){
 		System.err.println("Conjunction Helper: " + question);
 		List<Pair<String, String>> conjunctions = getConjunction(question);

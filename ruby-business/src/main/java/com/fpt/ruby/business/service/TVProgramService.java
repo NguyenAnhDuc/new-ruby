@@ -92,11 +92,13 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-        return filterByParamaters(mod);
-        //return findByParamaters(mod);
+        //return filterByParamaters(mod);
+        return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){
+        logger.info("TV Modifiers... channel: " + mods.getChannel() + " | title: " + mods.getProg_title()
+                    + "types size: " + mods.getType());
         long start = System.currentTimeMillis();
         List<TVProgram> tvPrograms = getAllTVPrograms();
         tvPrograms = tvPrograms.stream().filter(t->t.getStart_date() != null && t.getEnd_date() != null).collect(Collectors.toList());
@@ -124,6 +126,8 @@ public class TVProgramService {
     }
 
     public List<TVProgram> findByParamaters(TVModifiers mods) {
+        logger.info("TV Modifiers... channel: " + mods.getChannel() + " | title: " + mods.getProg_title()
+                + "types size: " + mods.getType());
         long start = System.currentTimeMillis();
         Query query = new Query();
         Criteria criteria = new Criteria();
@@ -152,7 +156,7 @@ public class TVProgramService {
         // Fix bug film:action && film:usa
         result = filterListByFeatureType(result, mods.getType());
 
-        result.sort(START_CMP);
+        //result.sort(START_CMP);
         logger.info("Query DB TIME: " + (System.currentTimeMillis() - start));
         return result;
     }

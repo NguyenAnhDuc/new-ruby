@@ -1,4 +1,4 @@
-package com.fpt.ruby.template;
+package com.fpt.ruby.business.template;
 
 /**
  * Created by quang on 12/2/2014.
@@ -6,7 +6,10 @@ package com.fpt.ruby.template;
 public class MovieModifiers extends RubyModifiers {
     private String movieTitle;
     private String cinName;
-
+    public MovieModifiers(){
+        movieTitle = null;
+        cinName = null;
+    }
     public String getMovieTitle() {
         return movieTitle;
     }

@@ -13,7 +13,7 @@ import jmdn.nlp.diacritic.DiacriticConverter;
  *
  * @author ngan
  */
-public class MovieTypeDetection extends TypeDetection {
+public class MovieTypeDetection {
 
     static VnIntentDetection classifier;
     public static void init(String qcDir, String dictDir) {
@@ -38,7 +38,7 @@ public class MovieTypeDetection extends TypeDetection {
         return classifier.classify(sent.trim()) + "\t" + cleanSent;
     }
 
-    public static String getIntent2(String sent) {
+    public static String getIntent(String sent) {
         String tunedSent = getTunedSent(sent);
         System.out.println("Tuned sent: " + tunedSent);
         if (tunedSent.contains("nước nào") && !tunedSent.contains("tiếng nước nào") ||

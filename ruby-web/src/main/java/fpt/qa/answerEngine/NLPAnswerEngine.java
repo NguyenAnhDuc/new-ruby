@@ -2,17 +2,16 @@ package fpt.qa.answerEngine;
 
 
 import com.fpt.ruby.business.service.*;
-import com.fpt.ruby.helper.ProcessHelper;
+import com.fpt.ruby.business.template.DomainType;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.NlpHelper;
-import com.fpt.ruby.nlp.TVAnswerMapper;
+import com.fpt.ruby.template.MovieProcess;
 import com.fpt.ruby.template.TVProcess;
 import fpt.qa.domainclassifier.DomainClassifier;
 
 public class NLPAnswerEngine extends AnswerEngine {
     public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
-    private static TVAnswerMapper tvans;
     private static DomainClassifier classifier;
     private static MovieTicketService mts;
     private static MovieFlyService mfs;
@@ -31,13 +30,11 @@ public class NLPAnswerEngine extends AnswerEngine {
 
     public static void config(NLPInfoWrapper info) {
         classifier = info.getClassifier();
-        tvans = info.getTvans();
         mfs = info.getMfs();
         mts = info.getMts();
         cins = info.getCins();
         diaConj = info.getDia();
         tps = info.getTps();
-        nonDiaConj = info.getNonDia();
         lgs = info.getLog();
         nameMapperService = info.getNameMapperService();
     }
@@ -54,16 +51,17 @@ public class NLPAnswerEngine extends AnswerEngine {
 
         try {
             if (domain.equalsIgnoreCase("tv")) {
-                TVProcess rubyProcess = new TVProcess(tps,diaConj);
-                rubyProcess.process(key);
-                ans.setAnswer(rubyProcess.rubyAnswer.getAnswer());
-                ans.setDomain("tv");
-                ans.setIntent(rubyProcess.rubyAnswer.getIntent());
-                /*ans = tvans.getAnswer(key, lgs, diaConj);
-                if (DiacriticConverter.hasDiacriticAccents(key) && ans.getAnswer().contains(TVAnswerMapperImpl.DEF_ANS))
-                    ans = tvans.getAnswer(DiacriticConverter.removeDiacritics(key), lgs, nonDiaConj);*/
+                TVProcess tvProcess = new TVProcess(tps,diaConj);
+                tvProcess.process(key);
+                ans.setAnswer(tvProcess.getRubyAnswer().getAnswer());
+                ans.setDomain(DomainType.TV.toString());
+                ans.setIntent(tvProcess.getRubyAnswer().getIntent());
             } else {
-                ans = ProcessHelper.getAnswer(key, mfs, mts, cins, lgs, nonDiaConj, diaConj);
+                MovieProcess movieProcess = new MovieProcess(diaConj,mfs,mts);
+                movieProcess.process(key);
+                ans.setAnswer(movieProcess.getRubyAnswer().getAnswer());
+                ans.setDomain(DomainType.TV.toString());
+                ans.setIntent(movieProcess.getRubyAnswer().getIntent());
             }
         } catch (Exception e) {
             e.printStackTrace();

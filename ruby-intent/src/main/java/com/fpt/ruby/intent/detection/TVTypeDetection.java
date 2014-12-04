@@ -11,7 +11,7 @@ import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
  *
  * @author ngan
  */
-public class TVTypeDetection extends TypeDetection {
+public class TVTypeDetection {
 
     private VnIntentDetection classifier;
 

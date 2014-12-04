@@ -4,7 +4,6 @@ import com.fpt.ruby.business.helper.DisplayAnswerHelper;
 import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.Log;
 import com.fpt.ruby.business.service.*;
-import com.fpt.ruby.helper.ProcessHelper;
 import com.fpt.ruby.model.ReportQuestion;
 import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
@@ -56,7 +55,6 @@ public class AppController {
     @Autowired
     ReportQuestionService reportQuestionService;
 
-    static TVAnswerMapper tam = new TVAnswerMapperImpl();
     static DomainClassifier classifier;
     private static final Logger logger = LoggerFactory
             .getLogger(AppController.class);
@@ -78,7 +76,7 @@ public class AppController {
     AIMLInfoWrapper aimlInfo;
     NLPInfoWrapper nlpInfo;
     //Conjunction
-    ConjunctionHelper conjunctionHelperWithDiacritic, conjunctionHelperNoneDiacritic;
+    ConjunctionHelper conjunctionHelperWithDiacritic;
 
     // get user agent
     /*
@@ -88,15 +86,11 @@ public class AppController {
 
     @PostConstruct
     public void init() {
-        tam.init(tvProgramService);
         NlpHelper.init();
-        ProcessHelper.init(nameMapperService);
         TVModifiersHelper.init(nameMapperService);
-        NonDiacriticNlpHelper.init(nameMapperService);
         String dir = (new RedisHelper()).getClass().getClassLoader()
                 .getResource("").getPath();
         conjunctionHelperWithDiacritic = new ConjunctionHelper(dir, nameMapperService);
-        conjunctionHelperNoneDiacritic = new ConjunctionHelper(dir + "/non-diacritic", nameMapperService);
         classifier = new DomainClassifier(dir, nameMapperService);
         keenClient = new JavaKeenClientBuilder().build();
         KeenProject keenProject = new KeenProject(KEEN_PROJECT_ID,
@@ -108,10 +102,8 @@ public class AppController {
         nlpInfo.setCins(cinemaService);
         nlpInfo.setClassifier(classifier);
         nlpInfo.setDia(conjunctionHelperWithDiacritic);
-        nlpInfo.setNonDia(conjunctionHelperNoneDiacritic);
         nlpInfo.setMfs(movieFlyService);
         nlpInfo.setMts(movieTicketService);
-        nlpInfo.setTvans(tam);
         nlpInfo.setTps(tvProgramService);
         nlpInfo.setLog(logService);
         nlpInfo.setNameMapperService(nameMapperService);

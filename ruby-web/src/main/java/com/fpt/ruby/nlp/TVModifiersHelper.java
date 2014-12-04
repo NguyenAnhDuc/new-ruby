@@ -32,7 +32,7 @@ public class TVModifiersHelper {
         typeExtractor = new ProgramTypeExtractor();
 
         // ignore program title
-        String[] ignoreTitles = new String[]{"thể thao", "game show", "bóng đá", "đá bóng", "thời sự", "tin tức", "tennis", "ten nít", "ca nhạc", "tenis"};
+        String[] ignoreTitles = new String[]{"phim","thể thao", "game show", "bóng đá", "đá bóng", "thời sự", "tin tức", "tennis", "ten nít", "ca nhạc", "tenis"};
         ignores.clear();
         for (String title : ignoreTitles) {
             ignores.add(title);
@@ -41,8 +41,8 @@ public class TVModifiersHelper {
     }
 
 
-    public static com.fpt.ruby.template.TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
-        com.fpt.ruby.template.TVModifiers mod = new com.fpt.ruby.template.TVModifiers();
+    public static com.fpt.ruby.business.template.TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
+        com.fpt.ruby.business.template.TVModifiers mod = new com.fpt.ruby.business.template.TVModifiers();
         List<Pair<String, String>> conjunctions = conjunctionHelper
                 .getConjunction(question);
         for (Pair<String, String> conjunction : conjunctions) {

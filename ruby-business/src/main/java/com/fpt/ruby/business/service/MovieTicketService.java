@@ -2,6 +2,7 @@ package com.fpt.ruby.business.service;
 
 import com.fpt.ruby.business.config.SpringMongoConfig;
 import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.template.MovieModifiers;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import org.slf4j.Logger;
@@ -112,6 +113,22 @@ public class MovieTicketService {
 
     public List<MovieTicket> findAll() {
         return mongoOperations.findAll(MovieTicket.class);
+    }
+
+    public List<MovieTicket> filterMoviesMatchCondition(MovieModifiers match, Date beforeDate, Date afterDate){
+        List<MovieTicket> movieTickets = getAllTickets();
+        if (match.getCinName() != null && !match.getCinName().isEmpty())
+            movieTickets = movieTickets.stream().filter(t->t.getCinema().equalsIgnoreCase(match.getCinName())).collect(Collectors.toList());
+        if (match.getMovieTitle() != null && !match.getMovieTitle().isEmpty())
+            movieTickets = movieTickets.stream().filter(t->t.getMovie().equalsIgnoreCase(match.getMovieTitle())).collect(Collectors.toList());
+        if (beforeDate != null && afterDate != null)
+            movieTickets = movieTickets.stream().filter(t->
+                    t.getDate().after(beforeDate) && t.getDate().before(afterDate)).collect(Collectors.toList());
+        else if (beforeDate != null)
+            movieTickets = movieTickets.stream().filter(t->t.getDate().after(beforeDate)).collect(Collectors.toList());
+        else if (afterDate != null)
+            movieTickets = movieTickets.stream().filter(t->t.getDate().before(afterDate)).collect(Collectors.toList());
+        return movieTickets;
     }
 
     public List<MovieTicket> filterMoviesMatchCondition(MovieTicket match, Date beforeDate, Date afterDate){

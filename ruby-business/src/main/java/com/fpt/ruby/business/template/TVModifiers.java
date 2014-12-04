@@ -1,4 +1,4 @@
-package com.fpt.ruby.template;
+package com.fpt.ruby.business.template;
 
 import java.util.List;
 

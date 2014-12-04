@@ -1,9 +1,5 @@
 package com.fpt.ruby.nlp;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.model.Cinema;
 import com.fpt.ruby.business.model.MovieFly;
@@ -11,6 +7,10 @@ import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.service.MovieFlyService;
 import com.fpt.ruby.helper.FeaturedMovieHelper;
 import com.fpt.ruby.helper.MovieAnswerGenarator;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AnswerMapper {
@@ -108,6 +108,10 @@ public class AnswerMapper {
 	}
 	
 	public static String getDynamicAnswer(String intent, List<MovieTicket> ans, MovieTicket matchMovieTicket, boolean haveTimeInfo){
+		return MovieAnswerGenarator.generateDynamicAnswer(ans,intent);
+	}
+
+	public static String getDynamicAnswer(String intent, List<MovieTicket> ans){
 		return MovieAnswerGenarator.generateDynamicAnswer(ans,intent);
 	}
 	

@@ -2,33 +2,19 @@ package fpt.qa.answerEngine;
 
 import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import com.fpt.ruby.nlp.TVAnswerMapper;
 import fpt.qa.domainclassifier.DomainClassifier;
 
 public class NLPInfoWrapper {
     DomainClassifier classifier;
-    TVAnswerMapper tvans;
     MovieFlyService mfs;
     MovieTicketService mts;
     CinemaService cins;
     TVProgramService tps;
     ConjunctionHelper dia;
-    ConjunctionHelper nonDia;
     LogService log;
     NameMapperService nameMapperService;
     public NLPInfoWrapper() {
     }
-
-//    public NLPInfoWrapper(DomainClassifier classifier, TVAnswerMapper tvans, MovieFlyService mfs, MovieTicketService mts, CinemaService cins, ConjunctionHelper dia, ConjunctionHelper nonDia) {
-//        this.classifier = classifier;
-//        this.tvans = tvans;
-//        this.mfs = mfs;
-//        this.mts = mts;
-//        this.cins = cins;
-//        this.dia = dia;
-//        this.nonDia = nonDia;
-//    }
-
     public LogService getLog() {
         return log;
     }
@@ -43,14 +29,6 @@ public class NLPInfoWrapper {
 
     public void setClassifier(DomainClassifier classifier) {
         this.classifier = classifier;
-    }
-
-    public TVAnswerMapper getTvans() {
-        return tvans;
-    }
-
-    public void setTvans(TVAnswerMapper tvans) {
-        this.tvans = tvans;
     }
 
     public MovieFlyService getMfs() {
@@ -85,13 +63,6 @@ public class NLPInfoWrapper {
         this.dia = dia;
     }
 
-    public ConjunctionHelper getNonDia() {
-        return nonDia;
-    }
-
-    public void setNonDia(ConjunctionHelper nonDia) {
-        this.nonDia = nonDia;
-    }
 
     public TVProgramService getTps() {
         return tps;

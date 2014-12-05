@@ -69,9 +69,9 @@ public class TVModifiersHelper {
             if (mod.getType() == null) {
                 List<ProgramType> ptype = typeExtractor.getTypes(question);
                 System.err.println("~~~"+ptype);
-                        if (ptype != null) {
-                            List<String> listType = new ArrayList<>();
-                            for (ProgramType type : ptype) {
+                if (ptype != null) {
+                    List<String> listType = new ArrayList<>();
+                    for (ProgramType type : ptype) {
                         if (!listType.contains(type.toString())) {
                             listType.add(type.toString());
                         }

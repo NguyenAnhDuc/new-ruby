@@ -154,7 +154,10 @@ public class TVProgramService {
         // Fix bug film:action && film:usa
         result = filterListByFeatureType(result, mods.getType());
 
-        result.sort(START_CMP);
+        if (result != null) {
+            result.sort(START_CMP);
+        }
+
         logger.info("Query DB TIME: " + (System.currentTimeMillis() - start));
         return result;
     }

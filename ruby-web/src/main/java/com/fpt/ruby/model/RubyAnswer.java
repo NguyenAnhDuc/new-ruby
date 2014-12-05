@@ -63,7 +63,6 @@ public class RubyAnswer {
 	}
 
 	public void setQueryParamater(QueryParamater queryParamater) {
-		// TODO Auto-generated method stub
 		this.queryParamater = queryParamater;
 		
 	}

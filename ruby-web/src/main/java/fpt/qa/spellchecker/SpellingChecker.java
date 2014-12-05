@@ -1,5 +1,6 @@
 package fpt.qa.spellchecker;
 
+import com.fpt.ruby.business.model.TVProgram;
 import fpt.qa.spellchecker.algorithm.DynamicProgramming;
 import fpt.qa.spellchecker.io.StopWordsFilter;
 import fpt.qa.spellchecker.io.UTF8FileUtility;
@@ -11,10 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,32 +36,7 @@ public class SpellingChecker {
 	public SpellingChecker(String resourcePath) {
 		System.err.println("Loading...");
 		training(resourcePath+"/data-correct-spellchecker/train/big.txt");
-//		BufferedReader in = new BufferedReader(new InputStreamReader(
-//				new FileInputStream(file), "UTF8"));
-//		Pattern p = Pattern
-//				.compile("[!@#$%^&*()_+|;',.,./\\s+aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz\\-\\+01234567890]+");
-//		for (String temp = ""; temp != null; temp = in.readLine()) {
-//			Matcher m = p.matcher(temp.toLowerCase());
-//			while (m.find()) {
-//				temp = m.group().toLowerCase().replaceAll("\\s+", " ").trim();
-//				if (temp.equalsIgnoreCase(""))
-//					continue;
-//				Language lang = LanguageClassifier.getLanguage(temp);
-//				if (lang.equals(Language.EN)) {
-//					nWordsEng
-//							.put(temp,
-//									nWordsEng.containsKey(temp) ? nWordsEng
-//											.get(temp) + 1 : 1);
-//				} else {
-//					nWordsViet
-//							.put(temp,
-//									nWordsViet.containsKey(temp) ? nWordsViet
-//											.get(temp) + 1 : 1);
-//				}
-//
-//			}
-//		}
-		// print();
+
 		System.err.println("Loading " + nWordsEng.size()
 				+ " features of English\n\t" + " and " + nWordsViet.size()
 				+ " features of Vietnamese\n\nLoading completed!");
@@ -169,6 +142,7 @@ public class SpellingChecker {
 			if (nWords.containsKey(s))
 				candidates.put(nWords.get(s), s);
 		}
+		printMap(candidates);
 		if (candidates.size() > 0) {
 			// System.out.println("" + (System.currentTimeMillis() -
 			// start)+" ms");

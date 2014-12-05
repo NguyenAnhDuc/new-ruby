@@ -1,20 +1,9 @@
 package fpt.qa.rubyweb;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.fpt.ruby.business.model.*;
 import com.fpt.ruby.business.service.*;
-import fpt.qa.additionalinformation.modifier.AbsoluteTime;
-import fpt.qa.crawler.CrawlerMyTV;
-import fpt.qa.crawler.moveek.MoveekCrawler;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.google.common.collect.Lists;
+import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,156 +12,149 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fpt.ruby.analytic.DataChart;
-import com.fpt.ruby.analytic.DataPieChart;
-
-import com.google.common.collect.Lists;
-import com.mongodb.BasicDBObject;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping("")
 public class AdminController {
-	@Autowired
-	private MovieTicketService movieTicketService;
-	@Autowired
-	private TVProgramService tvProgramService;
-	@Autowired
-	private LogService logService;
-	@Autowired
-	private CinemaService cinemaService;
-	@Autowired
-	private NameMapperService nameMapperService;
+    @Autowired
+    private MovieTicketService movieTicketService;
+    @Autowired
+    private TVProgramService tvProgramService;
+    @Autowired
+    private LogService logService;
+    @Autowired
+    private CinemaService cinemaService;
+    @Autowired
+    private NameMapperService nameMapperService;
 
 
+    @RequestMapping(value = "/addCinema", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    public String addCinema(@RequestParam("cin_name") String cinName, @RequestParam("cin_address") String cin_address,
+                            @RequestParam("mobile") String mobile, Model model) {
+        try {
+            Cinema cinema = new Cinema();
+            cinema.setName(cinName.trim());
+            cinema.setAddress(cin_address.trim());
+            cinema.setMobile(mobile.trim());
+            cinemaService.save(cinema);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            model.addAttribute("status", "failed");
+            return "";
+        }
+        model.addAttribute("status", "success");
+        List<Cinema> cinemas = cinemaService.findAll();
+        model.addAttribute("cinemas", cinemas);
+        return "showCinema";
+    }
 
+    @RequestMapping(value = "admin", method = RequestMethod.GET)
+    public String admin(Model model) {
+        return "admin-tools";
+    }
 
-	@RequestMapping(value="/addCinema", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-	public String addCinema(@RequestParam("cin_name") String cinName, @RequestParam("cin_address") String cin_address,
-											@RequestParam("mobile") String mobile,Model model){
-		try{
-			Cinema cinema = new Cinema();
-			cinema.setName( cinName.trim() );
-			cinema.setAddress( cin_address.trim() );
-			cinema.setMobile( mobile.trim() );
-			cinemaService.save( cinema );
-		}
-		catch (Exception ex){
-			ex.printStackTrace();
-			model.addAttribute("status","failed");
-			return "";
-		}
-		model.addAttribute("status","success");
-		List<Cinema> cinemas = cinemaService.findAll();
-		model.addAttribute("cinemas",cinemas);
-		return "showCinema";
-	}
-	
-	@RequestMapping(value="admin", method = RequestMethod.GET)
-	public String admin(Model model){
-		return "admin-tools";
-	}
+    @RequestMapping(value = "admin-add-cinema", method = RequestMethod.GET)
+    public String addCinema(Model model) {
+        return "addCinema";
+    }
 
-	@RequestMapping(value="admin-add-cinema", method = RequestMethod.GET)
-	public String addCinema(Model model){
-		return "addCinema";
-	}
-	
-	@RequestMapping(value="admin-show-tickets", method = RequestMethod.GET)
-	public String showTickets(@RequestParam("day") String  day, Model model){
-		int numday = 0 ;
-		try{
-			numday = Integer.parseInt(day);
-		}
-		catch (Exception ex){
-		}
+    @RequestMapping(value = "admin-show-tickets", method = RequestMethod.GET)
+    public String showTickets(@RequestParam("day") String day, Model model) {
+        int numday = 0;
+        try {
+            numday = Integer.parseInt(day);
+        } catch (Exception ex) {
+        }
 
-		List<MovieTicket> tickets = movieTicketService.findTicketToShow(numday);
-		model.addAttribute("tickets",tickets);
-		HashSet<String> movies = new HashSet<String>();
-		HashSet<String> cinemas = new HashSet<String>();
-		for (MovieTicket movieTicket : tickets){
-			movies.add(movieTicket.getMovie());
-			cinemas.add(movieTicket.getCinema());
-		}
-		model.addAttribute("numMovie",movies.size());
-		model.addAttribute("numCinema",cinemas.size());
-		return "showTicket";
-	}
-	
-	@RequestMapping(value="admin-show-tvprograms", method = RequestMethod.GET)
-	public String showTVPrograms(@RequestParam("day") String day, Model model){
-		int numday = 0 ;
-		try{
-			numday = Integer.parseInt(day);
-		}
-		catch (Exception ex){
-		}
-		List<TVProgram> tvPrograms = tvProgramService.findProgramToShow(numday);
-		model.addAttribute("tvPrograms",tvPrograms);
-		return "showTV";
-	}
-	
-	@RequestMapping(value="admin-show-cinemas", method = RequestMethod.GET)
-	public String showCinemas(Model model){
-		List<Cinema> cinemas = cinemaService.findAll();
-		
-		model.addAttribute("cinemas",cinemas);
-		return "showCinema";
-	}
-	
-	@RequestMapping(value="admin-show-logs", method = RequestMethod.GET)
-	public String showLogs(Model model, @RequestParam("num") String numString){
-		System.out.println("Admin Show Logs");
-		List<Log> logs = Lists.reverse(logService.findLogToShow());
-		int numLog = 0;
-		try {
-			numLog = Integer.parseInt(numString);
-		}
-		catch (Exception ex){
-			numLog=0;
-		}
-		if (numLog==0){
-			model.addAttribute("logs",logs);
-			return "showLog";
-		}
-		
-		model.addAttribute("logs",logs.subList(0, numLog));
-		return "showLog";
-	}
-	
-	@RequestMapping(value="admin-show-name-mapper", method = RequestMethod.GET)
-	public String showNameMapper(Model model) {
-		List<NameMapper> nms = nameMapperService.findAll().subList(0, 200);
-		model.addAttribute("nameMappers", nms);
-		return "showNameMapper";
-	}
-	
-	@RequestMapping(value = "/deleteTicket", method = RequestMethod.GET)
-	public String deleteBot(@RequestParam("ticketId") String ticketId,Model model) {
-		MovieTicket movieTicket = movieTicketService.findById(ticketId);
-		movieTicketService.delete(movieTicket);
-		List<MovieTicket> tickets = movieTicketService.findTicketToShow(0);
-		model.addAttribute("tickets",tickets);
-		return "showTicket";
-	}
-	@RequestMapping(value = "/testChartData", method = RequestMethod.POST)
-	public List<String> getData() {
-		List<String> data = new ArrayList<String>();
-		data.add("Jan");data.add("Feb");
-		return data;
-	}
+        List<MovieTicket> tickets = movieTicketService.findTicketToShow(numday);
+        model.addAttribute("tickets", tickets);
+        HashSet<String> movies = new HashSet<String>();
+        HashSet<String> cinemas = new HashSet<String>();
+        for (MovieTicket movieTicket : tickets) {
+            movies.add(movieTicket.getMovie());
+            cinemas.add(movieTicket.getCinema());
+        }
+        model.addAttribute("numMovie", movies.size());
+        model.addAttribute("numCinema", cinemas.size());
+        return "showTicket";
+    }
 
-	@RequestMapping(value="/admin-restart-cached-tv", method = RequestMethod.POST,  produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public BasicDBObject crawlMyTV(){
-		try{
-			tvProgramService.restartCached();
-		}
-		catch (Exception ex){
-			return new BasicDBObject().append("status", "failed");
-		}
-		return new BasicDBObject().append("status", "success");
-	}
+    @RequestMapping(value = "admin-show-tvprograms", method = RequestMethod.GET)
+    public String showTVPrograms(@RequestParam("day") String day, Model model) {
+        int numday = 0;
+        try {
+            numday = Integer.parseInt(day);
+        } catch (Exception ex) {
+        }
+        List<TVProgram> tvPrograms = tvProgramService.findProgramToShow(numday);
+        model.addAttribute("tvPrograms", tvPrograms);
+        return "showTV";
+    }
+
+    @RequestMapping(value = "admin-show-cinemas", method = RequestMethod.GET)
+    public String showCinemas(Model model) {
+        List<Cinema> cinemas = cinemaService.findAll();
+
+        model.addAttribute("cinemas", cinemas);
+        return "showCinema";
+    }
+
+    @RequestMapping(value = "admin-show-logs", method = RequestMethod.GET)
+    public String showLogs(Model model, @RequestParam("num") String numString) {
+        System.out.println("Admin Show Logs");
+        List<Log> logs = Lists.reverse(logService.findLogToShow());
+        int numLog = 0;
+        try {
+            numLog = Integer.parseInt(numString);
+        } catch (Exception ex) {
+            numLog = 0;
+        }
+        if (numLog == 0) {
+            model.addAttribute("logs", logs);
+            return "showLog";
+        }
+
+        model.addAttribute("logs", logs.subList(0, numLog));
+        return "showLog";
+    }
+
+    @RequestMapping(value = "admin-show-name-mapper", method = RequestMethod.GET)
+    public String showNameMapper(Model model) {
+        List<NameMapper> nms = nameMapperService.findAll().subList(0, 200);
+        model.addAttribute("nameMappers", nms);
+        return "showNameMapper";
+    }
+
+    @RequestMapping(value = "/deleteTicket", method = RequestMethod.GET)
+    public String deleteBot(@RequestParam("ticketId") String ticketId, Model model) {
+        MovieTicket movieTicket = movieTicketService.findById(ticketId);
+        movieTicketService.delete(movieTicket);
+        List<MovieTicket> tickets = movieTicketService.findTicketToShow(0);
+        model.addAttribute("tickets", tickets);
+        return "showTicket";
+    }
+
+    @RequestMapping(value = "/testChartData", method = RequestMethod.POST)
+    public List<String> getData() {
+        List<String> data = new ArrayList<String>();
+        data.add("Jan");
+        data.add("Feb");
+        return data;
+    }
+
+    @RequestMapping(value = "/admin-restart-cached-tv", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public BasicDBObject crawlMyTV() {
+        try {
+            tvProgramService.restartCached();
+        } catch (Exception ex) {
+            return new BasicDBObject().append("status", "failed");
+        }
+        return new BasicDBObject().append("status", "success");
+    }
 
 }
 
@@ -182,7 +164,7 @@ public class AdminController {
 
 
 /*
-	@RequestMapping(value = "/admin-analytic", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin-analytic", method = RequestMethod.GET)
 	public String testChart(Model model) {
 		int ONE_DAY = 24 * 3600 * 1000;
 		// Line Chart: NumberOfRequest

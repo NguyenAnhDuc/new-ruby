@@ -70,10 +70,15 @@ public class TVAnswerMapperImpl implements TVAnswerMapper {
             end = start;
         }
 
-        if (question.contains("sắp") && question.contains("sap") ||
+        if (question.contains("sắp") || question.contains("sap") ||
             question.contains("tiếp theo") || question.contains("tiep theo")){
             start = new Date(new Date().getTime() + ONE_HOUR);
             end = start;
+        }
+
+        if (start == null && end == null && (intent.equalsIgnoreCase("tv_ttl") || intent.equalsIgnoreCase("tv_pol"))) {
+            start = NlpHelper.getTimeCondition("hôm nay").getBeforeDate();
+            end = NlpHelper.getTimeCondition("hôm nay").getAfterDate();
         }
 
         mod.setStart(start);

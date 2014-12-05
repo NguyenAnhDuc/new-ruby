@@ -104,8 +104,11 @@ public class MovieFlyService {
 //    }
 
     public List<MovieFly> findByTitle(String title2) throws UnsupportedEncodingException {
-        // TODO: should handle title contain special characters like (+ . *). May leading to error when using regex
-        System.out.println("Title: " + title2);
+        // if title is null
+        if (title2 == null || title2.isEmpty()) {
+            return mongoOperations.findAll(MovieFly.class);
+        }
+
         String title = forRegex(title2);
         Query query = new Query(Criteria.where("title").regex("^" + title + "$", "i")); // incase-sensitive match
         List<MovieFly> movieFlies = mongoOperations.find(query, MovieFly.class);

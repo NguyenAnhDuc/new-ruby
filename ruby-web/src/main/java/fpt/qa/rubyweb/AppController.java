@@ -130,9 +130,6 @@ public class AppController {
             @CookieValue(value = "userID", defaultValue = "") String browserUserID) {
         god = new AnswerFinder(aimlInfo, nlpInfo, !confirmWebSearch.equals("no"));
         // Log
-        long pivot1 = (new Date()).getTime();
-
-
         String userID = browserUserID;
         if (!inputType.equals("text")) inputType = "voice";
         if (!appUserID.isEmpty()) userID = appUserID;
@@ -145,7 +142,6 @@ public class AppController {
         log.setDate(new Date());
 
         RubyAnswer ans = god.getAnswer(question);
-        long pivot2 = (new Date()).getTime();
         TrackingThread ti = new TrackingThread(ans, log, userID, inputType);
         ti.start();
         // If can't answer, take result from Bing Search

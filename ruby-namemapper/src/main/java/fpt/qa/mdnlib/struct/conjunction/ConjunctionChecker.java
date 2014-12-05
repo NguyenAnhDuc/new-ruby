@@ -19,7 +19,7 @@ import fpt.qa.mdnlib.util.string.StrUtil;
 public class ConjunctionChecker {
     private ConjunctionCollection conjunctionColl = null;
     private Words2Conjunctions words2Conjunctions = null;
-    
+    //private
     public ConjunctionChecker() {
         conjunctionColl = new ConjunctionCollection();
         words2Conjunctions = new Words2Conjunctions();
@@ -122,7 +122,7 @@ public class ConjunctionChecker {
                 }
             }
         }
-        
+        //System.err.println("Bùi Thiện : " + relevantConjs);
         return relevantConjs;
     }
     
@@ -176,17 +176,17 @@ public class ConjunctionChecker {
         
         for (Map.Entry<Integer, Integer> entry : conj2Count.entrySet()) {
             Conjunction conjunction = conjunctionColl.getConjunctionAt(entry.getKey());
-            
+
             if (conjunction != null) {
-                if (conjunction.size() == entry.getValue()) {
-                	
-                	
+                //if (conjunction.size() == entry.getValue()) {
+                    //System.err.println("Thiện [] " + conjunction.getConjWords());
+                    //System.err.println("Thiện [entry] " + entry.getValue());
                 	// kiem tra thu tu
                 	// tokens vs conjunction
                 	
                 	// danh sach cac tu trong conjunction
                 	List<String> listWords = conjunction.getConjWords();
-                	//System.out.println("S:" + listWords.toString());
+                	//System.out.println("S~~~~:" + listWords.toString());
                 	startIndex = 0;
                 	boolean notfound = true;
                 	
@@ -212,11 +212,13 @@ public class ConjunctionChecker {
                 		
                     if (! notfound)
                     	relevantConjs.add(conjunction.getStr());
-                    
-                }
+                //}
             }
         }
-        
+        System.err.println("Bùi Thiện : " + relevantConjs);
+        if(relevantConjs.isEmpty()) {
+            //return
+        }
         return relevantConjs;
     }
 }

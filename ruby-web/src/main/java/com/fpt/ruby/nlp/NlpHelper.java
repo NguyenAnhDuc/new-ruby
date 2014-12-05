@@ -8,17 +8,21 @@ import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.additionalinformation.modifier.AbsoluteTime;
 import fpt.qa.additionalinformation.modifier.AbsoluteTime.TimeResult;
+import fpt.qa.spellchecker.SpellCheckAndCorrector;
 
 import java.util.ArrayList;
 
 public class NlpHelper {
 	private static ConjunctionHelper conjunctionHelper;
 	private static AbsoluteTime absoluteTime;
+	private static SpellCheckAndCorrector spellCheckAndCorrector ;
+
 	public static void init() {
 		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
 		MovieTypeDetection.init(dir + "/qc/movie", dir + "/dicts");
 		NonDiacriticMovieIntentDetection.init( dir + "/qc/movie/non-diacritic", dir + "/dicts/non-diacritic" );
 		absoluteTime = new AbsoluteTime( NlpHelper.class.getClassLoader().getResource("").getPath() + "vnsutime/" );
+		spellCheckAndCorrector = new SpellCheckAndCorrector(dir);
 	}
 	
 	public String getIntent(boolean isDiacritic, String question){
@@ -42,6 +46,7 @@ public class NlpHelper {
 		if(question.isEmpty()){
 			return "";
 		}
+
 		int j = question.length() - 1;
 		// remove question mark or special character
 		for (; j >= 0; j--){
@@ -50,7 +55,9 @@ public class NlpHelper {
 				break;
 			}
 		}
-		return question.toLowerCase().substring(0,j+1);
+		question =  question.toLowerCase().substring(0,j+1);
+		return spellCheckAndCorrector.completed(question);
+
 	}
 	
 	public static TimeExtract getTimeCondition(String text){

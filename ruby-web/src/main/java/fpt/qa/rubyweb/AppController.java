@@ -5,10 +5,11 @@ import com.fpt.ruby.business.helper.RedisHelper;
 import com.fpt.ruby.business.model.Log;
 import com.fpt.ruby.business.service.*;
 import com.fpt.ruby.model.ReportQuestion;
-import com.fpt.ruby.model.RubyAnswer;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import com.fpt.ruby.nlp.*;
+import com.fpt.ruby.nlp.NlpHelper;
+import com.fpt.ruby.nlp.TVModifiersHelper;
 import com.fpt.ruby.service.ReportQuestionService;
+import com.fpt.ruby.template.RubyAnswer;
 import fpt.qa.answerEngine.AIMLInfoWrapper;
 import fpt.qa.answerEngine.AnswerFinder;
 import fpt.qa.answerEngine.NLPInfoWrapper;
@@ -229,7 +230,8 @@ public class AppController {
             log.setIntent(ans.getIntent());
             log.setDomain(ans.getDomain());
 
-            log.setQueryParamater(ans.getQueryParamater());
+            //911
+            //log.setQueryParamater(ans.getQueryParamater());
 
             logService.save(log);
 

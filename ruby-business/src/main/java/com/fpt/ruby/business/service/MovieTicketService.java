@@ -5,8 +5,6 @@ import com.fpt.ruby.business.model.MovieTicket;
 import com.fpt.ruby.business.template.MovieModifiers;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.domain.Sort;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
@@ -28,7 +27,7 @@ public class MovieTicketService {
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
     private static long ONE_HOUR =  60 * 60 * 1000;
     private static long ONE_MINUTE =  60 * 1000;
-    private static final Logger logger = LoggerFactory.getLogger(MovieTicketService.class);
+    private static final Logger logger = Logger.getLogger(MovieTicketService.class.getName());
     private final String MT_MOVIE = "movie";
     private final String MT_CINEMA = "cinema";
     private final String MT_DATE = "date";
@@ -116,7 +115,22 @@ public class MovieTicketService {
     }
 
     public List<MovieTicket> filterMoviesMatchCondition(MovieModifiers match, Date beforeDate, Date afterDate){
-        List<MovieTicket> movieTickets = getAllTickets();
+        logger.info("Cin name: " + match.getCinName() + "movie: " + match.getMovieTitle() );
+
+        Query query = new Query();
+        if (match.getCinName() != null && !match.getCinName().isEmpty())
+            query.addCriteria(Criteria.where(MT_CINEMA).regex(match.getCinName(),"i"));
+        if (match.getMovieTitle() != null && !match.getMovieTitle().isEmpty())
+            query.addCriteria(Criteria.where(MT_MOVIE).regex(match.getMovieTitle(),"i"));
+        if (beforeDate != null && afterDate != null)
+            query.addCriteria(Criteria.where(MT_DATE).gte(beforeDate).lte(afterDate));
+        else if (beforeDate != null)
+            query.addCriteria(Criteria.where(MT_DATE).gte(beforeDate));
+        else if (afterDate != null)
+            query.addCriteria(Criteria.where(MT_DATE).lte(afterDate));
+        return mongoOperations.find(query,MovieTicket.class);
+
+        /*List<MovieTicket> movieTickets = getAllTickets();
         if (match.getCinName() != null && !match.getCinName().isEmpty())
             movieTickets = movieTickets.stream().filter(t->t.getCinema().equalsIgnoreCase(match.getCinName())).collect(Collectors.toList());
         if (match.getMovieTitle() != null && !match.getMovieTitle().isEmpty())
@@ -128,7 +142,7 @@ public class MovieTicketService {
             movieTickets = movieTickets.stream().filter(t->t.getDate().after(beforeDate)).collect(Collectors.toList());
         else if (afterDate != null)
             movieTickets = movieTickets.stream().filter(t->t.getDate().before(afterDate)).collect(Collectors.toList());
-        return movieTickets;
+        return movieTickets;*/
     }
 
     public List<MovieTicket> filterMoviesMatchCondition(MovieTicket match, Date beforeDate, Date afterDate){

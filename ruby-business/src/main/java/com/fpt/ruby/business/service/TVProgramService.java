@@ -92,8 +92,8 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-        //return filterByParamaters(mod);
-        return findByParamaters(mod);
+        return filterByParamaters(mod);
+        //return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){

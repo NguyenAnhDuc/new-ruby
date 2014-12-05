@@ -3,7 +3,7 @@ package fpt.qa.answerEngine;
 
 import com.fpt.ruby.business.helper.DisplayAnswerHelper;
 import com.fpt.ruby.business.service.BingSearchService;
-import com.fpt.ruby.model.RubyAnswer;
+import com.fpt.ruby.template.RubyAnswer;
 
 public class WebSearchAnswerEngine extends AnswerEngine {
     private static int LIMIT;

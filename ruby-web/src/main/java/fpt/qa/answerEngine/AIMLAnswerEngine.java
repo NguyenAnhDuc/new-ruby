@@ -1,6 +1,6 @@
 package fpt.qa.answerEngine;
 
-import com.fpt.ruby.model.RubyAnswer;
+import com.fpt.ruby.template.RubyAnswer;
 
 public class AIMLAnswerEngine extends AnswerEngine {
     private static String botID;

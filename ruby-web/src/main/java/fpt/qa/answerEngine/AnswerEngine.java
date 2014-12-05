@@ -1,6 +1,6 @@
 package fpt.qa.answerEngine;
 
-import com.fpt.ruby.model.RubyAnswer;
+import com.fpt.ruby.template.RubyAnswer;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;

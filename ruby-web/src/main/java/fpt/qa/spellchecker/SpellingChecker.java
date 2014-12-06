@@ -59,7 +59,7 @@ public class SpellingChecker {
 	public void training(String trainFile) {
 		String[] features = UTF8FileUtility.getLines(trainFile);
 		for (String s : features) {
-			if (s.length() < 4) {
+			if (s.length() < 3) {
 				continue;
 			}
 			String temp = s.toLowerCase().replaceAll("\\s+", " ").trim();
@@ -121,7 +121,6 @@ public class SpellingChecker {
 
 	public final String correct(String phrase) {
 		phrase = removeDuplicateCharacter(phrase);
-
 		if (nWordsEng.containsKey(phrase) || nWordsViet.containsKey(phrase)) {
 			return phrase;
 		}
@@ -150,17 +149,16 @@ public class SpellingChecker {
 		}
 
 		// heuristic algorithm
-		double max = 0.0;
+		double max = 0.8;
 		String strMax = null;
 		for (String key : nWords.keySet()) {
 			// ignore
-			if ((double) key.length() / phrase.length() < 0.8
-					|| (double) phrase.length() / key.length() < 0.8) {
+			if ((double) key.length() / phrase.length() < 0.7
+					|| (double) phrase.length() / key.length() < 0.7) {
 				continue;
 			}
 
 			double score = DynamicProgramming.SWSPassageScore(key, phrase);
-			if (score >= 0.8) {
 				if (max < score) {
 					max = score;
 					strMax = key;
@@ -173,7 +171,6 @@ public class SpellingChecker {
 							: strMax;
 				}
 			}
-		}
 		// System.out.println("" + (System.currentTimeMillis() - start)+" ms");
 		return strMax;
 	}

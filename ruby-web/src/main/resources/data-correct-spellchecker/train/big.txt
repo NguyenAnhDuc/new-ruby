@@ -19,7 +19,9 @@ Dumb and Dumber To
 Gone Girl
 Horrible Bosses 2
 Mea Culpa
-Star Movie
+hành động
+kinh dị
+Star Movie	
 Star Movie
 NEWS
 NEWS
@@ -853,16 +855,11 @@ ban tin
 mỗi ngày 1 cuốn sách
 mỗi ngày 1 cuốn sách
 moi ngay 1 cuon sach
-nhà hát truyền hình
-nhà hát truyền hình
-nha hat truyen hinh
 vì trẻ em
 vi tre em
-vì trẻ em
 bí mật của cô bé toheba
 bi mat cua co be toheba
 bí mật của cô bé toheba
-vì an ninh tổ quốc
 vì an ninh tổ quốc
 vi an ninh to quoc
 bão qua làng
@@ -1585,9 +1582,6 @@ không mũ
 thời sự 12h
 thời sự 12h
 thoi su 12h
-phim truyện
-phim truyen
-phim truyện
 tin tức 14h
 tin tức 14h
 tin tuc 14h
@@ -11755,8 +11749,7 @@ The King Of Debt Collecting Agent
 Hắc Đạo Phong Vân
 Thất Tinh Anh Hùng Truyện
 That Tinh Anh Hung Truyen
-H
-c Đuong Quan Hiep Truyen
+Đuong Quan Hiep Truyen
 Thất Tinh Anh Hùng Truyện
 Hắc Đường Quần Hiệp Truyện
 The Black Panther Warriors
@@ -15547,10 +15540,8 @@ Mẹ Và Con Trai
 Me Va Con Trai
 Mama, Nothing To Fear
 Mama, Nothing To Fear
-Me
 Khong Co Gi Đe So
 Không Có Gì Để Sợ
-Mẹ
 Mệnh Lệnh Liên Hoàn
 Menh Lenh Lien Hoan
 Mệnh Lệnh Liên Hoàn
@@ -19914,18 +19905,12 @@ Tom And Jerry (p.9)
 Tom And Jerry (p.9)
  khuyến công
 
- chào buổi sáng
+chào buổi sáng
 chao buoi sang
- chào buổi sáng
- thời sự
- thời sự
-thoi su
- phim truyện
-phim truyen
- phim truyện
- kênh hiệu htv1
+chào buổi sáng
+kênh hiệu htv1
 kenh hieu htv1
- kênh hiệu htv1
+kênh hiệu htv1
 atp world tour 1000
 atp world tour 1000
 the numbers game s1 (30 mins)
@@ -20028,14 +20013,9 @@ tài năng sv
 tài năng sv
 tai nang sv
 phụ nữ là
-phụ nữ là
 phu nu la
 thần y
 than y
-thần y
-truyện
-truyen
-truyện
 tây du ký
 tay du ky
 tây du ký
@@ -34518,8 +34498,6 @@ Vung Đat Thay Ma
  tin tức
 
  tài chính - kinh doanh
- - kinh doanh
- - kinh doanh
  cho muôn đời sau linh hồn của đất
  doi sau linh hon cua dat
  cho muôn đời sau linh hồn của đất
@@ -34529,8 +34507,8 @@ Vung Đat Thay Ma
  phim truyện những đóa hoa tình yêu - tập 10
  nhung doa hoa tinh yeu - tap 10
  phim truyện những đóa hoa tình yêu - tập 10
- tạp chí âm nhạcsố 6
- am nhacso 6
+ tạp chí âm nhạc số 6
+ am nhac so 6
  tạp chí âm nhạcsố 6
  phim truyện bão qua làng - tập 25
  bao qua lang - tap 25
@@ -34553,11 +34531,10 @@ Vung Đat Thay Ma
  câu chuyện văn hóa
  văn hóa
  van hoa
- cổng làng tự truyện điệu múa cổ làng giắng
+ cổng làng tự truyện
  tu truyen dieu mua co lang giang
  cổng làng tự truyện điệu múa cổ làng giắng
  thời sự 9h
- 9h
  thời sự 9h
  công nghệ - đời sốngict sumit 2014 - ứng dụng công nghệ thông tin trong nông nghiệp
  - doi songict sumit 2014 - ung dung cong nghe thong tin trong nong nghiep

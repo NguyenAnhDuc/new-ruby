@@ -55,6 +55,8 @@ gì
 không
 khi nao
 chieu mai
+có chiếu
+co chieu
 chiều mai
 khi nào
 bao giờ
@@ -68,8 +70,9 @@ ngày mai
 ngay mai
 trưa mai
 trua mai
+có phim
+co phim
 khi nao
-phim
 chiếu trên
 chieu tren
 chiếu ở
@@ -82,7 +85,6 @@ $
 %
 ^
 &
-*
 (
 )
 _

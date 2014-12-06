@@ -5,7 +5,9 @@ public class DynamicProgramming {
 	
 	
 	public static double SWSNonStopPassageScore(String candidate, String word) {
-		
+		if(candidate==null||word ==null) {
+			return 0;
+		}
 		char[] cdd = candidate.toCharArray();
 		char[] wrd = word.toCharArray();
 		int cddLength = cdd.length;
@@ -42,6 +44,9 @@ public class DynamicProgramming {
 	}
 	
 	public static double SWSPassageScore(String candidate, String word) {
+		if(candidate==null||word ==null) {
+			return 0;
+		}
 		double score = 0;
 		int cddLength = candidate.length();
 		int wrdLength = word.length();

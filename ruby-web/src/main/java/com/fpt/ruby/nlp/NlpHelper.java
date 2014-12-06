@@ -54,7 +54,7 @@ public class NlpHelper {
             }
         }
         question = question.toLowerCase().substring(0, j + 1);
-        return spellCheckAndCorrector.completed(question);
+        return spellCheckAndCorrector.completed(question.replaceAll("\\s+"," "));
 
     }
 

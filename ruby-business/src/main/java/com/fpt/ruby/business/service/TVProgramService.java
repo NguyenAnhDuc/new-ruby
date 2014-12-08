@@ -133,7 +133,7 @@ public class TVProgramService {
             query.addCriteria(Criteria.where(FIELD_CHANNEL).is(mods.getChannel().toLowerCase()));
 
         if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
-            query.addCriteria(Criteria.where(FIELD_TITLE).is(mods.getProg_title().toLowerCase()));
+            query.addCriteria(Criteria.where(FIELD_TITLE).regex(mods.getProg_title().toLowerCase()));
 
         if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0) {
             query.addCriteria(Criteria.where(FIELD_TYPES).regex(genRegex(mods.getType())));

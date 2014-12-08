@@ -59,7 +59,7 @@ public class SpellingChecker {
 	public void training(String trainFile) {
 		String[] features = UTF8FileUtility.getLines(trainFile);
 		for (String s : features) {
-			if (s.length() < 3) {
+			if (s.length() < 4) {
 				continue;
 			}
 			String temp = s.toLowerCase().replaceAll("\\s+", " ").trim();

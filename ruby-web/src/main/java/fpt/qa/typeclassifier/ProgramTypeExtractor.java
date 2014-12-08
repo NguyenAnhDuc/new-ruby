@@ -82,7 +82,6 @@ public class ProgramTypeExtractor {
 		}
 
 		if (listType.contains(ProgramType.ENTERTAINMENT)) {
-			listType.add(ProgramType.CARTOON);
 			listType.add(ProgramType.MUSIC);
 			listType.add(ProgramType.FILM);
 			listType.add(ProgramType.FASHION);

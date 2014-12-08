@@ -20,6 +20,7 @@ Gone Girl
 Horrible Bosses 2
 Mea Culpa
 hành động
+hanh dong
 kinh dị
 Star Movie	
 Star Movie
@@ -5280,7 +5281,6 @@ The Good Lie
 Lời Nói Dối Ngọt Ngào
 Loi Noi Doi Ngot Ngao
  chào cờ
-
  thời sự 12h
  thời sự 12h
 thoi su 12h
@@ -14545,7 +14545,6 @@ Lối Rẽ
 Lối Sống Sai Lầm
 Lối Sống Sai Lầm
 Loi Song Sai Lam
-Sai Lam
 Sai Lầm
 Terms Of Endearment
 Terms Of Endearment
@@ -16850,7 +16849,6 @@ Ngàn Lời Yêu Thương
 Ngan Loi Yeu Thuong
 Ngàn Lời Yêu Thương
 Ngày 13 Đen Tối
-13-13-13
 Ngay 13 Đen Toi
 Ngày 13 Đen Tối
 We Were Here Part Ii
@@ -20903,8 +20901,6 @@ fukushima animals
 fukushima animals
 gangland killers
 gangland killers
-dog
-dog
 man-eating super squid
 man-eating super squid
 thể thao
@@ -21248,7 +21244,6 @@ Sa Mac Đinh Menh
 Intersections
 Sa Mạc Định Mệnh
 Sai Lầm
-Sai Lam
 Sai Lầm
 Ending Planner
 Ending Planner
@@ -24567,8 +24562,6 @@ Thang Tram
 Thăng Trầm
 It Started With A Kiss
 It Started With A Kiss
-Tho Ngay
-Thơ Ngây
 Letters To Juliet
 Thu Gui Juliet
 Letters To Juliet
@@ -26682,10 +26675,8 @@ Vợ Tôi Là Số 1
 The Other Woman
 Nguoi Yeu
 Nguoi Tinh
-Vo
 The Other Woman
 Người Yêu
-Vợ
 Người Tình
 Vụ Ám Sát Ngọt Ngào
 Vu Ám Sat Ngot Ngao
@@ -27092,9 +27083,6 @@ P 51 Dragon Fighter
 P 51 Dragon Fighter
 Vu Khi Rong Lua
 Vũ Khí Rồng Lửa
-30 Tập
-30 Tập
-30 Tap
 Vu Khi Sac Đep
 Vũ Khí Sắc Đẹp
 Pubescence 3
@@ -29765,8 +29753,6 @@ Căn Nhà Chết Chóc
 1048
 Can Phong 1408 Bi Ẩn
 Căn Phòng 1408 Bí Ẩn
-2046
-2046
 Can Phong 2046
 Căn Phòng 2046
 Darkroom
@@ -32880,8 +32866,6 @@ Sat Thu Vuot Thoi Gian
 Sát Thủ Vượt Thời Gian
 A Werewolf Boy
 A Werewolf Boy
-Soi
-Sói
 The Shadow Fox
 Soi Đem
 The Shadow Fox
@@ -34769,8 +34753,6 @@ ban tin
  việt nam
  viet nam
  thông tin 260
- 260
- 260
  đường tới vương miện hoa khôi áo dài việt nam 2014 - đường tới vương miện hoa hậu thế giới
  vương miện hoa khôi áo dài việt nam 2014 - đường tới vương miện hoa hậu thế giới
  vuong mien hoa khoi ao dai viet nam 2014 - duong toi vuong mien hoa hau the gioi
@@ -34781,7 +34763,6 @@ ban tin
  cam on cuoc doi - tap 36
  phim truyện cám ơn cuộc đời - tập 36
  vui sống mỗi ngày
- moi ngay
  vui sống mỗi ngày
  thể thao tường thuật vòng bảng uefa europa league: asteras – tottenham hotspur
  tuong thuat vong bang uefa europa league: asteras – tottenham hotspur
@@ -35993,9 +35974,6 @@ toa sang giua doi thuong
  khám phá việt nam cùng robert danhi
 kham pha viet nam cung robert danhi
  khám phá việt nam cùng robert danhi
- a ha
-a ha
- a ha
  bạn đường hợp ý
 ban duong hop y
  bạn đường hợp ý
@@ -37428,11 +37406,6 @@ cánh chim cô đơn (62 tập)
 hậu trường showbiz
 hậu trường showbiz
 hau truong showbiz
-vz
-vz
-hài
-hài
-hai
 trò chuyện với người nổi tiếng
 trò chuyện với người nổi tiếng
 tro chuyen voi nguoi noi tieng

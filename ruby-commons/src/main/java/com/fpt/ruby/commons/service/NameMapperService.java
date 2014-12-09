@@ -7,6 +7,7 @@ import com.fpt.ruby.commons.helper.NameMapperHelper;
 import com.fpt.ruby.commons.helper.TypeMapperHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class NameMapperService {
 	Set<String> x = new HashSet<String>();
 
-	@Autowired private MongoOperations db;
+	@Autowired private MongoTemplate db;
 
 	/*static {
 		ApplicationContext context = new AnnotationConfigApplicationContext(
@@ -39,9 +40,8 @@ public class NameMapperService {
 	}*/
 
 
-	public NameMapperService(MongoOperations mongoOperations) {
-		this.db = mongoOperations;
-		List<NameMapper> names = findAll();
+	public void init() {
+		List<NameMapper> names = db.findAll(NameMapper.class);
 		x.clear();
 
 		for (NameMapper n: names) {

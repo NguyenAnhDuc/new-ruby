@@ -4,7 +4,7 @@ import com.fpt.ruby.commons.constants.ProgramType;
 import com.fpt.ruby.commons.entity.tv.TVProgram;
 import com.fpt.ruby.commons.helper.TypeMapperHelper;
 import com.fpt.ruby.commons.service.TVProgramService;
-import fpt.qa.configs.SpringMongoConfig;
+import fpt.qa.config.SpringMongoConfig;
 import fpt.qa.mdnlib.struct.pair.Pair;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -28,7 +28,7 @@ public class TypeMapper {
 	static {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 		MongoOperations mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
-		tvs = new TVProgramService(mongoOperations);
+		//tvs = new TVProgramService(mongoOperations);
 		types = new ArrayList<>();
 		types.add(new FilmTypeRecognizer());
 		types.add(new GameShowTypeRecognizer());

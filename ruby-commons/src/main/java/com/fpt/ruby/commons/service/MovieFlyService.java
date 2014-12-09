@@ -7,6 +7,7 @@ import com.mongodb.WriteResult;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,7 @@ import java.util.List;
 public class MovieFlyService {
     private static final String RT_apikey = "squrt6un22xe46uy5wmxej8e";
     @Autowired
-    private MongoOperations mongoOperations;
-    public MovieFlyService(MongoOperations mongoOperations){
-        this.mongoOperations = mongoOperations;
-	}
+    private MongoTemplate mongoOperations;
 
 
     public static void main(String[] args) throws Exception {

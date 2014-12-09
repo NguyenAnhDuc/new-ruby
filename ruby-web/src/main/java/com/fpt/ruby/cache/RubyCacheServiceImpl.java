@@ -1,6 +1,5 @@
 package com.fpt.ruby.cache;
 
-import fpt.qa.configs.SpringMongoConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -18,10 +17,10 @@ public class RubyCacheServiceImpl implements RubyCacheService{
     private CacheHelper cacheHelper;
 
     public RubyCacheServiceImpl(){
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+       /* ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
         mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
         jedis = new Jedis(REDIS_HOST);
-        cacheHelper = new CacheHelper();
+        cacheHelper = new CacheHelper();*/
     }
 
     public void save (RubyCache rubyCache){

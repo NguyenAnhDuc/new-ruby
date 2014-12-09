@@ -12,7 +12,6 @@ import com.fpt.ruby.template.RubyAnswer;
 import fpt.qa.answerEngine.AIMLInfoWrapper;
 import fpt.qa.answerEngine.AnswerFinder;
 import fpt.qa.answerEngine.NLPInfoWrapper;
-import fpt.qa.configs.SpringMongoConfig;
 import fpt.qa.domainclassifier.DomainClassifier;
 import io.keen.client.java.JavaKeenClientBuilder;
 import io.keen.client.java.KeenClient;
@@ -43,12 +42,18 @@ public class AppController {
     HttpServletRequest request;
     @Autowired
     TVProgramService tvProgramService;
+    @Autowired
     MovieTicketService movieTicketService;
+    @Autowired
     MovieFlyService movieFlyService;
+    @Autowired
     CinemaService cinemaService;
+    @Autowired
     LogService logService;
+    @Autowired
     NameMapperService nameMapperService;
     BingSearchService bingSearchService;
+    @Autowired
     ReportQuestionService reportQuestionService;
 
     static DomainClassifier classifier;
@@ -81,22 +86,19 @@ public class AppController {
     public static final String UDF_ANS = "Xin lỗi, chúng tôi không trả lời được câu hỏi của bạn";
 
     private void initServervice(){
-        MongoOperations mongoOperations = (MongoOperations)
-                new AnnotationConfigApplicationContext(SpringMongoConfig.class).getBean("mongoTemplate");
-        tvProgramService = new TVProgramService(mongoOperations);
-        nameMapperService = new NameMapperService(mongoOperations);
+        //tvProgramService = new TVProgramService(mongoOperations);
+       /* nameMapperService = new NameMapperService(mongoOperations);
         movieFlyService = new MovieFlyService(mongoOperations);
         movieTicketService = new MovieTicketService(mongoOperations);
         cinemaService = new CinemaService(mongoOperations);
         logService = new LogService(mongoOperations);
         reportQuestionService = new ReportQuestionService(mongoOperations);
-        bingSearchService = new BingSearchService();
+        bingSearchService = new BingSearchService();*/
 
     }
 
     @PostConstruct
     public void init() {
-        //initServervice();
         NlpHelper.init();
         TVModifiersHelper.init(nameMapperService);
         String dir = (new AppController()).getClass().getClassLoader()

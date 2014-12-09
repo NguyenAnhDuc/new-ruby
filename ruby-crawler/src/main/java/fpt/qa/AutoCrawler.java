@@ -4,7 +4,7 @@ import com.fpt.ruby.commons.service.MovieTicketService;
 import com.fpt.ruby.commons.service.NameMapperService;
 import com.fpt.ruby.commons.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import fpt.qa.configs.SpringMongoConfig;
+import fpt.qa.config.SpringMongoConfig;
 import fpt.qa.crawler.CrawlerMyTV;
 import fpt.qa.crawler.CrawlerVTVCab;
 import fpt.qa.crawler.moveek.MoveekCrawler;
@@ -41,8 +41,8 @@ public class AutoCrawler {
     private void doCrawl(String dir, int numday) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
         this.mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
-        movieTicketService = new MovieTicketService(this.mongoOperations);
-        tvProgramService = new TVProgramService(this.mongoOperations);
+        movieTicketService = new MovieTicketService();
+        //tvProgramService = new TVProgramService(this.mongoOperations);
         CrawlerVTVCab vtvcab = new CrawlerVTVCab();
         CrawlerMyTV mytv = new CrawlerMyTV();
 
@@ -69,7 +69,7 @@ public class AutoCrawler {
         }
 
         // Start crawling
-        NameMapperService nms = new NameMapperService(this.mongoOperations);
+        NameMapperService nms = new NameMapperService();
         ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nms);
 
         try {

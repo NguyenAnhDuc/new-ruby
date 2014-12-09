@@ -1,6 +1,6 @@
 package com.fpt.ruby.intent.detection;
 
-import com.fpt.ruby.intent.detection.constants.IntentConstants;
+import com.fpt.ruby.commons.constants.IntentConstants;
 import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
 
 public class NonDiacriticMovieIntentDetection {

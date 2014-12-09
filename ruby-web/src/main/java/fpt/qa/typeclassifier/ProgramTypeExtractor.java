@@ -2,17 +2,18 @@ package fpt.qa.typeclassifier;
 
 import com.fpt.ruby.commons.constants.ProgramType;
 import fpt.qa.mdnlib.struct.pair.Pair;
+import fpt.qa.rubyweb.AppController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramTypeExtractor {
 
-	public static ConjType conjType;
+	public ConjType conjType;
 
 	public ProgramTypeExtractor() {
 		if (conjType == null) {
-			this.conjType = new ConjType((new ProgramTypeExtractor()).getClass()
+			this.conjType = new ConjType((new AppController()).getClass()
 					.getClassLoader().getResource("").getPath());
 		}
 	}

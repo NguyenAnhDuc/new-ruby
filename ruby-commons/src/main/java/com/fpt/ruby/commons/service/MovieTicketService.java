@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class MovieTicketService {
     private final String MT_TYPE = "type";
     private final String MT_CITY = "city";
     @Autowired
-    private MongoOperations mongoOperations;
+    private MongoTemplate mongoOperations;
     private Supplier<List<MovieTicket>> allTickets = Suppliers.memoizeWithExpiration(
             new Supplier<List<MovieTicket>>() {
                 public List<MovieTicket> get() {
@@ -40,9 +41,6 @@ public class MovieTicketService {
                 }
             }, ONE_HOUR, TimeUnit.MILLISECONDS);
 
-    public  MovieTicketService(MongoOperations mongoOperations){
-        this.mongoOperations = mongoOperations;
-    }
     private static boolean equalDate(Date date1, Date date2) {
         if (date1 == null && date2 == null) return true;
         try {

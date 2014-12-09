@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,10 @@ public class TVProgramService {
     private final String FIELD_END = "end_date";
 
     @Autowired
-    private MongoOperations mongoOperations;
+    private MongoTemplate mongoOperations;
+
     private static final Logger logger = Logger.getLogger(TVProgramService.class.getName());
 
-    public TVProgramService(MongoOperations mongoOperations) {
-        this.mongoOperations = mongoOperations;
-    }
     private List<TVProgram> all;
 
      private static String genRegex(List<String> types) {
@@ -87,8 +86,8 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-        return filterByParamaters(mod);
-        //return findByParamaters(mod);
+       // return filterByParamaters(mod);
+       return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){

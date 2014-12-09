@@ -9,7 +9,7 @@ import com.fpt.ruby.commons.helper.CrawlerHelper;
 import com.fpt.ruby.commons.service.MovieFlyService;
 import com.fpt.ruby.commons.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import fpt.qa.configs.SpringMongoConfig;
+import fpt.qa.config.SpringMongoConfig;
 import fpt.qa.type_mapper.TypeMapper;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.HttpResponse;
@@ -109,7 +109,7 @@ public class CrawlerMyTV {
         ApplicationContext context = new AnnotationConfigApplicationContext(
                 SpringMongoConfig.class);
         MongoOperations mongoOperations = (MongoOperations) context.getBean("mongoTemplate");
-        mfs = new MovieFlyService(mongoOperations);
+        //mfs = new MovieFlyService(mongoOperations);
         System.out.println("Crawling from MYTV");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         List<Channel> channels = getChanel(cjh);

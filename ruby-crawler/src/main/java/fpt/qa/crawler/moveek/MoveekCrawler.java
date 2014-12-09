@@ -3,7 +3,7 @@ package fpt.qa.crawler.moveek;
 import com.fpt.ruby.commons.entity.movie.MovieTicket;
 import com.fpt.ruby.commons.service.MovieFlyService;
 import com.fpt.ruby.commons.service.MovieTicketService;
-import fpt.qa.configs.SpringMongoConfig;
+import fpt.qa.config.SpringMongoConfig;
 import jmdn.struct.pair.Pair;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -40,8 +40,7 @@ public class MoveekCrawler {
     public static void doCrawl(MovieTicketService mts) {
         ApplicationContext context = new AnnotationConfigApplicationContext(
                 SpringMongoConfig.class);
-        MongoOperations mongoOperations = (MongoOperations) context.getBean("mongoTemplate");
-        MovieFlyService mfs = new MovieFlyService(mongoOperations);
+        MovieFlyService mfs = new MovieFlyService();
         Object[] keys = movie_urls.keySet().toArray();
         Set<String> movieNames = new HashSet<>();
 

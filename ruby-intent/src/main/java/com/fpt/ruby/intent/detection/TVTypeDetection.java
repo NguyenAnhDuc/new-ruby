@@ -11,9 +11,9 @@ import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
  *
  * @author ngan
  */
-public class TVTypeDetection extends TypeDetection {
+public class TVTypeDetection {
 
-    private static VnIntentDetection classifier;
+    private VnIntentDetection classifier;
 
     public void init(String qcDir, String dictDir) {
         FreqConjDict.loadConjList(dictDir + "/tv_conjunctions.txt");
@@ -21,7 +21,8 @@ public class TVTypeDetection extends TypeDetection {
         classifier.init();
     }
 
-    public static String getIntent(String sent) {
-        return "tv_" + classifier.classify(sent).toLowerCase();
+    public static String getIntent2(String sent) {
+        return "tv_cal";
+//        return "tv_" + classifier.classify(sent).toLowerCase();
     }
 }

@@ -51,7 +51,7 @@ public class TVProgramService {
 
      private static String genRegex(List<String> types) {
         if (types == null) return "";
-        List<String> finedType = new ArrayList<String>();
+        List<String> finedType = new ArrayList<>();
         types.forEach((t) -> finedType.add(t.toLowerCase().trim()));
         return String.join("|", finedType);
     }
@@ -92,20 +92,25 @@ public class TVProgramService {
     }
 
     public List<TVProgram> getList(TVModifiers mod) {
-//        return filterByParamaters(mod);
-        return findByParamaters(mod);
+        return filterByParamaters(mod);
+        //return findByParamaters(mod);
     }
 
     public List<TVProgram> filterByParamaters(TVModifiers mods){
         long start = System.currentTimeMillis();
         List<TVProgram> tvPrograms = getAllTVPrograms();
+
         tvPrograms = tvPrograms.stream().filter(t->t.getStart_date() != null && t.getEnd_date() != null).collect(Collectors.toList());
         if (mods.getChannel() != null && !mods.getChannel().isEmpty())
             tvPrograms = tvPrograms.stream().filter(t->t.getChannel().equalsIgnoreCase(mods.getChannel())).collect(Collectors.toList());
+
         if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
-            tvPrograms = tvPrograms.stream().filter(t->t.getTitle().equalsIgnoreCase(mods.getProg_title())).collect(Collectors.toList());
-        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0)
+            tvPrograms = tvPrograms.stream().filter(t->t.getTitle().contains(mods.getProg_title())).collect(Collectors.toList());
+
+        if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0) {
             tvPrograms = tvPrograms.stream().filter(t->t.getType().matches(genRegex(mods.getType()))).collect(Collectors.toList());
+            tvPrograms = filterListByFeatureType(tvPrograms, mods.getType());
+        }
 
         if (mods.getStart() != null && mods.getEnd() != null && mods.getStart() == mods.getEnd())
             tvPrograms = tvPrograms.stream().filter(t->
@@ -119,12 +124,18 @@ public class TVProgramService {
             tvPrograms = tvPrograms.stream().filter(t->t.getEnd_date().after(mods.getStart())).collect(Collectors.toList());
         else if (mods.getEnd() != null)
             tvPrograms = tvPrograms.stream().filter(t->t.getStart_date().before(mods.getEnd())).collect(Collectors.toList());
+
         logger.info("Cache Query Time: " + (System.currentTimeMillis() - start));
+        try {
+            tvPrograms.sort(START_CMP);
+        } catch (Exception e) {
+            // Life goes on!
+        }
+
         return tvPrograms;
     }
 
     public List<TVProgram> findByParamaters(TVModifiers mods) {
-        System.out.println("Hello2");
         long start = System.currentTimeMillis();
         Query query = new Query();
         Criteria criteria = new Criteria();
@@ -133,7 +144,7 @@ public class TVProgramService {
             query.addCriteria(Criteria.where(FIELD_CHANNEL).is(mods.getChannel().toLowerCase()));
 
         if (mods.getProg_title() != null && !mods.getProg_title().isEmpty())
-            query.addCriteria(Criteria.where(FIELD_TITLE).is(mods.getProg_title().toLowerCase()));
+            query.addCriteria(Criteria.where(FIELD_TITLE).regex(mods.getProg_title().toLowerCase()));
 
         if (mods.getProg_title() == null && mods.getType() != null && mods.getType().size() > 0) {
             query.addCriteria(Criteria.where(FIELD_TYPES).regex(genRegex(mods.getType())));
@@ -154,10 +165,7 @@ public class TVProgramService {
         // Fix bug film:action && film:usa
         result = filterListByFeatureType(result, mods.getType());
 
-        if (result != null) {
-            result.sort(START_CMP);
-        }
-
+        result.sort(START_CMP);
         logger.info("Query DB TIME: " + (System.currentTimeMillis() - start));
         return result;
     }

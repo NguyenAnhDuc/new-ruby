@@ -1,19 +1,19 @@
 package com.fpt.ruby.template;
 
-import java.util.List;
-
-import com.fpt.ruby.business.model.TimeExtract;
-
-import edu.stanford.nlp.util.Pair;
-
 public abstract class RubyProcess {
-	String normalize(String question){
-		return "";
+	abstract void normalize(String question);
+	abstract void getIntent();
+	abstract void getModifiers();
+	abstract void extractTime();
+	abstract void getCandidates();
+	abstract void getAnswer();
+
+	public final void process(String question){
+		normalize(question);
+		getIntent();
+		getModifiers();
+		extractTime();
+		getCandidates();
+		getAnswer();
 	}
-	abstract String getIntent(String question);
-	abstract List<Pair<String, String>> getModifiers(String question);
-	abstract TimeExtract extractTime(String question);
-	abstract String getAnswer(String question);
-	
-	
 }

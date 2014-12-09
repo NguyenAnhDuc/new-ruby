@@ -13,7 +13,7 @@ import jmdn.nlp.diacritic.DiacriticConverter;
  *
  * @author ngan
  */
-public class MovieTypeDetection extends TypeDetection {
+public class MovieTypeDetection {
 
     static VnIntentDetection classifier;
     public static void init(String qcDir, String dictDir) {

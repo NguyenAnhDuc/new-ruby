@@ -113,27 +113,26 @@
 							$('#result-intent').html(result.intent);
 
 							// Query Paramaters
-							var queryParamater = "";
-							if (result.queryParamater != null){
-								if (result.queryParamater.movieTitle != null) queryParamater +=  "Movie: " + result.queryParamater.movieTitle + "</br>";
-								if (result.queryParamater.cinName != null) queryParamater += "Cinema: " +  result.queryParamater.cinName + "</br>";
-								if (result.queryParamater.tvChannel != null) queryParamater += "Channel: " + result.queryParamater.tvChannel + "</br>";
-								if (result.queryParamater.tvProTitle != null) queryParamater += "TV Program: " + result.queryParamater.tvProTitle + "</br>";
-								if (result.queryParamater.types != null ) {
-									queryParamater += "Question Type: " + result.queryParamater.types + "</br>";
+							var rubyModifiers = "";
+							if (result.rubyModifiers != null){
+								if (result.rubyModifiers.movieTitle != null) rubyModifiers +=  "Movie: " + result.rubyModifiers.movieTitle + "</br>";
+								if (result.rubyModifiers.cinName != null) rubyModifiers += "Cinema: " +  result.rubyModifiers.cinName + "</br>";
+								if (result.rubyModifiers.tvChannel != null) rubyModifiers += "Channel: " + result.rubyModifiers.tvChannel + "</br>";
+								if (result.rubyModifiers.tvProTitle != null) rubyModifiers += "TV Program: " + result.rubyModifiers.tvProTitle + "</br>";
+								if (result.rubyModifiers.types != null ) {
+									rubyModifiers += "Question Type: " + result.rubyModifiers.types + "</br>";
 								}
-								$('#result-paramaters').html(queryParamater);
-								var htmlParamater = '', dateExtract = '';
-								if (result.queryParamater.beginTime != null)
-									dateExtract += 'Begin Time: '
-									+ new Date(result.queryParamater.beginTime) + "</br>";
-								if (result.queryParamater.endTime != null)
-									dateExtract += 'End Time: '
-									+ new Date(result.queryParamater.endTime);
-								+"</br>";
-								$('#result-time').html(dateExtract);
+								$('#result-paramaters').html(rubyModifiers);
 							}
-
+							var htmlParamater = '', dateExtract = '';
+							if (result.timeExtract.beforeDate != null)
+								dateExtract += 'Begin Time: '
+								+ new Date(result.timeExtract.beforeDate) + "</br>";
+							if (result.timeExtract.afterDate != null)
+								dateExtract += 'End Time: '
+								+ new Date(result.timeExtract.afterDate);
+							+"</br>";
+							$('#result-time').html(dateExtract);
 							$('#result-final').html(result.answer);
 						},
 						error : function(result) {

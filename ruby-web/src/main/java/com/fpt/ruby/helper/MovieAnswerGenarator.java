@@ -3,6 +3,7 @@ package com.fpt.ruby.helper;
 
 import com.fpt.ruby.business.constants.IntentConstants;
 import com.fpt.ruby.business.model.MovieTicket;
+import com.fpt.ruby.business.template.IConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
@@ -13,11 +14,10 @@ import java.util.stream.Collectors;
  * Created by ducna on 11/28/2014.
  */
 public class MovieAnswerGenarator {
-    private static final String UDF_ANS = "Chúng tôi không tìm thấy dữ liệu";
 
     public static String generateDynamicAnswer(List<MovieTicket> tickets, String intent){
         if (tickets.size() == 0){
-            return UDF_ANS;
+            return IConstants.ANSWER_NO_MATCH;
         }
 
         StringBuilder result = new StringBuilder();

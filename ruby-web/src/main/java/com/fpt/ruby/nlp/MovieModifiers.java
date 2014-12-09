@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fpt.ruby.business.helper.RedisHelper;
 
 
 public class MovieModifiers {
@@ -20,7 +19,7 @@ public class MovieModifiers {
 	public static Map<String, String> langMap = new HashMap<String, String>();
 	
 	static {
-		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath() + "/dicts/";
+		String dir = (new MovieModifiers()).getClass().getClassLoader().getResource("").getPath() + "/dicts/";
 		initGenreMap(dir);
 		initCountryMap(dir);
 		initActorsMap(dir);

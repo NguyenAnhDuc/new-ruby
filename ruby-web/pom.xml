@@ -10,9 +10,14 @@
   <dependencies>
   		<dependency>
 	  		<groupId>fpt.qa</groupId>
-		    <artifactId>ruby-business</artifactId>
+		    <artifactId>ruby-commons</artifactId>
 		    <version>1.0.1</version>
 	  	</dependency>
+	  <dependency>
+		  <groupId>fpt.qa</groupId>
+		  <artifactId>time-extractor</artifactId>
+		  <version>1.0.1</version>
+	  </dependency>
 	  	<dependency>
 	  		<groupId>fpt.qa</groupId>
 		    <artifactId>ruby-intent</artifactId>

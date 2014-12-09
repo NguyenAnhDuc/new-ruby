@@ -51,7 +51,7 @@ y 1611
 t:-2:-1:den:tap 1747
 ws:0:1:2:3:4:5:chu:nhat:nay:man:u:da 7314
 t:-1:0:chuong:trinh 505
-t:1:model 1774
+t:1:com.fpt.ruby.business.model 1774
 t:-1:doi 2985
 t:1:2:gi:luc 6439
 t:-1:0:gio:dang 6481
@@ -994,7 +994,7 @@ sbi:khung 2406
 bfl:12 6900
 t:-2:ket 1976
 t:-2:-1:vtv1:chieu 6915
-t:-1:0:model:truoc 4255
+t:-1:0:com.fpt.ruby.business.model:truoc 4255
 t:0:1:kenh:truyen 3636
 t:-2:kid 7118
 t:1:2:lai:chung 3434
@@ -1019,7 +1019,7 @@ t:1:2:cach:khac 3880
 t:-2:-1:da:voi 3831
 t:2:antv 2162
 t:2:duong" 3978
-t:-2:-1:cac:model 4254
+t:-2:-1:cac:com.fpt.ruby.business.model 4254
 t:1:2:premier:league 3355
 t:-2:-1:hd:len 2646
 t:0:1:vtv1:co 409
@@ -1101,7 +1101,7 @@ t:-1:30 6459
 t:0:duc 894
 t:-2:kenh 411
 t:-2:-1:9h:toi 6430
-t:1:2:cac:model 4242
+t:1:2:cac:com.fpt.ruby.business.model 4242
 t:0:1:dinh:olympia 2082
 bfl:lap 5053
 bfl:lam 3087
@@ -1667,7 +1667,7 @@ t:0:1:co:thuyet 5431
 t:-2:-1:ban:quyen 4418
 t:-2:-1:su:la 4502
 t:1:dung 128
-t:0:1:model:truoc 4251
+t:0:1:com.fpt.ruby.business.model:truoc 4251
 t:-2:-1:mua:ban 4414
 t:0:1:vtv3:dang 6436
 t:-2:chung 1967
@@ -1954,7 +1954,7 @@ t:1:2:xuong:len 7153
 t:-1:0:kenh:cinemax 6247
 t:1:tuc 1233
 t:-2:-1:dung:chuyen 2325
-t:-1:model 1786
+t:-1:com.fpt.ruby.business.model 1786
 t:-2:tuan 141
 t:-2:-1:co:chieu 701
 UDF:hay 2607
@@ -2032,7 +2032,7 @@ hdtv 1768
 t:-2:gay 3276
 t:1:2:nay:co 159
 t:0:1:-:nhat 7083
-t:2:model 1770
+t:2:com.fpt.ruby.business.model 1770
 t:-2:-1:bao:nhieu 1759
 t:-1:nao 296
 t:1:trua 6349
@@ -2589,7 +2589,7 @@ t:0:bo 1769
 t:2:hien 3285
 t:0:tang 673
 t:-2:-1:tinh:vtc 3045
-t:-1:0:cac:model 4250
+t:-1:0:cac:com.fpt.ruby.business.model 4250
 t:1:2:lich:phat 1552
 t:-1:0:vtvcab:dang 445
 t:-2:-1:mot:so 3858
@@ -2606,7 +2606,7 @@ t:0:de 2473
 sw:khung 2403
 t:1:2:kid:duoc 7260
 ebi:tinh 5637
-t:-2:model 1792
+t:-2:com.fpt.ruby.business.model 1792
 t:2:mai 720
 t:1:2:den:6 6708
 t:2:man 7043
@@ -2673,7 +2673,7 @@ t:0:xa 4694
 fl:mot 3840
 t:1:2:sot:cho 3268
 t:1:cua 288
-t:1:2:model:truoc 4247
+t:1:2:com.fpt.ruby.business.model:truoc 4247
 t:-1:0:20:gio 6635
 t:1:2:mu:da 3816
 t:1:2:trinh:truyen 1859
@@ -3094,7 +3094,7 @@ t:0:12 1258
 t:-1:thuong 2343
 t:1:chieu 443
 ws:0:1:2:kenh:nao:dang 5949
-t:0:1:cac:model 4246
+t:0:1:cac:com.fpt.ruby.business.model 4246
 t:2:som 2193
 t:0:1:bong:da 567
 sbi:hom 4800
@@ -3140,7 +3140,7 @@ t:0:disney 3732
 fl:vtc 6739
 sw:gia 2261
 ws:0:chuyen 4782
-t:-2:-1:model:truoc 4258
+t:-2:-1:com.fpt.ruby.business.model:truoc 4258
 ws:0:1:2:3:4:5:qua:tang:cuoc:song:duoc:chieu 7126
 t:0:1:thu:ve 3023
 ws:0:1:2:3:gia:lap:dat:k+ 2292
@@ -3535,7 +3535,7 @@ t:1:hbo 6403
 t:1:2:co:phu 3741
 t:0:1:sang:nay 1584
 t:-2:tat 1069
-t:0:model 1780
+t:0:com.fpt.ruby.business.model 1780
 t:-2:-1:thi:dau 2555
 t:0:phan 4686
 t:0:phai 873
@@ -8470,24 +8470,24 @@ UDF bfl:bo 1151 0.08800571722442863
 UDF hdtv 1152 0.09360926876441306
 UDF t:0:bo 1153 0.14418105311568347
 UDF t:1:thu 1154 0.48981816363566444
-UDF t:2:model 1155 0.07662548114462607
+UDF t:2:com.fpt.ruby.business.model 1155 0.07662548114462607
 UDF t:0:1:bo:thu 1156 0.08800571722442863
 UDF sl:12 1157 1.9175633903460012
 UDF t:-1:bo 1158 0.14418105311568347
 UDF t:0:thu 1159 0.5942944837273519
-UDF t:1:model 1160 0.07662548114462607
+UDF t:1:com.fpt.ruby.business.model 1160 0.07662548114462607
 UDF t:-1:0:bo:thu 1161 0.08800571722442863
 UDF t:-2:bo 1162 0.14418105311568347
 UDF t:-1:thu 1163 0.5942944837273519
-UDF t:0:model 1164 0.07662548114462607
+UDF t:0:com.fpt.ruby.business.model 1164 0.07662548114462607
 UDF t:2:co 1165 -0.671042455723396
 UDF t:-2:-1:bo:thu 1166 0.08800571722442863
 UDF t:-2:thu 1167 0.4976270847191267
-UDF t:-1:model 1168 0.07662548114462607
+UDF t:-1:com.fpt.ruby.business.model 1168 0.07662548114462607
 UDF t:1:co 1169 -0.7249083505268235
 UDF t:2:xem 1170 0.12135547000431807
 UDF t:1:2:co:xem 1171 0.061558764032354926
-UDF t:-2:model 1172 0.07662548114462607
+UDF t:-2:com.fpt.ruby.business.model 1172 0.07662548114462607
 UDF t:0:co 1173 -0.5848493939209375
 UDF t:1:xem 1174 0.16538346821721298
 UDF t:2:duoc 1175 -0.15528226700695222
@@ -10214,22 +10214,22 @@ UDF truoc 2895 0.04718813685712659
 UDF t:1:2:su:dung 2896 0.06381173950470219
 UDF t:1:2:nhu:cac 2897 0.04718813685712659
 UDF t:0:1:nhu:cac 2898 0.04718813685712659
-UDF t:1:2:cac:model 2899 0.04718813685712659
+UDF t:1:2:cac:com.fpt.ruby.business.model 2899 0.04718813685712659
 UDF t:2:truoc 2900 0.04718813685712659
 UDF t:-1:0:nhu:cac 2901 0.04718813685712659
-UDF t:0:1:cac:model 2902 0.04718813685712659
-UDF t:1:2:model:truoc 2903 0.04718813685712659
+UDF t:0:1:cac:com.fpt.ruby.business.model 2902 0.04718813685712659
+UDF t:1:2:com.fpt.ruby.business.model:truoc 2903 0.04718813685712659
 UDF t:1:truoc 2904 0.04718813685712659
 UDF t:-2:-1:nhu:cac 2905 0.04718813685712659
-UDF t:-1:0:cac:model 2906 0.04718813685712659
-UDF t:0:1:model:truoc 2907 0.04718813685712659
+UDF t:-1:0:cac:com.fpt.ruby.business.model 2906 0.04718813685712659
+UDF t:0:1:com.fpt.ruby.business.model:truoc 2907 0.04718813685712659
 UDF t:1:2:truoc:khong 2908 0.04718813685712659
 UDF t:0:truoc 2909 0.04718813685712659
-UDF t:-2:-1:cac:model 2910 0.04718813685712659
-UDF t:-1:0:model:truoc 2911 0.04718813685712659
+UDF t:-2:-1:cac:com.fpt.ruby.business.model 2910 0.04718813685712659
+UDF t:-1:0:com.fpt.ruby.business.model:truoc 2911 0.04718813685712659
 UDF t:0:1:truoc:khong 2912 0.04718813685712659
 UDF t:-1:truoc 2913 0.04718813685712659
-UDF t:-2:-1:model:truoc 2914 0.04718813685712659
+UDF t:-2:-1:com.fpt.ruby.business.model:truoc 2914 0.04718813685712659
 UDF t:-1:0:truoc:khong 2915 0.04718813685712659
 UDF UDF:do 2916 0.0766019555347818
 UDF ew:viet 2917 0.06873395208116671

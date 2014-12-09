@@ -1,25 +1,19 @@
 package fpt.qa.type_mapper;
 
+import com.fpt.ruby.commons.constants.ProgramType;
+import com.fpt.ruby.commons.entity.tv.TVProgram;
+import com.fpt.ruby.commons.helper.TypeMapperHelper;
+import com.fpt.ruby.commons.service.TVProgramService;
+import fpt.qa.configs.SpringMongoConfig;
+import fpt.qa.mdnlib.struct.pair.Pair;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
-import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.helper.TypeMapperHelper;
-import com.fpt.ruby.business.model.TVProgram;
-import com.fpt.ruby.business.service.TVProgramService;
-
-import fpt.qa.mdnlib.struct.pair.Pair;
+import java.util.*;
 
 public class TypeMapper {
 	static List<TypeRecognizer> types;
@@ -32,7 +26,9 @@ public class TypeMapper {
 	private static long ONE_WEEK = 7 * 24 * 60 * 60;
 
 	static {
-		tvs = new TVProgramService();
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+		MongoOperations mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
+		tvs = new TVProgramService(mongoOperations);
 		types = new ArrayList<>();
 		types.add(new FilmTypeRecognizer());
 		types.add(new GameShowTypeRecognizer());
@@ -58,7 +54,7 @@ public class TypeMapper {
 			System.out.println("\n________________");
 		}
 		try {
-			loadData((new RedisHelper()).getClass().getClassLoader().getResource("").getPath() + PATH);
+			loadData((new TypeMapper()).getClass().getClassLoader().getResource("").getPath() + PATH);
 		} catch (Exception ex) {
 			System.out.println("ERROR " + ex.getMessage());
 			ex.printStackTrace();
@@ -93,7 +89,7 @@ public class TypeMapper {
 
 	public static void init() {
 		try {
-			loadData((new RedisHelper()).getClass().getClassLoader().getResource("").getPath() + PATH);
+			loadData((new TypeMapper()).getClass().getClassLoader().getResource("").getPath() + PATH);
 		} catch (Exception ex) {
 			System.out.println("ERROR " + ex.getMessage());
 			ex.printStackTrace();

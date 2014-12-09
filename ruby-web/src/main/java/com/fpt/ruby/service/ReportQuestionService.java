@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
-import com.fpt.ruby.business.config.SpringMongoConfig;
+import fpt.qa.configs.SpringMongoConfig;
 import com.fpt.ruby.model.ReportQuestion;
 
 @Service

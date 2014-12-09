@@ -17,7 +17,7 @@ import java.util.Map;
 public class Observation {
     public String originalData = "";	// original data (before generating context predicates)
     public int[] cps = null;		// array of context predicates
-    public int modelLabel = -1;		// label predicted by model
+    public int modelLabel = -1;		// label predicted by com.fpt.ruby.business.model
 
     public Observation() {
 	// do nothing currently

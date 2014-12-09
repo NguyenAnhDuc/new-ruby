@@ -1,6 +1,6 @@
 package fpt.qa.genreclassifier;
 
-import com.fpt.ruby.business.service.NameMapperService;
+import com.fpt.ruby.commons.service.NameMapperService;
 import fpt.qa.additionalinformation.modifier.SurroundingWords;
 import fpt.qa.additionalinformation.name_mapper.NameMapperEngine;
 import fpt.qa.mdnlib.nlp.vn.vntokenizer.VnTokenizer;

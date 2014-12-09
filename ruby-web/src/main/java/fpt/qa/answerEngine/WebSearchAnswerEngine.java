@@ -1,8 +1,8 @@
 package fpt.qa.answerEngine;
 
 
-import com.fpt.ruby.business.helper.DisplayAnswerHelper;
-import com.fpt.ruby.business.service.BingSearchService;
+import com.fpt.ruby.commons.helper.DisplayAnswerHelper;
+import com.fpt.ruby.commons.service.BingSearchService;
 import com.fpt.ruby.template.RubyAnswer;
 
 public class WebSearchAnswerEngine extends AnswerEngine {

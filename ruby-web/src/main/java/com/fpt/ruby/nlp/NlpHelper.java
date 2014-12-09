@@ -1,16 +1,11 @@
 package com.fpt.ruby.nlp;
 
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.QuestionStructure;
-import com.fpt.ruby.business.model.TimeExtract;
+import com.fpt.ruby.commons.entity.objects.TimeExtract;
 import com.fpt.ruby.intent.detection.MovieTypeDetection;
 import com.fpt.ruby.intent.detection.NonDiacriticMovieIntentDetection;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import fpt.qa.additionalinformation.modifier.AbsoluteTime;
-import fpt.qa.additionalinformation.modifier.AbsoluteTime.TimeResult;
 import fpt.qa.spellchecker.SpellCheckAndCorrector;
-
-import java.util.ArrayList;
+import fpt.qa.vnTime.vntime.AbsoluteTime;
 
 public class NlpHelper {
     private static ConjunctionHelper conjunctionHelper;
@@ -18,7 +13,7 @@ public class NlpHelper {
     private static SpellCheckAndCorrector spellCheckAndCorrector;
 
     public static void init() {
-        String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
+        String dir = (new NlpHelper()).getClass().getClassLoader().getResource("").getPath();
         MovieTypeDetection.init(dir + "/qc/movie", dir + "/dicts");
         NonDiacriticMovieIntentDetection.init(dir + "/qc/movie/non-diacritic", dir + "/dicts/non-diacritic");
         absoluteTime = new AbsoluteTime(NlpHelper.class.getClassLoader().getResource("").getPath() + "vnsutime/");
@@ -31,13 +26,7 @@ public class NlpHelper {
     }
 
 
-    public static QuestionStructure processQuestionStructure(String question) {
-        QuestionStructure questionStructure = new QuestionStructure();
-        questionStructure.setKey(normalizeQuestion(question));
-        questionStructure.setHead(question.isEmpty() ? "" : MovieTypeDetection.getIntent(normalizeQuestion(question)));
-        questionStructure.setModifiers(new ArrayList<String>());
-        return questionStructure;
-    }
+
 
     public static String normalizeQuestion(String ques) {
         String question = ques.toLowerCase();
@@ -60,7 +49,7 @@ public class NlpHelper {
 
     public static TimeExtract getTimeCondition(String text) {
         try {
-            TimeResult timeResult = absoluteTime.getAbsoluteTime(text);
+            AbsoluteTime.TimeResult timeResult = absoluteTime.getAbsoluteTime(text);
             TimeExtract timeExtract = new TimeExtract();
             timeExtract.setBeforeDate(timeResult.getBeginTime());
             timeExtract.setAfterDate(timeResult.getEndTime());

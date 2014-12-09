@@ -32,7 +32,7 @@ import java.io.File;
 
 public class Estimator {
 	
-	// output model
+	// output com.fpt.ruby.business.model
 	protected Model trnModel;
 	LDACmdOption option;
 	
@@ -72,20 +72,20 @@ public class Estimator {
 			
 			if (option.savestep > 0){
 				if (trnModel.liter % option.savestep == 0){
-					System.out.println("Saving the model at iteration " + trnModel.liter + " ...");
+					System.out.println("Saving the com.fpt.ruby.business.model at iteration " + trnModel.liter + " ...");
 					computeTheta();
 					computePhi();
-					trnModel.saveModel("model-" + Conversion.ZeroPad(trnModel.liter, 5));
+					trnModel.saveModel("com.fpt.ruby.business.model-" + Conversion.ZeroPad(trnModel.liter, 5));
 				}
 			}
 		}// end iterations		
 		
 		System.out.println("Gibbs sampling completed!\n");
-		System.out.println("Saving the final model!\n");
+		System.out.println("Saving the final com.fpt.ruby.business.model!\n");
 		computeTheta();
 		computePhi();
 		trnModel.liter--;
-		trnModel.saveModel("model-final");
+		trnModel.saveModel("com.fpt.ruby.business.model-final");
 	}
 	
 	/**

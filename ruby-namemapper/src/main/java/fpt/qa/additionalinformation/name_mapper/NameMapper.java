@@ -1,6 +1,6 @@
 package fpt.qa.additionalinformation.name_mapper;
 
-import com.fpt.ruby.business.service.NameMapperService;
+import com.fpt.ruby.commons.service.NameMapperService;
 import fpt.qa.mdnlib.struct.pair.Pair;
 import vn.hus.nlp.utils.UTF8FileUtility;
 
@@ -48,8 +48,8 @@ public class NameMapper {
 
     public void load(NameMapperService nameMapperService, String domain) {
         nameMap = new HashMap<>();
-        List<com.fpt.ruby.business.model.NameMapper> nameMappers = nameMapperService.findByDomain(domain);
-        for (com.fpt.ruby.business.model.NameMapper nameMapper : nameMappers) {
+        List<com.fpt.ruby.commons.entity.NameMapper> nameMappers = nameMapperService.findByDomain(domain);
+        for (com.fpt.ruby.commons.entity.NameMapper nameMapper : nameMappers) {
             NamedEntity namedEntity = new NamedEntity(nameMapper.getType(), nameMapper.getName());
             nameMap.put(namedEntity, nameMapper.getVariants());
         }

@@ -1,10 +1,10 @@
 package com.fpt.ruby.helper;
 
+import com.fpt.ruby.commons.entity.movie.MovieFly;
+import com.fpt.ruby.nlp.AnswerMapper;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fpt.ruby.business.model.MovieFly;
-import com.fpt.ruby.nlp.AnswerMapper;
 
 public class FeaturedMovieHelper {
 	

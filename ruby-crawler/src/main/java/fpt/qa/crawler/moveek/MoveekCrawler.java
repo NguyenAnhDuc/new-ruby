@@ -1,10 +1,13 @@
 package fpt.qa.crawler.moveek;
 
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.MovieTicket;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.MovieTicketService;
+import com.fpt.ruby.commons.entity.movie.MovieTicket;
+import com.fpt.ruby.commons.service.MovieFlyService;
+import com.fpt.ruby.commons.service.MovieTicketService;
+import fpt.qa.configs.SpringMongoConfig;
 import jmdn.struct.pair.Pair;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,7 +25,7 @@ public class MoveekCrawler {
         String dir = "./classes/dicts/"; // TODO: correct default dir to allow run singly.
 
         try {
-            dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath() + "/moveek";
+            dir = (new MoveekCrawler()).getClass().getClassLoader().getResource("").getPath() + "/moveek";
         } catch (Exception ex) {
             System.out.println("Error init Moveek Crawler: " + ex.getMessage());
         } finally {
@@ -35,7 +38,10 @@ public class MoveekCrawler {
     }
 
     public static void doCrawl(MovieTicketService mts) {
-        MovieFlyService mfs = new MovieFlyService();
+        ApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringMongoConfig.class);
+        MongoOperations mongoOperations = (MongoOperations) context.getBean("mongoTemplate");
+        MovieFlyService mfs = new MovieFlyService(mongoOperations);
         Object[] keys = movie_urls.keySet().toArray();
         Set<String> movieNames = new HashSet<>();
 
@@ -154,6 +160,6 @@ public class MoveekCrawler {
     }
 
     public static void main(String[] args) {
-        doCrawl(new MovieTicketService());
+        //doCrawl(new MovieTicketService());
     }
 }

@@ -52,7 +52,7 @@ public class Trainer {
 
             foutModel = option.createModelFile();
             if (foutModel == null) {
-                System.out.println("Couldn't create model file");
+                System.out.println("Couldn't create com.fpt.ruby.business.model file");
                 return;
             }
 
@@ -96,7 +96,7 @@ public class Trainer {
 
             foutModel = option.createModelFile();
             if (foutModel == null) {
-                System.out.println("Couldn't create model file");
+                System.out.println("Couldn't create com.fpt.ruby.business.model file");
                 return;
             }
 
@@ -128,7 +128,7 @@ public class Trainer {
 
             finModel = option.openModelFile();
             if (finModel == null) {
-                System.out.println("Couldn't open model file");
+                System.out.println("Couldn't open com.fpt.ruby.business.model file");
                 return;
             }
 
@@ -185,7 +185,7 @@ public class Trainer {
 
                 foutModel = option.createModelFile();
                 if (foutModel == null) {
-                    System.out.println("Couldn't create model file");
+                    System.out.println("Couldn't create com.fpt.ruby.business.model file");
                     return;
                 }
 
@@ -217,7 +217,7 @@ public class Trainer {
 
                 finModel = option.openModelFile();
                 if (finModel == null) {
-                    System.out.println("Couldn't open model file");
+                    System.out.println("Couldn't open com.fpt.ruby.business.model file");
                     return;
                 }
 
@@ -253,7 +253,7 @@ public class Trainer {
 
                 foutModel = option.createModelFile();
                 if (foutModel == null) {
-                    System.out.println("Couldn't create model file");
+                    System.out.println("Couldn't create com.fpt.ruby.business.model file");
                     return;
                 }
 
@@ -310,6 +310,6 @@ public class Trainer {
 
     public static void displayHelp() {
         System.out.println("Usage:");
-        System.out.println("\tTrainer -all/-trn/-tst -d <model directory>");
+        System.out.println("\tTrainer -all/-trn/-tst -d <com.fpt.ruby.business.model directory>");
     }
 }

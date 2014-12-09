@@ -1,7 +1,7 @@
 package com.fpt.ruby.template;
 
-import com.fpt.ruby.business.model.TimeExtract;
-import com.fpt.ruby.business.template.RubyModifiers;
+import com.fpt.ruby.commons.entity.modifiers.RubyModifiers;
+import com.fpt.ruby.commons.entity.objects.TimeExtract;
 import org.springframework.data.annotation.Id;
 
 /**

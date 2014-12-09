@@ -11,8 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.fasterxml.jackson.core.sym.Name;
-import com.fpt.ruby.business.service.NameMapperService;
+import com.fpt.ruby.commons.service.NameMapperService;
 
 import fpt.qa.additionalinformation.modifier.ConjunctionWithType;
 import fpt.qa.mdnlib.nlp.vn.vntokenizer.VnTokenizer;

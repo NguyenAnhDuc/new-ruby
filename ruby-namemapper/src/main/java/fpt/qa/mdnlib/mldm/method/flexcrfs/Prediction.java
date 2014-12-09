@@ -44,8 +44,8 @@ public class Prediction {
 	
 	model = new Model(option, maps, dict, feagen, viterbi);
 	if (!model.init()) {
-	    System.out.println("Couldn't load the model");
-	    System.out.println("Check the <model directory> and the <model file> again");
+	    System.out.println("Couldn't load the com.fpt.ruby.business.model");
+	    System.out.println("Check the <com.fpt.ruby.business.model directory> and the <com.fpt.ruby.business.model file> again");
 	    return;
 	}
 	

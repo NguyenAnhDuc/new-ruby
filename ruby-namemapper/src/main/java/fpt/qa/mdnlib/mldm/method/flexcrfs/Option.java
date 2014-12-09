@@ -26,10 +26,10 @@ public class Option {
     public static final String inputSeparator = "/";
     public static final String outputSeparator = "/";
     
-    // model directory, default is current dir
+    // com.fpt.ruby.business.model directory, default is current dir
     public String modelDir = ".";
-    // model file (mapping, dictionary, and features)
-    public final String modelFile = "model.txt";
+    // com.fpt.ruby.business.model file (mapping, dictionary, and features)
+    public final String modelFile = "com.fpt.ruby.business.model.txt";
     // option file
     public final String optionFile = "option.txt";
     
@@ -99,7 +99,7 @@ public class Option {
 	    fin = new BufferedReader(new FileReader(filename));
 	    
 	} catch (IOException e) {
-	    System.out.println("Couldn't open model file: " + filename);
+	    System.out.println("Couldn't open com.fpt.ruby.business.model file: " + filename);
 	    System.out.println(e.toString());
 	    fin = null;
 	}

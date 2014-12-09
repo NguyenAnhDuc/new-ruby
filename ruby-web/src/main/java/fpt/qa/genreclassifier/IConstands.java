@@ -1,8 +1,8 @@
 package fpt.qa.genreclassifier;
 
-import com.fpt.ruby.business.helper.RedisHelper;
+import fpt.qa.rubyweb.AppController;
 
 public interface IConstands {
-	public static final ConjGenre CONJ_TYPE = new ConjGenre((new RedisHelper()).getClass()
+	public static final ConjGenre CONJ_TYPE = new ConjGenre((new AppController()).getClass()
 			.getClassLoader().getResource("").getPath());
 }

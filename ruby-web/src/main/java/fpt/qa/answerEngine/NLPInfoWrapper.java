@@ -1,6 +1,6 @@
 package fpt.qa.answerEngine;
 
-import com.fpt.ruby.business.service.*;
+import com.fpt.ruby.commons.service.*;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import fpt.qa.domainclassifier.DomainClassifier;
 

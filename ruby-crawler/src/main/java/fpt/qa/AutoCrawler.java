@@ -1,13 +1,17 @@
 package fpt.qa;
 
-import com.fpt.ruby.business.service.MovieTicketService;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.business.service.TVProgramService;
+import com.fpt.ruby.commons.service.MovieTicketService;
+import com.fpt.ruby.commons.service.NameMapperService;
+import com.fpt.ruby.commons.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
+import fpt.qa.configs.SpringMongoConfig;
 import fpt.qa.crawler.CrawlerMyTV;
 import fpt.qa.crawler.CrawlerVTVCab;
 import fpt.qa.crawler.moveek.MoveekCrawler;
 import fpt.qa.type_mapper.TypeMapper;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
 
 public class AutoCrawler {
 
@@ -15,6 +19,7 @@ public class AutoCrawler {
     private static Integer FUTURE_DAY = 3;
     private MovieTicketService movieTicketService;
     private TVProgramService tvProgramService;
+    private MongoOperations mongoOperations;
     // private CinemaService cinemaService;
 
     public static void main(String[] args) {
@@ -34,8 +39,10 @@ public class AutoCrawler {
     }
 
     private void doCrawl(String dir, int numday) {
-        movieTicketService = new MovieTicketService();
-        tvProgramService = new TVProgramService();
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+        this.mongoOperations = (MongoOperations) ctx.getBean("mongoTemplate");
+        movieTicketService = new MovieTicketService(this.mongoOperations);
+        tvProgramService = new TVProgramService(this.mongoOperations);
         CrawlerVTVCab vtvcab = new CrawlerVTVCab();
         CrawlerMyTV mytv = new CrawlerMyTV();
 
@@ -62,7 +69,7 @@ public class AutoCrawler {
         }
 
         // Start crawling
-        NameMapperService nms = new NameMapperService();
+        NameMapperService nms = new NameMapperService(this.mongoOperations);
         ConjunctionHelper conjunctionHelper = new ConjunctionHelper(dir, nms);
 
         try {

@@ -397,5 +397,7 @@
 		<module>ruby-namemapper</module>
 		<module>ruby-web</module>
 		<module>ruby-crawler</module>
+		<module>ruby-commons</module>
+		<module>ruby-time_extractor</module>
 	</modules>
 </project>

@@ -1,12 +1,10 @@
 package fpt.qa.typeclassifier;
 
+import com.fpt.ruby.commons.constants.ProgramType;
+import fpt.qa.mdnlib.struct.pair.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.RedisHelper;
-
-import fpt.qa.mdnlib.struct.pair.Pair;
 
 public class ProgramTypeExtractor {
 
@@ -14,7 +12,7 @@ public class ProgramTypeExtractor {
 
 	public ProgramTypeExtractor() {
 		if (conjType == null) {
-			this.conjType = new ConjType((new RedisHelper()).getClass()
+			this.conjType = new ConjType((new ProgramTypeExtractor()).getClass()
 					.getClassLoader().getResource("").getPath());
 		}
 	}

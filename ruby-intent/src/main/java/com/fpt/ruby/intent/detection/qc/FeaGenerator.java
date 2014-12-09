@@ -40,7 +40,7 @@ public class FeaGenerator {
     }
 
     /**
-     * Scan features for training the word segmentation model
+     * Scan features for training the word segmentation com.fpt.ruby.business.model
      *
      * @param sent
      * @return

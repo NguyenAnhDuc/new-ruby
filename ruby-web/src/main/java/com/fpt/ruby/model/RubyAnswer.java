@@ -1,14 +1,7 @@
 package com.fpt.ruby.model;
 
-import com.fpt.ruby.business.model.QueryParamater;
-
 public class RubyAnswer {
 	private String domain;
-	private QueryParamater queryParamater;
-	
-	public QueryParamater getQueryParamater() {
-		return queryParamater;
-	}
 
 	private String question;
 	private String answer;
@@ -62,9 +55,4 @@ public class RubyAnswer {
 		this.query = query;
 	}
 
-	public void setQueryParamater(QueryParamater queryParamater) {
-		this.queryParamater = queryParamater;
-		
-	}
-	
 }

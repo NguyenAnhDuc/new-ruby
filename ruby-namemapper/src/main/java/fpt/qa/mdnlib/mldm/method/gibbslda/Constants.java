@@ -18,7 +18,7 @@ public class Constants {
     public static final String MODEL_STATUS_UNKNOWN = "MODEL STATUS: UNKOWN"; 
     /* estimate from scratch */ 
     public static final String MODEL_STATUS_EST = "MODEL STATUS: EST"; 
-    /* continue to estimate from a previously estimated model */ 
+    /* continue to estimate from a previously estimated com.fpt.ruby.business.model */
     public static final String MODEL_STATUS_ESTC = "MODEL STATUS: ESTC"; 
     /* inference for new data */ 
     public static final String MODEL_STATUS_INF = "MODEL STATUS: INF"; 

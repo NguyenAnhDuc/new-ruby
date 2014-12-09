@@ -25,7 +25,7 @@ t:0:1:trình:the 7575
 k 1363
 u 7523
 thể 1794
-t:1:model 5752
+t:1:com.fpt.ruby.business.model 5752
 thế 1217
 t:0:1:lắp:truyền 3786
 t:-2:-1:phim:gì 1081
@@ -366,7 +366,7 @@ thao 645
 t:1:2:vtv1:hd 2374
 t:0:1:giờ:30 6846
 ws:0:1:2:3:4:lịch:thi:đấu:giải:premier 1982
-t:0:1:model:trước 5762
+t:0:1:com.fpt.ruby.business.model:trước 5762
 t:0:1:tất:cả 1024
 t:-1:0:gì:hay 1158
 t:-1:0:phụ:đề 4676
@@ -643,7 +643,7 @@ chiếu 610
 sbi:còn 3037
 t:2:phản 5082
 t:2:khung 6974
-t:-1:0:model:trước 5767
+t:-1:0:com.fpt.ruby.business.model:trước 5767
 t:2:phải 618
 t:0:1:chủ:nhật 154
 t:-2:-1:muốn:xem 1601
@@ -1131,7 +1131,7 @@ sbi:vtv3 221
 t:-2:truyền 823
 sbi:vtv1 2770
 sbi:vtv6 7094
-t:0:1:các:model 5756
+t:0:1:các:com.fpt.ruby.business.model 5756
 lắp 2324
 t:-2:-1:để:xem 3202
 t:0:vtc 1095
@@ -1243,7 +1243,7 @@ ws:0:1:kênh:nào 2838
 ws:0:1:2:3:bây:giờ:trên:vtv3 7085
 t:-1:0:có:phải 3397
 t:2:mu 195
-t:-2:-1:model:trước 5771
+t:-2:-1:com.fpt.ruby.business.model:trước 5771
 kết 2465
 t:2:trưa 6914
 t:0:1:có:xương 62
@@ -1364,7 +1364,7 @@ t:-1:trận 193
 t:-1:sports 1227
 t:-1:0:tuần:này 176
 t:0:htv2 2029
-t:1:2:các:model 5750
+t:1:2:các:com.fpt.ruby.business.model 5750
 t:2:"tuổi 2177
 ws:0:1:2:3:4:giọng:hát:việt:nhí:bao 7939
 t:0:đã 3826
@@ -1932,10 +1932,10 @@ nào 91
 t:0:1:giờ:hết 7568
 t:1:làng 401
 t:1:2:nào:chiếu 2836
-t:-1:model 5764
+t:-1:com.fpt.ruby.business.model 5764
 t:1:muộn 4005
 t:-2:còn 3053
-t:-2:-1:các:model 5766
+t:-2:-1:các:com.fpt.ruby.business.model 5766
 UDF:hay 2691
 t:-2:thiếu 3546
 t:0:1:ngoại:hạng 337
@@ -2013,7 +2013,7 @@ ws:0:1:2:3:4:5:6:phim:bánh:đúc:có:xương:lên:sóng 7511
 t:-2:-1:thời:gian 2721
 t:-1:tỉnh 4068
 hdtv 3173
-t:2:model 5746
+t:2:com.fpt.ruby.business.model 5746
 t:0:1:chiếu:giải 242
 t:-1:nam 4104
 t:-1:0:ở:đâu 2252
@@ -2181,7 +2181,7 @@ t:-1:0:đá:ngoại 856
 t:0:học 2194
 UDF:về 2646
 t:0:1:hình:vệ 1882
-t:1:2:model:trước 5757
+t:1:2:com.fpt.ruby.business.model:trước 5757
 t:1:ở 2235
 sbi:ai 5480
 t:-2:-1:phát:lại 2580
@@ -2216,7 +2216,7 @@ t:1:2:mấy:giờ 1770
 ebi:mấy 1731
 ws:0:dò 5676
 t:1:2:nhiêu:rồi 1786
-t:-1:0:các:model 5761
+t:-1:0:các:com.fpt.ruby.business.model 5761
 t:1:2:nữa:đến 4243
 t:-1:0:tối:mai 1328
 t:0:1:nhật:bản 7483
@@ -2608,7 +2608,7 @@ t:0:là 1179
 t:0:nhiêu 1722
 t:0:hiện 3432
 t:2:mai 657
-t:-2:model 5769
+t:-2:com.fpt.ruby.business.model 5769
 lúc 1947
 t:0:1:đồ:rê 5439
 t:2:man 7531
@@ -3695,7 +3695,7 @@ sw:truyền 807
 t:-1:0:cho:thiếu 3538
 ws:0:chuẩn 4461
 t:-1:các 3367
-t:0:model 5758
+t:0:com.fpt.ruby.business.model 5758
 sw:đầu 5348
 t:0:1:bài:hát 3094
 t:-1:0:trình:truyền 3404
@@ -10926,28 +10926,28 @@ UDF UDF:dò 3243 0.06230570624760245
 UDF ebi:trước 3244 0.02117029592151388
 UDF trước 3245 0.02117029592151388
 UDF t:1:2:như:các 3246 0.02117029592151388
-UDF t:2:model 3247 0.02117029592151388
+UDF t:2:com.fpt.ruby.business.model 3247 0.02117029592151388
 UDF t:0:1:như:các 3248 0.02117029592151388
-UDF t:1:2:các:model 3249 0.02117029592151388
-UDF t:1:model 3250 0.02117029592151388
+UDF t:1:2:các:com.fpt.ruby.business.model 3249 0.02117029592151388
+UDF t:1:com.fpt.ruby.business.model 3250 0.02117029592151388
 UDF t:2:trước 3251 0.02117029592151388
 UDF t:-1:0:như:các 3252 0.02117029592151388
-UDF t:0:1:các:model 3253 0.02117029592151388
-UDF t:1:2:model:trước 3254 0.02117029592151388
-UDF t:0:model 3255 0.02117029592151388
+UDF t:0:1:các:com.fpt.ruby.business.model 3253 0.02117029592151388
+UDF t:1:2:com.fpt.ruby.business.model:trước 3254 0.02117029592151388
+UDF t:0:com.fpt.ruby.business.model 3255 0.02117029592151388
 UDF t:1:trước 3256 0.02117029592151388
 UDF t:-2:-1:như:các 3257 0.02117029592151388
-UDF t:-1:0:các:model 3258 0.02117029592151388
-UDF t:0:1:model:trước 3259 0.02117029592151388
+UDF t:-1:0:các:com.fpt.ruby.business.model 3258 0.02117029592151388
+UDF t:0:1:com.fpt.ruby.business.model:trước 3259 0.02117029592151388
 UDF t:1:2:trước:không 3260 0.02117029592151388
-UDF t:-1:model 3261 0.02117029592151388
+UDF t:-1:com.fpt.ruby.business.model 3261 0.02117029592151388
 UDF t:0:trước 3262 0.02117029592151388
-UDF t:-2:-1:các:model 3263 0.02117029592151388
-UDF t:-1:0:model:trước 3264 0.02117029592151388
+UDF t:-2:-1:các:com.fpt.ruby.business.model 3263 0.02117029592151388
+UDF t:-1:0:com.fpt.ruby.business.model:trước 3264 0.02117029592151388
 UDF t:0:1:trước:không 3265 0.02117029592151388
-UDF t:-2:model 3266 0.02117029592151388
+UDF t:-2:com.fpt.ruby.business.model 3266 0.02117029592151388
 UDF t:-1:trước 3267 0.02117029592151388
-UDF t:-2:-1:model:trước 3268 0.02117029592151388
+UDF t:-2:-1:com.fpt.ruby.business.model:trước 3268 0.02117029592151388
 UDF t:-1:0:trước:không 3269 0.02117029592151388
 UDF tận 3270 0.017018850323527096
 UDF dụng 3271 0.061377989148984645

@@ -37,7 +37,7 @@ public class Dictionary {
 	dict = new HashMap();
     }
     
-    // read dictionary from model file 
+    // read dictionary from com.fpt.ruby.business.model file
     public void readDict(BufferedReader fin) throws IOException {
 	dict.clear();
 	
@@ -103,7 +103,7 @@ public class Dictionary {
 	fin.readLine();
     }
     
-    // write dictionary to model file
+    // write dictionary to com.fpt.ruby.business.model file
     public void writeDict(PrintWriter fout) throws IOException {
 	Iterator it;
 	int count = 0;

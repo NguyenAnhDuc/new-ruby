@@ -5,7 +5,7 @@
  */
 package com.fpt.ruby.intent.detection;
 
-import com.fpt.ruby.business.constants.IntentConstants;
+import com.fpt.ruby.intent.detection.constants.IntentConstants;
 import com.fpt.ruby.intent.detection.qc.VnIntentDetection;
 import jmdn.nlp.diacritic.DiacriticConverter;
 

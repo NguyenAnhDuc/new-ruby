@@ -19,7 +19,7 @@ import fpt.qa.mdnlib.math.optimization.LBFGS;
 
 public class Train {
 
-    // the model object
+    // the com.fpt.ruby.business.model object
     public Model model = null;
     
     public int numLabels = 0;
@@ -164,7 +164,7 @@ public class Train {
 		    maxAccuracy = accuracy;
 		    maxAccuracyIter = numIter;
 		    
-		    // save the best model towards testing evaluation
+		    // save the best com.fpt.ruby.business.model towards testing evaluation
 		    if (model.option.saveBestModel) {
 			for (i = 0; i < numFeatures; i++) {
 			    tempLambda[i] = lambda[i];

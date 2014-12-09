@@ -1,8 +1,8 @@
 package fpt.qa.typeclassifier;
 
-import com.fpt.ruby.business.helper.RedisHelper;
+import fpt.qa.rubyweb.AppController;
 
 public interface IConstands {
-	public static final ConjType CONJ_TYPE = new ConjType((new RedisHelper()).getClass()
+	public static final ConjType CONJ_TYPE = new ConjType((new AppController()).getClass()
 			.getClassLoader().getResource("").getPath());
 }

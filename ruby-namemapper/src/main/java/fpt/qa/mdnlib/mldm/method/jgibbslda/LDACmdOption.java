@@ -5,7 +5,7 @@ import org.kohsuke.args4j.Option;
 
 public class LDACmdOption {
 	
-	@Option(name="-est", usage="Specify whether we want to estimate model from scratch")
+	@Option(name="-est", usage="Specify whether we want to estimate com.fpt.ruby.business.model from scratch")
 	public boolean est = false;
 	
 	@Option(name="-estc", usage="Specify whether we want to continue the last estimation")
@@ -20,7 +20,7 @@ public class LDACmdOption {
 	@Option(name="-dfile", usage="Specify data file")
 	public String dfile = "";
 	
-	@Option(name="-model", usage="Specify the model name")
+	@Option(name="-com.fpt.ruby.business.model", usage="Specify the com.fpt.ruby.business.model name")
 	public String modelName = "";
 	
 	@Option(name="-alpha", usage="Specify alpha")
@@ -35,7 +35,7 @@ public class LDACmdOption {
 	@Option(name="-niters", usage="Specify the number of iterations")
 	public int niters = 1000;
 	
-	@Option(name="-savestep", usage="Specify the number of steps to save the model since the last save")
+	@Option(name="-savestep", usage="Specify the number of steps to save the com.fpt.ruby.business.model since the last save")
 	public int savestep = 100;
 	
 	@Option(name="-twords", usage="Specify the number of most likely words to be printed for each topic")

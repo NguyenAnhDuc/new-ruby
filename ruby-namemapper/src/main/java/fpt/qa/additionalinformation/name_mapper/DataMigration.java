@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 import vn.hus.nlp.utils.UTF8FileUtility;
 
 import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.service.NameMapperService;
+import com.fpt.ruby.commons.service.NameMapperService;
 
 
 public class DataMigration {

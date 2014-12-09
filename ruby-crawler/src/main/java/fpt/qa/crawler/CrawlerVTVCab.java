@@ -1,22 +1,12 @@
 package fpt.qa.crawler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.CrawlerHelper;
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.Channel;
-import com.fpt.ruby.business.model.TVProgram;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.business.service.TVProgramService;
+import com.fpt.ruby.commons.constants.ProgramType;
+import com.fpt.ruby.commons.entity.objects.Channel;
+import com.fpt.ruby.commons.entity.tv.TVProgram;
+import com.fpt.ruby.commons.helper.CrawlerHelper;
+import com.fpt.ruby.commons.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import fpt.qa.mdnlib.struct.conjunction.Conjunction;
+import fpt.qa.type_mapper.TypeMapper;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -29,7 +19,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import fpt.qa.type_mapper.TypeMapper;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class CrawlerVTVCab {
@@ -104,7 +100,7 @@ public class CrawlerVTVCab {
 		String dir;
 
 		try {
-			dir = (new RedisHelper()).getClass().getClassLoader()
+			dir = (new CrawlerVTVCab()).getClass().getClassLoader()
 					.getResource("").getPath();
 		} catch (Exception ex) {
 			dir = defaultPath;
@@ -229,14 +225,14 @@ public class CrawlerVTVCab {
 	}
 
 	public static void main(String[] args) throws Exception {
-		TVProgramService ts = new TVProgramService();
+		/*TVProgramService ts = new TVProgramService();
 		NameMapperService nms = new NameMapperService();
 
 		String dir = "/home/timxad/ws/proj/ruby/new-ruby/ruby-web/src/main/resources/";
 		ConjunctionHelper ch = new ConjunctionHelper(dir, nms);
 
 		CrawlerVTVCab crawler = new CrawlerVTVCab();
-		crawler.doCrawl(ts, ch, 3);
+		crawler.doCrawl(ts, ch, 3);*/
 	}
 
 }

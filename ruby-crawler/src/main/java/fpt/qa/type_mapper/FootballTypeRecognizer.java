@@ -1,9 +1,7 @@
 package fpt.qa.type_mapper;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import com.fpt.ruby.business.constants.ProgramType;
+import com.fpt.ruby.commons.constants.ProgramType;
 
 public class FootballTypeRecognizer extends TypeRecognizer {
 	public FootballTypeRecognizer() {

@@ -1,10 +1,11 @@
 package fpt.qa.type_mapper;
 
+import com.fpt.ruby.commons.constants.ProgramType;
+import com.fpt.ruby.commons.helper.TypeMapperHelper;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.TypeMapperHelper;
 
 public class TypeRecognizer {
 	private ProgramType type;

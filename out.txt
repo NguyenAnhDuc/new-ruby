@@ -1362,9 +1362,13 @@ movie	mov_title	Lucy 	Lucy
 movie	mov_title	Anh Dã 3+1	Anh Da 3+1	Anh Dã 3+1
 movie	mov_title	Karate Girl	Co Gai Karate	Karate Girl	Cô Gái Karate
 movie	mov_title	The Good Lie	The Good Lie	Lời Nói Dối Ngọt Ngào	Loi Noi Doi Ngot Ngao
-tv	program_title	 chào cờ	 chào cờ	chao co
+tv	program_title	 chào cờ
+	 chào cờ
+	chao co
 tv	program_title	 thời sự 12h	 thời sự 12h	thoi su 12h
-tv	program_title	 cà phê sáng	 cà phê sáng	ca phe sang
+tv	program_title	 cà phê sáng
+	 cà phê sáng
+	ca phe sang
 tv	program_title	 uncle grandpa	 uncle grandpa	uncle grandpa
 tv	program_title	 htv giới thiệu	 htv giới thiệu	htv gioi thieu
 tv	program_title	thể thao (live)	the thao (live)	thể thao (live)
@@ -5273,7 +5277,9 @@ movie	mov_title	Tom And Jerry (p.10)	Tom And Jerry (p.10)
 movie	mov_title	Tom And Jerry (p.11)	Tom And Jerry (p.11)
 movie	mov_title	Tom And Jerry (p.8)	Tom And Jerry (p.8)
 movie	mov_title	Tom And Jerry (p.9)	Tom And Jerry (p.9)
-tv	program_title	 khuyến công	 khuyến công	khuyen cong
+tv	program_title	 khuyến công
+	 khuyến công
+	khuyen cong
 tv	program_title	 chào buổi sáng	chao buoi sang	 chào buổi sáng
 tv	program_title	 thời sự	 thời sự	thoi su
 tv	program_title	 phim truyện	phim truyen	 phim truyện
@@ -9230,44 +9236,102 @@ movie	mov_title	Tom And Jerry (p.7)	Tom And Jerry (p.7)
 movie	mov_title	Trái Tim Mùa Thu (hàn Quốc)	Trai Tim Mua Thu (han Quoc)	Trái Tim Mùa Thu (hàn Quốc)
 tv	program_title	fastfurious 6	fastfurious 6	Vet Đuoi Dai Rio	Rio
 movie	mov_title	Zombieland The Series	Zombieland The Series	Zombieland	Vung Đat Thay Ma
-tv	program_title	 tin tức	 tin tức	tin tuc
-tv	program_title	 tài chính - kinh doanh	 tài chính - kinh doanh	tai chinh - kinh doanh
-tv	program_title	 cho muôn đời sau linh hồn của đất	cho muon doi sau linh hon cua dat	 cho muôn đời sau linh hồn của đất
-tv	program_title	 lục lạc vàng xã điện phước - huyện điện bàn - tỉnh quảng nam	 lục lạc vàng xã điện phước - huyện điện bàn - tỉnh quảng nam	luc lac vang xa dien phuoc - huyen dien ban - tinh quang nam
-tv	program_title	 phim truyện những đóa hoa tình yêu - tập 10	phim truyen nhung doa hoa tinh yeu - tap 10	 phim truyện những đóa hoa tình yêu - tập 10
-tv	program_title	 tạp chí âm nhạcsố 6	tap chi am nhacso 6	 tạp chí âm nhạcsố 6
-tv	program_title	 phim truyện bão qua làng - tập 25	phim truyen bao qua lang - tap 25	 phim truyện bão qua làng - tập 25
-tv	program_title	 khám phá thế giới khám phá nước mỹ từ trên cao - phần 17 : đảo rhode, hoa kỳ	kham pha the gioi kham pha nuoc my tu tren cao - phan 17 : dao rhode, hoa ky	 khám phá thế giới khám phá nước mỹ từ trên cao - phần 17 : đảo rhode, hoa kỳ
-tv	program_title	 đại đoàn kết có nên đưa ban công tác mặt trận tại khu dân cư vào trong luật	dai doan ket co nen dua ban cong tac mat tran tai khu dan cu vao trong luat	 đại đoàn kết có nên đưa ban công tác mặt trận tại khu dân cư vào trong luật
-tv	program_title	 chào buổi sáng	 chào buổi sáng	chao buoi sang
-tv	program_title	 phóng sự mưu sinh bám biển	 phóng sự mưu sinh bám biển	phong su muu sinh bam bien
-tv	program_title	 khám phá việt namthú chơi tem ở huế	 khám phá việt namthú chơi tem ở huế	kham pha viet namthu choi tem o hue
-tv	program_title	 câu chuyện văn hóa	 câu chuyện văn hóa	cau chuyen van hoa
-tv	program_title	 cổng làng tự truyện điệu múa cổ làng giắng	cong lang tu truyen dieu mua co lang giang	 cổng làng tự truyện điệu múa cổ làng giắng
-tv	program_title	 thời sự 9h	thoi su 9h	 thời sự 9h
-tv	program_title	 công nghệ - đời sốngict sumit 2014 - ứng dụng công nghệ thông tin trong nông nghiệp	cong nghe - doi songict sumit 2014 - ung dung cong nghe thong tin trong nong nghiep	 công nghệ - đời sốngict sumit 2014 - ứng dụng công nghệ thông tin trong nông nghiệp
-tv	program_title	 tin tức 10h	 tin tức 10h	tin tuc 10h
-tv	program_title	 phóng sự âm vang từ lòng đất	phong su am vang tu long dat	 phóng sự âm vang từ lòng đất
-tv	program_title	 văn học nghệ thuậtsau những nốt lặng	 văn học nghệ thuậtsau những nốt lặng	van hoc nghe thuatsau nhung not lang
-tv	program_title	 chuyển động 24h	 chuyển động 24h	chuyen dong 24h
-tv	program_title	 thời sự 12h	 thời sự 12h	thoi su 12h
-tv	program_title	 phim truyện đội cảnh sát đặc nhiệm s - tập 9	 phim truyện đội cảnh sát đặc nhiệm s - tập 9	phim truyen doi canh sat dac nhiem s - tap 9
-tv	program_title	 tin tức 14h	 tin tức 14h	tin tuc 14h
-tv	program_title	 phim cuối tuầnbàn tay đen	phim cuoi tuanban tay den	 phim cuối tuầnbàn tay đen
-tv	program_title	 thời sự 16h	thoi su 16h	 thời sự 16h
-tv	program_title	 vì người nghèogiải pháp xóa nghèo ở sóc trăng	 vì người nghèogiải pháp xóa nghèo ở sóc trăng	vi nguoi ngheogiai phap xoa ngheo o soc trang
-tv	program_title	 sinh ra từ làng nguyễn thanh phương – ươm những giống cây vàng	 sinh ra từ làng nguyễn thanh phương – ươm những giống cây vàng	sinh ra tu lang nguyen thanh phuong – uom nhung giong cay vang
-tv	program_title	 tin quốc tế	 tin quốc tế	tin quoc te
-tv	program_title	 vì cộng đồng mang sức trẻ để phục vụ nhân dân	vi cong dong mang suc tre de phuc vu nhan dan	 vì cộng đồng mang sức trẻ để phục vụ nhân dân
-tv	program_title	 cuộc sống thường ngày	cuoc song thuong ngay	 cuộc sống thường ngày
-tv	program_title	 thời sự 19h	thoi su 19h	 thời sự 19h
-tv	program_title	 thể thao 24/7	the thao 24/7	 thể thao 24/7
-tv	program_title	 phim tài liệu đường trường sơn - tuyến hậu cần huyền thoại - tập 1: những người mở đường trường sơn	phim tai lieu duong truong son - tuyen hau can huyen thoai - tap 1: nhung nguoi mo duong truong son	 phim tài liệu đường trường sơn - tuyến hậu cần huyền thoại - tập 1: những người mở đường trường sơn
-tv	program_title	 phim truyện bão qua làng - tập 26	 phim truyện bão qua làng - tập 26	phim truyen bao qua lang - tap 26
-tv	program_title	 thế giới trong ngày	 thế giới trong ngày	the gioi trong ngay
-tv	program_title	 phóng sự trở lại tacloban	phong su tro lai tacloban	 phóng sự trở lại tacloban
-tv	program_title	 chuyện đương thời luật phòng chống bạo lực gia đình có chống được bạo lực?	 chuyện đương thời luật phòng chống bạo lực gia đình có chống được bạo lực?	chuyen duong thoi luat phong chong bao luc gia dinh co chong duoc bao luc?
-tv	program_title	 bản tin	 bản tin	ban tin
+tv	program_title	 tin tức
+	 tin tức
+	tin tuc
+tv	program_title	 tài chính - kinh doanh
+	 tài chính - kinh doanh
+	tai chinh - kinh doanh
+tv	program_title	 cho muôn đời sau linh hồn của đất
+	cho muon doi sau linh hon cua dat	 cho muôn đời sau linh hồn của đất
+tv	program_title	 lục lạc vàng xã điện phước - huyện điện bàn - tỉnh quảng nam
+	 lục lạc vàng xã điện phước - huyện điện bàn - tỉnh quảng nam
+	luc lac vang xa dien phuoc - huyen dien ban - tinh quang nam
+tv	program_title	 phim truyện những đóa hoa tình yêu - tập 10
+	phim truyen nhung doa hoa tinh yeu - tap 10	 phim truyện những đóa hoa tình yêu - tập 10
+tv	program_title	 tạp chí âm nhạcsố 6
+	tap chi am nhacso 6	 tạp chí âm nhạcsố 6
+tv	program_title	 phim truyện bão qua làng - tập 25
+	phim truyen bao qua lang - tap 25	 phim truyện bão qua làng - tập 25
+tv	program_title	 khám phá thế giới khám phá nước mỹ từ trên cao - phần 17 : đảo rhode, hoa kỳ
+	kham pha the gioi kham pha nuoc my tu tren cao - phan 17 : dao rhode, hoa ky	 khám phá thế giới khám phá nước mỹ từ trên cao - phần 17 : đảo rhode, hoa kỳ
+tv	program_title	 đại đoàn kết có nên đưa ban công tác mặt trận tại khu dân cư vào trong luật
+	dai doan ket co nen dua ban cong tac mat tran tai khu dan cu vao trong luat	 đại đoàn kết có nên đưa ban công tác mặt trận tại khu dân cư vào trong luật
+tv	program_title	 chào buổi sáng
+	 chào buổi sáng
+	chao buoi sang
+tv	program_title	 phóng sự mưu sinh bám biển
+	 phóng sự mưu sinh bám biển
+	phong su muu sinh bam bien
+tv	program_title	 khám phá việt namthú chơi tem ở huế
+	 khám phá việt namthú chơi tem ở huế
+	kham pha viet namthu choi tem o hue
+tv	program_title	 câu chuyện văn hóa
+	 câu chuyện văn hóa
+	cau chuyen van hoa
+tv	program_title	 cổng làng tự truyện điệu múa cổ làng giắng
+	cong lang tu truyen dieu mua co lang giang	 cổng làng tự truyện điệu múa cổ làng giắng
+tv	program_title	 thời sự 9h
+	thoi su 9h	 thời sự 9h
+tv	program_title	 công nghệ - đời sốngict sumit 2014 - ứng dụng công nghệ thông tin trong nông nghiệp
+	cong nghe - doi songict sumit 2014 - ung dung cong nghe thong tin trong nong nghiep	 công nghệ - đời sốngict sumit 2014 - ứng dụng công nghệ thông tin trong nông nghiệp
+tv	program_title	 tin tức 10h
+	 tin tức 10h
+	tin tuc 10h
+tv	program_title	 phóng sự âm vang từ lòng đất
+	phong su am vang tu long dat	 phóng sự âm vang từ lòng đất
+tv	program_title	 văn học nghệ thuậtsau những nốt lặng
+	 văn học nghệ thuậtsau những nốt lặng
+	van hoc nghe thuatsau nhung not lang
+tv	program_title	 chuyển động 24h
+	 chuyển động 24h
+	chuyen dong 24h
+tv	program_title	 thời sự 12h
+	 thời sự 12h
+	thoi su 12h
+tv	program_title	 phim truyện đội cảnh sát đặc nhiệm s - tập 9
+	 phim truyện đội cảnh sát đặc nhiệm s - tập 9
+	phim truyen doi canh sat dac nhiem s - tap 9
+tv	program_title	 tin tức 14h
+	 tin tức 14h
+	tin tuc 14h
+tv	program_title	 phim cuối tuầnbàn tay đen
+	phim cuoi tuanban tay den	 phim cuối tuầnbàn tay đen
+tv	program_title	 thời sự 16h
+	thoi su 16h	 thời sự 16h
+tv	program_title	 vì người nghèogiải pháp xóa nghèo ở sóc trăng
+	 vì người nghèogiải pháp xóa nghèo ở sóc trăng
+	vi nguoi ngheogiai phap xoa ngheo o soc trang
+tv	program_title	 sinh ra từ làng nguyễn thanh phương – ươm những giống cây vàng
+	 sinh ra từ làng nguyễn thanh phương – ươm những giống cây vàng
+	sinh ra tu lang nguyen thanh phuong – uom nhung giong cay vang
+tv	program_title	 tin quốc tế
+	 tin quốc tế
+	tin quoc te
+tv	program_title	 vì cộng đồng mang sức trẻ để phục vụ nhân dân
+	vi cong dong mang suc tre de phuc vu nhan dan	 vì cộng đồng mang sức trẻ để phục vụ nhân dân
+tv	program_title	 cuộc sống thường ngày
+	cuoc song thuong ngay	 cuộc sống thường ngày
+tv	program_title	 thời sự 19h
+	thoi su 19h	 thời sự 19h
+tv	program_title	 thể thao 24/7
+	the thao 24/7	 thể thao 24/7
+tv	program_title	 phim tài liệu đường trường sơn - tuyến hậu cần huyền thoại - tập 1: những người mở đường trường sơn
+	phim tai lieu duong truong son - tuyen hau can huyen thoai - tap 1: nhung nguoi mo duong truong son	 phim tài liệu đường trường sơn - tuyến hậu cần huyền thoại - tập 1: những người mở đường trường sơn
+tv	program_title	 phim truyện bão qua làng - tập 26
+	 phim truyện bão qua làng - tập 26
+	phim truyen bao qua lang - tap 26
+tv	program_title	 thế giới trong ngày
+	 thế giới trong ngày
+	the gioi trong ngay
+tv	program_title	 phóng sự trở lại tacloban
+	phong su tro lai tacloban	 phóng sự trở lại tacloban
+tv	program_title	 chuyện đương thời luật phòng chống bạo lực gia đình có chống được bạo lực?
+	 chuyện đương thời luật phòng chống bạo lực gia đình có chống được bạo lực?
+	chuyen duong thoi luat phong chong bao luc gia dinh co chong duoc bao luc?
+tv	program_title	 bản tin
+	 bản tin
+	ban tin
 tv	program_title	 tin tức	 tin tức	tin tuc
 tv	program_title	 tài chính - kinh doanh	 tài chính - kinh doanh	tai chinh - kinh doanh
 tv	program_title	 cho muôn đời sau thần linh của làng	 cho muôn đời sau thần linh của làng	cho muon doi sau than linh cua lang
@@ -9309,35 +9373,75 @@ tv	program_title	 thế giới trong ngày	 thế giới trong ngày	the gioi tr
 tv	program_title	 tác phẩm mới	tac pham moi	 tác phẩm mới
 tv	program_title	 cửa sổ văn học	 cửa sổ văn học	cua so van hoc
 tv	program_title	 bản tin	 bản tin	ban tin
-tv	program_title	 phim truyện quý bà go bong shil - tập 34	phim truyen quy ba go bong shil - tap 34	 phim truyện quý bà go bong shil - tập 34
-tv	program_title	 bình luận thể thao trực tiếp	binh luan the thao truc tiep	 bình luận thể thao trực tiếp
-tv	program_title	 truyền hình trực tiếp vòng bảng uefa europa league: saint etienne - inter milan	 truyền hình trực tiếp vòng bảng uefa europa league: saint etienne - inter milan	truyen hinh truc tiep vong bang uefa europa league: saint etienne - inter milan
-tv	program_title	 phim truyện trò đời - tập 14	phim truyen tro doi - tap 14	 phim truyện trò đời - tập 14
-tv	program_title	 thể thao sôi động champions league	the thao soi dong champions league	 thể thao sôi động champions league
-tv	program_title	 đừng để tiền rơi	dung de tien roi	 đừng để tiền rơi
-tv	program_title	 thử thách đường phố	thu thach duong pho	 thử thách đường phố
-tv	program_title	 nhịp đập 360 độ thể thao	nhip dap 360 do the thao	 nhịp đập 360 độ thể thao
-tv	program_title	 hai trái tim vàng vụ hôn phối bất thành	 hai trái tim vàng vụ hôn phối bất thành	hai trai tim vang vu hon phoi bat thanh
-tv	program_title	 kỹ năng sống trẻ hoảng sợ khi ngủ	ky nang song tre hoang so khi ngu	 kỹ năng sống trẻ hoảng sợ khi ngủ
-tv	program_title	 về quê	 về quê	ve que
-tv	program_title	 đường lên đỉnh olympia	duong len dinh olympia	 đường lên đỉnh olympia
-tv	program_title	 thể thao trước thềm đại hội tdtt toàn quốc 2014	the thao truoc them dai hoi tdtt toan quoc 2014	 thể thao trước thềm đại hội tdtt toàn quốc 2014
-tv	program_title	 người mẫu việt nam	 người mẫu việt nam	nguoi mau viet nam
-tv	program_title	 thông tin 260	 thông tin 260	thong tin 260
-tv	program_title	 đường tới vương miện hoa khôi áo dài việt nam 2014 - đường tới vương miện hoa hậu thế giới	 đường tới vương miện hoa khôi áo dài việt nam 2014 - đường tới vương miện hoa hậu thế giới	duong toi vuong mien hoa khoi ao dai viet nam 2014 - duong toi vuong mien hoa hau the gioi
-tv	program_title	 phụ nữ là số 1 lòng trắc ẩn	 phụ nữ là số 1 lòng trắc ẩn	phu nu la so 1 long trac an
-tv	program_title	 phim truyện cám ơn cuộc đời - tập 36	phim truyen cam on cuoc doi - tap 36	 phim truyện cám ơn cuộc đời - tập 36
-tv	program_title	 vui sống mỗi ngày	vui song moi ngay	 vui sống mỗi ngày
-tv	program_title	 thể thao tường thuật vòng bảng uefa europa league: asteras – tottenham hotspur	the thao tuong thuat vong bang uefa europa league: asteras – tottenham hotspur	 thể thao tường thuật vòng bảng uefa europa league: asteras – tottenham hotspur
-tv	program_title	 tìm kiếm tài năng việt nam	 tìm kiếm tài năng việt nam	tim kiem tai nang viet nam
-tv	program_title	 siêu sao giải ngoại hạng	sieu sao giai ngoai hang	 siêu sao giải ngoại hạng
-tv	program_title	 360 độ thể thao	360 do the thao	 360 độ thể thao
-tv	program_title	 phim truyện thần y - tập 25	phim truyen than y - tap 25	 phim truyện thần y - tập 25
-tv	program_title	 thời sự	thoi su	 thời sự
-tv	program_title	 chúng tôi là chiến sĩ lữ đoàn cb 575/quân khu 1	 chúng tôi là chiến sĩ lữ đoàn cb 575/quân khu 1	chung toi la chien si lu doan cb 575/quan khu 1
-tv	program_title	 sắc màu phái đẹp	 sắc màu phái đẹp	sac mau phai dep
-tv	program_title	 gương mặt thân quen nhí	 gương mặt thân quen nhí	guong mat than quen nhi
-tv	program_title	 quà tặng cuộc sống khởi đầu của thành công	qua tang cuoc song khoi dau cua thanh cong	 quà tặng cuộc sống khởi đầu của thành công
+tv	program_title	 phim truyện quý bà go bong shil - tập 34
+	phim truyen quy ba go bong shil - tap 34	 phim truyện quý bà go bong shil - tập 34
+tv	program_title	 bình luận thể thao trực tiếp
+	binh luan the thao truc tiep	 bình luận thể thao trực tiếp
+tv	program_title	 truyền hình trực tiếp vòng bảng uefa europa league: saint etienne - inter milan
+	 truyền hình trực tiếp vòng bảng uefa europa league: saint etienne - inter milan
+	truyen hinh truc tiep vong bang uefa europa league: saint etienne - inter milan
+tv	program_title	 phim truyện trò đời - tập 14
+	phim truyen tro doi - tap 14	 phim truyện trò đời - tập 14
+tv	program_title	 thể thao sôi động champions league
+	the thao soi dong champions league	 thể thao sôi động champions league
+tv	program_title	 đừng để tiền rơi
+	dung de tien roi	 đừng để tiền rơi
+tv	program_title	 thử thách đường phố
+	thu thach duong pho	 thử thách đường phố
+tv	program_title	 nhịp đập 360 độ thể thao
+	nhip dap 360 do the thao	 nhịp đập 360 độ thể thao
+tv	program_title	 hai trái tim vàng vụ hôn phối bất thành
+	 hai trái tim vàng vụ hôn phối bất thành
+	hai trai tim vang vu hon phoi bat thanh
+tv	program_title	 kỹ năng sống trẻ hoảng sợ khi ngủ
+	ky nang song tre hoang so khi ngu	 kỹ năng sống trẻ hoảng sợ khi ngủ
+tv	program_title	 về quê
+	 về quê
+	ve que
+tv	program_title	 đường lên đỉnh olympia
+	duong len dinh olympia	 đường lên đỉnh olympia
+tv	program_title	 thể thao trước thềm đại hội tdtt toàn quốc 2014
+	the thao truoc them dai hoi tdtt toan quoc 2014	 thể thao trước thềm đại hội tdtt toàn quốc 2014
+tv	program_title	 người mẫu việt nam
+	 người mẫu việt nam
+	nguoi mau viet nam
+tv	program_title	 thông tin 260
+	 thông tin 260
+	thong tin 260
+tv	program_title	 đường tới vương miện hoa khôi áo dài việt nam 2014 - đường tới vương miện hoa hậu thế giới
+	 đường tới vương miện hoa khôi áo dài việt nam 2014 - đường tới vương miện hoa hậu thế giới
+	duong toi vuong mien hoa khoi ao dai viet nam 2014 - duong toi vuong mien hoa hau the gioi
+tv	program_title	 phụ nữ là số 1 lòng trắc ẩn
+	 phụ nữ là số 1 lòng trắc ẩn
+	phu nu la so 1 long trac an
+tv	program_title	 phim truyện cám ơn cuộc đời - tập 36
+	phim truyen cam on cuoc doi - tap 36	 phim truyện cám ơn cuộc đời - tập 36
+tv	program_title	 vui sống mỗi ngày
+	vui song moi ngay	 vui sống mỗi ngày
+tv	program_title	 thể thao tường thuật vòng bảng uefa europa league: asteras – tottenham hotspur
+	the thao tuong thuat vong bang uefa europa league: asteras – tottenham hotspur	 thể thao tường thuật vòng bảng uefa europa league: asteras – tottenham hotspur
+tv	program_title	 tìm kiếm tài năng việt nam
+	 tìm kiếm tài năng việt nam
+	tim kiem tai nang viet nam
+tv	program_title	 siêu sao giải ngoại hạng
+	sieu sao giai ngoai hang	 siêu sao giải ngoại hạng
+tv	program_title	 360 độ thể thao
+	360 do the thao	 360 độ thể thao
+tv	program_title	 phim truyện thần y - tập 25
+	phim truyen than y - tap 25	 phim truyện thần y - tập 25
+tv	program_title	 thời sự
+	thoi su	 thời sự
+tv	program_title	 chúng tôi là chiến sĩ lữ đoàn cb 575/quân khu 1
+	 chúng tôi là chiến sĩ lữ đoàn cb 575/quân khu 1
+	chung toi la chien si lu doan cb 575/quan khu 1
+tv	program_title	 sắc màu phái đẹp
+	 sắc màu phái đẹp
+	sac mau phai dep
+tv	program_title	 gương mặt thân quen nhí
+	 gương mặt thân quen nhí
+	guong mat than quen nhi
+tv	program_title	 quà tặng cuộc sống khởi đầu của thành công
+	qua tang cuoc song khoi dau cua thanh cong	 quà tặng cuộc sống khởi đầu của thành công
 tv	program_title	 phim truyện quý bà go bong shil - tập 35	 phim truyện quý bà go bong shil - tập 35	phim truyen quy ba go bong shil - tap 35
 tv	program_title	 phim tài liệu nhỏ nhưng thoáng	 phim tài liệu nhỏ nhưng thoáng	phim tai lieu nho nhung thoang
 tv	program_title	 thể thao tuờng thuật vòng bảng uefa europa league : asteras - tottenham hotspur	the thao tuong thuat vong bang uefa europa league : asteras - tottenham hotspur	 thể thao tuờng thuật vòng bảng uefa europa league : asteras - tottenham hotspur
@@ -9364,40 +9468,90 @@ tv	program_title	 s - việt nam	s - viet nam	 s - việt nam
 tv	program_title	 phim truyện thần y - tập 26	 phim truyện thần y - tập 26	phim truyen than y - tap 26
 tv	program_title	 người mẫu việt nam	nguoi mau viet nam	 người mẫu việt nam
 tv	program_title	 ơn giời, cậu đây rồi	on gioi, cau day roi	 ơn giời, cậu đây rồi
-tv	program_title	 phim truyện ông tơ hai phẩy - tập 22	phim truyen ong to hai phay - tap 22	 phim truyện ông tơ hai phẩy - tập 22
-tv	program_title	 5s online hỗ trợ tác chiến - tập 277	 5s online hỗ trợ tác chiến - tập 277	5s online ho tro tac chien - tap 277
-tv	program_title	 khám phá thế giới	 khám phá thế giới	kham pha the gioi
-tv	program_title	 đùa chút thôi - số 42	dua chut thoi - so 42	 đùa chút thôi - số 42
-tv	program_title	 phim việt nam tình yêu học trò - tập 6	 phim việt nam tình yêu học trò - tập 6	phim viet nam tinh yeu hoc tro - tap 6
-tv	program_title	 kỹ năng thoát hiểm	 kỹ năng thoát hiểm	ky nang thoat hiem
-tv	program_title	 sinh ra từ làng triệu phú cây giống	sinh ra tu lang trieu phu cay giong	 sinh ra từ làng triệu phú cây giống
-tv	program_title	 xưởng thời trang - số 45	xuong thoi trang - so 45	 xưởng thời trang - số 45
-tv	program_title	 siêu thủ lĩnh phục hưng - phần 2	 siêu thủ lĩnh phục hưng - phần 2	sieu thu linh phuc hung - phan 2
-tv	program_title	 5s online yêu nữ hàng hiệu - tập 276	5s online yeu nu hang hieu - tap 276	 5s online yêu nữ hàng hiệu - tập 276
-tv	program_title	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 17	hoa khoi ao dai viet nam 2014 duong toi vuong mien hoa hau the gioi - tap 17	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 17
-tv	program_title	 ngược chiềulòng tự nhủ	 ngược chiềulòng tự nhủ	nguoc chieulong tu nhu
-tv	program_title	 phim hoạt hìnhcuộc chiến giữa coop và mèo kat - tập 27	 phim hoạt hìnhcuộc chiến giữa coop và mèo kat - tập 27	phim hoat hinhcuoc chien giua coop va meo kat - tap 27
-tv	program_title	 những bông hoa nhỏvừng ơi! mở cửa ra: đèn dung nham	nhung bong hoa nhovung oi! mo cua ra: den dung nham	 những bông hoa nhỏvừng ơi! mở cửa ra: đèn dung nham
-tv	program_title	 5s online 	5s online	 5s online 
-tv	program_title	 tòa tuyên ánhôi của	 tòa tuyên ánhôi của	toa tuyen anhoi cua
-tv	program_title	 hành trình khám phá	 hành trình khám phá	hanh trinh kham pha
-tv	program_title	 vtv kết nối	 vtv kết nối	vtv ket noi
-tv	program_title	 phim truyện ông tơ hai phẩy - tập 23	phim truyen ong to hai phay - tap 23	 phim truyện ông tơ hai phẩy - tập 23
-tv	program_title	 đùa chút thôi - số 41	dua chut thoi - so 41	 đùa chút thôi - số 41
-tv	program_title	 bữa trưa vui vẻ	bua trua vui ve	 bữa trưa vui vẻ
-tv	program_title	 5s online mối tình đầu - tập 279	 5s online mối tình đầu - tập 279	5s online moi tinh dau - tap 279
-tv	program_title	 bếpviệt	bepviet	 bếpviệt
-tv	program_title	 phim hoạt hình cuộc chiến giữa coop và mèo kat - tập 28	 phim hoạt hình cuộc chiến giữa coop và mèo kat - tập 28	phim hoat hinh cuoc chien giua coop va meo kat - tap 28
-tv	program_title	 bạn trẻ bốn phương	ban tre bon phuong	 bạn trẻ bốn phương
-tv	program_title	 hãy cùng khám phá	hay cung kham pha	 hãy cùng khám phá
-tv	program_title	 lăng kính v6	 lăng kính v6	lang kinh v6
-tv	program_title	 v6 du ký miếng ngon hà nội	v6 du ky mieng ngon ha noi	 v6 du ký miếng ngon hà nội
-tv	program_title	 phim mỹ thám tử đại tài - tập 24	phim my tham tu dai tai - tap 24	 phim mỹ thám tử đại tài - tập 24
-tv	program_title	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 18	hoa khoi ao dai viet nam 2014 duong toi vuong mien hoa hau the gioi - tap 18	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 18
-tv	program_title	 5s online trúng số thật quá lố - tập 281	 5s online trúng số thật quá lố - tập 281	5s online trung so that qua lo - tap 281
-tv	program_title	 bài hát việt studio số 26	bai hat viet studio so 26	 bài hát việt studio số 26
-tv	program_title	 phim việt nam tình yêu học trò - tập 7	 phim việt nam tình yêu học trò - tập 7	phim viet nam tinh yeu hoc tro - tap 7
-tv	program_title	 tôi hát - số 45	 tôi hát - số 45	toi hat - so 45
+tv	program_title	 phim truyện ông tơ hai phẩy - tập 22
+	phim truyen ong to hai phay - tap 22	 phim truyện ông tơ hai phẩy - tập 22
+tv	program_title	 5s online hỗ trợ tác chiến - tập 277
+	 5s online hỗ trợ tác chiến - tập 277
+	5s online ho tro tac chien - tap 277
+tv	program_title	 khám phá thế giới
+	 khám phá thế giới
+	kham pha the gioi
+tv	program_title	 đùa chút thôi - số 42
+	dua chut thoi - so 42	 đùa chút thôi - số 42
+tv	program_title	 phim việt nam tình yêu học trò - tập 6
+	 phim việt nam tình yêu học trò - tập 6
+	phim viet nam tinh yeu hoc tro - tap 6
+tv	program_title	 kỹ năng thoát hiểm
+	 kỹ năng thoát hiểm
+	ky nang thoat hiem
+tv	program_title	 sinh ra từ làng triệu phú cây giống
+	sinh ra tu lang trieu phu cay giong	 sinh ra từ làng triệu phú cây giống
+tv	program_title	 xưởng thời trang - số 45
+	xuong thoi trang - so 45	 xưởng thời trang - số 45
+tv	program_title	 siêu thủ lĩnh phục hưng - phần 2
+	 siêu thủ lĩnh phục hưng - phần 2
+	sieu thu linh phuc hung - phan 2
+tv	program_title	 5s online yêu nữ hàng hiệu - tập 276
+	5s online yeu nu hang hieu - tap 276	 5s online yêu nữ hàng hiệu - tập 276
+tv	program_title	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 17
+	hoa khoi ao dai viet nam 2014 duong toi vuong mien hoa hau the gioi - tap 17	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 17
+tv	program_title	 ngược chiềulòng tự nhủ
+	 ngược chiềulòng tự nhủ
+	nguoc chieulong tu nhu
+tv	program_title	 phim hoạt hìnhcuộc chiến giữa coop và mèo kat - tập 27
+	 phim hoạt hìnhcuộc chiến giữa coop và mèo kat - tập 27
+	phim hoat hinhcuoc chien giua coop va meo kat - tap 27
+tv	program_title	 những bông hoa nhỏvừng ơi! mở cửa ra: đèn dung nham
+	nhung bong hoa nhovung oi! mo cua ra: den dung nham	 những bông hoa nhỏvừng ơi! mở cửa ra: đèn dung nham
+tv	program_title	 5s online 
+	5s online	 5s online 
+tv	program_title	 tòa tuyên ánhôi của
+	 tòa tuyên ánhôi của
+	toa tuyen anhoi cua
+tv	program_title	 hành trình khám phá
+	 hành trình khám phá
+	hanh trinh kham pha
+tv	program_title	 vtv kết nối
+	 vtv kết nối
+	vtv ket noi
+tv	program_title	 phim truyện ông tơ hai phẩy - tập 23
+	phim truyen ong to hai phay - tap 23	 phim truyện ông tơ hai phẩy - tập 23
+tv	program_title	 đùa chút thôi - số 41
+	dua chut thoi - so 41	 đùa chút thôi - số 41
+tv	program_title	 bữa trưa vui vẻ
+	bua trua vui ve	 bữa trưa vui vẻ
+tv	program_title	 5s online mối tình đầu - tập 279
+	 5s online mối tình đầu - tập 279
+	5s online moi tinh dau - tap 279
+tv	program_title	 bếpviệt
+	bepviet	 bếpviệt
+tv	program_title	 phim hoạt hình cuộc chiến giữa coop và mèo kat - tập 28
+	 phim hoạt hình cuộc chiến giữa coop và mèo kat - tập 28
+	phim hoat hinh cuoc chien giua coop va meo kat - tap 28
+tv	program_title	 bạn trẻ bốn phương
+	ban tre bon phuong	 bạn trẻ bốn phương
+tv	program_title	 hãy cùng khám phá
+	hay cung kham pha	 hãy cùng khám phá
+tv	program_title	 lăng kính v6
+	 lăng kính v6
+	lang kinh v6
+tv	program_title	 v6 du ký miếng ngon hà nội
+	v6 du ky mieng ngon ha noi	 v6 du ký miếng ngon hà nội
+tv	program_title	 phim mỹ thám tử đại tài - tập 24
+	phim my tham tu dai tai - tap 24	 phim mỹ thám tử đại tài - tập 24
+tv	program_title	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 18
+	hoa khoi ao dai viet nam 2014 duong toi vuong mien hoa hau the gioi - tap 18	 hoa khôi áo dài việt nam 2014 đường tới vương miện hoa hậu thế giới - tập 18
+tv	program_title	 5s online trúng số thật quá lố - tập 281
+	 5s online trúng số thật quá lố - tập 281
+	5s online trung so that qua lo - tap 281
+tv	program_title	 bài hát việt studio số 26
+	bai hat viet studio so 26	 bài hát việt studio số 26
+tv	program_title	 phim việt nam tình yêu học trò - tập 7
+	 phim việt nam tình yêu học trò - tập 7
+	phim viet nam tinh yeu hoc tro - tap 7
+tv	program_title	 tôi hát - số 45
+	 tôi hát - số 45
+	toi hat - so 45
 tv	program_title	 phim truyện ông tơ hai phẩy - tập 23	phim truyen ong to hai phay - tap 23	 phim truyện ông tơ hai phẩy - tập 23
 tv	program_title	 5s online ổ kiến lửa - tập 278	 5s online ổ kiến lửa - tập 278	5s online o kien lua - tap 278
 tv	program_title	 khám phá thế giới	 khám phá thế giới	kham pha the gioi
@@ -9429,50 +9583,118 @@ tv	program_title	 hoa khôi áo dài việt nam 2014đường tới vương mi�
 tv	program_title	 đùa chút thôi - số 44	dua chut thoi - so 44	 đùa chút thôi - số 44
 tv	program_title	 vũ điệu xanh vòng chung kết kv miền bắc thể loại hip hop và free style	 vũ điệu xanh vòng chung kết kv miền bắc thể loại hip hop và free style	vu dieu xanh vong chung ket kv mien bac the loai hip hop va free style
 tv	program_title	 tòa tuyên án trẻ em như búp trên cành	toa tuyen an tre em nhu bup tren canh	 tòa tuyên án trẻ em như búp trên cành
-tv	program_title	 sắc màu các dân tộc cánh dù xanh, cánh đồng vàng	sac mau cac dan toc canh du xanh, canh dong vang	 sắc màu các dân tộc cánh dù xanh, cánh đồng vàng
-tv	program_title	 mười vạn câu hỏi vì sao	muoi van cau hoi vi sao	 mười vạn câu hỏi vì sao
-tv	program_title	 phim việt namhai phía chân trời - tập 18	 phim việt namhai phía chân trời - tập 18	phim viet namhai phia chan troi - tap 18
-tv	program_title	 phim nước ngoài người phụ nữ của anh - tập 33	 phim nước ngoài người phụ nữ của anh - tập 33	phim nuoc ngoai nguoi phu nu cua anh - tap 33
-tv	program_title	 dân số và phát triển chăm sóc sức khỏe thanh niên vùng đầm phá ven biển	dan so va phat trien cham soc suc khoe thanh nien vung dam pha ven bien	 dân số và phát triển chăm sóc sức khỏe thanh niên vùng đầm phá ven biển
-tv	program_title	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 5	kham pha the gioi ve dep thien nhien chau phi - phan 5	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 5
-tv	program_title	 phim tài liệu	phim tai lieu	 phim tài liệu
-tv	program_title	 khám phá thế giới những dòng sông của thế giới - phần 5 : sông ranh, dòng sông lãng mạn	 khám phá thế giới những dòng sông của thế giới - phần 5 : sông ranh, dòng sông lãng mạn	kham pha the gioi nhung dong song cua the gioi - phan 5 : song ranh, dong song lang man
-tv	program_title	 thể dục theo mùa bài tập múa vòng dành cho người cao tuổi	the duc theo mua bai tap mua vong danh cho nguoi cao tuoi	 thể dục theo mùa bài tập múa vòng dành cho người cao tuổi
-tv	program_title	 bạn của nhà nông	ban cua nha nong	 bạn của nhà nông
-tv	program_title	 sống khỏe mỗi ngày bệnh viêm gan virut b	 sống khỏe mỗi ngày bệnh viêm gan virut b	song khoe moi ngay benh viem gan virut b
-tv	program_title	 7 ngày công nghệ số 134	 7 ngày công nghệ số 134	7 ngay cong nghe so 134
-tv	program_title	 phóng sự ký sự nước lào - tập 5 : váy lào	phong su ky su nuoc lao - tap 5 : vay lao	 phóng sự ký sự nước lào - tập 5 : váy lào
-tv	program_title	 phát triển bền vững	 phát triển bền vững	phat trien ben vung
-tv	program_title	 khám phá thế giới những dòng sông của thế giới – phần 7 : sông st. lawrence	 khám phá thế giới những dòng sông của thế giới – phần 7 : sông st. lawrence	kham pha the gioi nhung dong song cua the gioi – phan 7 : song st. lawrence
-tv	program_title	 dạy ngoại ngữ tiếng trung du lịch - bài 52	day ngoai ngu tieng trung du lich - bai 52	 dạy ngoại ngữ tiếng trung du lịch - bài 52
-tv	program_title	 kiến thức sử - địavề vĩnh linh	 kiến thức sử - địavề vĩnh linh	kien thuc su - diave vinh linh
-tv	program_title	 dạy nghề nghề điện lạnh	 dạy nghề nghề điện lạnh	day nghe nghe dien lanh
-tv	program_title	 y học phương đông phương pháp tác động cột sống	 y học phương đông phương pháp tác động cột sống	y hoc phuong dong phuong phap tac dong cot song
-tv	program_title	 phim truyện cuộc chiến hoa hồng - tập 10	 phim truyện cuộc chiến hoa hồng - tập 10	phim truyen cuoc chien hoa hong - tap 10
-tv	program_title	 7 ngày công nghệ số 135	 7 ngày công nghệ số 135	7 ngay cong nghe so 135
-tv	program_title	 sức khỏe và cuộc sống	suc khoe va cuoc song	 sức khỏe và cuộc sống
-tv	program_title	 lần đầu làm mẹ	 lần đầu làm mẹ	lan dau lam me
-tv	program_title	 phóng sự ký sự nước lào - tập 6 : chợ sáng ở viêng chăn	phong su ky su nuoc lao - tap 6 : cho sang o vieng chan	 phóng sự ký sự nước lào - tập 6 : chợ sáng ở viêng chăn
-tv	program_title	 phim tài liệu gương điển hình trong công tác phòng chống ma túy	phim tai lieu guong dien hinh trong cong tac phong chong ma tuy	 phim tài liệu gương điển hình trong công tác phòng chống ma túy
-tv	program_title	 hành trình khám phá khám phá hang động ở thái nguyên	 hành trình khám phá khám phá hang động ở thái nguyên	hanh trinh kham pha kham pha hang dong o thai nguyen
-tv	program_title	 năng suất - chất lượng giải pháp nâng cao năng suất chất lượng cho doanh nghiệp vừa và nhỏ việt nam	 năng suất - chất lượng giải pháp nâng cao năng suất chất lượng cho doanh nghiệp vừa và nhỏ việt nam	nang suat - chat luong giai phap nang cao nang suat chat luong cho doanh nghiep vua va nho viet nam
-tv	program_title	 bổ trợ kiến thức văn hóa toán lớp 9 - bài 11 : phương trình đường thẳng trong mặt phẳng oxy	bo tro kien thuc van hoa toan lop 9 - bai 11 : phuong trinh duong thang trong mat phang oxy	 bổ trợ kiến thức văn hóa toán lớp 9 - bài 11 : phương trình đường thẳng trong mặt phẳng oxy
-tv	program_title	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 7 : quản lý công viên quốc gia ở châu phi	kham pha the gioi ve dep thien nhien chau phi - phan 7 : quan ly cong vien quoc gia o chau phi	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 7 : quản lý công viên quốc gia ở châu phi
-tv	program_title	 phim việt nam hai phía chân trời - tập 19	 phim việt nam hai phía chân trời - tập 19	phim viet nam hai phia chan troi - tap 19
-tv	program_title	 vì cuộc sống	vi cuoc song	 vì cuộc sống
-tv	program_title	 an ninh & cuộc sống vàng ảo mất tiền thật	an ninh & cuoc song vang ao mat tien that	 an ninh & cuộc sống vàng ảo mất tiền thật
-tv	program_title	 pháp luật và cuộc sống hiến pháp vn qua các thời kỳ phát triển	 pháp luật và cuộc sống hiến pháp vn qua các thời kỳ phát triển	phap luat va cuoc song hien phap vn qua cac thoi ky phat trien
-tv	program_title	 sống khỏe mỗi ngày con đường thuốc việt	 sống khỏe mỗi ngày con đường thuốc việt	song khoe moi ngay con duong thuoc viet
-tv	program_title	 chuyển động 24 giờ	 chuyển động 24 giờ	chuyen dong 24 gio
-tv	program_title	 phim truyện người phụ nữ của anh - tập 34	phim truyen nguoi phu nu cua anh - tap 34	 phim truyện người phụ nữ của anh - tập 34
-tv	program_title	 phim ngắn tây du ký - tập 38	 phim ngắn tây du ký - tập 38	phim ngan tay du ky - tap 38
-tv	program_title	 sống xanh : ai là chuyên gia?số 09	song xanh : ai la chuyen gia?so 09	 sống xanh : ai là chuyên gia?số 09
-tv	program_title	 chúc bé ngủ ngon	 chúc bé ngủ ngon	chuc be ngu ngon
-tv	program_title	 hãy chia sẻ cùng chúng tôi	hay chia se cung chung toi	 hãy chia sẻ cùng chúng tôi
-tv	program_title	 tâm hồn việtđộc đáo tàu tượng đối ca	 tâm hồn việtđộc đáo tàu tượng đối ca	tam hon vietdoc dao tau tuong doi ca
-tv	program_title	 bản tin 22h	 bản tin 22h	ban tin 22h
-tv	program_title	 phóng sự mất cân bằng giới tính khi sinh	phong su mat can bang gioi tinh khi sinh	 phóng sự mất cân bằng giới tính khi sinh
-tv	program_title	 23 giờ	 23 giờ	23 gio
+tv	program_title	 sắc màu các dân tộc cánh dù xanh, cánh đồng vàng
+	sac mau cac dan toc canh du xanh, canh dong vang	 sắc màu các dân tộc cánh dù xanh, cánh đồng vàng
+tv	program_title	 mười vạn câu hỏi vì sao
+	muoi van cau hoi vi sao	 mười vạn câu hỏi vì sao
+tv	program_title	 phim việt namhai phía chân trời - tập 18
+	 phim việt namhai phía chân trời - tập 18
+	phim viet namhai phia chan troi - tap 18
+tv	program_title	 phim nước ngoài người phụ nữ của anh - tập 33
+	 phim nước ngoài người phụ nữ của anh - tập 33
+	phim nuoc ngoai nguoi phu nu cua anh - tap 33
+tv	program_title	 dân số và phát triển chăm sóc sức khỏe thanh niên vùng đầm phá ven biển
+	dan so va phat trien cham soc suc khoe thanh nien vung dam pha ven bien	 dân số và phát triển chăm sóc sức khỏe thanh niên vùng đầm phá ven biển
+tv	program_title	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 5
+	kham pha the gioi ve dep thien nhien chau phi - phan 5	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 5
+tv	program_title	 phim tài liệu
+	phim tai lieu	 phim tài liệu
+tv	program_title	 khám phá thế giới những dòng sông của thế giới - phần 5 : sông ranh, dòng sông lãng mạn
+	 khám phá thế giới những dòng sông của thế giới - phần 5 : sông ranh, dòng sông lãng mạn
+	kham pha the gioi nhung dong song cua the gioi - phan 5 : song ranh, dong song lang man
+tv	program_title	 thể dục theo mùa bài tập múa vòng dành cho người cao tuổi
+	the duc theo mua bai tap mua vong danh cho nguoi cao tuoi	 thể dục theo mùa bài tập múa vòng dành cho người cao tuổi
+tv	program_title	 bạn của nhà nông
+	ban cua nha nong	 bạn của nhà nông
+tv	program_title	 sống khỏe mỗi ngày bệnh viêm gan virut b
+	 sống khỏe mỗi ngày bệnh viêm gan virut b
+	song khoe moi ngay benh viem gan virut b
+tv	program_title	 7 ngày công nghệ số 134
+	 7 ngày công nghệ số 134
+	7 ngay cong nghe so 134
+tv	program_title	 phóng sự ký sự nước lào - tập 5 : váy lào
+	phong su ky su nuoc lao - tap 5 : vay lao	 phóng sự ký sự nước lào - tập 5 : váy lào
+tv	program_title	 phát triển bền vững
+	 phát triển bền vững
+	phat trien ben vung
+tv	program_title	 khám phá thế giới những dòng sông của thế giới – phần 7 : sông st. lawrence
+	 khám phá thế giới những dòng sông của thế giới – phần 7 : sông st. lawrence
+	kham pha the gioi nhung dong song cua the gioi – phan 7 : song st. lawrence
+tv	program_title	 dạy ngoại ngữ tiếng trung du lịch - bài 52
+	day ngoai ngu tieng trung du lich - bai 52	 dạy ngoại ngữ tiếng trung du lịch - bài 52
+tv	program_title	 kiến thức sử - địavề vĩnh linh
+	 kiến thức sử - địavề vĩnh linh
+	kien thuc su - diave vinh linh
+tv	program_title	 dạy nghề nghề điện lạnh
+	 dạy nghề nghề điện lạnh
+	day nghe nghe dien lanh
+tv	program_title	 y học phương đông phương pháp tác động cột sống
+	 y học phương đông phương pháp tác động cột sống
+	y hoc phuong dong phuong phap tac dong cot song
+tv	program_title	 phim truyện cuộc chiến hoa hồng - tập 10
+	 phim truyện cuộc chiến hoa hồng - tập 10
+	phim truyen cuoc chien hoa hong - tap 10
+tv	program_title	 7 ngày công nghệ số 135
+	 7 ngày công nghệ số 135
+	7 ngay cong nghe so 135
+tv	program_title	 sức khỏe và cuộc sống
+	suc khoe va cuoc song	 sức khỏe và cuộc sống
+tv	program_title	 lần đầu làm mẹ
+	 lần đầu làm mẹ
+	lan dau lam me
+tv	program_title	 phóng sự ký sự nước lào - tập 6 : chợ sáng ở viêng chăn
+	phong su ky su nuoc lao - tap 6 : cho sang o vieng chan	 phóng sự ký sự nước lào - tập 6 : chợ sáng ở viêng chăn
+tv	program_title	 phim tài liệu gương điển hình trong công tác phòng chống ma túy
+	phim tai lieu guong dien hinh trong cong tac phong chong ma tuy	 phim tài liệu gương điển hình trong công tác phòng chống ma túy
+tv	program_title	 hành trình khám phá khám phá hang động ở thái nguyên
+	 hành trình khám phá khám phá hang động ở thái nguyên
+	hanh trinh kham pha kham pha hang dong o thai nguyen
+tv	program_title	 năng suất - chất lượng giải pháp nâng cao năng suất chất lượng cho doanh nghiệp vừa và nhỏ việt nam
+	 năng suất - chất lượng giải pháp nâng cao năng suất chất lượng cho doanh nghiệp vừa và nhỏ việt nam
+	nang suat - chat luong giai phap nang cao nang suat chat luong cho doanh nghiep vua va nho viet nam
+tv	program_title	 bổ trợ kiến thức văn hóa toán lớp 9 - bài 11 : phương trình đường thẳng trong mặt phẳng oxy
+	bo tro kien thuc van hoa toan lop 9 - bai 11 : phuong trinh duong thang trong mat phang oxy	 bổ trợ kiến thức văn hóa toán lớp 9 - bài 11 : phương trình đường thẳng trong mặt phẳng oxy
+tv	program_title	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 7 : quản lý công viên quốc gia ở châu phi
+	kham pha the gioi ve dep thien nhien chau phi - phan 7 : quan ly cong vien quoc gia o chau phi	 khám phá thế giới vẻ đẹp thiên nhiên châu phi - phần 7 : quản lý công viên quốc gia ở châu phi
+tv	program_title	 phim việt nam hai phía chân trời - tập 19
+	 phim việt nam hai phía chân trời - tập 19
+	phim viet nam hai phia chan troi - tap 19
+tv	program_title	 vì cuộc sống
+	vi cuoc song	 vì cuộc sống
+tv	program_title	 an ninh & cuộc sống vàng ảo mất tiền thật
+	an ninh & cuoc song vang ao mat tien that	 an ninh & cuộc sống vàng ảo mất tiền thật
+tv	program_title	 pháp luật và cuộc sống hiến pháp vn qua các thời kỳ phát triển
+	 pháp luật và cuộc sống hiến pháp vn qua các thời kỳ phát triển
+	phap luat va cuoc song hien phap vn qua cac thoi ky phat trien
+tv	program_title	 sống khỏe mỗi ngày con đường thuốc việt
+	 sống khỏe mỗi ngày con đường thuốc việt
+	song khoe moi ngay con duong thuoc viet
+tv	program_title	 chuyển động 24 giờ
+	 chuyển động 24 giờ
+	chuyen dong 24 gio
+tv	program_title	 phim truyện người phụ nữ của anh - tập 34
+	phim truyen nguoi phu nu cua anh - tap 34	 phim truyện người phụ nữ của anh - tập 34
+tv	program_title	 phim ngắn tây du ký - tập 38
+	 phim ngắn tây du ký - tập 38
+	phim ngan tay du ky - tap 38
+tv	program_title	 sống xanh : ai là chuyên gia?số 09
+	song xanh : ai la chuyen gia?so 09	 sống xanh : ai là chuyên gia?số 09
+tv	program_title	 chúc bé ngủ ngon
+	 chúc bé ngủ ngon
+	chuc be ngu ngon
+tv	program_title	 hãy chia sẻ cùng chúng tôi
+	hay chia se cung chung toi	 hãy chia sẻ cùng chúng tôi
+tv	program_title	 tâm hồn việtđộc đáo tàu tượng đối ca
+	 tâm hồn việtđộc đáo tàu tượng đối ca
+	tam hon vietdoc dao tau tuong doi ca
+tv	program_title	 bản tin 22h
+	 bản tin 22h
+	ban tin 22h
+tv	program_title	 phóng sự mất cân bằng giới tính khi sinh
+	phong su mat can bang gioi tinh khi sinh	 phóng sự mất cân bằng giới tính khi sinh
+tv	program_title	 23 giờ
+	 23 giờ
+	23 gio
 tv	program_title	 kiến thức sử - địa về vĩnh linh	 kiến thức sử - địa về vĩnh linh	kien thuc su - dia ve vinh linh
 tv	program_title	 mười vạn câu hỏi vì sao	 mười vạn câu hỏi vì sao	muoi van cau hoi vi sao
 tv	program_title	 phim việt nam hai phía chân trời - tập 19	phim viet nam hai phia chan troi - tap 19	 phim việt nam hai phía chân trời - tập 19
@@ -10040,7 +10262,7 @@ tv	program_title	 f5 refresh (p719)	 f5 refresh (p719)	f5 refresh (p719)
 tv	program_title	 f5 refresh (p704)	 f5 refresh (p704)	f5 refresh (p704)
 tv	program_title	 switched at birth - oh future!, 14 s4 - 14	 switched at birth - oh future!, 14 s4 - 14	switched at birth - oh future!, 14 s4 - 14
 tv	program_title	 grey's anatomy - throwing it all away, 15 s10 - 15	grey's anatomy - throwing it all away, 15 s10 - 15	 grey's anatomy - throwing it all away, 15 s10 - 15
-tv	program_title	 america's next top model - the guy who gets a second chance, 2 s21 - 2	 america's next top model - the guy who gets a second chance, 2 s21 - 2	america's next top model - the guy who gets a second chance, 2 s21 - 2
+tv	program_title	 america's next top com.fpt.ruby.business.model - the guy who gets a second chance, 2 s21 - 2	 america's next top com.fpt.ruby.business.model - the guy who gets a second chance, 2 s21 - 2	america's next top com.fpt.ruby.business.model - the guy who gets a second chance, 2 s21 - 2
 tv	program_title	 fit for fashion - mind over body, 3 - 3	fit for fashion - mind over body, 3 - 3	 fit for fashion - mind over body, 3 - 3
 tv	program_title	 fit for fashion - movement matters, 4 - 4	 fit for fashion - movement matters, 4 - 4	fit for fashion - movement matters, 4 - 4
 tv	program_title	 dads - comic book issues, 9 s1 - 9	dads - comic book issues, 9 s1 - 9	 dads - comic book issues, 9 s1 - 9
@@ -10962,7 +11184,7 @@ tv	program_title	cupcake girls - spouting off, 15 s3 - 15	cupcake girls - spouti
 tv	program_title	cupcake girls - cakes on a plane, 16 s3 - 16	cupcake girls - cakes on a plane, 16 s3 - 16
 tv	program_title	switched at birth - it isn't what you think,18 s4 - 18	switched at birth - it isn't what you think,18 s4 - 18
 tv	program_title	masterchef junior us - flip it, 2 s2 - 2	masterchef junior us - flip it, 2 s2 - 2
-tv	program_title	america's next top model - the girl who's a player, 3 s21 - 3	america's next top model - the girl who's a player, 3 s21 - 3
+tv	program_title	america's next top com.fpt.ruby.business.model - the girl who's a player, 3 s21 - 3	america's next top com.fpt.ruby.business.model - the girl who's a player, 3 s21 - 3
 tv	program_title	million dollar listing - no one is recession-proof, 1 s3 - 1	million dollar listing - no one is recession-proof, 1 s3 - 1
 tv	program_title	grey's anatomy - i'm winning, 19 s10 - 19	grey's anatomy - i'm winning, 19 s10 - 19
 tv	program_title	dads - enemies of bill , 17 s1 - 17	dads - enemies of bill , 17 s1 - 17
@@ -11322,7 +11544,7 @@ tv	program_title	ace of cakes - grand ole opry, 10 s9 - 10	ace of cakes - grand 
 tv	program_title	ace of cakes - charm city... off the grid, 11 s9 - 11	ace of cakes - charm city... off the grid, 11 s9 - 11
 tv	program_title	mistresses - all in, 7 s1 - 7	mistresses - all in, 7 s1 - 7
 tv	program_title	masterchef junior us - masterchef junior us s2, 4 s2 - 4	masterchef junior us - masterchef junior us s2, 4 s2 - 4
-tv	program_title	america's next top model - the guy who starts a fight, 5 s21 - 5	america's next top model - the guy who starts a fight, 5 s21 - 5
+tv	program_title	america's next top com.fpt.ruby.business.model - the guy who starts a fight, 5 s21 - 5	america's next top com.fpt.ruby.business.model - the guy who starts a fight, 5 s21 - 5
 tv	program_title	million dollar listing - dolphins, rats and next door neighbors, 3 s3 - 3	million dollar listing - dolphins, rats and next door neighbors, 3 s3 - 3
 tv	program_title	một giờ làm quan	một giờ làm quan	mot gio lam quan
 tv	program_title	thung lũng hoang vắng	thung lung hoang vang	thung lũng hoang vắng
@@ -12859,7 +13081,7 @@ tv	program_title	ace of cakes - miami meltdown, 1 s9 - 1	ace of cakes - miami me
 tv	program_title	ace of cakes - 30 rock (and roll), 2 s9 - 2	ace of cakes - 30 rock (and roll), 2 s9 - 2
 tv	program_title	mistresses - the morning after, 2 s1 - 2	mistresses - the morning after, 2 s1 - 2
 tv	program_title	masterchef junior us - masterchef junior us s2, 3 s2 - 3	masterchef junior us - masterchef junior us s2, 3 s2 - 3
-tv	program_title	america's next top model - the guy who gets a beard weave, 4 s21 - 4	america's next top model - the guy who gets a beard weave, 4 s21 - 4
+tv	program_title	america's next top com.fpt.ruby.business.model - the guy who gets a beard weave, 4 s21 - 4	america's next top com.fpt.ruby.business.model - the guy who gets a beard weave, 4 s21 - 4
 tv	program_title	million dollar listing - big numbers, small deals, 2 s3 - 2	million dollar listing - big numbers, small deals, 2 s3 - 2
 tv	program_title	grey's anatomy - fear (of the unknown), 24 s10 - 24	grey's anatomy - fear (of the unknown), 24 s10 - 24
 tv	program_title	how to live with your parents (for the rest of you - how to get involved, 9 - 9	how to live with your parents (for the rest of you - how to get involved, 9 - 9

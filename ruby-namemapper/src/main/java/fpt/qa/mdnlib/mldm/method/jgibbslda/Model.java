@@ -52,7 +52,7 @@ public class Model {
 	public String dir;
 	public String dfile;
 	public String modelName;
-	public int modelStatus; 		//see Constants class for status of model
+	public int modelStatus; 		//see Constants class for status of com.fpt.ruby.business.model
 	public LDADataset data;			// link to a dataset
 	
 	public int M; //dataset size (i.e., number of docs)
@@ -60,7 +60,7 @@ public class Model {
 	public int K; //number of topics
 	public double alpha, beta; //LDA  hyperparameters
 	public int niters; //number of Gibbs sampling iteration
-	public int liter; //the iteration at which the model was saved	
+	public int liter; //the iteration at which the com.fpt.ruby.business.model was saved
 	public int savestep; //saving period
 	public int twords; //print out top words per each topic
 	public int withrawdata;
@@ -101,7 +101,7 @@ public class Model {
 		
 		dir = "./";
 		dfile = "trndocs.dat";
-		modelName = "model-final";
+		modelName = "com.fpt.ruby.business.model-final";
 		modelStatus = Constants.MODEL_STATUS_UNKNOWN;		
 		
 		M = 0;
@@ -128,7 +128,7 @@ public class Model {
 	 * read other file to get parameters
 	 */
 	protected boolean readOthersFile(String otherFile){
-		//open file <model>.others to read:
+		//open file <com.fpt.ruby.business.model>.others to read:
             
 		BufferedReader reader;
 		try {
@@ -228,14 +228,14 @@ public class Model {
 			reader.close();
 		}
 		catch (Exception e){
-			System.out.println("Error while loading model: " + e.getMessage());
+			System.out.println("Error while loading com.fpt.ruby.business.model: " + e.getMessage());
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * load saved model
+	 * load saved com.fpt.ruby.business.model
 	 */
 	public boolean loadModel(){
 		if (!readOthersFile(dir + File.separator + modelName + othersSuffix))
@@ -255,7 +255,7 @@ public class Model {
 	}
 	
 	/**
-	 * Save word-topic assignments for this model
+	 * Save word-topic assignments for this com.fpt.ruby.business.model
 	 */
 	public boolean saveModelTAssign(String filename){
 		int i, j;
@@ -274,14 +274,14 @@ public class Model {
 			writer.close();
 		}
 		catch (Exception e){
-			System.out.println("Error while saving model tassign: " + e.getMessage());
+			System.out.println("Error while saving com.fpt.ruby.business.model tassign: " + e.getMessage());
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * Save theta (topic distribution) for this model
+	 * Save theta (topic distribution) for this com.fpt.ruby.business.model
 	 */
 	public boolean saveModelTheta(String filename){
             BufferedWriter writer;
@@ -296,7 +296,7 @@ public class Model {
 			writer.close();
 		}
 		catch (Exception e){
-			System.out.println("Error while saving topic distribution file for this model: " + e.getMessage());
+			System.out.println("Error while saving topic distribution file for this com.fpt.ruby.business.model: " + e.getMessage());
 			return false;
 		}
 		return true;
@@ -327,7 +327,7 @@ public class Model {
 	}
 	
 	/**
-	 * Save other information of this model
+	 * Save other information of this com.fpt.ruby.business.model
 	 */
 	public boolean saveModelOthers(String filename){
             BufferedWriter writer;
@@ -344,14 +344,14 @@ public class Model {
 			writer.close();
 		}
 		catch(Exception e){
-			System.out.println("Error while saving model others:" + e.getMessage());
+			System.out.println("Error while saving com.fpt.ruby.business.model others:" + e.getMessage());
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * Save model the most likely words for each topic
+	 * Save com.fpt.ruby.business.model the most likely words for each topic
 	 */
 	public boolean saveModelTwords(String filename){
             BufferedWriter writer;
@@ -387,14 +387,14 @@ public class Model {
 			writer.close();
 		}
 		catch (Exception e){
-			System.out.println("Error while saving model twords: " + e.getMessage());
+			System.out.println("Error while saving com.fpt.ruby.business.model twords: " + e.getMessage());
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * Save model
+	 * Save com.fpt.ruby.business.model
 	 */
 	public boolean saveModel(String modelName){
 		if (!saveModelTAssign(dir + File.separator + modelName + tassignSuffix)){
@@ -424,7 +424,7 @@ public class Model {
 	//	Init Methods
 	//---------------------------------------------------------------
 	/**
-	 * initialize the model
+	 * initialize the com.fpt.ruby.business.model
 	 */
 	protected boolean init(LDACmdOption option){		
 		if (option == null)
@@ -640,9 +640,9 @@ public class Model {
 		
 		p = new double[K];
 		
-		// load model, i.e., read z and trndata
+		// load com.fpt.ruby.business.model, i.e., read z and trndata
 		if (!loadModel()){
-			System.out.println("Fail to load word-topic assignment file of the model!\n");
+			System.out.println("Fail to load word-topic assignment file of the com.fpt.ruby.business.model!\n");
 			return false;
 		}
 		

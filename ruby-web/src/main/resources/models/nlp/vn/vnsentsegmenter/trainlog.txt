@@ -1,7 +1,7 @@
 OPTION VALUES:
 ==============
 Model directory: models/nlp/vn/vnsentsegmenter
-Model file: model.txt
+Model file: com.fpt.ruby.business.model.txt
 Option file: option.txt
 Training log file: trainlog.txt (this one)
 Training data file: train.tagged
@@ -19,7 +19,7 @@ Sigma square: 100.0
 Epsilon for convergence: 1.0E-4
 Number of corrections in L-BFGS: 7
 Evaluation during training: true
-Save the best model towards testing data: true
+Save the best com.fpt.ruby.business.model towards testing data: true
 
 Start to train ...
 

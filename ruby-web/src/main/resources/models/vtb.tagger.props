@@ -1,5 +1,5 @@
 ## tagger training invoked at Thu Aug 05 14:33:50 CEST 2010 with arguments:
-                   model = resources/models/vtb.tagger
+                   com.fpt.ruby.business.model = resources/models/vtb.tagger
                     arch = left5words,vietnameseunknowns
                trainFile = data/vtb-20091030.tagged.txt
          closedClassTags = 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.fpt.ruby.business.service.NameMapperService;
+import com.fpt.ruby.commons.service.NameMapperService;
 
 import fpt.qa.additionalinformation.modifier.SurroundingWords;
 import fpt.qa.additionalinformation.name_mapper.NameMapperEngine;

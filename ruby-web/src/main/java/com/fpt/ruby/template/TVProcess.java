@@ -1,11 +1,11 @@
 package com.fpt.ruby.template;
 
-import com.fpt.ruby.business.model.TVProgram;
-import com.fpt.ruby.business.model.TimeExtract;
-import com.fpt.ruby.business.service.TVProgramService;
-import com.fpt.ruby.business.template.DomainType;
-import com.fpt.ruby.business.template.IConstants;
-import com.fpt.ruby.business.template.TVModifiers;
+import com.fpt.ruby.commons.constants.DomainType;
+import com.fpt.ruby.commons.constants.IConstants;
+import com.fpt.ruby.commons.entity.modifiers.TVModifiers;
+import com.fpt.ruby.commons.entity.objects.TimeExtract;
+import com.fpt.ruby.commons.entity.tv.TVProgram;
+import com.fpt.ruby.commons.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.NlpHelper;
 import com.fpt.ruby.nlp.TVModifiersHelper;
@@ -73,9 +73,9 @@ public class TVProcess extends RubyProcess {
     @Override
     void getCandidates() {
         TimeExtract timeExtract = rubyAnswer.getTimeExtract();
-        com.fpt.ruby.business.model.TVModifiers tvModifiers1 = new com.fpt.ruby.business.model.TVModifiers();
-        tvModifiers1.setChannel(tvModifiers.getTvChannel());tvModifiers1.setProg_title(tvModifiers.getTvTitle());
-        tvModifiers1.setType(tvModifiers.getTypes());
+        com.fpt.ruby.commons.entity.modifiers.TVModifiers tvModifiers1 = new  com.fpt.ruby.commons.entity.modifiers.TVModifiers();
+        tvModifiers1.setTvChannel(tvModifiers.getTvChannel());tvModifiers1.setTvTitle(tvModifiers.getTvTitle());
+        tvModifiers1.setTypes(tvModifiers.getTypes());
         tvModifiers1.setStart(timeExtract.getBeforeDate());tvModifiers1.setEnd(timeExtract.getAfterDate());
         tvPrograms = tvProgramService.getList(tvModifiers1);
     }

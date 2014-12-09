@@ -39,9 +39,9 @@ public class Model {
 	this.taggerVtb = taggerVtb;	
     }
     
-    // load the model
+    // load the com.fpt.ruby.business.model
     public boolean init() {
-	// open model file to load model here ... complete later
+	// open com.fpt.ruby.business.model file to load com.fpt.ruby.business.model here ... complete later
 	BufferedReader fin;
 	String modelFile = taggerOpt.modelDir + File.separator + taggerOpt.modelFile;
 	
@@ -67,11 +67,11 @@ public class Model {
 	    
 	    System.gc();
 	    
-	    // close model file
+	    // close com.fpt.ruby.business.model file
 	    fin.close();
 	    
 	} catch (IOException e) {
-	    System.out.println("Couldn't open model file: " + modelFile);
+	    System.out.println("Couldn't open com.fpt.ruby.business.model file: " + modelFile);
 	    System.out.println(e.toString());
 	    
 	    return false;	    

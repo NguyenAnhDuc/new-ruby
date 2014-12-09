@@ -6,7 +6,7 @@ TYPE	CARTOON; chương trình thiếu nhi, hoạt hình, phim hoạt hình, chư
 TYPE	NEWS; thời sự, tin tức, chương trình tin tức, chương trình thời sự, bản tin, thoi su, tin tuc, chuong trinh tin tuc, ban tin, chuong trinh tin tuc
 TYPE	TENIS; tennis, quần vợt, wimbledon, úc mở rộng, mỹ mở rộng, uc mo rong, my mo rong, ten nít, te nít, te nit,ten nis
 TYPE	FOOTBALL; football, foot ball, đá bóng, da bong,trận bóng,tran bong , bóng đá, bong da, túc cầu, tuc cau, c1, champion league, fa, vleague, v-league, v league
-TYPE	FASHION; fashion, thời trang, thoi trang, bộ sưu tập, xuân hè, catwalk, top model, bo suu tap
+TYPE	FASHION; fashion, thời trang, thoi trang, bộ sưu tập, xuân hè, catwalk, top com.fpt.ruby.business.model, bo suu tap
 TYPE	DISCOVERY; discovery, khám phá, kham pha
 TYPE	SCIENCE; science, khoa hoc, khoa học
 TYPE	ENTERTAINMENT; entertaiment, giải trí, giai tri, giai tri tong hop, hay, thú vị, hay ho, thu vi, đặc sắc, dac sac

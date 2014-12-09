@@ -1,6 +1,5 @@
 package fpt.qa.genreclassifier;
 
-import com.fpt.ruby.business.helper.RedisHelper;
 import fpt.qa.mdnlib.struct.pair.Pair;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class GenreExtractor {
 
 	public GenreExtractor() {
 		if (conjType == null) {
-			this.conjType = new ConjGenre((new RedisHelper()).getClass()
+			this.conjType = new ConjGenre((new GenreExtractor()).getClass()
 					.getClassLoader().getResource("").getPath());
 		}
 	}

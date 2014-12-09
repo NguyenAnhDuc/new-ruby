@@ -1,18 +1,20 @@
 package com.fpt.ruby.nlp;
 
-import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.TVModifiers;
-import com.fpt.ruby.business.service.NameMapperService;
+import com.fpt.ruby.commons.constants.ProgramType;
+import com.fpt.ruby.commons.entity.modifiers.TVModifiers;
+import com.fpt.ruby.commons.service.NameMapperService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
-import fpt.qa.additionalinformation.modifier.AbsoluteTime;
 import fpt.qa.genreclassifier.GenreExtractor;
 import fpt.qa.langclassifier.LangExtractor;
 import fpt.qa.mdnlib.diacritic.DiacriticConverter;
 import fpt.qa.mdnlib.struct.pair.Pair;
 import fpt.qa.typeclassifier.ProgramTypeExtractor;
+import fpt.qa.vnTime.vntime.AbsoluteTime;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TVModifiersHelper {
     private static final String CHANNEL = "chanel_title";
@@ -26,7 +28,7 @@ public class TVModifiersHelper {
 
     // init the conjunction helper object
     public static void init(NameMapperService nameMapperService) {
-        String dir = (new RedisHelper()).getClass().getClassLoader()
+        String dir = (new TVModifiersHelper()).getClass().getClassLoader()
                 .getResource("").getPath();
         timeParser = new AbsoluteTime(dir + "/vnsutime");
         typeExtractor = new ProgramTypeExtractor();
@@ -43,8 +45,8 @@ public class TVModifiersHelper {
     }
 
 
-    public static com.fpt.ruby.business.template.TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
-        com.fpt.ruby.business.template.TVModifiers mod = new com.fpt.ruby.business.template.TVModifiers();
+    public static TVModifiers getTVModifiers(String question, ConjunctionHelper conjunctionHelper){
+        TVModifiers mod = new TVModifiers();
         List<Pair<String, String>> conjunctions = conjunctionHelper
                 .getConjunction(question);
         for (Pair<String, String> conjunction : conjunctions) {
@@ -117,23 +119,23 @@ public class TVModifiersHelper {
         List<Pair<String, String>> conjunctions = conjHelper
                 .getConjunction(question);
         for (Pair<String, String> conjunction : conjunctions) {
-            if (mod.getChannel() == null && conjunction.second.equals(CHANNEL)) {
-                mod.setChannel(conjunction.first);
+            if (mod.getTvChannel() == null && conjunction.second.equals(CHANNEL)) {
+                mod.setTvChannel(conjunction.first);
                 continue;
             }
 
-            if (mod.getProg_title() == null
+            if (mod.getTvTitle() == null
                     && conjunction.second.equals(PROGRAM)) {
-                mod.setProg_title(conjunction.first);
+                mod.setTvTitle(conjunction.first);
                 continue;
             }
 
         }
 
-        String title = mod.getProg_title();
+        String title = mod.getTvTitle();
         if (title == null || title.isEmpty() || ignores.contains(title.toLowerCase())) {
-            mod.setProg_title(null);
-            if (mod.getType() == null) {
+            mod.setTvTitle(null);
+            if (mod.getTypes() == null) {
                 List<ProgramType> ptype = typeExtractor.getTypes(question);
                 if (ptype != null) {
                     List<String> listType = new ArrayList<>();
@@ -142,16 +144,16 @@ public class TVModifiersHelper {
                             listType.add(type.toString());
                         }
                     }
-                    mod.setType(listType);
+                    mod.setTypes(listType);
                 } else {
-                    mod.setType(null);
+                    mod.setTypes(null);
                 }
             }
         } else {
-            mod.setType(null);
+            mod.setTypes(null);
         }
 
-        if (mod.getType() != null && (mod.getType().contains(ProgramType.FILM.toString()) || mod.getType().contains(ProgramType.CARTOON.toString()))) {
+        if (mod.getTypes() != null && (mod.getTypes().contains(ProgramType.FILM.toString()) || mod.getTypes().contains(ProgramType.CARTOON.toString()))) {
             System.err.println("|||||||||||||||||||||||||||||||||||||||||||");
             boolean specific = false;
             GenreExtractor genreExtractor = new GenreExtractor();
@@ -160,25 +162,25 @@ public class TVModifiersHelper {
 
             if (genre != null) {
                 specific = true;
-                List<String> types = mod.getType();
+                List<String> types = mod.getTypes();
                 types.addAll(genre);
-                mod.setType(types);
+                mod.setTypes(types);
             }
 
             List<String> langs = langExtractor.getLanguage(question);
             if (langs != null) {
                 specific = true;
-                List<String> types = mod.getType();
+                List<String> types = mod.getTypes();
                 types.addAll(langs);
-                mod.setType(types);
+                mod.setTypes(types);
             }
 
             if (specific) {
-                mod.getType().remove(ProgramType.FILM.toString());
+                mod.getTypes().remove(ProgramType.FILM.toString());
             }
-            mod.setType((new ArrayList<>(new HashSet<>(mod.getType()))));
+            mod.setTypes((new ArrayList<>(new HashSet<>(mod.getTypes()))));
         }
-        System.out.println("mod.type = " + mod.getType());
+        System.out.println("mod.type = " + mod.getTypes());
         return mod;
     }
 }

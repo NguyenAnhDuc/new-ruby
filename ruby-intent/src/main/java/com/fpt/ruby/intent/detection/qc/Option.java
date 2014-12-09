@@ -18,10 +18,10 @@ import java.util.StringTokenizer;
 
 public class Option {
 
-    // model directory
+    // com.fpt.ruby.business.model directory
     public String modelDir = ".";
-    // model file 
-    public String modelFile = "model.txt";
+    // com.fpt.ruby.business.model file
+    public String modelFile = "com.fpt.ruby.business.model.txt";
     public static String modelSeparator = "##########";
     // option file
     public String optionFile = "option.txt";
@@ -55,7 +55,7 @@ public class Option {
     
     // evaluation options
     public boolean evaluateDuringTraining = true; // evaluate during training
-    public boolean saveBestModel = true; // save the best model with testing data
+    public boolean saveBestModel = true; // save the best com.fpt.ruby.business.model with testing data
     
     public Option() {
     }
@@ -239,9 +239,9 @@ public class Option {
 	    fout.println("Evaluation during training: false");
 	}
 	if (saveBestModel) {
-	    fout.println("Save the best model towards testing data: true");
+	    fout.println("Save the best com.fpt.ruby.business.model towards testing data: true");
 	} else {
-	    fout.println("Save the best model towards testing data: false");
+	    fout.println("Save the best com.fpt.ruby.business.model towards testing data: false");
 	}
 	fout.println();
     }

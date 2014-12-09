@@ -1,5 +1,9 @@
 package com.fpt.ruby.nlp;
 
+import com.fpt.ruby.commons.entity.movie.Cinema;
+import com.fpt.ruby.commons.entity.movie.MovieFly;
+import jmdn.util.string.StrUtil;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,18 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jmdn.util.string.StrUtil;
-
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.Cinema;
-import com.fpt.ruby.business.model.MovieFly;
-
 public class MovieAnswerMapperImpl implements MovieAnswerMapper {
 	static Map<String, String> genreMap = new HashMap<String, String>();
 	static Map<String, String> langMap = new HashMap<String, String>();
 	static Map<String, String> countryMap = new HashMap<String, String>();
 	static {
-		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
+		String dir = (new MovieAnswerMapperImpl()).getClass().getClassLoader().getResource("").getPath();
 		initGenreMap(dir + "/dicts/genreMap.txt");
 		initLangMap(dir + "/dicts/languageMap.txt");
 		initCountryMap(dir + "/dicts/countryMap.txt");

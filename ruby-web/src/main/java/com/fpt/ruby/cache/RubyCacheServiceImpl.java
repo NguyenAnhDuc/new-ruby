@@ -1,6 +1,6 @@
 package com.fpt.ruby.cache;
 
-import com.fpt.ruby.business.config.SpringMongoConfig;
+import fpt.qa.configs.SpringMongoConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;

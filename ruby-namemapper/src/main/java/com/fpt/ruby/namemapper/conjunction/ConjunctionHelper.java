@@ -1,12 +1,12 @@
 package com.fpt.ruby.namemapper.conjunction;
 
-import com.fpt.ruby.business.constants.IntentConstants;
-import com.fpt.ruby.business.helper.RedisHelper;
-import com.fpt.ruby.business.model.MovieTicket;
-import com.fpt.ruby.business.model.NameMapper;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.business.template.MovieModifiers;
+import com.fpt.ruby.commons.constants.IntentConstants;
+import com.fpt.ruby.commons.entity.NameMapper;
+import com.fpt.ruby.commons.entity.modifiers.MovieModifiers;
+import com.fpt.ruby.commons.entity.movie.MovieTicket;
+import com.fpt.ruby.commons.service.NameMapperService;
 import fpt.qa.additionalinformation.modifier.ConjunctionWithType;
+import fpt.qa.additionalinformation.modifier.NamedEntityExtractor;
 import fpt.qa.mdnlib.struct.pair.Pair;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ConjunctionHelper {
 	private ConjunctionWithType conjunctionWithType;
 	public ConjunctionHelper(NameMapperService nameMapperService){
-		String dir = (new RedisHelper()).getClass().getClassLoader().getResource("").getPath();
+		String dir = (new NamedEntityExtractor()).getClass().getClassLoader().getResource("").getPath();
 		conjunctionWithType = new ConjunctionWithType( dir, nameMapperService );
 	}
 	public ConjunctionHelper(String dir, NameMapperService nameMapperService){

@@ -1,25 +1,16 @@
 package fpt.qa.additionalinformation.modifier;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.fasterxml.jackson.core.sym.Name;
-import com.fpt.ruby.business.service.NameMapperService;
-
-import fpt.qa.additionalinformation.name_mapper.NameMapper;
+import com.fpt.ruby.commons.service.NameMapperService;
 import fpt.qa.additionalinformation.name_mapper.NameMapperEngine;
 import fpt.qa.mdnlib.nlp.vn.vntokenizer.VnTokenizer;
 import fpt.qa.mdnlib.struct.conjunction.ConjunctionChecker;
 import fpt.qa.mdnlib.struct.pair.Pair;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 public class ConjunctionWithType extends ConjunctionChecker{
 	private Map< String, HashSet< String > > conjunctionType;

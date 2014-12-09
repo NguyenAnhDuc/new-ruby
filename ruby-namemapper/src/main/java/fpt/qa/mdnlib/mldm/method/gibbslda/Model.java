@@ -17,7 +17,7 @@ import fpt.qa.mdnlib.util.string.StrUtil;
  * @author hieupx
  */
 public class Model {
-    public String modelDir; /* the directory where the model files are stored */    
+    public String modelDir; /* the directory where the com.fpt.ruby.business.model files are stored */
     public String dataFile; /* the data file */
     
     public String wordMapFile; /* the word map file */
@@ -25,11 +25,11 @@ public class Model {
     public String tAssignSuffix; /* the suffix for topic assignment file */
     public String thetaSuffix; /* the suffix for theta file */
     public String phiSuffix; /* the suffix for phi file */
-    public String othersSuffix; /* the suffix for file containing other model parameters */
+    public String othersSuffix; /* the suffix for file containing other com.fpt.ruby.business.model parameters */
     public String tWordsSuffix; /* the suffix for file containing words-per-topics */
     
-    public String modelName; /* the model name */
-    public String modelStatus; /* the model status, can be oen of the following: */
+    public String modelName; /* the com.fpt.ruby.business.model name */
+    public String modelStatus; /* the com.fpt.ruby.business.model status, can be oen of the following: */
                              /* MODEL_STATUS_UNKNOWN */
                              /* MODEL_STATUS_EST */
                              /* MODEL_STATUS_ESTC */
@@ -38,18 +38,18 @@ public class Model {
     
     public int K; /* the number of LDA topics */
     public double alpha, beta; /* LDA hyperparameters */
-    public int nEstIters; /* the number of Gibbs sampling iterations for model estimation */
+    public int nEstIters; /* the number of Gibbs sampling iterations for com.fpt.ruby.business.model estimation */
     public int nInfIters; /* the number of Gibbs sampling iterations for inference mode */
-    public int saveStep; /* model saving period */
+    public int saveStep; /* com.fpt.ruby.business.model saving period */
     public int tWords; /* print out tWords top words per each topic */
     public int M; /* the number of documents (training data) */
     public int V; /* the number of words (vocabulary size of training data) */
-    public int lastIter; /* the iteration at which the model was saved */
+    public int lastIter; /* the iteration at which the com.fpt.ruby.business.model was saved */
     
     public TrainData data; /* training data */
     public Dictionary dict; /* dictionary */
     
-    /* variables for sampling and model estimation */
+    /* variables for sampling and com.fpt.ruby.business.model estimation */
     public double[] p; /* temporary variable for sampling */
     public int[][] z; /* topic assignments for words, size M x doc.size() */
     public int[][] nw; /* nw[i][j]: the number of instances of word/term i assigned to topic j, size V x K */
@@ -76,7 +76,7 @@ public class Model {
         othersSuffix = ".others";
         tWordsSuffix = ".twords";
         
-        modelName = "model-final";
+        modelName = "com.fpt.ruby.business.model-final";
         modelStatus = Constants.MODEL_STATUS_UNKNOWN;
         
         K = 100;
@@ -220,7 +220,7 @@ public class Model {
             return initForInf();
             
         } else {
-            System.out.println("No model initialization!");
+            System.out.println("No com.fpt.ruby.business.model initialization!");
             return false;
         }
     }
@@ -309,9 +309,9 @@ public class Model {
         data = new TrainData();
         data.dict.readWordMap(modelDir + wordMapFile);
         
-        /* load LDA model */
+        /* load LDA com.fpt.ruby.business.model */
         if (!loadModelForEstC()) {
-            System.out.println("Failed to load LDA model!");
+            System.out.println("Failed to load LDA com.fpt.ruby.business.model!");
             return false;
         }
         
@@ -381,7 +381,7 @@ public class Model {
         
         int[][] tempZ = loadModelForInf();
         if (tempZ == null) {
-            System.out.println("Failed to load LDA model!");
+            System.out.println("Failed to load LDA com.fpt.ruby.business.model!");
             return false;
         }
         
@@ -445,7 +445,7 @@ public class Model {
     }
     
     public boolean loadModelForEstC() {
-        System.out.println("Loading LDA model to continue estimation...");
+        System.out.println("Loading LDA com.fpt.ruby.business.model to continue estimation...");
         
         String filename = modelDir + modelName + tAssignSuffix;
         
@@ -506,13 +506,13 @@ public class Model {
             return false;
         } 
         
-        System.out.println("Loading LDA model to continue estimation: completed!");
+        System.out.println("Loading LDA com.fpt.ruby.business.model to continue estimation: completed!");
         
         return true;
     }
     
     public int[][] loadModelForInf() {
-        System.out.println("Loading LDA model for inference...");
+        System.out.println("Loading LDA com.fpt.ruby.business.model for inference...");
         
         String filename = modelDir + modelName + tAssignSuffix;
         
@@ -567,7 +567,7 @@ public class Model {
             return null;
         } 
         
-        System.out.println("Loading LDA model for inference: completed!");
+        System.out.println("Loading LDA com.fpt.ruby.business.model for inference: completed!");
         
         return tempZ;
     }

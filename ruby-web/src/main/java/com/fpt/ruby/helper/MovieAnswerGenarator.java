@@ -1,9 +1,9 @@
 
 package com.fpt.ruby.helper;
 
-import com.fpt.ruby.business.constants.IntentConstants;
-import com.fpt.ruby.business.model.MovieTicket;
-import com.fpt.ruby.business.template.IConstants;
+import com.fpt.ruby.commons.constants.IConstants;
+import com.fpt.ruby.commons.entity.movie.MovieTicket;
+import com.fpt.ruby.commons.constants.IntentConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.HashSet;

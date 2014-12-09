@@ -1,6 +1,5 @@
 package fpt.qa.spellchecker;
 
-import com.fpt.ruby.business.model.TVProgram;
 import fpt.qa.spellchecker.algorithm.DynamicProgramming;
 import fpt.qa.spellchecker.io.StopWordsFilter;
 import fpt.qa.spellchecker.io.UTF8FileUtility;
@@ -8,13 +7,8 @@ import fpt.qa.spellchecker.util.IConstands;
 import fpt.qa.spellchecker.util.Language;
 import fpt.qa.spellchecker.util.LanguageClassifier;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SpellingChecker {
 

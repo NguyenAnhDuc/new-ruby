@@ -50,10 +50,10 @@ public class Classification {
     
     public void init() {    
 	try {
-	    // open model file
+	    // open com.fpt.ruby.business.model file
 	    finModel = option.openModelFile();
 	    if (finModel == null) {
-		System.out.println("Couldn't open model file");
+		System.out.println("Couldn't open com.fpt.ruby.business.model file");
 		return;
 	    }
 	
@@ -74,15 +74,15 @@ public class Classification {
 	    // create an inference object
 	    inference = new Inference();
 	
-	    // create a model object
+	    // create a com.fpt.ruby.business.model object
 	    model = new Model(option, data, dict, feagen, null, inference, null);
 	    model.initInference();
 	
-	    // close model file
+	    // close com.fpt.ruby.business.model file
 	    finModel.close();
 	    
 	} catch(IOException e) {
-	    System.out.println("Couldn't load the model, check the model file again");
+	    System.out.println("Couldn't load the com.fpt.ruby.business.model, check the com.fpt.ruby.business.model file again");
 	    System.out.println(e.toString());
 	}
 	

@@ -29,7 +29,7 @@
 package fpt.qa.mdnlib.mldm.method.jgibbslda;
 
 public class Inferencer {	
-	// Train model
+	// Train com.fpt.ruby.business.model
 	public Model trnModel;
 	public Dictionary globalDict;
 	private LDACmdOption option;
@@ -54,9 +54,9 @@ public class Inferencer {
 		return true;
 	}
 	
-	//inference new model ~ getting data from a specified dataset
+	//inference new com.fpt.ruby.business.model ~ getting data from a specified dataset
 	public Model inference( LDADataset newData){
-		System.out.println("init new model");
+		System.out.println("init new com.fpt.ruby.business.model");
 		Model newModel = new Model();		
 		
 		newModel.initNewModel(option, newData, trnModel);		
@@ -96,7 +96,7 @@ public class Inferencer {
 		return inference(dataset);
 	}
 	
-	//inference new model ~ getting dataset from file specified in option
+	//inference new com.fpt.ruby.business.model ~ getting dataset from file specified in option
 	public Model inference(){	
 		//System.out.println("inference");
 		

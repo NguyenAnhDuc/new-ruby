@@ -37,7 +37,7 @@ public class Feature {
 	strId2IdxAdd(fmap);
     }
 
-    // create a feature from a string (e.g., reading from model file)    
+    // create a feature from a string (e.g., reading from com.fpt.ruby.business.model file)
     public Feature(String str, Map cpStr2Int, Map lbStr2Int) {	
 	FeatureInit(str, cpStr2Int, lbStr2Int);
     }

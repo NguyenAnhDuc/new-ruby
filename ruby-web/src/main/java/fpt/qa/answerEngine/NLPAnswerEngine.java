@@ -1,9 +1,9 @@
 package fpt.qa.answerEngine;
 
 
-import com.fpt.ruby.business.service.*;
-import com.fpt.ruby.business.template.DomainType;
-import com.fpt.ruby.business.template.IConstants;
+import com.fpt.ruby.commons.constants.DomainType;
+import com.fpt.ruby.commons.constants.IConstants;
+import com.fpt.ruby.commons.service.*;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.NlpHelper;
 import com.fpt.ruby.template.MovieProcess;

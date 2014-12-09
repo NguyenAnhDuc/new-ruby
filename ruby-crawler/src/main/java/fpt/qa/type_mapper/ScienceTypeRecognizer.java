@@ -1,6 +1,7 @@
 package fpt.qa.type_mapper;
 
-import com.fpt.ruby.business.constants.ProgramType;
+
+import com.fpt.ruby.commons.constants.ProgramType;
 
 public class ScienceTypeRecognizer extends TypeRecognizer {
 	public ScienceTypeRecognizer() {

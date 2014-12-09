@@ -1,6 +1,5 @@
 package fpt.qa.langclassifier;
 
-import com.fpt.ruby.business.helper.RedisHelper;
 import fpt.qa.mdnlib.struct.pair.Pair;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class LangExtractor {
 
 	public LangExtractor() {
 		if (conjType == null) {
-			this.conjType = new ConjLang((new RedisHelper()).getClass()
+			this.conjType = new ConjLang((new LangExtractor()).getClass()
 					.getClassLoader().getResource("").getPath());
 		}
 	}

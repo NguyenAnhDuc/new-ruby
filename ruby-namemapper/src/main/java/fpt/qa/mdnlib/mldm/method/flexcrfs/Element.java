@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Element {
     public int count = 0;	// the number of occurrences of this context predicate
-    public int chosen = 0;	// indicating whether or not it is incorporated into the model
+    public int chosen = 0;	// indicating whether or not it is incorporated into the com.fpt.ruby.business.model
     
     Map lbCntFidxes = null;	// map of labels to CountFeatureIdxes
     

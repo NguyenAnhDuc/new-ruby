@@ -1,16 +1,14 @@
 package com.fpt.ruby.helper;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.fpt.ruby.commons.entity.objects.BingSearchAnswer;
+import com.fpt.ruby.commons.helper.DisplayAnswerHelper;
 import net.billylieurance.azuresearch.AzureSearchResultSet;
 import net.billylieurance.azuresearch.AzureSearchWebQuery;
 import net.billylieurance.azuresearch.AzureSearchWebResult;
-
 import org.springframework.stereotype.Service;
 
-import com.fpt.ruby.business.helper.DisplayAnswerHelper;
-import com.fpt.ruby.business.model.BingSearchAnswer;
+import java.util.ArrayList;
+import java.util.List;
 @Service
 public class BingSearchHelper {
 private String appId;

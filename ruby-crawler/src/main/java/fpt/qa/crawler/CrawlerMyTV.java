@@ -1,14 +1,15 @@
 package fpt.qa.crawler;
 
-import com.fpt.ruby.business.constants.ProgramType;
-import com.fpt.ruby.business.helper.CrawlerHelper;
-import com.fpt.ruby.business.model.Channel;
-import com.fpt.ruby.business.model.MovieFly;
-import com.fpt.ruby.business.model.TVProgram;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.NameMapperService;
-import com.fpt.ruby.business.service.TVProgramService;
+
+import com.fpt.ruby.commons.constants.ProgramType;
+import com.fpt.ruby.commons.entity.movie.MovieFly;
+import com.fpt.ruby.commons.entity.objects.Channel;
+import com.fpt.ruby.commons.entity.tv.TVProgram;
+import com.fpt.ruby.commons.helper.CrawlerHelper;
+import com.fpt.ruby.commons.service.MovieFlyService;
+import com.fpt.ruby.commons.service.TVProgramService;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
+import fpt.qa.configs.SpringMongoConfig;
 import fpt.qa.type_mapper.TypeMapper;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.HttpResponse;
@@ -19,6 +20,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -36,7 +40,7 @@ public class CrawlerMyTV {
             "VTVCAB2", "STAR WORLD HD", "VOV", "K+1", "K+NS", "NATIONAL GEOGRAPHIC",
             "MTV", "ITV"));
     private static long ONE_DAY = 24 * 60 * 60 * 1000;
-    private MovieFlyService mfs = new MovieFlyService();
+    private MovieFlyService mfs;
     // Check lai
     private static Set<String> filmChannel = new TreeSet<>(Arrays.asList("hbo", "max", "star movies"));
     private static Set<String> filmTitle = new TreeSet<>();
@@ -102,6 +106,10 @@ public class CrawlerMyTV {
     }
 
     public void doCrawl(TVProgramService tvs, ConjunctionHelper cjh, int numdays) throws Exception {
+        ApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringMongoConfig.class);
+        MongoOperations mongoOperations = (MongoOperations) context.getBean("mongoTemplate");
+        mfs = new MovieFlyService(mongoOperations);
         System.out.println("Crawling from MYTV");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         List<Channel> channels = getChanel(cjh);

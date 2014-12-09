@@ -1,7 +1,12 @@
+/*
 package fpt.qa.rubyweb;
 
-import com.fpt.ruby.business.model.*;
-import com.fpt.ruby.business.service.*;
+import com.fpt.ruby.commons.entity.Log;
+import com.fpt.ruby.commons.entity.NameMapper;
+import com.fpt.ruby.commons.entity.movie.Cinema;
+import com.fpt.ruby.commons.entity.movie.MovieTicket;
+import com.fpt.ruby.commons.entity.tv.TVProgram;
+import com.fpt.ruby.commons.service.*;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,6 +163,7 @@ public class AdminController {
 
 }
 
+*/
 
 
 
@@ -165,7 +171,7 @@ public class AdminController {
 
 /*
     @RequestMapping(value = "/admin-analytic", method = RequestMethod.GET)
-	public String testChart(Model model) {
+	public String testChart(Model com.fpt.ruby.business.model) {
 		int ONE_DAY = 24 * 3600 * 1000;
 		// Line Chart: NumberOfRequest
 		Date today = new Date();
@@ -202,8 +208,8 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("data", json);
-		model.addAttribute("jsonS", jsonAll);
+		com.fpt.ruby.business.model.addAttribute("data", json);
+		com.fpt.ruby.business.model.addAttribute("jsonS", jsonAll);
 		// Pie Chart: Intent
 		logs = logService.findAll();
 		List<DataPieChart> dataPies = new ArrayList<DataPieChart>();
@@ -224,7 +230,7 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("jsonPie", jsonPie);
+		com.fpt.ruby.business.model.addAttribute("jsonPie", jsonPie);
 
 		return "admin-dashboard";
 	}*/

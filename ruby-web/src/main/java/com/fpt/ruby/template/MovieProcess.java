@@ -1,15 +1,15 @@
 package com.fpt.ruby.template;
 
-import com.fpt.ruby.business.constants.IntentConstants;
-import com.fpt.ruby.business.model.MovieFly;
-import com.fpt.ruby.business.model.MovieTicket;
-import com.fpt.ruby.business.model.TimeExtract;
-import com.fpt.ruby.business.service.MovieFlyService;
-import com.fpt.ruby.business.service.MovieTicketService;
-import com.fpt.ruby.business.template.DomainType;
-import com.fpt.ruby.business.template.IConstants;
-import com.fpt.ruby.business.template.MovieModifiers;
+import com.fpt.ruby.commons.constants.DomainType;
+import com.fpt.ruby.commons.constants.IConstants;
+import com.fpt.ruby.commons.entity.modifiers.MovieModifiers;
+import com.fpt.ruby.commons.entity.movie.MovieFly;
+import com.fpt.ruby.commons.entity.movie.MovieTicket;
+import com.fpt.ruby.commons.entity.objects.TimeExtract;
+import com.fpt.ruby.commons.service.MovieFlyService;
+import com.fpt.ruby.commons.service.MovieTicketService;
 import com.fpt.ruby.intent.detection.MovieTypeDetection;
+import com.fpt.ruby.commons.constants.IntentConstants;
 import com.fpt.ruby.namemapper.conjunction.ConjunctionHelper;
 import com.fpt.ruby.nlp.AnswerMapper;
 import com.fpt.ruby.nlp.NlpHelper;
